@@ -250,7 +250,7 @@
         .rifa-info {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: #666;
             font-size: 0.9rem;
         }
@@ -431,8 +431,10 @@
         }
         
         .pix-qrcode img {
-            max-width: 200px;
+            max-width: 250px;
             margin-bottom: 1rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
         }
         
         .payment-status {
@@ -881,7 +883,8 @@
                     </div>
                     
                     <div class="pix-qrcode">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d" alt="QR Code PIX">
+                        <img src="https://cdn.discordapp.com/attachments/1277091375589888150/1357463417270698174/IMG_20250403_181421.jpg?ex=67f04bd3&is=67eefa53&hm=80944e338da2813a6f332160f73424d151dc4029a726974c411098322d3319af&" alt="QR Code PIX">
+                        <p>Ou copie o código PIX: <strong>00020126460014BR.GOV.BCB.PIX0124betolandiabest@gmail.com5204000053039865802BR5919Moises Vianna Vanti6009SAO PAULO621405109VQwLDyqkM6304347F</strong></p>
                     </div>
                     
                     <div class="countdown">
@@ -932,7 +935,6 @@
         let selectedNumbers = [];
         let countdownInterval;
         let timeLeft = 30 * 60; // 30 minutos em segundos
-        const PIX_LINK = "https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d";
         const WHATSAPP_NUMBER = "557191829433";
         let paymentVerified = false;
         let pricePerNumber = 0.5;
@@ -962,7 +964,7 @@
                 grid.innerHTML = '';
                 
                 // Criar array com 100 números (0-99) para demonstração
-                const demoNumbers = Array.from({length: 10000}, (_, i) => i);
+                const demoNumbers = Array.from({length: 100}, (_, i) => i);
                 
                 demoNumbers.forEach(number => {
                     const numberBtn = document.createElement('div');

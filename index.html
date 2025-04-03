@@ -443,28 +443,6 @@
             margin-bottom: 1rem;
         }
         
-        .pix-copy {
-            display: flex;
-            margin-top: 1rem;
-        }
-        
-        .pix-copy input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-right: none;
-            border-radius: 4px 0 0 4px;
-        }
-        
-        .pix-copy button {
-            padding: 0 1rem;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 0 4px 4px 0;
-            cursor: pointer;
-        }
-        
         .payment-status {
             text-align: center;
             padding: 1rem;
@@ -825,7 +803,7 @@
                 <div id="pixStep" style="display: none;">
                     <div class="pix-instructions">
                         <h3><i class="fas fa-qrcode"></i> Pagamento via PIX</h3>
-                        <p>Faça o pagamento de <strong id="pixAmount">R$ 1,00</strong> usando o QR Code ou código abaixo:</p>
+                        <p>Faça o pagamento de <strong id="pixAmount">R$ 1,00</strong> usando o QR Code abaixo:</p>
                     </div>
                     
                     <div class="pix-qrcode">
@@ -965,12 +943,6 @@
             
             document.getElementById('totalAmount').textContent = `R$ ${total.toFixed(2)}`;
             document.getElementById('pixAmount').textContent = `R$ ${total.toFixed(2)}`;
-            
-            // Atualizar valor no código PIX (simulação)
-            if(total > 0) {
-                const pixCode = `00020126580014BR.GOV.BCB.PIX0136625898c-ac6f-435e-a3bd-3c710a4adb5d52040000530398654${total.toFixed(2).replace('.', '').padStart(2, '0')}5802BR5917Rifa%20Sort6009SAO PAULO61080540900062250521gQ3k9p7XqK8tL2vR1wY4f6304E9A0`;
-                document.getElementById('pixCode').value = pixCode;
-            }
         }
         
         // Próximo passo
@@ -1002,14 +974,6 @@
             
             // Iniciar contagem regressiva
             startCountdown();
-        }
-        
-        // Copiar código PIX
-        function copyPixCode() {
-            const pixCode = document.getElementById('pixCode');
-            pixCode.select();
-            document.execCommand('copy');
-            showToast('Código PIX copiado para a área de transferência!');
         }
         
         // Verificar pagamento (simulado)

@@ -14,6 +14,7 @@
             --success: #4caf50;
             --danger: #f44336;
             --info: #2196f3;
+            --whatsapp: #25D366;
         }
         
         * {
@@ -128,6 +129,11 @@
         
         .btn-info {
             background-color: var(--info);
+            color: white;
+        }
+        
+        .btn-whatsapp {
+            background-color: var(--whatsapp);
             color: white;
         }
         
@@ -497,6 +503,32 @@
             margin-right: 5px;
         }
         
+        .payment-check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+        
+        #paymentVerified {
+            margin-left: 10px;
+            color: var(--success);
+            display: none;
+        }
+        
+        .winner-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .winner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
         /* Responsividade */
         @media (max-width: 768px) {
             .header-content {
@@ -512,14 +544,6 @@
             
             nav ul li {
                 margin: 0.5rem;
-            }
-            
-            .hero {
-                height: 400px;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
             }
             
             .numbers-grid {
@@ -567,20 +591,6 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Ganhadores sem foto */
-        .winner-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .winner-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -775,7 +785,7 @@
             </div>
             <div style="text-align: center; color: #bbb; font-size: 0.9rem;">
                 <p>© 2023 Rifa Sort - Todos os direitos reservados</p>
-                <p>CNPJ: 12.345.678/0001-99 - Este site não realiza sorteios, apenas facilita a organização de rifas entre particulares.</p>
+                <p>CNPJ: 59.664.760/0001-46 - Este site não realiza sorteios, apenas facilita a organização de rifas entre particulares.</p>
             </div>
         </div>
     </footer>
@@ -790,8 +800,8 @@
             <div class="modal-body">
                 <div id="selectionStep">
                     <div class="form-group">
-                        <label>Informe seu nome:</label>
-                        <input type="text" id="user-name" class="form-control" placeholder="Seu nome completo" required>
+                        <label>Informe seu nome completo:</label>
+                        <input type="text" id="user-name" class="form-control" placeholder="Seu nome" required>
                     </div>
                     <div class="form-group">
                         <label>Informe seu WhatsApp:</label>
@@ -808,52 +818,40 @@
                     </div>
                     <div class="pix-instructions">
                         <h3><i class="fas fa-info-circle"></i> Pagamento exclusivo via PIX</h3>
-                        <p>Você será redirecionado para efetuar o pagamento via PIX após selecionar seus números.</p>
+                        <p>Após selecionar seus números, você fará o pagamento via PIX e enviará os dados para nosso WhatsApp.</p>
                     </div>
                 </div>
                 
                 <div id="pixStep" style="display: none;">
                     <div class="pix-instructions">
                         <h3><i class="fas fa-qrcode"></i> Pagamento via PIX</h3>
-                        <p>Para finalizar sua participação, faça o pagamento PIX usando uma das opções abaixo. Seus números serão reservados por <strong>30 minutos</strong>.</p>
+                        <p>Faça o pagamento de <strong id="pixAmount">R$ 1,00</strong> usando o QR Code ou código abaixo:</p>
                     </div>
                     
                     <div class="pix-qrcode">
-                        <h3>Escaneie o QR Code</h3>
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d" alt="QR Code PIX">
-                        <p>Valor: <strong id="pixAmount">R$ 1,00</strong></p>
                     </div>
                     
                     <div class="pix-instructions">
-                        <h3><i class="fas fa-copy"></i> Ou copie o código PIX</h3>
+                        <h3><i class="fas fa-copy"></i> Código PIX (Copiar e Colar)</h3>
                         <div class="pix-copy">
                             <input type="text" id="pixCode" value="00020126580014BR.GOV.BCB.PIX0136625898c-ac6f-435e-a3bd-3c710a4adb5d52040000530398654051.005802BR5917Rifa%20Sort6009SAO PAULO61080540900062250521gQ3k9p7XqK8tL2vR1wY4f6304E9A0" readonly>
                             <button onclick="copyPixCode()"><i class="fas fa-copy"></i></button>
                         </div>
                     </div>
                     
-                    <div class="countdown">
-                        <i class="fas fa-clock timer-icon"></i>
-                        Tempo restante para pagamento: <span id="countdownTimer">30:00</span>
+                    <div class="payment-check">
+                        <button class="btn btn-success" onclick="verifyPayment()">
+                            <i class="fas fa-sync-alt"></i> Verificar Pagamento
+                        </button>
+                        <span id="paymentVerified">
+                            <i class="fas fa-check-circle"></i> Pagamento confirmado!
+                        </span>
                     </div>
                     
-                    <div class="payment-status success" id="paymentSuccess" style="display: none;">
-                        <i class="fas fa-check-circle"></i> Pagamento confirmado! Seus números foram reservados com sucesso.
-                    </div>
-                    
-                    <div class="payment-status error" id="paymentError" style="display: none;">
-                        <i class="fas fa-exclamation-circle"></i> Pagamento não identificado. Por favor, tente novamente.
-                    </div>
-                    
-                    <div class="payment-status pending" id="paymentPending">
-                        <i class="fas fa-sync-alt fa-spin"></i> Aguardando confirmação do pagamento...
-                    </div>
-                    
-                    <div style="text-align: center; margin-top: 1rem;">
-                        <button class="btn btn-success" onclick="verifyPayment()"><i class="fas fa-sync-alt"></i> Verificar Pagamento</button>
-                        <button class="btn btn-info" onclick="window.open('https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d', '_blank')"><i class="fas fa-external-link-alt"></i> Abrir no Aplicativo</button>
-                        <p style="margin-top: 1rem; font-size: 0.9rem;">Se o pagamento não for identificado automaticamente, entre em contato com nosso suporte.</p>
-                    </div>
+                    <button class="btn btn-whatsapp btn-block" onclick="sendToWhatsApp()" id="whatsappBtn" disabled>
+                        <i class="fab fa-whatsapp"></i> Enviar Números para WhatsApp
+                    </button>
                 </div>
             </div>
             <div class="modal-footer" id="modalFooter">
@@ -876,6 +874,7 @@
         let timeLeft = 30 * 60; // 30 minutos em segundos
         const PIX_LINK = "https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d";
         const WHATSAPP_NUMBER = "557191829433";
+        let paymentVerified = false;
         
         // Números já vendidos
         let soldNumbers = {
@@ -896,6 +895,7 @@
             currentRifa = rifaType;
             selectedNumbers = [];
             resetCountdown();
+            paymentVerified = false;
             
             // Configurar modal
             setupRifaModal();
@@ -908,6 +908,8 @@
             document.getElementById('selectionStep').style.display = 'block';
             document.getElementById('pixStep').style.display = 'none';
             document.getElementById('nextButton').style.display = 'block';
+            document.getElementById('paymentVerified').style.display = 'none';
+            document.getElementById('whatsappBtn').disabled = true;
             
             document.getElementById('modalTitle').textContent = `Participar da Rifa - ${getRifaName(currentRifa)}`;
             document.getElementById('pricePerNumber').textContent = `R$ ${rifaPrices[currentRifa].toFixed(2)}`;
@@ -933,11 +935,6 @@
             document.getElementById('nextButton').textContent = 'Próximo';
             document.getElementById('nextButton').onclick = function() { nextStep(); };
             updateTotalAmount();
-            
-            // Esconder mensagens de status
-            document.getElementById('paymentSuccess').style.display = 'none';
-            document.getElementById('paymentError').style.display = 'none';
-            document.getElementById('paymentPending').style.display = 'none';
         }
         
         function closeModal() {
@@ -1013,35 +1010,6 @@
             
             // Iniciar contagem regressiva
             startCountdown();
-            
-            // Mostrar status de pagamento pendente
-            document.getElementById('paymentPending').style.display = 'block';
-            
-            // Enviar dados para WhatsApp
-            sendWhatsAppNotification(userName, userPhone);
-        }
-        
-        // Enviar notificação para WhatsApp
-        function sendWhatsAppNotification(name, phone) {
-            const rifaName = getRifaName(currentRifa);
-            const total = selectedNumbers.length * rifaPrices[currentRifa];
-            const numbersList = selectedNumbers.join(', ');
-            
-            const message = `Nova compra de rifa:\n\n` +
-                            `Nome: ${name}\n` +
-                            `WhatsApp: ${phone}\n` +
-                            `Rifa: ${rifaName}\n` +
-                            `Números: ${numbersList}\n` +
-                            `Total: R$ ${total.toFixed(2)}`;
-            
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
-            
-            // Em um sistema real, você pode fazer uma requisição para o backend
-            // Aqui estamos apenas abrindo o WhatsApp (comentado para não abrir popup durante demonstração)
-            // window.open(whatsappUrl, '_blank');
-            
-            console.log('Dados enviados para WhatsApp:', message);
         }
         
         // Copiar código PIX
@@ -1055,39 +1023,51 @@
         // Verificar pagamento (simulado)
         function verifyPayment() {
             // Em um sistema real, aqui seria feita uma requisição para verificar o pagamento
-            // Vamos simular uma confirmação após 2 segundos
+            showToast('Verificando pagamento...');
             
-            document.getElementById('paymentSuccess').style.display = 'none';
-            document.getElementById('paymentError').style.display = 'none';
-            document.getElementById('paymentPending').style.display = 'block';
-            
-            // Simular delay de verificação
-            setTimeout(function() {
+            setTimeout(() => {
                 // 80% de chance de sucesso para demonstração
-                if(Math.random() < 0.8) {
-                    document.getElementById('paymentSuccess').style.display = 'block';
-                    document.getElementById('paymentPending').style.display = 'none';
+                paymentVerified = Math.random() < 0.8;
+                
+                if(paymentVerified) {
+                    document.getElementById('paymentVerified').style.display = 'inline';
+                    document.getElementById('whatsappBtn').disabled = false;
+                    showToast('Pagamento confirmado com sucesso!');
                     
                     // Em um sistema real, aqui os números seriam reservados no banco de dados
-                    // E o usuário receberia um e-mail de confirmação
-                    
-                    // Adicionar números à lista de vendidos (apenas para demonstração)
                     soldNumbers[currentRifa] = [...soldNumbers[currentRifa], ...selectedNumbers];
-                    
-                    // Resetar contagem regressiva
-                    resetCountdown();
-                    
-                    // Mostrar botão para fechar
-                    document.getElementById('nextButton').style.display = 'block';
-                    document.getElementById('nextButton').textContent = 'Fechar';
-                    document.getElementById('nextButton').onclick = function() { closeModal(); };
-                    
-                    showToast('Pagamento confirmado! Seus números foram reservados.');
                 } else {
-                    document.getElementById('paymentError').style.display = 'block';
-                    document.getElementById('paymentPending').style.display = 'none';
-                    showToast('Pagamento não identificado. Por favor, tente novamente.');
+                    showToast('Pagamento ainda não identificado. Tente novamente.');
                 }
+            }, 2000);
+        }
+        
+        // Enviar dados para WhatsApp
+        function sendToWhatsApp() {
+            if(!paymentVerified) {
+                showToast('Por favor, verifique primeiro o pagamento PIX');
+                return;
+            }
+
+            const nome = document.getElementById('user-name').value.trim();
+            const telefone = document.getElementById('user-phone').value.replace(/\D/g, '');
+            const rifa = getRifaName(currentRifa);
+            const valorTotal = selectedNumbers.length * rifaPrices[currentRifa];
+            
+            const mensagem = `✅ COMPRA CONFIRMADA ✅\n\n` +
+                            `Nome: ${nome}\n` +
+                            `Telefone: ${telefone}\n` +
+                            `Rifa: ${rifa}\n` +
+                            `Números: ${selectedNumbers.join(', ')}\n` +
+                            `Valor: R$ ${valorTotal.toFixed(2)}\n\n` +
+                            `Data: ${new Date().toLocaleString()}`;
+
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensagem)}`, '_blank');
+            
+            // Fechar modal após 2 segundos
+            setTimeout(() => {
+                closeModal();
+                showToast('Obrigado por participar! Boa sorte no sorteio!');
             }, 2000);
         }
         
@@ -1102,9 +1082,6 @@
                 
                 if(timeLeft <= 0) {
                     clearInterval(countdownInterval);
-                    document.getElementById('paymentError').style.display = 'block';
-                    document.getElementById('paymentPending').style.display = 'none';
-                    document.getElementById('countdownTimer').textContent = "00:00";
                     showToast('Tempo esgotado! Por favor, inicie um novo pedido.');
                 }
             }, 1000);
@@ -1173,24 +1150,17 @@
         });
         
         // Máscara para telefone
-        document.getElementById('user-phone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if(value.length > 0) {
-                value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
-            }
-            
-            e.target.value = value;
-        });
-        
-        document.getElementById('contact-phone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            
-            if(value.length > 0) {
-                value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
-            }
-            
-            e.target.value = value;
+        const phoneInputs = document.querySelectorAll('input[type="tel"]');
+        phoneInputs.forEach(input => {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if(value.length > 0) {
+                    value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
+                }
+                
+                e.target.value = value;
+            });
         });
     </script>
 </body>

@@ -656,6 +656,19 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
+        /* Paginação */
+        .pagination-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .page-info {
+            font-weight: bold;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -860,6 +873,12 @@
                             </div>
                         </div>
                         
+                        <div class="pagination-controls">
+                            <button id="prevPage" class="btn" disabled onclick="changePage(-1)">Anterior</button>
+                            <span id="pageInfo" class="page-info">Página 1/100</span>
+                            <button id="nextPage" class="btn" onclick="changePage(1)">Próxima</button>
+                        </div>
+                        
                         <div class="selected-numbers-container">
                             <h4>Números selecionados: <span id="selectedCount">0</span></h4>
                             <div class="selected-numbers-list" id="selectedNumbersList">
@@ -937,6 +956,9 @@
         const WHATSAPP_NUMBER = "557191829433";
         let paymentVerified = false;
         let pricePerNumber = 0.5;
+        let currentPage = 1;
+        const numbersPerPage = 100;
+        const totalPages = 100; // 10000 números / 100 por página
         
         // Função para inicializar dados da rifa
         function initRifaData(rifaType) {
@@ -954,7 +976,7 @@
         }
 
         // Função para carregar números disponíveis
-        function loadAvailableNumbers(rifaType) {
+        function loadAvailableNumbers(rifaType, page = 1) {
             try {
                 const rifaData = initRifaData(rifaType);
                 const soldNumbers = rifaData.soldNumbers || [];
@@ -962,33 +984,46 @@
                 const grid = document.getElementById('availableNumbersGrid');
                 grid.innerHTML = '';
                 
-                // Criar array com 100 números (0-99) para demonstração
-                const demoNumbers = Array.from({length: 100}, (_, i) => i);
+                // Calcular números para a página atual
+                const startNumber = (page - 1) * numbersPerPage;
+                const endNumber = startNumber + numbersPerPage;
                 
-                demoNumbers.forEach(number => {
+                for (let i = startNumber; i < endNumber; i++) {
                     const numberBtn = document.createElement('div');
                     numberBtn.className = 'number-btn';
-                    numberBtn.textContent = number;
-                    numberBtn.dataset.number = number;
+                    numberBtn.textContent = i;
+                    numberBtn.dataset.number = i;
                     
-                    if (soldNumbers.includes(number)) {
+                    if (soldNumbers.includes(i)) {
                         numberBtn.classList.add('sold');
                         numberBtn.title = 'Número já vendido';
-                    } else if (reservedNumbers.includes(number)) {
+                    } else if (reservedNumbers.includes(i)) {
                         numberBtn.classList.add('reserved');
                         numberBtn.title = 'Número reservado';
                     } else {
                         numberBtn.addEventListener('click', function() {
-                            toggleNumberSelection(number);
+                            toggleNumberSelection(i);
                         });
                     }
                     
                     grid.appendChild(numberBtn);
-                });
+                }
+                
+                // Atualizar controles de paginação
+                document.getElementById('pageInfo').textContent = `Página ${page}/${totalPages}`;
+                document.getElementById('prevPage').disabled = page <= 1;
+                document.getElementById('nextPage').disabled = page >= totalPages;
+                
             } catch (error) {
                 console.error('Erro ao carregar números:', error);
                 showToast('Erro ao carregar números disponíveis');
             }
+        }
+
+        // Mudar página
+        function changePage(delta) {
+            currentPage += delta;
+            loadAvailableNumbers(currentRifa, currentPage);
         }
 
         // Função para alternar seleção de número
@@ -1030,6 +1065,7 @@
                 currentRifa = rifaType;
                 pricePerNumber = price;
                 selectedNumbers = [];
+                currentPage = 1;
                 
                 // Inicializa os dados da rifa
                 initRifaData(rifaType);
@@ -1040,7 +1076,7 @@
                 document.getElementById('selectedCount').textContent = '0';
                 
                 // Carrega os números disponíveis
-                loadAvailableNumbers(rifaType);
+                loadAvailableNumbers(rifaType, currentPage);
                 
                 document.getElementById('selectionStep').style.display = 'block';
                 document.getElementById('pixStep').style.display = 'none';
@@ -1218,7 +1254,7 @@
             const data = JSON.parse(localStorage.getItem('rifaData')) || {};
             const rifaData = data[rifaType] || { soldNumbers: [] };
             const soldCount = rifaData.soldNumbers.length;
-            const progressPercent = (soldCount / 10000) * 10000; // 100 números no total
+            const progressPercent = (soldCount / 10000) * 100; // 10000 números no total
             
             document.getElementById(`${rifaType}-progress-text`).textContent = `${Math.round(progressPercent)}% vendidos`;
             document.getElementById(`${rifaType}-progress-numbers`).textContent = `${soldCount}/10000`;
@@ -1329,7 +1365,7 @@
             const data = JSON.parse(localStorage.getItem('rifaData')) || {};
             const rifaData = data[rifaType] || { soldNumbers: [], participants: {} };
             
-            // Verificar se todos os números foram vendidos (100 números)
+            // Verificar se todos os números foram vendidos (10000 números)
             if (rifaData.soldNumbers.length === 10000 && !rifaData.winner) {
                 // Realizar o sorteio
                 const winnerIndex = Math.floor(Math.random() * rifaData.soldNumbers.length);

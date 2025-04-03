@@ -203,6 +203,30 @@
             font-size: 0.8rem;
         }
         
+        .rifa-closed {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--danger);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .rifa-winner {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--success);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
         .rifa-card:hover .rifa-image img {
             transform: scale(1.05);
         }
@@ -252,7 +276,7 @@
         .progress-fill {
             height: 100%;
             background-color: var(--primary);
-            width: 65%;
+            width: 0%;
             transition: width 0.5s ease;
         }
         
@@ -286,7 +310,7 @@
         .modal-content {
             background-color: white;
             width: 90%;
-            max-width: 500px;
+            max-width: 800px;
             margin: 2rem auto;
             border-radius: 8px;
             overflow: hidden;
@@ -352,69 +376,55 @@
             border-color: var(--primary);
         }
         
-        .input-group {
+        .number-input-container {
             display: flex;
-        }
-        
-        .input-group .form-control {
-            border-radius: 4px 0 0 4px;
-        }
-        
-        .input-group-btn {
-            border-radius: 0 4px 4px 0;
-        }
-        
-        .numbers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-            gap: 0.5rem;
+            flex-direction: column;
             margin-bottom: 1.5rem;
         }
         
-        .number-btn {
-            width: 40px;
-            height: 40px;
+        .number-input-group {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f5f5f5;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .number-input {
+            flex: 1;
+            padding: 0.8rem;
             border: 1px solid #ddd;
             border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            font-size: 0.9rem;
-        }
-        
-        .number-btn:hover {
-            background-color: #e0e0e0;
-        }
-        
-        .number-btn.selected {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .number-btn.sold {
-            background-color: #ffcdd2;
-            color: #b71c1c;
-            cursor: not-allowed;
-        }
-        
-        .number-btn.sold::after {
-            content: 'X';
-            position: absolute;
-            font-weight: bold;
             font-size: 1rem;
         }
         
-        .modal-footer {
-            padding: 1.5rem;
-            background-color: #f5f5f5;
+        .add-number-btn {
+            padding: 0.8rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .selected-numbers-list {
             display: flex;
-            justify-content: flex-end;
-            gap: 1rem;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+        
+        .selected-number {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .remove-number {
+            margin-left: 5px;
+            cursor: pointer;
         }
         
         .pix-instructions {
@@ -500,11 +510,24 @@
             padding: 1.5rem;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
         }
         
         .winner-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .winner-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .winner-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
         }
         
         /* Responsividade */
@@ -524,26 +547,9 @@
                 margin: 0.5rem;
             }
             
-            .numbers-grid {
-                grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+            .modal-content {
+                width: 95%;
             }
-            
-            .number-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 0.8rem;
-            }
-        }
-        
-        /* Animações */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
         }
         
         /* Toast Notification */
@@ -569,6 +575,43 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Modal de Ganhador */
+        .winner-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+        }
+        
+        .winner-modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        .winner-modal h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .winner-modal p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .winner-modal .btn {
+            margin-top: 1.5rem;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -596,9 +639,9 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Participe de rifas online por apenas R$1,00 por número!</h1>
+                <h1>Participe de rifas online por apenas R$0,50 por número!</h1>
                 <p>Escolha seus números da sorte, pague via PIX e concorra a prêmios incríveis!</p>
-                <a href="#rifas" class="btn btn-large pulse"><i class="fas fa-arrow-down"></i> Ver Rifas Disponíveis</a>
+                <a href="#rifas" class="btn btn-large"><i class="fas fa-arrow-down"></i> Ver Rifas Disponíveis</a>
             </div>
         </div>
     </section>
@@ -607,82 +650,84 @@
         <div class="container">
             <div class="section-title">
                 <h2>Rifas em Andamento</h2>
-                <p>Escolha uma das rifas abaixo e garanta seus números por apenas R$1,00 cada</p>
+                <p>Escolha uma das rifas abaixo e garanta seus números por apenas R$0,50 cada</p>
             </div>
             <div class="rifas-grid">
                 <div class="rifa-card">
                     <div class="rifa-image">
-                        <img src="https://images.unsplash.com/photo-1697898706716-3fd0fc3a5b0a" alt="iPhone 15 Pro">
-                        <span class="rifa-badge">Mais Popular</span>
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c" alt="Prêmio em Dinheiro">
+                        <span class="rifa-badge">Disponível</span>
                     </div>
                     <div class="rifa-content">
-                        <h3 class="rifa-title">iPhone 15 Pro 256GB</h3>
-                        <p class="rifa-prize">Prêmio: iPhone 15 Pro 256GB</p>
+                        <h3 class="rifa-title">Rifa R$1.000,00</h3>
+                        <p class="rifa-prize">Prêmio: R$ 1.000,00 em dinheiro</p>
                         <div class="rifa-info">
-                            <span><i class="far fa-calendar-alt"></i> Sorteio: 30/11/2023</span>
-                            <span><i class="far fa-ticket-alt"></i> Números: 0-999</span>
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: 30/01/2025</span>
+                            <span><i class="far fa-ticket-alt"></i> Números: 0-9999</span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-label">
-                                <span>72% vendidos</span>
-                                <span>720/1000</span>
+                                <span id="rifa1-progress-text">0% vendidos</span>
+                                <span id="rifa1-progress-numbers">0/10000</span>
                             </div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 72%"></div>
+                                <div class="progress-fill" id="rifa1-progress-bar" style="width: 0%"></div>
                             </div>
                         </div>
-                        <p class="rifa-price">R$ 1,00 por número</p>
-                        <button class="btn btn-primary btn-block" onclick="openRifaModal('iphone')"><i class="fas fa-shopping-cart"></i> Participar Agora</button>
+                        <p class="rifa-price">R$ 0,50 por número</p>
+                        <button class="btn btn-primary btn-block" onclick="openRifaModal('rifa1')"><i class="fas fa-shopping-cart"></i> Participar Agora</button>
                     </div>
                 </div>
                 
                 <div class="rifa-card">
                     <div class="rifa-image">
-                        <img src="https://images.unsplash.com/photo-1610945415295-d9d0dd97d5d3" alt="Samsung Note 10">
+                        <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e" alt="Prêmio em Dinheiro">
+                        <span class="rifa-closed">Em Breve</span>
                     </div>
                     <div class="rifa-content">
-                        <h3 class="rifa-title">Samsung Galaxy Note 10</h3>
-                        <p class="rifa-prize">Prêmio: Samsung Note 10 256GB</p>
+                        <h3 class="rifa-title">Rifa R$2.000,00</h3>
+                        <p class="rifa-prize">Prêmio: R$ 2.000,00 em dinheiro</p>
                         <div class="rifa-info">
-                            <span><i class="far fa-calendar-alt"></i> Sorteio: 15/12/2023</span>
-                            <span><i class="far fa-ticket-alt"></i> Números: 0-999</span>
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: 15/02/2025</span>
+                            <span><i class="far fa-ticket-alt"></i> Números: 0-9999</span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-label">
-                                <span>45% vendidos</span>
-                                <span>450/1000</span>
+                                <span id="rifa2-progress-text">0% vendidos</span>
+                                <span id="rifa2-progress-numbers">0/10000</span>
                             </div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 45%"></div>
+                                <div class="progress-fill" id="rifa2-progress-bar" style="width: 0%"></div>
                             </div>
                         </div>
-                        <p class="rifa-price">R$ 1,00 por número</p>
-                        <button class="btn btn-primary btn-block" onclick="openRifaModal('samsung')"><i class="fas fa-shopping-cart"></i> Participar Agora</button>
+                        <p class="rifa-price">R$ 0,50 por número</p>
+                        <button class="btn btn-block" style="background-color: #ccc; cursor: not-allowed;"><i class="fas fa-lock"></i> Em Breve</button>
                     </div>
                 </div>
                 
                 <div class="rifa-card">
                     <div class="rifa-image">
-                        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e" alt="Bike Trek">
+                        <img src="https://images.unsplash.com/photo-1604594849809-dfedbc827105" alt="Prêmio em Dinheiro">
+                        <span class="rifa-closed">Em Breve</span>
                     </div>
                     <div class="rifa-content">
-                        <h3 class="rifa-title">Bike Trek X-Caliber 8</h3>
-                        <p class="rifa-prize">Prêmio: Bicicleta Trek X-Caliber 8</p>
+                        <h3 class="rifa-title">Rifa R$3.000,00</h3>
+                        <p class="rifa-prize">Prêmio: R$ 3.000,00 em dinheiro</p>
                         <div class="rifa-info">
-                            <span><i class="far fa-calendar-alt"></i> Sorteio: 10/12/2023</span>
-                            <span><i class="far fa-ticket-alt"></i> Números: 0-999</span>
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: 10/03/2025</span>
+                            <span><i class="far fa-ticket-alt"></i> Números: 0-9999</span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-label">
-                                <span>60% vendidos</span>
-                                <span>600/1000</span>
+                                <span id="rifa3-progress-text">0% vendidos</span>
+                                <span id="rifa3-progress-numbers">0/10000</span>
                             </div>
                             <div class="progress-bar">
-                                <div class="progress-fill" style="width: 60%"></div>
+                                <div class="progress-fill" id="rifa3-progress-bar" style="width: 0%"></div>
                             </div>
                         </div>
-                        <p class="rifa-price">R$ 1,00 por número</p>
-                        <button class="btn btn-primary btn-block" onclick="openRifaModal('bike')"><i class="fas fa-shopping-cart"></i> Participar Agora</button>
+                        <p class="rifa-price">R$ 0,50 por número</p>
+                        <button class="btn btn-block" style="background-color: #ccc; cursor: not-allowed;"><i class="fas fa-lock"></i> Em Breve</button>
                     </div>
                 </div>
             </div>
@@ -693,37 +738,11 @@
         <div class="container">
             <div class="section-title">
                 <h2>Últimos Ganhadores</h2>
-                <p>Confira algumas das pessoas sortudas que já ganharam prêmios em nossas rifas</p>
+                <p>Confira os números sorteados e os felizes ganhadores</p>
             </div>
-            <div class="rifas-grid">
-                <div class="winner-card">
-                    <h3 class="rifa-title">Maria Silva</h3>
-                    <p class="rifa-prize">Ganhou: iPhone 14 Pro</p>
-                    <div class="rifa-info">
-                        <span><i class="far fa-calendar-alt"></i> Sorteio: 15/10/2023</span>
-                        <span><i class="far fa-ticket-alt"></i> Número: 427</span>
-                    </div>
-                    <p style="font-style: italic; color: #666;">"Comprei 5 números por R$5,00 e fui sorteada! Recebi meu iPhone em 3 dias."</p>
-                </div>
-                
-                <div class="winner-card">
-                    <h3 class="rifa-title">Carlos Oliveira</h3>
-                    <p class="rifa-prize">Ganhou: Notebook Dell</p>
-                    <div class="rifa-info">
-                        <span><i class="far fa-calendar-alt"></i> Sorteio: 01/10/2023</span>
-                        <span><i class="far fa-ticket-alt"></i> Número: 128</span>
-                    </div>
-                    <p style="font-style: italic; color: #666;">"Investi R$10,00 em 10 números e ganhei um notebook de R$4.000!"</p>
-                </div>
-                
-                <div class="winner-card">
-                    <h3 class="rifa-title">Ana Santos</h3>
-                    <p class="rifa-prize">Ganhou: TV LG 55"</p>
-                    <div class="rifa-info">
-                        <span><i class="far fa-calendar-alt"></i> Sorteio: 20/09/2023</span>
-                        <span><i class="far fa-ticket-alt"></i> Número: 312</span>
-                    </div>
-                    <p style="font-style: italic; color: #666;">"Comprei 3 números por R$3,00 e ganhei uma TV novinha!"</p>
+            <div id="winnersContainer">
+                <div style="text-align: center; padding: 2rem;">
+                    <p>Nenhum ganhador ainda. Seja o primeiro!</p>
                 </div>
             </div>
         </div>
@@ -762,7 +781,7 @@
                 <img src="https://logopng.com.br/logos/pix-106.png" alt="PIX" style="height: 50px;">
             </div>
             <div style="text-align: center; color: #bbb; font-size: 0.9rem;">
-                <p>© 2023 Rifa Sort - Todos os direitos reservados</p>
+                <p>© 2024 Rifa Sort - Todos os direitos reservados</p>
                 <p>CNPJ: 59.664.760/0001-46 - Este site não realiza sorteios, apenas facilita a organização de rifas entre particulares.</p>
             </div>
         </div>
@@ -786,9 +805,15 @@
                         <input type="tel" id="user-phone" class="form-control" placeholder="(00) 00000-0000" required>
                     </div>
                     <div class="form-group">
-                        <label>Escolha seus números (<span id="pricePerNumber">R$ 1,00</span> cada)</label>
-                        <div class="numbers-grid" id="numbersGrid">
-                            <!-- Números serão gerados pelo JavaScript -->
+                        <label>Escolha seus números (<span id="pricePerNumber">R$ 0,50</span> cada)</label>
+                        <div class="number-input-container">
+                            <div class="number-input-group">
+                                <input type="number" id="numberInput" class="number-input" placeholder="Digite um número de 0 a 9999" min="0" max="9999">
+                                <button class="add-number-btn" onclick="addNumber()">Adicionar</button>
+                            </div>
+                            <div class="selected-numbers-list" id="selectedNumbersList">
+                                <!-- Números selecionados aparecerão aqui -->
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -803,11 +828,16 @@
                 <div id="pixStep" style="display: none;">
                     <div class="pix-instructions">
                         <h3><i class="fas fa-qrcode"></i> Pagamento via PIX</h3>
-                        <p>Faça o pagamento de <strong id="pixAmount">R$ 1,00</strong> usando o QR Code abaixo:</p>
+                        <p>Faça o pagamento de <strong id="pixAmount">R$ 0,50</strong> usando o QR Code abaixo:</p>
                     </div>
                     
                     <div class="pix-qrcode">
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d" alt="QR Code PIX">
+                    </div>
+                    
+                    <div class="countdown">
+                        <i class="fas fa-clock timer-icon"></i>
+                        Tempo restante para pagamento: <span id="countdownTimer">30:00</span>
                     </div>
                     
                     <div class="payment-check">
@@ -831,6 +861,17 @@
         </div>
     </div>
     
+    <!-- Modal de Ganhador -->
+    <div id="winnerModal" class="winner-modal">
+        <div class="winner-modal-content">
+            <h2>🎉 Parabéns ao Ganhador! 🎉</h2>
+            <p id="winnerRifaName"></p>
+            <p>Número sorteado: <strong id="winnerNumber"></strong></p>
+            <p>Ganhador: <strong id="winnerPhone"></strong></p>
+            <button class="btn btn-primary" onclick="closeWinnerModal()">Fechar</button>
+        </div>
+    </div>
+    
     <!-- Toast Notification -->
     <div id="toast" class="toast">
         <div id="toastMessage"></div>
@@ -846,99 +887,189 @@
         const WHATSAPP_NUMBER = "557191829433";
         let paymentVerified = false;
         
-        // Números já vendidos
-        let soldNumbers = {
-            iphone: [15, 42, 78, 123, 256, 342, 427, 589, 678, 721, 834, 915],
-            samsung: [8, 23, 45, 67, 89, 112, 156, 201, 245, 312, 378, 421, 489],
-            bike: [5, 12, 34, 56, 78, 91, 115, 142, 178, 203, 245, 287]
-        };
-        
-        // Preços das rifas (todos R$1,00 por número)
-        const rifaPrices = {
-            iphone: 1,
-            samsung: 1,
-            bike: 1
-        };
-        
-        // Funções para abrir e fechar o modal
-        function openRifaModal(rifaType) {
-            currentRifa = rifaType;
-            selectedNumbers = [];
-            resetCountdown();
-            paymentVerified = false;
-            
-            // Configurar modal
-            setupRifaModal();
-            
-            // Exibir modal
-            document.getElementById('rifaModal').style.display = 'block';
-        }
-        
-        function setupRifaModal() {
-            document.getElementById('selectionStep').style.display = 'block';
-            document.getElementById('pixStep').style.display = 'none';
-            document.getElementById('nextButton').style.display = 'block';
-            document.getElementById('paymentVerified').style.display = 'none';
-            document.getElementById('whatsappBtn').disabled = true;
-            
-            document.getElementById('modalTitle').textContent = `Participar da Rifa - ${getRifaName(currentRifa)}`;
-            document.getElementById('pricePerNumber').textContent = `R$ ${rifaPrices[currentRifa].toFixed(2)}`;
-            
-            // Limpar campos
-            document.getElementById('user-name').value = '';
-            document.getElementById('user-phone').value = '';
-            
-            // Gerar grid de números
-            const numbersGrid = document.getElementById('numbersGrid');
-            numbersGrid.innerHTML = '';
-            
-            const maxNumber = 999; // Todas as rifas vão de 0-999
-            
-            for(let i = 0; i <= maxNumber; i++) {
-                const numberBtn = document.createElement('div');
-                numberBtn.className = soldNumbers[currentRifa].includes(i) ? 'number-btn sold' : 'number-btn';
-                numberBtn.textContent = i;
-                numberBtn.onclick = soldNumbers[currentRifa].includes(i) ? null : function() { selectNumber(this); };
-                numbersGrid.appendChild(numberBtn);
+        // Inicializar banco de dados local
+        function initDatabase() {
+            if(!localStorage.getItem('rifaData')) {
+                const initialData = {
+                    rifa1: {
+                        soldNumbers: [],
+                        reservedNumbers: [],
+                        participants: {},
+                        winner: null
+                    },
+                    rifa2: {
+                        soldNumbers: [],
+                        reservedNumbers: [],
+                        participants: {},
+                        winner: null
+                    },
+                    rifa3: {
+                        soldNumbers: [],
+                        reservedNumbers: [],
+                        participants: {},
+                        winner: null
+                    }
+                };
+                localStorage.setItem('rifaData', JSON.stringify(initialData));
             }
             
-            document.getElementById('nextButton').textContent = 'Próximo';
-            document.getElementById('nextButton').onclick = function() { nextStep(); };
-            updateTotalAmount();
+            // Carregar ganhadores
+            loadWinners();
         }
         
-        function closeModal() {
-            document.getElementById('rifaModal').style.display = 'none';
-            clearInterval(countdownInterval);
+        // Carregar lista de ganhadores
+        function loadWinners() {
+            const data = JSON.parse(localStorage.getItem('rifaData'));
+            const winnersContainer = document.getElementById('winnersContainer');
+            winnersContainer.innerHTML = '';
+            
+            let hasWinners = false;
+            
+            for (const rifaType in data) {
+                if (data[rifaType].winner) {
+                    hasWinners = true;
+                    const winner = data[rifaType].winner;
+                    const rifaName = getRifaName(rifaType);
+                    
+                    const winnerCard = document.createElement('div');
+                    winnerCard.className = 'winner-card';
+                    winnerCard.innerHTML = `
+                        <h3>${rifaName}</h3>
+                        <div class="winner-info">
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: ${winner.date}</span>
+                            <span class="winner-number">Nº ${winner.number}</span>
+                        </div>
+                        <p>Ganhador: ${winner.phone}</p>
+                    `;
+                    winnersContainer.appendChild(winnerCard);
+                }
+            }
+            
+            if (!hasWinners) {
+                winnersContainer.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <p>Nenhum ganhador ainda. Seja o primeiro!</p>
+                    </div>
+                `;
+            }
         }
         
+        // Função para verificar e realizar sorteio se necessário
+        function checkAndDrawWinner(rifaType) {
+            const data = JSON.parse(localStorage.getItem('rifaData'));
+            const rifaData = data[rifaType];
+            
+            // Verificar se todos os números foram vendidos (10000 números)
+            if (rifaData.soldNumbers.length === 10000 && !rifaData.winner) {
+                // Realizar o sorteio
+                const winnerIndex = Math.floor(Math.random() * rifaData.soldNumbers.length);
+                const winnerNumber = rifaData.soldNumbers[winnerIndex];
+                const winnerPhone = rifaData.participants[winnerNumber].phone;
+                const winnerName = rifaData.participants[winnerNumber].name;
+                
+                // Registrar o ganhador
+                data[rifaType].winner = {
+                    number: winnerNumber,
+                    phone: winnerPhone,
+                    name: winnerName,
+                    date: new Date().toLocaleString()
+                };
+                
+                localStorage.setItem('rifaData', JSON.stringify(data));
+                
+                // Mostrar o ganhador
+                showWinnerNotification(rifaType, winnerNumber, winnerPhone);
+                
+                // Atualizar a lista de ganhadores
+                loadWinners();
+                
+                return true;
+            }
+            return false;
+        }
+        
+        // Função para mostrar notificação do ganhador
+        function showWinnerNotification(rifaType, winnerNumber, winnerPhone) {
+            const rifaName = getRifaName(rifaType);
+            
+            document.getElementById('winnerRifaName').textContent = rifaName;
+            document.getElementById('winnerNumber').textContent = winnerNumber;
+            document.getElementById('winnerPhone').textContent = winnerPhone;
+            
+            document.getElementById('winnerModal').style.display = 'block';
+        }
+        
+        // Fechar modal do ganhador
+        function closeWinnerModal() {
+            document.getElementById('winnerModal').style.display = 'none';
+        }
+        
+        // [Manter todas as outras funções anteriores...]
+
         // Função auxiliar para obter o nome da rifa
         function getRifaName(rifaType) {
             switch(rifaType) {
-                case 'iphone': return 'iPhone 15 Pro';
-                case 'samsung': return 'Samsung Note 10';
-                case 'bike': return 'Bike Trek';
+                case 'rifa1': return 'Rifa R$1.000,00';
+                case 'rifa2': return 'Rifa R$2.000,00';
+                case 'rifa3': return 'Rifa R$3.000,00';
                 default: return '';
             }
         }
-        
-        // Selecionar números
-        function selectNumber(element) {
-            element.classList.toggle('selected');
-            const number = parseInt(element.textContent);
+
+        // Adicionar número à lista
+        function addNumber() {
+            const numberInput = document.getElementById('numberInput');
+            const number = parseInt(numberInput.value);
             
-            if(element.classList.contains('selected')) {
-                selectedNumbers.push(number);
-            } else {
-                selectedNumbers = selectedNumbers.filter(n => n !== number);
+            if(isNaN(number) || number < 0 || number > 9999) {
+                showToast('Por favor, digite um número válido entre 0 e 9999');
+                return;
             }
             
+            if(selectedNumbers.includes(number)) {
+                showToast('Este número já foi selecionado');
+                return;
+            }
+            
+            // Verificar se o número já foi vendido ou reservado
+            const data = JSON.parse(localStorage.getItem('rifaData'));
+            if (data[currentRifa].soldNumbers.includes(number) || data[currentRifa].reservedNumbers.includes(number)) {
+                showToast('Este número já está ocupado. Por favor, escolha outro.');
+                return;
+            }
+            
+            selectedNumbers.push(number);
+            updateSelectedNumbersList();
             updateTotalAmount();
+            numberInput.value = '';
+        }
+        
+        // Remover número da lista
+        function removeNumber(number) {
+            selectedNumbers = selectedNumbers.filter(n => n !== number);
+            updateSelectedNumbersList();
+            updateTotalAmount();
+        }
+        
+        // Atualizar lista de números selecionados
+        function updateSelectedNumbersList() {
+            const list = document.getElementById('selectedNumbersList');
+            list.innerHTML = '';
+            
+            selectedNumbers.forEach(number => {
+                const numberElement = document.createElement('div');
+                numberElement.className = 'selected-number';
+                numberElement.innerHTML = `
+                    ${number}
+                    <span class="remove-number" onclick="removeNumber(${number})">&times;</span>
+                `;
+                list.appendChild(numberElement);
+            });
         }
         
         // Atualizar valor total
         function updateTotalAmount() {
-            const price = rifaPrices[currentRifa];
+            const price = 0.5; // R$0,50 por número
             const total = selectedNumbers.length * price;
             
             document.getElementById('totalAmount').textContent = `R$ ${total.toFixed(2)}`;
@@ -967,6 +1098,9 @@
                 return;
             }
             
+            // Reservar os números selecionados
+            reserveNumbers();
+            
             // Mostrar passo do PIX
             document.getElementById('selectionStep').style.display = 'none';
             document.getElementById('pixStep').style.display = 'block';
@@ -974,6 +1108,74 @@
             
             // Iniciar contagem regressiva
             startCountdown();
+        }
+        
+        // Reservar números selecionados
+        function reserveNumbers() {
+            const data = JSON.parse(localStorage.getItem('rifaData'));
+            
+            // Adicionar aos reservados
+            data[currentRifa].reservedNumbers = [...data[currentRifa].reservedNumbers, ...selectedNumbers];
+            
+            // Remover duplicatas (só por garantia)
+            data[currentRifa].reservedNumbers = [...new Set(data[currentRifa].reservedNumbers)];
+            
+            localStorage.setItem('rifaData', JSON.stringify(data));
+        }
+        
+        // Liberar números reservados (se o usuário cancelar)
+        function releaseReservedNumbers() {
+            const data = JSON.parse(localStorage.getItem('rifaData'));
+            
+            // Remover os números reservados
+            data[currentRifa].reservedNumbers = data[currentRifa].reservedNumbers.filter(
+                num => !selectedNumbers.includes(num)
+            );
+            
+            localStorage.setItem('rifaData', JSON.stringify(data));
+        }
+        
+        // Confirmar compra dos números (quando o pagamento for verificado)
+        function confirmNumberPurchase() {
+            const data = JSON.parse(localStorage.getItem('rifaData'));
+            const userName = document.getElementById('user-name').value.trim();
+            const userPhone = document.getElementById('user-phone').value.replace(/\D/g, '');
+            
+            // Adicionar aos vendidos
+            data[currentRifa].soldNumbers = [...data[currentRifa].soldNumbers, ...selectedNumbers];
+            
+            // Registrar participantes
+            selectedNumbers.forEach(number => {
+                data[currentRifa].participants[number] = {
+                    name: userName,
+                    phone: userPhone,
+                    date: new Date().toLocaleString()
+                };
+            });
+            
+            // Remover dos reservados
+            data[currentRifa].reservedNumbers = data[currentRifa].reservedNumbers.filter(
+                num => !selectedNumbers.includes(num)
+            );
+            
+            localStorage.setItem('rifaData', JSON.stringify(data));
+            
+            // Atualizar progresso
+            updateProgress(currentRifa);
+            
+            // Verificar se deve realizar o sorteio
+            checkAndDrawWinner(currentRifa);
+        }
+        
+        // Atualizar barra de progresso
+        function updateProgress(rifaType) {
+            const data = JSON.parse(localStorage.getItem('rifaData'));
+            const soldCount = data[rifaType].soldNumbers.length;
+            const progressPercent = (soldCount / 10000) * 100;
+            
+            document.getElementById(`${rifaType}-progress-text`).textContent = `${Math.round(progressPercent)}% vendidos`;
+            document.getElementById(`${rifaType}-progress-numbers`).textContent = `${soldCount}/10000`;
+            document.getElementById(`${rifaType}-progress-bar`).style.width = `${progressPercent}%`;
         }
         
         // Verificar pagamento (simulado)
@@ -990,8 +1192,8 @@
                     document.getElementById('whatsappBtn').disabled = false;
                     showToast('Pagamento confirmado com sucesso!');
                     
-                    // Em um sistema real, aqui os números seriam reservados no banco de dados
-                    soldNumbers[currentRifa] = [...soldNumbers[currentRifa], ...selectedNumbers];
+                    // Confirmar a compra dos números
+                    confirmNumberPurchase();
                 } else {
                     showToast('Pagamento ainda não identificado. Tente novamente.');
                 }
@@ -1008,14 +1210,14 @@
             const nome = document.getElementById('user-name').value.trim();
             const telefone = document.getElementById('user-phone').value.replace(/\D/g, '');
             const rifa = getRifaName(currentRifa);
-            const valorTotal = selectedNumbers.length * rifaPrices[currentRifa];
+            const valorTotal = (selectedNumbers.length * 0.5).toFixed(2);
             
             const mensagem = `✅ COMPRA CONFIRMADA ✅\n\n` +
                             `Nome: ${nome}\n` +
                             `Telefone: ${telefone}\n` +
                             `Rifa: ${rifa}\n` +
                             `Números: ${selectedNumbers.join(', ')}\n` +
-                            `Valor: R$ ${valorTotal.toFixed(2)}\n\n` +
+                            `Valor: R$ ${valorTotal}\n\n` +
                             `Data: ${new Date().toLocaleString()}`;
 
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensagem)}`, '_blank');
@@ -1039,6 +1241,14 @@
                 if(timeLeft <= 0) {
                     clearInterval(countdownInterval);
                     showToast('Tempo esgotado! Por favor, inicie um novo pedido.');
+                    
+                    // Liberar números reservados
+                    releaseReservedNumbers();
+                    
+                    // Voltar para a seleção
+                    document.getElementById('pixStep').style.display = 'none';
+                    document.getElementById('selectionStep').style.display = 'block';
+                    document.getElementById('nextButton').style.display = 'block';
                 }
             }, 1000);
         }
@@ -1072,6 +1282,9 @@
         window.onclick = function(event) {
             if (event.target == document.getElementById('rifaModal')) {
                 closeModal();
+            }
+            if (event.target == document.getElementById('winnerModal')) {
+                closeWinnerModal();
             }
         }
         
@@ -1118,6 +1331,16 @@
                 e.target.value = value;
             });
         });
+        
+        // Inicializar o banco de dados quando a página carregar
+        window.onload = function() {
+            initDatabase();
+            
+            // Verificar se há sorteios pendentes ao carregar a página
+            checkAndDrawWinner('rifa1');
+            checkAndDrawWinner('rifa2');
+            checkAndDrawWinner('rifa3');
+        };
     </script>
 </body>
 </html>

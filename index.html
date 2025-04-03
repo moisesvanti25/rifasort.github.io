@@ -305,6 +305,13 @@
             background-color: rgba(0,0,0,0.7);
             z-index: 1000;
             overflow-y: auto;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: block;
+            opacity: 1;
         }
         
         .modal-content {
@@ -376,33 +383,8 @@
             border-color: var(--primary);
         }
         
-        .number-input-container {
-            display: flex;
-            flex-direction: column;
+        .selected-numbers-container {
             margin-bottom: 1.5rem;
-        }
-        
-        .number-input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        
-        .number-input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        
-        .add-number-btn {
-            padding: 0.8rem 1rem;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
         }
         
         .selected-numbers-list {
@@ -613,6 +595,65 @@
         .winner-modal .btn {
             margin-top: 1.5rem;
         }
+        
+        /* Estilos para a grade de números */
+        .available-numbers-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .available-numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+            gap: 5px;
+        }
+        
+        .number-btn {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .number-btn:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .number-btn.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .number-btn.sold {
+            background-color: #ffebee;
+            color: #c62828;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+        
+        .number-btn.reserved {
+            background-color: #fff8e1;
+            color: #ff8f00;
+            cursor: not-allowed;
+        }
+        
+        .search-numbers {
+            margin-bottom: 1rem;
+        }
+        
+        .search-numbers input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -682,13 +723,13 @@
                 <div class="rifa-card">
                     <div class="rifa-image">
                         <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e" alt="Prêmio em PIX">
-                        <span class="rifa-badge">Disponível</span>
+                        <span class="rifa-closed">Em Breve</span>
                     </div>
                     <div class="rifa-content">
                         <h3 class="rifa-title">Rifa R$2.000,00</h3>
                         <p class="rifa-prize">Prêmio: R$ 2.000,00 via PIX</p>
                         <div class="rifa-info">
-                            <span><i class="far fa-calendar-alt"></i> Sorteio: Após venda de todos os números</span>
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: Em breve</span>
                             <span><i class="far fa-ticket-alt"></i> Números: 0-9999</span>
                         </div>
                         <div class="progress-container">
@@ -701,20 +742,20 @@
                             </div>
                         </div>
                         <p class="rifa-price">R$ 1,50 por número</p>
-                        <button class="btn btn-primary btn-block" onclick="openRifaModal('rifa2', 1.5)"><i class="fas fa-shopping-cart"></i> Participar Agora</button>
+                        <button class="btn btn-block" style="background-color: #ccc; cursor: not-allowed;"><i class="fas fa-lock"></i> Em Breve</button>
                     </div>
                 </div>
                 
                 <div class="rifa-card">
                     <div class="rifa-image">
                         <img src="https://images.unsplash.com/photo-1604594849809-dfedbc827105" alt="Prêmio em PIX">
-                        <span class="rifa-badge">Disponível</span>
+                        <span class="rifa-closed">Em Breve</span>
                     </div>
                     <div class="rifa-content">
                         <h3 class="rifa-title">Rifa R$3.000,00</h3>
                         <p class="rifa-prize">Prêmio: R$ 3.000,00 via PIX</p>
                         <div class="rifa-info">
-                            <span><i class="far fa-calendar-alt"></i> Sorteio: Após venda de todos os números</span>
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: Em breve</span>
                             <span><i class="far fa-ticket-alt"></i> Números: 0-9999</span>
                         </div>
                         <div class="progress-container">
@@ -727,7 +768,7 @@
                             </div>
                         </div>
                         <p class="rifa-price">R$ 2,00 por número</p>
-                        <button class="btn btn-primary btn-block" onclick="openRifaModal('rifa3', 2.0)"><i class="fas fa-shopping-cart"></i> Participar Agora</button>
+                        <button class="btn btn-block" style="background-color: #ccc; cursor: not-allowed;"><i class="fas fa-lock"></i> Em Breve</button>
                     </div>
                 </div>
             </div>
@@ -806,11 +847,19 @@
                     </div>
                     <div class="form-group">
                         <label>Escolha seus números (<span id="pricePerNumber">R$ 0,50</span> cada)</label>
-                        <div class="number-input-container">
-                            <div class="number-input-group">
-                                <input type="number" id="numberInput" class="number-input" placeholder="Digite um número de 0 a 9999" min="0" max="9999">
-                                <button class="add-number-btn" onclick="addNumber()">Adicionar</button>
+                        
+                        <div class="search-numbers">
+                            <input type="text" id="numberSearch" placeholder="Pesquisar número..." oninput="filterNumbers()">
+                        </div>
+                        
+                        <div class="available-numbers-container">
+                            <div class="available-numbers-grid" id="availableNumbersGrid">
+                                <!-- Números serão preenchidos via JavaScript -->
                             </div>
+                        </div>
+                        
+                        <div class="selected-numbers-container">
+                            <h4>Números selecionados: <span id="selectedCount">0</span></h4>
                             <div class="selected-numbers-list" id="selectedNumbersList">
                                 <!-- Números selecionados aparecerão aqui -->
                             </div>
@@ -888,40 +937,142 @@
         let paymentVerified = false;
         let pricePerNumber = 0.5;
         
+        // Função para inicializar dados da rifa
+        function initRifaData(rifaType) {
+            let data = JSON.parse(localStorage.getItem('rifaData')) || {};
+            if (!data[rifaType]) {
+                data[rifaType] = {
+                    soldNumbers: [],
+                    reservedNumbers: [],
+                    participants: {},
+                    winner: null
+                };
+                localStorage.setItem('rifaData', JSON.stringify(data));
+            }
+            return data[rifaType];
+        }
+
+        // Função para carregar números disponíveis
+        function loadAvailableNumbers(rifaType) {
+            try {
+                const rifaData = initRifaData(rifaType);
+                const soldNumbers = rifaData.soldNumbers || [];
+                const reservedNumbers = rifaData.reservedNumbers || [];
+                const grid = document.getElementById('availableNumbersGrid');
+                grid.innerHTML = '';
+                
+                // Criar array com 100 números (0-99) para demonstração
+                const demoNumbers = Array.from({length: 10000}, (_, i) => i);
+                
+                demoNumbers.forEach(number => {
+                    const numberBtn = document.createElement('div');
+                    numberBtn.className = 'number-btn';
+                    numberBtn.textContent = number;
+                    numberBtn.dataset.number = number;
+                    
+                    if (soldNumbers.includes(number)) {
+                        numberBtn.classList.add('sold');
+                        numberBtn.title = 'Número já vendido';
+                    } else if (reservedNumbers.includes(number)) {
+                        numberBtn.classList.add('reserved');
+                        numberBtn.title = 'Número reservado';
+                    } else {
+                        numberBtn.addEventListener('click', function() {
+                            toggleNumberSelection(number);
+                        });
+                    }
+                    
+                    grid.appendChild(numberBtn);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar números:', error);
+                showToast('Erro ao carregar números disponíveis');
+            }
+        }
+
+        // Função para alternar seleção de número
+        function toggleNumberSelection(number) {
+            const numberBtn = document.querySelector(`.number-btn[data-number="${number}"]`);
+            
+            if (selectedNumbers.includes(number)) {
+                // Remover da seleção
+                selectedNumbers = selectedNumbers.filter(n => n !== number);
+                numberBtn.classList.remove('selected');
+            } else {
+                // Adicionar à seleção
+                selectedNumbers.push(number);
+                numberBtn.classList.add('selected');
+            }
+            
+            updateSelectedNumbersList();
+            updateTotalAmount();
+        }
+
+        // Função para filtrar números na pesquisa
+        function filterNumbers() {
+            const searchTerm = document.getElementById('numberSearch').value.toLowerCase();
+            const numberBtns = document.querySelectorAll('.number-btn');
+            
+            numberBtns.forEach(btn => {
+                const number = btn.dataset.number;
+                if (number.includes(searchTerm)) {
+                    btn.style.display = 'block';
+                } else {
+                    btn.style.display = 'none';
+                }
+            });
+        }
+
         // Abrir modal da rifa
         function openRifaModal(rifaType, price) {
-            currentRifa = rifaType;
-            pricePerNumber = price;
-            selectedNumbers = [];
-            
-            // Atualizar o preço por número no modal
-            document.getElementById('pricePerNumber').textContent = `R$ ${pricePerNumber.toFixed(2)}`;
-            document.getElementById('totalAmount').textContent = 'R$ 0,00';
-            document.getElementById('selectedNumbersList').innerHTML = '';
-            
-            // Resetar o modal para o primeiro passo
-            document.getElementById('selectionStep').style.display = 'block';
-            document.getElementById('pixStep').style.display = 'none';
-            document.getElementById('nextButton').style.display = 'block';
-            document.getElementById('paymentVerified').style.display = 'none';
-            document.getElementById('whatsappBtn').disabled = true;
-            
-            // Resetar campos
-            document.getElementById('user-name').value = '';
-            document.getElementById('user-phone').value = '';
-            document.getElementById('numberInput').value = '';
-            
-            // Abrir modal
-            document.getElementById('rifaModal').style.display = 'block';
-            paymentVerified = false;
-            
-            // Resetar contagem regressiva
-            resetCountdown();
+            try {
+                currentRifa = rifaType;
+                pricePerNumber = price;
+                selectedNumbers = [];
+                
+                // Inicializa os dados da rifa
+                initRifaData(rifaType);
+                
+                document.getElementById('pricePerNumber').textContent = `R$ ${pricePerNumber.toFixed(2)}`;
+                document.getElementById('totalAmount').textContent = 'R$ 0,00';
+                document.getElementById('selectedNumbersList').innerHTML = '';
+                document.getElementById('selectedCount').textContent = '0';
+                
+                // Carrega os números disponíveis
+                loadAvailableNumbers(rifaType);
+                
+                document.getElementById('selectionStep').style.display = 'block';
+                document.getElementById('pixStep').style.display = 'none';
+                document.getElementById('nextButton').style.display = 'block';
+                document.getElementById('paymentVerified').style.display = 'none';
+                document.getElementById('whatsappBtn').disabled = true;
+                
+                document.getElementById('user-name').value = '';
+                document.getElementById('user-phone').value = '';
+                document.getElementById('numberSearch').value = '';
+                
+                const modal = document.getElementById('rifaModal');
+                modal.style.display = 'block';
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+                
+                paymentVerified = false;
+                resetCountdown();
+                
+            } catch (error) {
+                console.error('Erro ao abrir modal:', error);
+                showToast('Ocorreu um erro. Por favor, recarregue a página e tente novamente.');
+            }
         }
-        
+
         // Fechar modal
         function closeModal() {
-            document.getElementById('rifaModal').style.display = 'none';
+            const modal = document.getElementById('rifaModal');
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
             
             // Liberar números reservados se não foi para o próximo passo
             if (document.getElementById('selectionStep').style.display !== 'none') {
@@ -931,177 +1082,11 @@
             // Parar contagem regressiva
             clearInterval(countdownInterval);
         }
-        
-        // Inicializar banco de dados local
-        function initDatabase() {
-            if(!localStorage.getItem('rifaData')) {
-                const initialData = {
-                    rifa1: {
-                        soldNumbers: [],
-                        reservedNumbers: [],
-                        participants: {},
-                        winner: null
-                    },
-                    rifa2: {
-                        soldNumbers: [],
-                        reservedNumbers: [],
-                        participants: {},
-                        winner: null
-                    },
-                    rifa3: {
-                        soldNumbers: [],
-                        reservedNumbers: [],
-                        participants: {},
-                        winner: null
-                    }
-                };
-                localStorage.setItem('rifaData', JSON.stringify(initialData));
-            }
-            
-            // Carregar ganhadores
-            loadWinners();
-            
-            // Atualizar progresso das rifas
-            updateProgress('rifa1');
-            updateProgress('rifa2');
-            updateProgress('rifa3');
-        }
-        
-        // Carregar lista de ganhadores
-        function loadWinners() {
-            const data = JSON.parse(localStorage.getItem('rifaData'));
-            const winnersContainer = document.getElementById('winnersContainer');
-            winnersContainer.innerHTML = '';
-            
-            let hasWinners = false;
-            
-            for (const rifaType in data) {
-                if (data[rifaType].winner) {
-                    hasWinners = true;
-                    const winner = data[rifaType].winner;
-                    const rifaName = getRifaName(rifaType);
-                    
-                    const winnerCard = document.createElement('div');
-                    winnerCard.className = 'winner-card';
-                    winnerCard.innerHTML = `
-                        <h3>${rifaName}</h3>
-                        <div class="winner-info">
-                            <span><i class="far fa-calendar-alt"></i> Sorteio: ${winner.date}</span>
-                            <span class="winner-number">Nº ${winner.number}</span>
-                        </div>
-                        <p>Ganhador: ${winner.phone}</p>
-                    `;
-                    winnersContainer.appendChild(winnerCard);
-                }
-            }
-            
-            if (!hasWinners) {
-                winnersContainer.innerHTML = `
-                    <div style="text-align: center; padding: 2rem;">
-                        <p>Nenhum ganhador ainda. Seja o primeiro!</p>
-                    </div>
-                `;
-            }
-        }
-        
-        // Função para verificar e realizar sorteio se necessário
-        function checkAndDrawWinner(rifaType) {
-            const data = JSON.parse(localStorage.getItem('rifaData'));
-            const rifaData = data[rifaType];
-            
-            // Verificar se todos os números foram vendidos (10000 números)
-            if (rifaData.soldNumbers.length === 10000 && !rifaData.winner) {
-                // Realizar o sorteio
-                const winnerIndex = Math.floor(Math.random() * rifaData.soldNumbers.length);
-                const winnerNumber = rifaData.soldNumbers[winnerIndex];
-                const winnerPhone = rifaData.participants[winnerNumber].phone;
-                const winnerName = rifaData.participants[winnerNumber].name;
-                
-                // Registrar o ganhador
-                data[rifaType].winner = {
-                    number: winnerNumber,
-                    phone: winnerPhone,
-                    name: winnerName,
-                    date: new Date().toLocaleString()
-                };
-                
-                localStorage.setItem('rifaData', JSON.stringify(data));
-                
-                // Mostrar o ganhador
-                showWinnerNotification(rifaType, winnerNumber, winnerPhone);
-                
-                // Atualizar a lista de ganhadores
-                loadWinners();
-                
-                return true;
-            }
-            return false;
-        }
-        
-        // Função para mostrar notificação do ganhador
-        function showWinnerNotification(rifaType, winnerNumber, winnerPhone) {
-            const rifaName = getRifaName(rifaType);
-            
-            document.getElementById('winnerRifaName').textContent = rifaName;
-            document.getElementById('winnerNumber').textContent = winnerNumber;
-            document.getElementById('winnerPhone').textContent = winnerPhone;
-            
-            document.getElementById('winnerModal').style.display = 'block';
-        }
-        
-        // Fechar modal do ganhador
-        function closeWinnerModal() {
-            document.getElementById('winnerModal').style.display = 'none';
-        }
-        
-        // Função auxiliar para obter o nome da rifa
-        function getRifaName(rifaType) {
-            switch(rifaType) {
-                case 'rifa1': return 'Rifa R$1.000,00';
-                case 'rifa2': return 'Rifa R$2.000,00';
-                case 'rifa3': return 'Rifa R$3.000,00';
-                default: return '';
-            }
-        }
 
-        // Adicionar número à lista
-        function addNumber() {
-            const numberInput = document.getElementById('numberInput');
-            const number = parseInt(numberInput.value);
-            
-            if(isNaN(number) || number < 0 || number > 9999) {
-                showToast('Por favor, digite um número válido entre 0 e 9999');
-                return;
-            }
-            
-            if(selectedNumbers.includes(number)) {
-                showToast('Este número já foi selecionado');
-                return;
-            }
-            
-            // Verificar se o número já foi vendido ou reservado
-            const data = JSON.parse(localStorage.getItem('rifaData'));
-            if (data[currentRifa].soldNumbers.includes(number) || data[currentRifa].reservedNumbers.includes(number)) {
-                showToast('Este número já está ocupado. Por favor, escolha outro.');
-                return;
-            }
-            
-            selectedNumbers.push(number);
-            updateSelectedNumbersList();
-            updateTotalAmount();
-            numberInput.value = '';
-        }
-        
-        // Remover número da lista
-        function removeNumber(number) {
-            selectedNumbers = selectedNumbers.filter(n => n !== number);
-            updateSelectedNumbersList();
-            updateTotalAmount();
-        }
-        
         // Atualizar lista de números selecionados
         function updateSelectedNumbersList() {
             const list = document.getElementById('selectedNumbersList');
+            const countElement = document.getElementById('selectedCount');
             list.innerHTML = '';
             
             selectedNumbers.forEach(number => {
@@ -1113,17 +1098,30 @@
                 `;
                 list.appendChild(numberElement);
             });
+            
+            countElement.textContent = selectedNumbers.length;
+        }
+        
+        // Remover número selecionado
+        function removeNumber(number) {
+            selectedNumbers = selectedNumbers.filter(n => n !== number);
+            updateSelectedNumbersList();
+            updateTotalAmount();
+            
+            const numberBtn = document.querySelector(`.number-btn[data-number="${number}"]`);
+            if (numberBtn) {
+                numberBtn.classList.remove('selected');
+            }
         }
         
         // Atualizar valor total
         function updateTotalAmount() {
             const total = selectedNumbers.length * pricePerNumber;
-            
             document.getElementById('totalAmount').textContent = `R$ ${total.toFixed(2)}`;
             document.getElementById('pixAmount').textContent = `R$ ${total.toFixed(2)}`;
         }
         
-        // Próximo passo
+        // Próximo passo (para pagamento)
         function nextStep() {
             // Validar nome e telefone
             const userName = document.getElementById('user-name').value.trim();
@@ -1159,20 +1157,20 @@
         
         // Reservar números selecionados
         function reserveNumbers() {
-            const data = JSON.parse(localStorage.getItem('rifaData'));
+            const data = JSON.parse(localStorage.getItem('rifaData')) || {};
             
             // Adicionar aos reservados
             data[currentRifa].reservedNumbers = [...data[currentRifa].reservedNumbers, ...selectedNumbers];
             
-            // Remover duplicatas (só por garantia)
+            // Remover duplicatas
             data[currentRifa].reservedNumbers = [...new Set(data[currentRifa].reservedNumbers)];
             
             localStorage.setItem('rifaData', JSON.stringify(data));
         }
         
-        // Liberar números reservados (se o usuário cancelar)
+        // Liberar números reservados
         function releaseReservedNumbers() {
-            const data = JSON.parse(localStorage.getItem('rifaData'));
+            const data = JSON.parse(localStorage.getItem('rifaData')) || {};
             
             // Remover os números reservados
             data[currentRifa].reservedNumbers = data[currentRifa].reservedNumbers.filter(
@@ -1182,9 +1180,9 @@
             localStorage.setItem('rifaData', JSON.stringify(data));
         }
         
-        // Confirmar compra dos números (quando o pagamento for verificado)
+        // Confirmar compra dos números
         function confirmNumberPurchase() {
-            const data = JSON.parse(localStorage.getItem('rifaData'));
+            const data = JSON.parse(localStorage.getItem('rifaData')) || {};
             const userName = document.getElementById('user-name').value.trim();
             const userPhone = document.getElementById('user-phone').value.replace(/\D/g, '');
             
@@ -1216,9 +1214,10 @@
         
         // Atualizar barra de progresso
         function updateProgress(rifaType) {
-            const data = JSON.parse(localStorage.getItem('rifaData'));
-            const soldCount = data[rifaType].soldNumbers.length;
-            const progressPercent = (soldCount / 10000) * 100;
+            const data = JSON.parse(localStorage.getItem('rifaData')) || {};
+            const rifaData = data[rifaType] || { soldNumbers: [] };
+            const soldCount = rifaData.soldNumbers.length;
+            const progressPercent = (soldCount / 10000) * 10000; // 100 números no total
             
             document.getElementById(`${rifaType}-progress-text`).textContent = `${Math.round(progressPercent)}% vendidos`;
             document.getElementById(`${rifaType}-progress-numbers`).textContent = `${soldCount}/10000`;
@@ -1227,7 +1226,6 @@
         
         // Verificar pagamento (simulado)
         function verifyPayment() {
-            // Em um sistema real, aqui seria feita uma requisição para verificar o pagamento
             showToast('Verificando pagamento...');
             
             setTimeout(() => {
@@ -1325,6 +1323,100 @@
             }, 3000);
         }
         
+        // Verificar e realizar sorteio se necessário
+        function checkAndDrawWinner(rifaType) {
+            const data = JSON.parse(localStorage.getItem('rifaData')) || {};
+            const rifaData = data[rifaType] || { soldNumbers: [], participants: {} };
+            
+            // Verificar se todos os números foram vendidos (100 números)
+            if (rifaData.soldNumbers.length === 10000 && !rifaData.winner) {
+                // Realizar o sorteio
+                const winnerIndex = Math.floor(Math.random() * rifaData.soldNumbers.length);
+                const winnerNumber = rifaData.soldNumbers[winnerIndex];
+                const winnerPhone = rifaData.participants[winnerNumber]?.phone || 'Não informado';
+                const winnerName = rifaData.participants[winnerNumber]?.name || 'Não informado';
+                
+                // Registrar o ganhador
+                data[rifaType].winner = {
+                    number: winnerNumber,
+                    phone: winnerPhone,
+                    name: winnerName,
+                    date: new Date().toLocaleString()
+                };
+                
+                localStorage.setItem('rifaData', JSON.stringify(data));
+                
+                // Mostrar o ganhador
+                showWinnerNotification(rifaType, winnerNumber, winnerPhone);
+                
+                // Atualizar a lista de ganhadores
+                loadWinners();
+            }
+        }
+        
+        // Mostrar notificação do ganhador
+        function showWinnerNotification(rifaType, winnerNumber, winnerPhone) {
+            const rifaName = getRifaName(rifaType);
+            
+            document.getElementById('winnerRifaName').textContent = rifaName;
+            document.getElementById('winnerNumber').textContent = winnerNumber;
+            document.getElementById('winnerPhone').textContent = winnerPhone;
+            
+            document.getElementById('winnerModal').style.display = 'block';
+        }
+        
+        // Fechar modal do ganhador
+        function closeWinnerModal() {
+            document.getElementById('winnerModal').style.display = 'none';
+        }
+        
+        // Obter nome da rifa
+        function getRifaName(rifaType) {
+            switch(rifaType) {
+                case 'rifa1': return 'Rifa R$1.000,00';
+                case 'rifa2': return 'Rifa R$2.000,00';
+                case 'rifa3': return 'Rifa R$3.000,00';
+                default: return '';
+            }
+        }
+        
+        // Carregar lista de ganhadores
+        function loadWinners() {
+            const data = JSON.parse(localStorage.getItem('rifaData')) || {};
+            const winnersContainer = document.getElementById('winnersContainer');
+            winnersContainer.innerHTML = '';
+            
+            let hasWinners = false;
+            
+            for (const rifaType in data) {
+                if (data[rifaType].winner) {
+                    hasWinners = true;
+                    const winner = data[rifaType].winner;
+                    const rifaName = getRifaName(rifaType);
+                    
+                    const winnerCard = document.createElement('div');
+                    winnerCard.className = 'winner-card';
+                    winnerCard.innerHTML = `
+                        <h3>${rifaName}</h3>
+                        <div class="winner-info">
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: ${winner.date}</span>
+                            <span class="winner-number">Nº ${winner.number}</span>
+                        </div>
+                        <p>Ganhador: ${winner.phone}</p>
+                    `;
+                    winnersContainer.appendChild(winnerCard);
+                }
+            }
+            
+            if (!hasWinners) {
+                winnersContainer.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <p>Nenhum ganhador ainda. Seja o primeiro!</p>
+                    </div>
+                `;
+            }
+        }
+        
         // Fechar modal ao clicar fora
         window.onclick = function(event) {
             if (event.target == document.getElementById('rifaModal')) {
@@ -1379,14 +1471,17 @@
             });
         });
         
-        // Inicializar o banco de dados quando a página carregar
+        // Inicialização
         window.onload = function() {
-            initDatabase();
+            // Inicializa dados para todas as rifas
+            initRifaData('rifa1');
+            initRifaData('rifa2');
+            initRifaData('rifa3');
             
-            // Verificar se há sorteios pendentes ao carregar a página
-            checkAndDrawWinner('rifa1');
-            checkAndDrawWinner('rifa2');
-            checkAndDrawWinner('rifa3');
+            loadWinners();
+            updateProgress('rifa1');
+            updateProgress('rifa2');
+            updateProgress('rifa3');
         };
     </script>
 </body>

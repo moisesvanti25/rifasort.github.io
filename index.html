@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa Sort - Rifas Online com Login por Celular</title>
+    <style>
+        :root {
+            --primary: #6a1b9a;
+            --primary-dark: #4a148c;
+            --secondary: #ffab00;
+            --light: #f5f5f5;
+            --dark: #212121;
+            --success: #4caf50;
+            --danger: #f44336;
+            --info: #2196f3;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a i {
+            margin-right: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 0.5rem;
+            border: 2px solid var(--secondary);
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 0.5rem 0;
+            min-width: 200px;
+            display: none;
+            z-index: 10;
+        }
+        
+        .user-dropdown a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .user-dropdown a:hover {
+            background-color: #f5f5f5;
+            color: var(--primary);
+        }
+        
+        .user-profile:hover .user-dropdown {
+            display: block;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--secondary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-large {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-info {
+            background-color: var(--info);
+            color: white;
+        }
+        
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .rifas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .rifa-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .rifa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        
+        .rifa-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .rifa-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .rifa-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .rifa-card:hover .rifa-image img {
+            transform: scale(1.05);
+        }
+        
+        .rifa-content {
+            padding: 1.5rem;
+        }
+        
+        .rifa-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .rifa-prize {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .rifa-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .progress-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 65%;
+            transition: width 0.5s ease;
+        }
+        
+        .rifa-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            margin: 2rem auto;
+            border-radius: 8px;
+            overflow: hidden;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .input-group {
+            display: flex;
+        }
+        
+        .input-group .form-control {
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .input-group-btn {
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .number-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.9rem;
+        }
+        
+        .number-btn:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .number-btn.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .number-btn.sold {
+            background-color: #ffcdd2;
+            color: #b71c1c;
+            cursor: not-allowed;
+        }
+        
+        .number-btn.sold::after {
+            content: 'X';
+            position: absolute;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        
+        .modal-footer {
+            padding: 1.5rem;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        
+        .pix-instructions {
+            background-color: #e3f2fd;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pix-instructions h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .pix-qrcode {
+            text-align: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .pix-qrcode img {
+            max-width: 200px;
+            margin-bottom: 1rem;
+        }
+        
+        .pix-copy {
+            display: flex;
+            margin-top: 1rem;
+        }
+        
+        .pix-copy input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+        }
+        
+        .pix-copy button {
+            padding: 0 1rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .payment-status {
+            text-align: center;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .payment-status.success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            display: block;
+        }
+        
+        .payment-status.error {
+            background-color: #ffebee;
+            color: #c62828;
+            display: block;
+        }
+        
+        .payment-status.pending {
+            background-color: #fff8e1;
+            color: #ff8f00;
+            display: block;
+        }
+        
+        .countdown {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .timer-icon {
+            margin-right: 5px;
+        }
+        
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .login-container h2 {
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .login-container p {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        
+        .sms-code-container {
+            display: none;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .user-actions {
+                margin-top: 1rem;
+            }
+            
+            .hero {
+                height: 400px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .numbers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
+            }
+            
+            .number-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Animações */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            padding: 1rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            max-width: 300px;
+        }
+        
+        .toast.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>Rifa Sort</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-home"></i> Início</a></li>
+                        <li><a href="#rifas"><i class="fas fa-ticket-alt"></i> Rifas</a></li>
+                        <li><a href="#ganhadores"><i class="fas fa-trophy"></i> Ganhadores</a></li>
+                        <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
+                    </ul>
+                </nav>
+                <div class="user-actions" id="userActions">
+                    <div id="loginButton">
+                        <button class="btn btn-primary" onclick="openLoginModal()">
+                            <i class="fas fa-mobile-alt"></i> Entrar com Celular
+                        </button>
+                    </div>
+                    <div class="user-profile" id="userProfile" style="display: none;">
+                        <div class="user-avatar" id="userAvatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span id="userName"></span>
+                        <div class="user-dropdown">
+                            <a href="#"><i class="fas fa-user"></i> Minha Conta</a>
+                            <a href="#"><i class="fas fa-ticket-alt"></i> Minhas Rifas</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Participe de rifas online por apenas R$1,00 por número!</h1>
+                <p>Escolha seus números da sorte, pague via PIX e concorra a prêmios incríveis!</p>
+                <a href="#rifas" class="btn btn-large pulse"><i class="fas fa-arrow-down"></i> Ver Rifas Disponíveis</a>
+            </div>
+        </div>
+    </section>
+    
+    <section id="rifas" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Rifas em Andamento</h2>
+                <p>Escolha uma das rifas abaixo e garanta seus números por apenas R$1,00 cada</p>
+            </div>
+            <div class="rifas-grid">
+                <div class="rifa-card">
+                    <div class="rifa-image">
+                        <img src="https://images.unsplash.com/photo-1697898706716-3fd0fc3a5b0a" alt="iPhone 15 Pro">
+                        <span class="rifa-badge">Mais Popular</span>
+                    </div>
+                    <div class="rifa-content">
+                        <h3 class="rifa-title">iPhone 15 Pro 256GB</h3>
+                        <p class="rifa-prize">Prêmio: iPhone 15 Pro 256GB</p>
+                        <div class="rifa-info">
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: 30/11/2023</span>
+                            <span><i class="far fa-ticket-alt"></i> Números: 0-999</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>72% vendidos</span>
+                                <span>720/1000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 72%"></div>
+                            </div>
+                        </div>
+                        <p class="rifa-price">R$ 1,00 por número</p>
+                        <button class="btn btn-primary btn-block" onclick="openRifaModal('iphone')"><i class="fas fa-shopping-cart"></i> Participar Agora</button>
+                    </div>
+                </div>
+                
+                <div class="rifa-card">
+                    <div class="rifa-image">
+                        <img src="https://images.unsplash.com/photo-1610945415295-d9d0dd97d5d3" alt="Samsung Note 10">
+                    </div>
+                    <div class="rifa-content">
+                        <h3 class="rifa-title">Samsung Galaxy Note 10</h3>
+                        <p class="rifa-prize">Prêmio: Samsung Note 10 256GB</p>
+                        <div class="rifa-info">
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: 15/12/2023</span>
+                            <span><i class="far fa-ticket-alt"></i> Números: 0-999</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>45% vendidos</span>
+                                <span>450/1000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                            </div>
+                        </div>
+                        <p class="rifa-price">R$ 1,00 por número</p>
+                        <button class="btn btn-primary btn-block" onclick="openRifaModal('samsung')"><i class="fas fa-shopping-cart"></i> Participar Agora</button>
+                    </div>
+                </div>
+                
+                <div class="rifa-card">
+                    <div class="rifa-image">
+                        <img src="https://images.unsplash.com/photo-1485965120184-e220f721d03e" alt="Bike Trek">
+                    </div>
+                    <div class="rifa-content">
+                        <h3 class="rifa-title">Bike Trek X-Caliber 8</h3>
+                        <p class="rifa-prize">Prêmio: Bicicleta Trek X-Caliber 8</p>
+                        <div class="rifa-info">
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: 10/12/2023</span>
+                            <span><i class="far fa-ticket-alt"></i> Números: 0-999</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-label">
+                                <span>60% vendidos</span>
+                                <span>600/1000</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                        </div>
+                        <p class="rifa-price">R$ 1,00 por número</p>
+                        <button class="btn btn-primary btn-block" onclick="openRifaModal('bike')"><i class="fas fa-shopping-cart"></i> Participar Agora</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="ganhadores" class="section" style="background-color: #f5f5f5;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Últimos Ganhadores</h2>
+                <p>Confira algumas das pessoas sortudas que já ganharam prêmios em nossas rifas</p>
+            </div>
+            <div class="rifas-grid">
+                <div class="rifa-card">
+                    <div class="rifa-image">
+                        <img src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5" alt="Ganhador iPhone">
+                    </div>
+                    <div class="rifa-content">
+                        <h3 class="rifa-title">Maria Silva</h3>
+                        <p class="rifa-prize">Ganhou: iPhone 14 Pro</p>
+                        <div class="rifa-info">
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: 15/10/2023</span>
+                            <span><i class="far fa-ticket-alt"></i> Número: 427</span>
+                        </div>
+                        <p style="font-style: italic; color: #666;">"Comprei 5 números por R$5,00 e fui sorteada! Recebi meu iPhone em 3 dias."</p>
+                    </div>
+                </div>
+                
+                <div class="rifa-card">
+                    <div class="rifa-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Ganhador Notebook">
+                    </div>
+                    <div class="rifa-content">
+                        <h3 class="rifa-title">Carlos Oliveira</h3>
+                        <p class="rifa-prize">Ganhou: Notebook Dell</p>
+                        <div class="rifa-info">
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: 01/10/2023</span>
+                            <span><i class="far fa-ticket-alt"></i> Número: 128</span>
+                        </div>
+                        <p style="font-style: italic; color: #666;">"Investi R$10,00 em 10 números e ganhei um notebook de R$4.000!"</p>
+                    </div>
+                </div>
+                
+                <div class="rifa-card">
+                    <div class="rifa-image">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" alt="Ganhadora TV">
+                    </div>
+                    <div class="rifa-content">
+                        <h3 class="rifa-title">Ana Santos</h3>
+                        <p class="rifa-prize">Ganhou: TV LG 55"</p>
+                        <div class="rifa-info">
+                            <span><i class="far fa-calendar-alt"></i> Sorteio: 20/09/2023</span>
+                            <span><i class="far fa-ticket-alt"></i> Número: 312</span>
+                        </div>
+                        <p style="font-style: italic; color: #666;">"Comprei 3 números por R$3,00 e ganhei uma TV novinha!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contato" class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entre em Contato</h2>
+                <p>Tem dúvidas ou precisa de ajuda? Fale conosco!</p>
+            </div>
+            <div style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contact-name">Nome</label>
+                        <input type="text" id="contact-name" class="form-control" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-phone">Celular</label>
+                        <input type="tel" id="contact-phone" class="form-control" placeholder="Seu número de celular" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-message">Mensagem</label>
+                        <textarea id="contact-message" class="form-control" rows="5" placeholder="Sua mensagem" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Enviar Mensagem</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h3 style="color: var(--secondary); margin-bottom: 1rem;">Pagamento via PIX</h3>
+                <img src="https://logopng.com.br/logos/pix-106.png" alt="PIX" style="height: 50px;">
+            </div>
+            <div style="text-align: center; color: #bbb; font-size: 0.9rem;">
+                <p>© 2023 Rifa Sort - Todos os direitos reservados</p>
+                <p>CNPJ: 12.345.678/0001-99 - Este site não realiza sorteios, apenas facilita a organização de rifas entre particulares.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Entrar na Rifa Sort</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="phoneLoginStep">
+                    <div class="form-group">
+                        <label for="login-phone">Número de Celular</label>
+                        <div class="input-group">
+                            <input type="tel" id="login-phone" class="form-control" placeholder="(00) 00000-0000" required>
+                            <button class="btn btn-primary input-group-btn" onclick="sendSmsCode()">Enviar Código</button>
+                        </div>
+                        <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Enviaremos um código de verificação por SMS</p>
+                    </div>
+                </div>
+                
+                <div id="smsCodeStep" class="sms-code-container">
+                    <div class="form-group">
+                        <label for="sms-code">Código de Verificação</label>
+                        <input type="text" id="sms-code" class="form-control" placeholder="Digite o código de 6 dígitos" maxlength="6" required>
+                        <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Enviamos um código para <span id="phoneNumberDisplay"></span></p>
+                        <a href="#" onclick="resendSmsCode()" style="font-size: 0.8rem;">Reenviar código</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-name">Seu Nome</label>
+                        <input type="text" id="user-name" class="form-control" placeholder="Como gostaria de ser chamado" required>
+                    </div>
+                    <button class="btn btn-primary btn-block" onclick="verifySmsCode()">Verificar e Entrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Participação -->
+    <div id="rifaModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Participar da Rifa</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="loginRequired" style="text-align: center; padding: 2rem; display: none;">
+                    <h3 style="margin-bottom: 1rem;">Login Necessário</h3>
+                    <p style="margin-bottom: 2rem;">Você precisa estar logado para participar das rifas.</p>
+                    <button class="btn btn-primary" onclick="openLoginModal()">
+                        <i class="fas fa-mobile-alt"></i> Entrar com Celular
+                    </button>
+                </div>
+                
+                <div id="selectionStep">
+                    <div class="form-group">
+                        <label>Você está participando como: <strong id="userParticipatingAs"></strong></label>
+                    </div>
+                    <div class="form-group">
+                        <label>Escolha seus números (<span id="pricePerNumber">R$ 1,00</span> cada)</label>
+                        <div class="numbers-grid" id="numbersGrid">
+                            <!-- Números serão gerados pelo JavaScript -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h3 style="text-align: right;">Total: <span id="totalAmount">R$ 0,00</span></h3>
+                    </div>
+                    <div class="pix-instructions">
+                        <h3><i class="fas fa-info-circle"></i> Pagamento exclusivo via PIX</h3>
+                        <p>Você será redirecionado para efetuar o pagamento via PIX após selecionar seus números.</p>
+                    </div>
+                </div>
+                
+                <div id="pixStep" style="display: none;">
+                    <div class="pix-instructions">
+                        <h3><i class="fas fa-qrcode"></i> Pagamento via PIX</h3>
+                        <p>Para finalizar sua participação, faça o pagamento PIX usando uma das opções abaixo. Seus números serão reservados por <strong>30 minutos</strong>.</p>
+                    </div>
+                    
+                    <div class="pix-qrcode">
+                        <h3>Escaneie o QR Code</h3>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d" alt="QR Code PIX">
+                        <p>Valor: <strong id="pixAmount">R$ 1,00</strong></p>
+                    </div>
+                    
+                    <div class="pix-instructions">
+                        <h3><i class="fas fa-copy"></i> Ou copie o código PIX</h3>
+                        <div class="pix-copy">
+                            <input type="text" id="pixCode" value="00020126580014BR.GOV.BCB.PIX0136625898c-ac6f-435e-a3bd-3c710a4adb5d52040000530398654051.005802BR5917Rifa%20Sort6009SAO PAULO61080540900062250521gQ3k9p7XqK8tL2vR1wY4f6304E9A0" readonly>
+                            <button onclick="copyPixCode()"><i class="fas fa-copy"></i></button>
+                        </div>
+                    </div>
+                    
+                    <div class="countdown">
+                        <i class="fas fa-clock timer-icon"></i>
+                        Tempo restante para pagamento: <span id="countdownTimer">30:00</span>
+                    </div>
+                    
+                    <div class="payment-status success" id="paymentSuccess" style="display: none;">
+                        <i class="fas fa-check-circle"></i> Pagamento confirmado! Seus números foram reservados com sucesso.
+                    </div>
+                    
+                    <div class="payment-status error" id="paymentError" style="display: none;">
+                        <i class="fas fa-exclamation-circle"></i> Pagamento não identificado. Por favor, tente novamente.
+                    </div>
+                    
+                    <div class="payment-status pending" id="paymentPending">
+                        <i class="fas fa-sync-alt fa-spin"></i> Aguardando confirmação do pagamento...
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button class="btn btn-success" onclick="verifyPayment()"><i class="fas fa-sync-alt"></i> Verificar Pagamento</button>
+                        <button class="btn btn-info" onclick="window.open('https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d', '_blank')"><i class="fas fa-external-link-alt"></i> Abrir no Aplicativo</button>
+                        <p style="margin-top: 1rem; font-size: 0.9rem;">Se o pagamento não for identificado automaticamente, entre em contato com nosso suporte.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <button class="btn btn-danger" onclick="closeModal()"><i class="fas fa-times"></i> Cancelar</button>
+                <button class="btn btn-primary" id="nextButton" onclick="nextStep()"><i class="fas fa-arrow-right"></i> Próximo</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <div id="toastMessage"></div>
+    </div>
+    
+    <script>
+        // Variáveis globais
+        let currentRifa = null;
+        let selectedNumbers = [];
+        let countdownInterval;
+        let timeLeft = 30 * 60; // 30 minutos em segundos
+        const PIX_LINK = "https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d";
+        let user = null;
+        let smsCode = ''; // Em produção, isso seria gerado no backend
+        
+        // Números já vendidos
+        let soldNumbers = {
+            iphone: [15, 42, 78, 123, 256, 342, 427, 589, 678, 721, 834, 915],
+            samsung: [8, 23, 45, 67, 89, 112, 156, 201, 245, 312, 378, 421, 489],
+            bike: [5, 12, 34, 56, 78, 91, 115, 142, 178, 203, 245, 287]
+        };
+        
+        // Preços das rifas (todos R$1,00 por número)
+        const rifaPrices = {
+            iphone: 1,
+            samsung: 1,
+            bike: 1
+        };
+        
+        // Abrir modal de login
+        function openLoginModal() {
+            closeModal(); // Fechar qualquer modal aberto
+            document.getElementById('loginModal').style.display = 'block';
+            document.getElementById('phoneLoginStep').style.display = 'block';
+            document.getElementById('smsCodeStep').style.display = 'none';
+        }
+        
+        // Enviar código SMS (simulado)
+        function sendSmsCode() {
+            const phoneInput = document.getElementById('login-phone');
+            const phone = phoneInput.value.replace(/\D/g, '');
+            
+            if(phone.length !== 11) {
+                showToast('Por favor, insira um número de celular válido com DDD');
+                return;
+            }
+            
+            // Simular envio de SMS (em produção, isso seria feito no backend)
+            smsCode = Math.floor(100000 + Math.random() * 900000).toString();
+            console.log(`Código SMS enviado para ${phone}: ${smsCode}`); // Apenas para demonstração
+            
+            // Mostrar passo de verificação
+            document.getElementById('phoneLoginStep').style.display = 'none';
+            document.getElementById('smsCodeStep').style.display = 'block';
+            document.getElementById('phoneNumberDisplay').textContent = 
+                `(${phone.substring(0, 2)}) ${phone.substring(2, 7)}-${phone.substring(7)}`;
+            
+            showToast('Código de verificação enviado por SMS');
+        }
+        
+        // Reenviar código SMS
+        function resendSmsCode() {
+            // Simular reenvio do código
+            smsCode = Math.floor(100000 + Math.random() * 900000).toString();
+            console.log(`Novo código SMS: ${smsCode}`); // Apenas para demonstração
+            showToast('Novo código de verificação enviado');
+        }
+        
+        // Verificar código SMS
+        function verifySmsCode() {
+            const codeInput = document.getElementById('sms-code');
+            const nameInput = document.getElementById('user-name');
+            const phoneInput = document.getElementById('login-phone');
+            
+            if(codeInput.value !== smsCode) {
+                showToast('Código inválido. Por favor, tente novamente.');
+                return;
+            }
+            
+            if(nameInput.value.trim() === '') {
+                showToast('Por favor, insira seu nome');
+                return;
+            }
+            
+            // Login bem-sucedido
+            user = {
+                name: nameInput.value.trim(),
+                phone: phoneInput.value.replace(/\D/g, '')
+            };
+            
+            // Atualizar UI
+            document.getElementById('loginButton').style.display = 'none';
+            document.getElementById('userProfile').style.display = 'flex';
+            document.getElementById('userName').textContent = user.name;
+            document.getElementById('userAvatar').textContent = user.name.charAt(0).toUpperCase();
+            
+            // Fechar modal de login
+            closeModal();
+            
+            showToast(`Bem-vindo, ${user.name}!`);
+            
+            // Se o modal de rifa estiver aberto, atualizar
+            if(document.getElementById('rifaModal').style.display === 'block') {
+                setupRifaModal();
+            }
+        }
+        
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            user = null;
+            document.getElementById('loginButton').style.display = 'block';
+            document.getElementById('userProfile').style.display = 'none';
+            showToast('Você saiu da sua conta.');
+        });
+        
+        // Funções para abrir e fechar o modal
+        function openRifaModal(rifaType) {
+            currentRifa = rifaType;
+            selectedNumbers = [];
+            resetCountdown();
+            
+            // Configurar modal
+            setupRifaModal();
+            
+            // Exibir modal
+            document.getElementById('rifaModal').style.display = 'block';
+        }
+        
+        function setupRifaModal() {
+            if(!user) {
+                // Mostrar tela de login necessária
+                document.getElementById('loginRequired').style.display = 'block';
+                document.getElementById('selectionStep').style.display = 'none';
+                document.getElementById('pixStep').style.display = 'none';
+                document.getElementById('nextButton').style.display = 'none';
+                return;
+            }
+            
+            // Usuário logado - mostrar tela normal
+            document.getElementById('loginRequired').style.display = 'none';
+            document.getElementById('selectionStep').style.display = 'block';
+            document.getElementById('pixStep').style.display = 'none';
+            document.getElementById('nextButton').style.display = 'block';
+            
+            document.getElementById('modalTitle').textContent = `Participar da Rifa - ${getRifaName(currentRifa)}`;
+            document.getElementById('pricePerNumber').textContent = `R$ ${rifaPrices[currentRifa].toFixed(2)}`;
+            document.getElementById('userParticipatingAs').textContent = user.name;
+            
+            // Gerar grid de números
+            const numbersGrid = document.getElementById('numbersGrid');
+            numbersGrid.innerHTML = '';
+            
+            const maxNumber = 999; // Todas as rifas vão de 0-999
+            
+            for(let i = 0; i <= maxNumber; i++) {
+                const numberBtn = document.createElement('div');
+                numberBtn.className = soldNumbers[currentRifa].includes(i) ? 'number-btn sold' : 'number-btn';
+                numberBtn.textContent = i;
+                numberBtn.onclick = soldNumbers[currentRifa].includes(i) ? null : function() { selectNumber(this); };
+                numbersGrid.appendChild(numberBtn);
+            }
+            
+            document.getElementById('nextButton').textContent = 'Próximo';
+            document.getElementById('nextButton').onclick = function() { nextStep(); };
+            updateTotalAmount();
+            
+            // Esconder mensagens de status
+            document.getElementById('paymentSuccess').style.display = 'none';
+            document.getElementById('paymentError').style.display = 'none';
+            document.getElementById('paymentPending').style.display = 'none';
+        }
+        
+        function closeModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('rifaModal').style.display = 'none';
+            clearInterval(countdownInterval);
+        }
+        
+        // Função auxiliar para obter o nome da rifa
+        function getRifaName(rifaType) {
+            switch(rifaType) {
+                case 'iphone': return 'iPhone 15 Pro';
+                case 'samsung': return 'Samsung Note 10';
+                case 'bike': return 'Bike Trek';
+                default: return '';
+            }
+        }
+        
+        // Selecionar números
+        function selectNumber(element) {
+            element.classList.toggle('selected');
+            const number = parseInt(element.textContent);
+            
+            if(element.classList.contains('selected')) {
+                selectedNumbers.push(number);
+            } else {
+                selectedNumbers = selectedNumbers.filter(n => n !== number);
+            }
+            
+            updateTotalAmount();
+        }
+        
+        // Atualizar valor total
+        function updateTotalAmount() {
+            const price = rifaPrices[currentRifa];
+            const total = selectedNumbers.length * price;
+            
+            document.getElementById('totalAmount').textContent = `R$ ${total.toFixed(2)}`;
+            document.getElementById('pixAmount').textContent = `R$ ${total.toFixed(2)}`;
+            
+            // Atualizar valor no código PIX (simulação)
+            if(total > 0) {
+                const pixCode = `00020126580014BR.GOV.BCB.PIX0136625898c-ac6f-435e-a3bd-3c710a4adb5d52040000530398654${total.toFixed(2).replace('.', '').padStart(2, '0')}5802BR5917Rifa%20Sort6009SAO PAULO61080540900062250521gQ3k9p7XqK8tL2vR1wY4f6304E9A0`;
+                document.getElementById('pixCode').value = pixCode;
+            }
+        }
+        
+        // Próximo passo
+        function nextStep() {
+            // Validar seleção
+            if(selectedNumbers.length === 0) {
+                showToast('Por favor, selecione pelo menos um número para participar.');
+                return;
+            }
+            
+            // Mostrar passo do PIX
+            document.getElementById('selectionStep').style.display = 'none';
+            document.getElementById('pixStep').style.display = 'block';
+            document.getElementById('nextButton').style.display = 'none';
+            
+            // Iniciar contagem regressiva
+            startCountdown();
+            
+            // Mostrar status de pagamento pendente
+            document.getElementById('paymentPending').style.display = 'block';
+        }
+        
+        // Copiar código PIX
+        function copyPixCode() {
+            const pixCode = document.getElementById('pixCode');
+            pixCode.select();
+            document.execCommand('copy');
+            showToast('Código PIX copiado para a área de transferência!');
+        }
+        
+        // Verificar pagamento (simulado)
+        function verifyPayment() {
+            // Em um sistema real, aqui seria feita uma requisição para verificar o pagamento
+            // Vamos simular uma confirmação após 2 segundos
+            
+            document.getElementById('paymentSuccess').style.display = 'none';
+            document.getElementById('paymentError').style.display = 'none';
+            document.getElementById('paymentPending').style.display = 'block';
+            
+            // Simular delay de verificação
+            setTimeout(function() {
+                // 80% de chance de sucesso para demonstração
+                if(Math.random() < 0.8) {
+                    document.getElementById('paymentSuccess').style.display = 'block';
+                    document.getElementById('paymentPending').style.display = 'none';
+                    
+                    // Em um sistema real, aqui os números seriam reservados no banco de dados
+                    // E o usuário receberia um e-mail de confirmação
+                    
+                    // Adicionar números à lista de vendidos (apenas para demonstração)
+                    soldNumbers[currentRifa] = [...soldNumbers[currentRifa], ...selectedNumbers];
+                    
+                    // Resetar contagem regressiva
+                    resetCountdown();
+                    
+                    // Mostrar botão para fechar
+                    document.getElementById('nextButton').style.display = 'block';
+                    document.getElementById('nextButton').textContent = 'Fechar';
+                    document.getElementById('nextButton').onclick = function() { closeModal(); };
+                    
+                    showToast('Pagamento confirmado! Seus números foram reservados.');
+                } else {
+                    document.getElementById('paymentError').style.display = 'block';
+                    document.getElementById('paymentPending').style.display = 'none';
+                    showToast('Pagamento não identificado. Por favor, tente novamente.');
+                }
+            }, 2000);
+        }
+        
+        // Contagem regressiva
+        function startCountdown() {
+            resetCountdown();
+            updateCountdownDisplay();
+            
+            countdownInterval = setInterval(function() {
+                timeLeft--;
+                updateCountdownDisplay();
+                
+                if(timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById('paymentError').style.display = 'block';
+                    document.getElementById('paymentPending').style.display = 'none';
+                    document.getElementById('countdownTimer').textContent = "00:00";
+                    showToast('Tempo esgotado! Por favor, inicie um novo pedido.');
+                }
+            }, 1000);
+        }
+        
+        function resetCountdown() {
+            clearInterval(countdownInterval);
+            timeLeft = 30 * 60; // 30 minutos em segundos
+        }
+        
+        function updateCountdownDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('countdownTimer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // Mostrar toast notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            const modals = ['loginModal', 'rifaModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (event.target == modal) {
+                    closeModal();
+                }
+            });
+        }
+        
+        // Formulário de contato
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('contact-name').value;
+            const phone = document.getElementById('contact-phone').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // Simular envio do formulário
+            showToast('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+            this.reset();
+        });
+        
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Máscara para telefone
+        document.getElementById('login-phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if(value.length > 0) {
+                value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
+            }
+            
+            e.target.value = value;
+        });
+        
+        document.getElementById('contact-phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            
+            if(value.length > 0) {
+                value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7, 11)}`;
+            }
+            
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

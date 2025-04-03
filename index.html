@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifa Sort - Rifas Online com Login por Celular</title>
+    <title>Rifa Sort - Rifas Online</title>
     <style>
         :root {
             --primary: #6a1b9a;
@@ -86,64 +86,6 @@
         
         nav ul li a:hover {
             color: var(--secondary);
-        }
-        
-        .user-actions {
-            display: flex;
-            align-items: center;
-        }
-        
-        .user-profile {
-            display: flex;
-            align-items: center;
-            margin-left: 1rem;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 0.5rem;
-            border: 2px solid var(--secondary);
-            background-color: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-weight: bold;
-        }
-        
-        .user-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: white;
-            border-radius: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 0.5rem 0;
-            min-width: 200px;
-            display: none;
-            z-index: 10;
-        }
-        
-        .user-dropdown a {
-            display: block;
-            padding: 0.5rem 1rem;
-            color: var(--dark);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .user-dropdown a:hover {
-            background-color: #f5f5f5;
-            color: var(--primary);
-        }
-        
-        .user-profile:hover .user-dropdown {
-            display: block;
         }
         
         .btn {
@@ -555,30 +497,6 @@
             margin-right: 5px;
         }
         
-        .login-container {
-            max-width: 400px;
-            margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        
-        .login-container h2 {
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-        
-        .login-container p {
-            margin-bottom: 2rem;
-            color: #666;
-        }
-        
-        .sms-code-container {
-            display: none;
-        }
-        
         /* Responsividade */
         @media (max-width: 768px) {
             .header-content {
@@ -594,10 +512,6 @@
             
             nav ul li {
                 margin: 0.5rem;
-            }
-            
-            .user-actions {
-                margin-top: 1rem;
             }
             
             .hero {
@@ -654,6 +568,20 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* Ganhadores sem foto */
+        .winner-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .winner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -673,24 +601,6 @@
                         <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
                     </ul>
                 </nav>
-                <div class="user-actions" id="userActions">
-                    <div id="loginButton">
-                        <button class="btn btn-primary" onclick="openLoginModal()">
-                            <i class="fas fa-mobile-alt"></i> Entrar com Celular
-                        </button>
-                    </div>
-                    <div class="user-profile" id="userProfile" style="display: none;">
-                        <div class="user-avatar" id="userAvatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <span id="userName"></span>
-                        <div class="user-dropdown">
-                            <a href="#"><i class="fas fa-user"></i> Minha Conta</a>
-                            <a href="#"><i class="fas fa-ticket-alt"></i> Minhas Rifas</a>
-                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Sair</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </header>
@@ -798,49 +708,34 @@
                 <p>Confira algumas das pessoas sortudas que já ganharam prêmios em nossas rifas</p>
             </div>
             <div class="rifas-grid">
-                <div class="rifa-card">
-                    <div class="rifa-image">
-                        <img src="https://images.unsplash.com/photo-1593104547489-5cfb3839a3b5" alt="Ganhador iPhone">
+                <div class="winner-card">
+                    <h3 class="rifa-title">Maria Silva</h3>
+                    <p class="rifa-prize">Ganhou: iPhone 14 Pro</p>
+                    <div class="rifa-info">
+                        <span><i class="far fa-calendar-alt"></i> Sorteio: 15/10/2023</span>
+                        <span><i class="far fa-ticket-alt"></i> Número: 427</span>
                     </div>
-                    <div class="rifa-content">
-                        <h3 class="rifa-title">Maria Silva</h3>
-                        <p class="rifa-prize">Ganhou: iPhone 14 Pro</p>
-                        <div class="rifa-info">
-                            <span><i class="far fa-calendar-alt"></i> Sorteio: 15/10/2023</span>
-                            <span><i class="far fa-ticket-alt"></i> Número: 427</span>
-                        </div>
-                        <p style="font-style: italic; color: #666;">"Comprei 5 números por R$5,00 e fui sorteada! Recebi meu iPhone em 3 dias."</p>
-                    </div>
+                    <p style="font-style: italic; color: #666;">"Comprei 5 números por R$5,00 e fui sorteada! Recebi meu iPhone em 3 dias."</p>
                 </div>
                 
-                <div class="rifa-card">
-                    <div class="rifa-image">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Ganhador Notebook">
+                <div class="winner-card">
+                    <h3 class="rifa-title">Carlos Oliveira</h3>
+                    <p class="rifa-prize">Ganhou: Notebook Dell</p>
+                    <div class="rifa-info">
+                        <span><i class="far fa-calendar-alt"></i> Sorteio: 01/10/2023</span>
+                        <span><i class="far fa-ticket-alt"></i> Número: 128</span>
                     </div>
-                    <div class="rifa-content">
-                        <h3 class="rifa-title">Carlos Oliveira</h3>
-                        <p class="rifa-prize">Ganhou: Notebook Dell</p>
-                        <div class="rifa-info">
-                            <span><i class="far fa-calendar-alt"></i> Sorteio: 01/10/2023</span>
-                            <span><i class="far fa-ticket-alt"></i> Número: 128</span>
-                        </div>
-                        <p style="font-style: italic; color: #666;">"Investi R$10,00 em 10 números e ganhei um notebook de R$4.000!"</p>
-                    </div>
+                    <p style="font-style: italic; color: #666;">"Investi R$10,00 em 10 números e ganhei um notebook de R$4.000!"</p>
                 </div>
                 
-                <div class="rifa-card">
-                    <div class="rifa-image">
-                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2" alt="Ganhadora TV">
+                <div class="winner-card">
+                    <h3 class="rifa-title">Ana Santos</h3>
+                    <p class="rifa-prize">Ganhou: TV LG 55"</p>
+                    <div class="rifa-info">
+                        <span><i class="far fa-calendar-alt"></i> Sorteio: 20/09/2023</span>
+                        <span><i class="far fa-ticket-alt"></i> Número: 312</span>
                     </div>
-                    <div class="rifa-content">
-                        <h3 class="rifa-title">Ana Santos</h3>
-                        <p class="rifa-prize">Ganhou: TV LG 55"</p>
-                        <div class="rifa-info">
-                            <span><i class="far fa-calendar-alt"></i> Sorteio: 20/09/2023</span>
-                            <span><i class="far fa-ticket-alt"></i> Número: 312</span>
-                        </div>
-                        <p style="font-style: italic; color: #666;">"Comprei 3 números por R$3,00 e ganhei uma TV novinha!"</p>
-                    </div>
+                    <p style="font-style: italic; color: #666;">"Comprei 3 números por R$3,00 e ganhei uma TV novinha!"</p>
                 </div>
             </div>
         </div>
@@ -885,42 +780,6 @@
         </div>
     </footer>
     
-    <!-- Modal de Login -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Entrar na Rifa Sort</h2>
-                <button class="close-modal" onclick="closeModal()">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div id="phoneLoginStep">
-                    <div class="form-group">
-                        <label for="login-phone">Número de Celular</label>
-                        <div class="input-group">
-                            <input type="tel" id="login-phone" class="form-control" placeholder="(00) 00000-0000" required>
-                            <button class="btn btn-primary input-group-btn" onclick="sendSmsCode()">Enviar Código</button>
-                        </div>
-                        <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Enviaremos um código de verificação por SMS</p>
-                    </div>
-                </div>
-                
-                <div id="smsCodeStep" class="sms-code-container">
-                    <div class="form-group">
-                        <label for="sms-code">Código de Verificação</label>
-                        <input type="text" id="sms-code" class="form-control" placeholder="Digite o código de 6 dígitos" maxlength="6" required>
-                        <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">Enviamos um código para <span id="phoneNumberDisplay"></span></p>
-                        <a href="#" onclick="resendSmsCode()" style="font-size: 0.8rem;">Reenviar código</a>
-                    </div>
-                    <div class="form-group">
-                        <label for="user-name">Seu Nome</label>
-                        <input type="text" id="user-name" class="form-control" placeholder="Como gostaria de ser chamado" required>
-                    </div>
-                    <button class="btn btn-primary btn-block" onclick="verifySmsCode()">Verificar e Entrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
     <!-- Modal de Participação -->
     <div id="rifaModal" class="modal">
         <div class="modal-content">
@@ -929,17 +788,14 @@
                 <button class="close-modal" onclick="closeModal()">&times;</button>
             </div>
             <div class="modal-body">
-                <div id="loginRequired" style="text-align: center; padding: 2rem; display: none;">
-                    <h3 style="margin-bottom: 1rem;">Login Necessário</h3>
-                    <p style="margin-bottom: 2rem;">Você precisa estar logado para participar das rifas.</p>
-                    <button class="btn btn-primary" onclick="openLoginModal()">
-                        <i class="fas fa-mobile-alt"></i> Entrar com Celular
-                    </button>
-                </div>
-                
                 <div id="selectionStep">
                     <div class="form-group">
-                        <label>Você está participando como: <strong id="userParticipatingAs"></strong></label>
+                        <label>Informe seu nome:</label>
+                        <input type="text" id="user-name" class="form-control" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Informe seu WhatsApp:</label>
+                        <input type="tel" id="user-phone" class="form-control" placeholder="(00) 00000-0000" required>
                     </div>
                     <div class="form-group">
                         <label>Escolha seus números (<span id="pricePerNumber">R$ 1,00</span> cada)</label>
@@ -1019,8 +875,7 @@
         let countdownInterval;
         let timeLeft = 30 * 60; // 30 minutos em segundos
         const PIX_LINK = "https://nubank.com.br/cobrar/18rbqd/6625898c-ac6f-435e-a3bd-3c710a4adb5d";
-        let user = null;
-        let smsCode = ''; // Em produção, isso seria gerado no backend
+        const WHATSAPP_NUMBER = "557191829433";
         
         // Números já vendidos
         let soldNumbers = {
@@ -1036,93 +891,6 @@
             bike: 1
         };
         
-        // Abrir modal de login
-        function openLoginModal() {
-            closeModal(); // Fechar qualquer modal aberto
-            document.getElementById('loginModal').style.display = 'block';
-            document.getElementById('phoneLoginStep').style.display = 'block';
-            document.getElementById('smsCodeStep').style.display = 'none';
-        }
-        
-        // Enviar código SMS (simulado)
-        function sendSmsCode() {
-            const phoneInput = document.getElementById('login-phone');
-            const phone = phoneInput.value.replace(/\D/g, '');
-            
-            if(phone.length !== 11) {
-                showToast('Por favor, insira um número de celular válido com DDD');
-                return;
-            }
-            
-            // Simular envio de SMS (em produção, isso seria feito no backend)
-            smsCode = Math.floor(100000 + Math.random() * 900000).toString();
-            console.log(`Código SMS enviado para ${phone}: ${smsCode}`); // Apenas para demonstração
-            
-            // Mostrar passo de verificação
-            document.getElementById('phoneLoginStep').style.display = 'none';
-            document.getElementById('smsCodeStep').style.display = 'block';
-            document.getElementById('phoneNumberDisplay').textContent = 
-                `(${phone.substring(0, 2)}) ${phone.substring(2, 7)}-${phone.substring(7)}`;
-            
-            showToast('Código de verificação enviado por SMS');
-        }
-        
-        // Reenviar código SMS
-        function resendSmsCode() {
-            // Simular reenvio do código
-            smsCode = Math.floor(100000 + Math.random() * 900000).toString();
-            console.log(`Novo código SMS: ${smsCode}`); // Apenas para demonstração
-            showToast('Novo código de verificação enviado');
-        }
-        
-        // Verificar código SMS
-        function verifySmsCode() {
-            const codeInput = document.getElementById('sms-code');
-            const nameInput = document.getElementById('user-name');
-            const phoneInput = document.getElementById('login-phone');
-            
-            if(codeInput.value !== smsCode) {
-                showToast('Código inválido. Por favor, tente novamente.');
-                return;
-            }
-            
-            if(nameInput.value.trim() === '') {
-                showToast('Por favor, insira seu nome');
-                return;
-            }
-            
-            // Login bem-sucedido
-            user = {
-                name: nameInput.value.trim(),
-                phone: phoneInput.value.replace(/\D/g, '')
-            };
-            
-            // Atualizar UI
-            document.getElementById('loginButton').style.display = 'none';
-            document.getElementById('userProfile').style.display = 'flex';
-            document.getElementById('userName').textContent = user.name;
-            document.getElementById('userAvatar').textContent = user.name.charAt(0).toUpperCase();
-            
-            // Fechar modal de login
-            closeModal();
-            
-            showToast(`Bem-vindo, ${user.name}!`);
-            
-            // Se o modal de rifa estiver aberto, atualizar
-            if(document.getElementById('rifaModal').style.display === 'block') {
-                setupRifaModal();
-            }
-        }
-        
-        // Logout
-        document.getElementById('logoutBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            user = null;
-            document.getElementById('loginButton').style.display = 'block';
-            document.getElementById('userProfile').style.display = 'none';
-            showToast('Você saiu da sua conta.');
-        });
-        
         // Funções para abrir e fechar o modal
         function openRifaModal(rifaType) {
             currentRifa = rifaType;
@@ -1137,24 +905,16 @@
         }
         
         function setupRifaModal() {
-            if(!user) {
-                // Mostrar tela de login necessária
-                document.getElementById('loginRequired').style.display = 'block';
-                document.getElementById('selectionStep').style.display = 'none';
-                document.getElementById('pixStep').style.display = 'none';
-                document.getElementById('nextButton').style.display = 'none';
-                return;
-            }
-            
-            // Usuário logado - mostrar tela normal
-            document.getElementById('loginRequired').style.display = 'none';
             document.getElementById('selectionStep').style.display = 'block';
             document.getElementById('pixStep').style.display = 'none';
             document.getElementById('nextButton').style.display = 'block';
             
             document.getElementById('modalTitle').textContent = `Participar da Rifa - ${getRifaName(currentRifa)}`;
             document.getElementById('pricePerNumber').textContent = `R$ ${rifaPrices[currentRifa].toFixed(2)}`;
-            document.getElementById('userParticipatingAs').textContent = user.name;
+            
+            // Limpar campos
+            document.getElementById('user-name').value = '';
+            document.getElementById('user-phone').value = '';
             
             // Gerar grid de números
             const numbersGrid = document.getElementById('numbersGrid');
@@ -1181,7 +941,6 @@
         }
         
         function closeModal() {
-            document.getElementById('loginModal').style.display = 'none';
             document.getElementById('rifaModal').style.display = 'none';
             clearInterval(countdownInterval);
         }
@@ -1227,7 +986,21 @@
         
         // Próximo passo
         function nextStep() {
-            // Validar seleção
+            // Validar nome e telefone
+            const userName = document.getElementById('user-name').value.trim();
+            const userPhone = document.getElementById('user-phone').value.replace(/\D/g, '');
+            
+            if(userName === '') {
+                showToast('Por favor, informe seu nome completo.');
+                return;
+            }
+            
+            if(userPhone.length !== 11) {
+                showToast('Por favor, insira um número de WhatsApp válido com DDD.');
+                return;
+            }
+            
+            // Validar seleção de números
             if(selectedNumbers.length === 0) {
                 showToast('Por favor, selecione pelo menos um número para participar.');
                 return;
@@ -1243,6 +1016,32 @@
             
             // Mostrar status de pagamento pendente
             document.getElementById('paymentPending').style.display = 'block';
+            
+            // Enviar dados para WhatsApp
+            sendWhatsAppNotification(userName, userPhone);
+        }
+        
+        // Enviar notificação para WhatsApp
+        function sendWhatsAppNotification(name, phone) {
+            const rifaName = getRifaName(currentRifa);
+            const total = selectedNumbers.length * rifaPrices[currentRifa];
+            const numbersList = selectedNumbers.join(', ');
+            
+            const message = `Nova compra de rifa:\n\n` +
+                            `Nome: ${name}\n` +
+                            `WhatsApp: ${phone}\n` +
+                            `Rifa: ${rifaName}\n` +
+                            `Números: ${numbersList}\n` +
+                            `Total: R$ ${total.toFixed(2)}`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            
+            // Em um sistema real, você pode fazer uma requisição para o backend
+            // Aqui estamos apenas abrindo o WhatsApp (comentado para não abrir popup durante demonstração)
+            // window.open(whatsappUrl, '_blank');
+            
+            console.log('Dados enviados para WhatsApp:', message);
         }
         
         // Copiar código PIX
@@ -1338,13 +1137,9 @@
         
         // Fechar modal ao clicar fora
         window.onclick = function(event) {
-            const modals = ['loginModal', 'rifaModal'];
-            modals.forEach(modalId => {
-                const modal = document.getElementById(modalId);
-                if (event.target == modal) {
-                    closeModal();
-                }
-            });
+            if (event.target == document.getElementById('rifaModal')) {
+                closeModal();
+            }
         }
         
         // Formulário de contato
@@ -1378,7 +1173,7 @@
         });
         
         // Máscara para telefone
-        document.getElementById('login-phone').addEventListener('input', function(e) {
+        document.getElementById('user-phone').addEventListener('input', function(e) {
             let value = e.target.value.replace(/\D/g, '');
             
             if(value.length > 0) {

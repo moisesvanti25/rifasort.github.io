@@ -15,6 +15,7 @@
             --danger: #f44336;
             --info: #2196f3;
             --whatsapp: #25D366;
+            --instagram: #E1306C;
         }
         
         * {
@@ -134,6 +135,11 @@
         
         .btn-whatsapp {
             background-color: var(--whatsapp);
+            color: white;
+        }
+        
+        .btn-instagram {
+            background-color: var(--instagram);
             color: white;
         }
         
@@ -669,6 +675,42 @@
         .page-info {
             font-weight: bold;
         }
+
+        /* Instagram Feed */
+        .instagram-feed {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .instagram-post {
+            width: 150px;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .instagram-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .instagram-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -686,6 +728,7 @@
                         <li><a href="#rifas"><i class="fas fa-ticket-alt"></i> Rifas</a></li>
                         <li><a href="#ganhadores"><i class="fas fa-trophy"></i> Ganhadores</a></li>
                         <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
+                        <li><a href="https://instagram.com/rifasort_" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
                     </ul>
                 </nav>
             </div>
@@ -698,6 +741,9 @@
                 <h1>Participe de rifas online e concorra a prêmios incríveis!</h1>
                 <p>Escolha seus números da sorte, pague via PIX e boa sorte!</p>
                 <a href="#rifas" class="btn btn-large"><i class="fas fa-arrow-down"></i> Ver Rifas Disponíveis</a>
+                <div class="social-links">
+                    <a href="https://instagram.com/rifasort_" class="btn btn-instagram" target="_blank"><i class="fab fa-instagram"></i> Siga-nos no Instagram</a>
+                </div>
             </div>
         </div>
     </section>
@@ -801,6 +847,20 @@
                     <p>Nenhum ganhador ainda. Seja o primeiro!</p>
                 </div>
             </div>
+            
+            <div class="section-title" style="margin-top: 4rem;">
+                <h2>Confira nosso Instagram</h2>
+                <p>Acompanhe os sorteios e novidades em nosso perfil</p>
+            </div>
+            
+            <div class="instagram-feed" id="instagramFeed">
+                <!-- Feed do Instagram será carregado via JavaScript -->
+                <div style="text-align: center; width: 100%;">
+                    <a href="https://instagram.com/rifasort_" class="btn btn-instagram" target="_blank">
+                        <i class="fab fa-instagram"></i> Ver mais no Instagram @rifasort_
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -818,7 +878,7 @@
                     </div>
                     <div class="form-group">
                         <label for="contact-phone">Celular</label>
-                        <input type="tel" id="contact-phone" class="form-control" placeholder="Seu número de celular" required>
+                        <input type="tel" id="contact-phone" class="form-control" placeholder="(00) 00000-0000" required>
                     </div>
                     <div class="form-group">
                         <label for="contact-message">Mensagem</label>
@@ -891,7 +951,7 @@
                     </div>
                     <div class="pix-instructions">
                         <h3><i class="fas fa-info-circle"></i> Pagamento exclusivo via PIX</h3>
-                        <p>Após selecionar seus números, você fará o pagamento via PIX e enviará os dados para nosso WhatsApp.</p>
+                        <p>Após selecionar seus números, você fará o pagamento via PIX e enviará os dados para nosso Instagram.</p>
                     </div>
                 </div>
                 
@@ -919,8 +979,8 @@
                         </span>
                     </div>
                     
-                    <button class="btn btn-whatsapp btn-block" onclick="sendToWhatsApp()" id="whatsappBtn" disabled>
-                        <i class="fab fa-whatsapp"></i> Enviar Números para WhatsApp
+                    <button class="btn btn-instagram btn-block" onclick="sendToInstagram()" id="instagramBtn" disabled>
+                        <i class="fab fa-instagram"></i> Enviar Números para Instagram
                     </button>
                 </div>
             </div>
@@ -938,6 +998,7 @@
             <p id="winnerRifaName"></p>
             <p>Número sorteado: <strong id="winnerNumber"></strong></p>
             <p>Ganhador: <strong id="winnerPhone"></strong></p>
+            <p>Confira o post no Instagram: <a href="#" id="winnerInstagramLink" target="_blank">@rifasort_</a></p>
             <button class="btn btn-primary" onclick="closeWinnerModal()">Fechar</button>
         </div>
     </div>
@@ -953,7 +1014,7 @@
         let selectedNumbers = [];
         let countdownInterval;
         let timeLeft = 30 * 60; // 30 minutos em segundos
-        const WHATSAPP_NUMBER = "557191829433";
+        const INSTAGRAM_USER = "rifasort_";
         let paymentVerified = false;
         let pricePerNumber = 0.5;
         let currentPage = 1;
@@ -968,7 +1029,8 @@
                     soldNumbers: [],
                     reservedNumbers: [],
                     participants: {},
-                    winner: null
+                    winner: null,
+                    winnerPostUrl: ""
                 };
                 localStorage.setItem('rifaData', JSON.stringify(data));
             }
@@ -1082,7 +1144,7 @@
                 document.getElementById('pixStep').style.display = 'none';
                 document.getElementById('nextButton').style.display = 'block';
                 document.getElementById('paymentVerified').style.display = 'none';
-                document.getElementById('whatsappBtn').disabled = true;
+                document.getElementById('instagramBtn').disabled = true;
                 
                 document.getElementById('user-name').value = '';
                 document.getElementById('user-phone').value = '';
@@ -1271,7 +1333,7 @@
                 
                 if(paymentVerified) {
                     document.getElementById('paymentVerified').style.display = 'inline';
-                    document.getElementById('whatsappBtn').disabled = false;
+                    document.getElementById('instagramBtn').disabled = false;
                     showToast('Pagamento confirmado com sucesso!');
                     
                     // Confirmar a compra dos números
@@ -1282,8 +1344,8 @@
             }, 2000);
         }
         
-        // Enviar dados para WhatsApp
-        function sendToWhatsApp() {
+        // Enviar dados para Instagram
+        function sendToInstagram() {
             if(!paymentVerified) {
                 showToast('Por favor, verifique primeiro o pagamento PIX');
                 return;
@@ -1294,6 +1356,7 @@
             const rifa = getRifaName(currentRifa);
             const valorTotal = (selectedNumbers.length * pricePerNumber).toFixed(2);
             
+            // Mensagem para enviar via Instagram
             const mensagem = `✅ COMPRA CONFIRMADA ✅\n\n` +
                             `Nome: ${nome}\n` +
                             `Telefone: ${telefone}\n` +
@@ -1302,13 +1365,17 @@
                             `Valor: R$ ${valorTotal}\n\n` +
                             `Data: ${new Date().toLocaleString()}`;
 
-            window.open(`https://wa.me/+557191829433?text=${encodeURIComponent(mensagem)}`, '_blank');
+            // Abrir Instagram com a mensagem pré-preenchida
+            window.open(`https://instagram.com/${INSTAGRAM_USER}`, '_blank');
             
-            // Fechar modal após 2 segundos
+            // Mostrar instruções para o usuário
+            showToast('Acesse nosso Instagram @rifasort_ e envie uma mensagem direta com os dados da compra');
+            
+            // Fechar modal após 3 segundos
             setTimeout(() => {
                 closeModal();
                 showToast('Obrigado por participar! Boa sorte no sorteio!');
-            }, 2000);
+            }, 3000);
         }
         
         // Contagem regressiva
@@ -1381,23 +1448,42 @@
                     date: new Date().toLocaleString()
                 };
                 
+                // Gerar um link fictício para o post no Instagram
+                data[rifaType].winnerPostUrl = `https://instagram.com/${INSTAGRAM_USER}/posts/${Math.random().toString(36).substring(2, 15)}`;
+                
                 localStorage.setItem('rifaData', JSON.stringify(data));
                 
                 // Mostrar o ganhador
-                showWinnerNotification(rifaType, winnerNumber, winnerPhone);
+                showWinnerNotification(rifaType, winnerNumber, winnerPhone, data[rifaType].winnerPostUrl);
                 
                 // Atualizar a lista de ganhadores
                 loadWinners();
+                
+                // Simular publicação no Instagram
+                simulateInstagramPost(rifaType, winnerNumber, winnerPhone, winnerName);
             }
         }
         
+        // Simular publicação no Instagram
+        function simulateInstagramPost(rifaType, winnerNumber, winnerPhone, winnerName) {
+            // Em um sistema real, aqui você faria uma chamada para a API do Instagram
+            // ou usaria um webhook para notificar o administrador para postar
+            
+            console.log(`Novo ganhador para ${rifaType}: Número ${winnerNumber} - ${winnerName} (${winnerPhone})`);
+            console.log(`Postar no Instagram @${INSTAGRAM_USER} sobre o ganhador`);
+            
+            // Atualizar o feed do Instagram
+            loadInstagramFeed();
+        }
+        
         // Mostrar notificação do ganhador
-        function showWinnerNotification(rifaType, winnerNumber, winnerPhone) {
+        function showWinnerNotification(rifaType, winnerNumber, winnerPhone, instagramUrl) {
             const rifaName = getRifaName(rifaType);
             
             document.getElementById('winnerRifaName').textContent = rifaName;
             document.getElementById('winnerNumber').textContent = winnerNumber;
             document.getElementById('winnerPhone').textContent = winnerPhone;
+            document.getElementById('winnerInstagramLink').href = instagramUrl;
             
             document.getElementById('winnerModal').style.display = 'block';
         }
@@ -1440,6 +1526,7 @@
                             <span class="winner-number">Nº ${winner.number}</span>
                         </div>
                         <p>Ganhador: ${winner.phone}</p>
+                        <p><a href="${data[rifaType].winnerPostUrl}" target="_blank"><i class="fab fa-instagram"></i> Ver post no Instagram</a></p>
                     `;
                     winnersContainer.appendChild(winnerCard);
                 }
@@ -1451,6 +1538,49 @@
                         <p>Nenhum ganhador ainda. Seja o primeiro!</p>
                     </div>
                 `;
+            }
+        }
+        
+        // Carregar feed do Instagram (simulado)
+        function loadInstagramFeed() {
+            const data = JSON.parse(localStorage.getItem('rifaData')) || {};
+            const feedContainer = document.getElementById('instagramFeed');
+            
+            // Limpar o feed existente (exceto o botão)
+            const existingPosts = Array.from(feedContainer.querySelectorAll('.instagram-post'));
+            if (existingPosts.length > 0) {
+                existingPosts.forEach(post => post.remove());
+            }
+            
+            // Adicionar posts simulados
+            let hasPosts = false;
+            
+            for (const rifaType in data) {
+                if (data[rifaType].winner) {
+                    hasPosts = true;
+                    const winner = data[rifaType].winner;
+                    
+                    const post = document.createElement('div');
+                    post.className = 'instagram-post';
+                    post.innerHTML = `
+                        <a href="${data[rifaType].winnerPostUrl}" target="_blank">
+                            <img src="https://source.unsplash.com/random/300x300/?winner,celebration,${rifaType}" alt="Post do Instagram">
+                        </a>
+                    `;
+                    feedContainer.insertBefore(post, feedContainer.lastElementChild);
+                }
+            }
+            
+            // Se não houver posts, adicionar um placeholder
+            if (!hasPosts) {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'instagram-post';
+                placeholder.innerHTML = `
+                    <a href="https://instagram.com/${INSTAGRAM_USER}" target="_blank">
+                        <img src="https://source.unsplash.com/random/300x300/?raffle,ticket,lottery" alt="Post do Instagram">
+                    </a>
+                `;
+                feedContainer.insertBefore(placeholder, feedContainer.lastElementChild);
             }
         }
         
@@ -1516,6 +1646,7 @@
             initRifaData('rifa3');
             
             loadWinners();
+            loadInstagramFeed();
             updateProgress('rifa1');
             updateProgress('rifa2');
             updateProgress('rifa3');

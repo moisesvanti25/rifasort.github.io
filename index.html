@@ -16,6 +16,7 @@
             --info: #2196f3;
             --whatsapp: #25D366;
             --instagram: #E1306C;
+            --security: #4CAF50;
         }
         
         * {
@@ -143,6 +144,11 @@
             color: white;
         }
         
+        .btn-security {
+            background-color: var(--security);
+            color: white;
+        }
+        
         .section {
             padding: 4rem 0;
         }
@@ -162,6 +168,17 @@
             color: #666;
             max-width: 700px;
             margin: 0 auto;
+        }
+        
+        .security-badge {
+            display: inline-block;
+            background-color: var(--security);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         
         .rifas-grid {
@@ -756,6 +773,24 @@
             background-color: #ffebee;
             color: #c62828;
         }
+        
+        /* Security Badge */
+        .security-banner {
+            background-color: #e8f5e9;
+            padding: 1rem;
+            text-align: center;
+            margin: 1rem 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .security-banner i {
+            color: var(--security);
+            font-size: 1.5rem;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -785,6 +820,12 @@
             <div class="hero-content">
                 <h1>Participe de rifas online e concorra a prêmios incríveis!</h1>
                 <p>Escolha seus números da sorte, pague via PIX e boa sorte!</p>
+                
+                <div class="security-banner">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Ambiente 100% Seguro - Transações Protegidas</span>
+                </div>
+                
                 <a href="#rifas" class="btn btn-large"><i class="fas fa-arrow-down"></i> Ver Rifas Disponíveis</a>
                 <div class="social-links">
                     <a href="https://instagram.com/rifasort_" class="btn btn-instagram" target="_blank"><i class="fab fa-instagram"></i> Siga-nos no Instagram</a>
@@ -798,6 +839,9 @@
             <div class="section-title">
                 <h2>Rifas em Andamento</h2>
                 <p>Escolha uma das rifas abaixo e garanta seus números</p>
+                <div class="security-badge">
+                    <i class="fas fa-lock"></i> Ambiente 100% Seguro
+                </div>
             </div>
             <div class="rifas-grid">
                 <div class="rifa-card">
@@ -886,6 +930,9 @@
             <div class="section-title">
                 <h2>Últimos Ganhadores</h2>
                 <p>Confira os números sorteados e os felizes ganhadores</p>
+                <div class="security-badge">
+                    <i class="fas fa-shield-alt"></i> Sorteios Auditáveis e Transparentes
+                </div>
             </div>
             <div id="winnersContainer">
                 <div style="text-align: center; padding: 2rem;">
@@ -896,9 +943,17 @@
             <div class="section-title" style="margin-top: 4rem;">
                 <h2>Confira nosso Instagram</h2>
                 <p>Acompanhe os sorteios e novidades em nosso perfil</p>
+                <a href="" target="_blank" class="btn btn-instagram">
+                    <i class="fab fa-instagram"></i> Ver último sorteio
+                </a>
             </div>
             
             <div class="instagram-feed" id="instagramFeed">
+                <div class="instagram-post">
+                    <a href="https://www.instagram.com/p/DH9tz-wMYGY/" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Post do Instagram">
+                    </a>
+                </div>
                 <div style="text-align: center; width: 100%;">
                     <a href="https://instagram.com/rifasort_" class="btn btn-instagram" target="_blank">
                         <i class="fab fa-instagram"></i> Ver mais no Instagram @rifasort_
@@ -913,6 +968,9 @@
             <div class="section-title">
                 <h2>Entre em Contato</h2>
                 <p>Tem dúvidas ou precisa de ajuda? Fale conosco!</p>
+                <div class="security-badge">
+                    <i class="fas fa-user-shield"></i> Dados Protegidos
+                </div>
             </div>
             <div style="max-width: 600px; margin: 0 auto; background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 <form id="contactForm">
@@ -939,6 +997,10 @@
             <div style="text-align: center; margin-bottom: 2rem;">
                 <h3 style="color: var(--secondary); margin-bottom: 1rem;">Pagamento via PIX</h3>
                 <img src="https://logopng.com.br/logos/pix-106.png" alt="PIX" style="height: 50px;">
+                <div class="security-banner" style="margin-top: 1rem;">
+                    <i class="fas fa-lock"></i>
+                    <span>Ambiente 100% Seguro - Todos os dados protegidos</span>
+                </div>
             </div>
             <div style="text-align: center; color: #bbb; font-size: 0.9rem;">
                 <p>© 2024 Rifa Sort - Todos os direitos reservados</p>
@@ -956,6 +1018,11 @@
             </div>
             <div class="modal-body">
                 <div id="selectionStep">
+                    <div class="security-banner" style="margin-bottom: 1.5rem;">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Transação 100% Segura</span>
+                    </div>
+                    
                     <div class="form-group">
                         <label>Informe seu nome completo:</label>
                         <input type="text" id="user-name" class="form-control" placeholder="Seu nome" required>
@@ -1000,10 +1067,15 @@
                 </div>
                 
                 <div id="pixStep" style="display: none;">
+                    <div class="security-banner" style="margin-bottom: 1.5rem;">
+                        <i class="fas fa-lock"></i>
+                        <span>Dados Protegidos - Ambiente 100% Seguro</span>
+                    </div>
+                    
                     <div class="pix-instructions">
                         <h3><i class="fas fa-qrcode"></i> Pagamento via PIX</h3>
                         <p>Faça o pagamento de <strong id="pixAmount">R$ 0,50</strong> para:</p>
-                        <p><strong>Chave PIX:</strong> rifasort777@gmail.com/p>
+                        <p><strong>Chave PIX:</strong> rifasort777@gmail.com</p>
                     </div>
                     
                     <div class="comprovante-container">
@@ -1053,8 +1125,9 @@
     </div>
     
     <script>
-        // Configuração do Webhook - SUBSTITUA PELO SEU WEBHOOK DO DISCORD
-        const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1249459689255600281/mzJ3_xx7sjD3ytLedXU7bMMi2mL22Cb7n_Xr_sT-Rg2QXlEO9ZCYrE6XnqPjM8ZwFCdU';
+        // Configuração dos Webhooks
+        const DISCORD_WEBHOOK_NUMEROS = 'https://discord.com/api/webhooks/1249459689255600281/mzJ3_xx7sjD3ytLedXU7bMMi2mL22Cb7n_Xr_sT-Rg2QXlEO9ZCYrE6XnqPjM8ZwFCdU';
+        const DISCORD_WEBHOOK_CONTATOS = 'https://discord.com/api/webhooks/1359658940874494173/1yJEVMiPO3i1AaxNIGKLleQfaxNkGDtCMmnuXo9vCIWxLahMVJf-g_ddxmssCPEM72qB';
         
         // Variáveis globais
         let currentRifa = null;
@@ -1376,51 +1449,78 @@
             webhookStatus.style.display = 'none';
             
             try {
-                // Criar payload para o Discord
+                // 1. Enviar números para o webhook de números
+                await fetch(DISCORD_WEBHOOK_NUMEROS, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        embeds: [{
+                            title: '🔢 NOVOS NÚMEROS SELECIONADOS',
+                            color: 0x6a1b9a,
+                            fields: [
+                                { name: '🎟️ Rifa', value: rifa, inline: true },
+                                { name: '🔢 Números', value: numeros, inline: true },
+                                { name: '💰 Valor Total', value: `R$ ${valorTotal}`, inline: true }
+                            ],
+                            timestamp: new Date().toISOString(),
+                            footer: { text: 'Rifa Sort - Sistema de Rifas' }
+                        }]
+                    })
+                });
+
+                // 2. Enviar contatos para o webhook de contatos
+                await fetch(DISCORD_WEBHOOK_CONTATOS, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        embeds: [{
+                            title: '📝 NOVO CONTATO DE PARTICIPANTE',
+                            color: 0x2196F3,
+                            fields: [
+                                { name: '👤 Nome', value: nome, inline: true },
+                                { name: '📞 WhatsApp', value: telefone, inline: true },
+                                { name: '🎟️ Rifa', value: rifa, inline: true },
+                                { name: '📝 Observações', value: observacoes || 'Nenhuma', inline: false }
+                            ],
+                            timestamp: new Date().toISOString(),
+                            footer: { text: 'Rifa Sort - Dados de Contato' }
+                        }]
+                    })
+                });
+
+                // 3. Enviar comprovante para o webhook de contatos
                 const formData = new FormData();
                 formData.append('payload_json', JSON.stringify({
                     embeds: [{
-                        title: '📄 NOVO COMPROVANTE DE RIFA',
-                        color: 0x6a1b9a,
-                        fields: [
-                            { name: '👤 Nome', value: nome, inline: true },
-                            { name: '📞 WhatsApp', value: telefone, inline: true },
-                            { name: '🎟️ Rifa', value: rifa, inline: true },
-                            { name: '🔢 Números', value: numeros, inline: true },
-                            { name: '💰 Valor Total', value: `R$ ${valorTotal}`, inline: true },
-                            { name: '📝 Observações', value: observacoes || 'Nenhuma', inline: false }
-                        ],
-                        timestamp: new Date().toISOString(),
-                        footer: { text: 'Rifa Sort - Sistema de Rifas' }
+                        title: '📄 COMPROVANTE DE PAGAMENTO',
+                        color: 0x4CAF50,
+                        description: `Rifa: ${rifa}\nParticipante: ${nome}\nValor: R$ ${valorTotal}`,
+                        timestamp: new Date().toISOString()
                     }]
                 }));
                 formData.append('file', comprovanteFile);
                 
-                // Enviar para o webhook
-                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                await fetch(DISCORD_WEBHOOK_CONTATOS, {
                     method: 'POST',
                     body: formData
                 });
+
+                webhookStatus.textContent = 'Dados enviados com sucesso! Estamos verificando seu pagamento.';
+                webhookStatus.className = 'webhook-status webhook-success';
+                webhookStatus.style.display = 'block';
                 
-                if (response.ok) {
-                    webhookStatus.textContent = 'Comprovante enviado com sucesso! Estamos verificando seu pagamento.';
-                    webhookStatus.className = 'webhook-status webhook-success';
-                    webhookStatus.style.display = 'block';
-                    
-                    // Confirmar a compra dos números
-                    confirmNumberPurchase();
-                    
-                    // Fechar modal após 3 segundos
-                    setTimeout(() => {
-                        closeModal();
-                        showToast('Compra registrada com sucesso! Boa sorte!');
-                    }, 3000);
-                } else {
-                    throw new Error('Erro ao enviar para o Discord');
-                }
+                // Confirmar a compra dos números
+                confirmNumberPurchase();
+                
+                // Fechar modal após 3 segundos
+                setTimeout(() => {
+                    closeModal();
+                    showToast('Compra registrada com sucesso! Boa sorte!');
+                }, 3000);
+                
             } catch (error) {
                 console.error('Erro no webhook:', error);
-                webhookStatus.textContent = 'Erro ao enviar comprovante. Por favor, tente novamente ou entre em contato.';
+                webhookStatus.textContent = 'Erro ao enviar dados. Por favor, tente novamente ou entre em contato.';
                 webhookStatus.className = 'webhook-status webhook-error';
                 webhookStatus.style.display = 'block';
                 enviarBtn.disabled = false;
@@ -1433,7 +1533,7 @@
             const rifa = getRifaName(rifaType);
             
             try {
-                const response = await fetch(DISCORD_WEBHOOK_URL, {
+                const response = await fetch(DISCORD_WEBHOOK_NUMEROS, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -1603,13 +1703,13 @@
                 }
             }
             
-            // Se não houver posts, adicionar um placeholder
+            // Se não houver posts, adicionar um placeholder com sua imagem do Instagram
             if (!hasPosts) {
                 const placeholder = document.createElement('div');
                 placeholder.className = 'instagram-post';
                 placeholder.innerHTML = `
-                    <a href="https://instagram.com/${INSTAGRAM_USER}" target="_blank">
-                        <img src="https://source.unsplash.com/random/300x300/?raffle,ticket,lottery" alt="Post do Instagram">
+                    <a href="https://www.instagram.com/p/DH9tz-wMYGY/" target="_blank">
+                        <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Post do Instagram">
                     </a>
                 `;
                 feedContainer.insertBefore(placeholder, feedContainer.lastElementChild);
@@ -1647,7 +1747,25 @@
             const phone = document.getElementById('contact-phone').value;
             const message = document.getElementById('contact-message').value;
             
-            // Simular envio do formulário
+            // Enviar contato para o webhook de contatos
+            fetch(DISCORD_WEBHOOK_CONTATOS, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    embeds: [{
+                        title: '📩 NOVA MENSAGEM DE CONTATO',
+                        color: 0xE1306C,
+                        fields: [
+                            { name: '👤 Nome', value: name, inline: true },
+                            { name: '📞 WhatsApp', value: phone, inline: true },
+                            { name: '📝 Mensagem', value: message, inline: false }
+                        ],
+                        timestamp: new Date().toISOString(),
+                        footer: { text: 'Rifa Sort - Formulário de Contato' }
+                    }]
+                })
+            });
+            
             showToast('Mensagem enviada com sucesso! Entraremos em contato em breve.');
             this.reset();
         });

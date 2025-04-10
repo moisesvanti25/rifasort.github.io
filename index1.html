@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marketing Master - Manual Profissional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --danger: #f72585;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.3s;
+            position: relative;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .mt-20 {
+            margin-top: 20px;
+        }
+        
+        .auth-links {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .auth-links a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid var(--primary);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            font-size: 12px;
+            font-weight: 600;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .price {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: #666;
+        }
+        
+        .pricing-features {
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 10px;
+            list-style: none;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .pricing-features li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: var(--success);
+        }
+        
+        /* Features */
+        .features {
+            padding: 80px 0;
+            background-color: #f9f9f9;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* Manual Preview */
+        .manual-preview {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .preview-content {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .preview-content h3 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .preview-content p {
+            margin-bottom: 15px;
+        }
+        
+        .locked-content {
+            position: relative;
+        }
+        
+        .locked-content:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .locked-content .lock-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            background-color: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            display: none;
+            padding: 150px 0 80px;
+        }
+        
+        .user-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .user-name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .user-email {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .user-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-top: 5px;
+        }
+        
+        .status-active {
+            background-color: #e6f7ee;
+            color: #00a854;
+        }
+        
+        .status-inactive {
+            background-color: #fff1f0;
+            color: #f5222d;
+        }
+        
+        .logout-btn {
+            background-color: var(--warning);
+        }
+        
+        .logout-btn:hover {
+            background-color: #d61a6f;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+        
+        .sidebar {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            color: var(--dark);
+            text-decoration: none;
+            padding: 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu li a i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .sidebar-menu li a:hover, .sidebar-menu li a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .main-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .content-header h2 {
+            font-size: 28px;
+            color: var(--dark);
+        }
+        
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .stat-card p {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .content-section {
+            margin-bottom: 40px;
+        }
+        
+        .content-section h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Manual Content */
+        .manual-content {
+            display: none;
+        }
+        
+        .manual-section {
+            margin-bottom: 40px;
+        }
+        
+        .manual-section h3 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .manual-section h4 {
+            font-size: 20px;
+            color: var(--secondary);
+            margin: 25px 0 15px;
+        }
+        
+        .manual-section p {
+            margin-bottom: 15px;
+        }
+        
+        .manual-section ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .manual-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        /* Payment Section */
+        .payment-section {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+        
+        .payment-method.active {
+            border-color: var(--primary);
+            background-color: rgba(67, 97, 238, 0.1);
+        }
+        
+        .payment-method i {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        /* Admin Dashboard */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .admin-table th, .admin-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .admin-table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+        
+        .admin-table tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .badge-success {
+            background-color: #e6f7ee;
+            color: #00a854;
+        }
+        
+        .badge-warning {
+            background-color: #fff7e6;
+            color: #fa8c16;
+        }
+        
+        .badge-danger {
+            background-color: #fff1f0;
+            color: #f5222d;
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 5px;
+        }
+        
+        .edit-btn {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .delete-btn {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 10px;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-bullseye"></i>
+                <span>Marketing Master</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#pricing">Planos</a></li>
+                    <li><a href="#features">Recursos</a></li>
+                    <li><a href="#" id="loginBtn">Login</a></li>
+                    <li><a href="#" id="registerBtn">Registrar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Senha</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-block">Entrar</button>
+                <div class="auth-links text-center mt-20">
+                    Não tem uma conta? <a href="#" id="showRegister">Registre-se</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Criar Conta</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Nome</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Senha</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword">Confirmar Senha</label>
+                    <input type="password" id="registerConfirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-block">Registrar</button>
+                <div class="auth-links text-center mt-20">
+                    Já tem uma conta? <a href="#" id="showLogin">Faça login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Finalizar Compra</h2>
+            <form id="paymentForm">
+                <div class="form-group">
+                    <label for="cardName">Nome no Cartão</label>
+                    <input type="text" id="cardName" required>
+                </div>
+                <div class="form-group">
+                    <label for="cardNumber">Número do Cartão</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                </div>
+                <div class="form-group">
+                    <label for="cardExpiry">Validade</label>
+                    <input type="text" id="cardExpiry" placeholder="MM/AA" required>
+                </div>
+                <div class="form-group">
+                    <label for="cardCvv">CVV</label>
+                    <input type="text" id="cardCvv" placeholder="123" required>
+                </div>
+                <button type="submit" class="btn btn-block">Pagar R$97,00</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Manual Completo de Marketing Digital</h1>
+            <p>Tudo o que você precisa saber para dominar o marketing digital em um só lugar. Estratégias, técnicas e ferramentas para impulsionar seus negócios.</p>
+            <div class="hero-buttons">
+                <a href="#pricing" class="btn">Ver Planos</a>
+                <a href="#" class="btn btn-outline" id="heroLoginBtn">Acessar Área do Aluno</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Escolha Seu Plano</h2>
+                <p>Adquira agora o acesso completo ao manual de marketing digital</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Básico</h3>
+                    <div class="price">R$47<span>/mês</span></div>
+                    <ul class="pricing-features">
+                        <li>Acesso ao manual por 1 mês</li>
+                        <li>Atualizações mensais</li>
+                        <li>Suporte por email</li>
+                        <li>Certificado digital</li>
+                    </ul>
+                    <button class="btn btn-block" onclick="showPaymentModal('basico')">Assinar Plano</button>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Popular</div>
+                    <h3>Anual</h3>
+                    <div class="price">R$97<span>/ano</span></div>
+                    <ul class="pricing-features">
+                        <li>Acesso ao manual por 1 ano</li>
+                        <li>Atualizações semanais</li>
+                        <li>Suporte prioritário</li>
+                        <li>Certificado digital</li>
+                        <li>Bônus exclusivos</li>
+                    </ul>
+                    <button class="btn btn-block" onclick="showPaymentModal('anual')">Assinar Plano</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Vitalício</h3>
+                    <div class="price">R$197<span>/único</span></div>
+                    <ul class="pricing-features">
+                        <li>Acesso vitalício ao manual</li>
+                        <li>Atualizações semanais</li>
+                        <li>Suporte 24/7</li>
+                        <li>Certificado digital</li>
+                        <li>Todos os bônus</li>
+                        <li>Acesso a comunidade</li>
+                    </ul>
+                    <button class="btn btn-block" onclick="showPaymentModal('vitalicio')">Assinar Plano</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>O Que Você Vai Aprender</h2>
+                <p>Conheça os principais tópicos abordados no nosso manual completo</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Estratégias de Marketing</h3>
+                    <p>Aprenda as melhores estratégias para aumentar suas vendas e construir uma marca forte no mercado digital.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3>SEO Avançado</h3>
+                    <p>Domine as técnicas de otimização para motores de busca e aumente seu tráfego orgânico.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <h3>Publicidade Online</h3>
+                    <p>Aprenda a criar campanhas eficientes no Google Ads, Facebook Ads e outras plataformas.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-envelope-open-text"></i>
+                    </div>
+                    <h3>Email Marketing</h3>
+                    <p>Descubra como criar sequências de emails que convertem e nutrem seus leads.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mídias Sociais</h3>
+                    <p>Estratégias comprovadas para crescer suas redes sociais e engajar seu público.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-funnel-dollar"></i>
+                    </div>
+                    <h3>Funil de Vendas</h3>
+                    <p>Construa um funil de vendas eficiente que converte visitantes em clientes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manual Preview Section -->
+    <section class="manual-preview">
+        <div class="container">
+            <div class="section-title">
+                <h2>Preview do Manual</h2>
+                <p>Confira um trecho do conteúdo exclusivo disponível para assinantes</p>
+            </div>
+            <div class="preview-content">
+                <h3>Introdução ao Marketing Digital</h3>
+                <p>O marketing digital é o conjunto de atividades que uma empresa (ou pessoa) executa online com o objetivo de atrair novos negócios, criar relacionamentos e desenvolver uma identidade de marca.</p>
+                <p>Diferente do marketing tradicional, o marketing digital permite segmentação precisa, mensuração em tempo real e ajustes rápidos nas campanhas.</p>
+            </div>
+            <div class="preview-content locked-content">
+                <div class="lock-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Estratégias Avançadas de SEO (Conteúdo Bloqueado)</h3>
+                <p>Para acessar este conteúdo e todo o manual completo, você precisa adquirir um dos nossos planos.</p>
+                <p>O manual inclui técnicas avançadas de otimização para mecanismos de busca, pesquisa de palavras-chave, construção de backlinks e muito mais.</p>
+            </div>
+            <div class="text-center">
+                <a href="#pricing" class="btn">Ver Planos de Acesso</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Marketing Master</h3>
+                    <p>O manual mais completo de marketing digital para profissionais e empreendedores que querem dominar as estratégias online.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#pricing">Planos</a></li>
+                        <li><a href="#features">Recursos</a></li>
+                        <li><a href="#" id="footerLoginBtn">Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contato</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contato@marketingmaster.com</li>
+                        <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+                        <li><i class="fas fa-map-marker-alt"></i> São Paulo, Brasil</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Redes Sociais</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Marketing Master. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Dashboard (hidden by default) -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <div class="user-header">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <div>
+                        <div class="user-name" id="userName">Usuário</div>
+                        <div class="user-email" id="userEmail">usuario@email.com</div>
+                        <div class="user-status" id="userStatus">Status: <span id="statusText">Inativo</span></div>
+                    </div>
+                </div>
+                <button class="btn logout-btn" id="logoutBtn">Sair</button>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="sidebar">
+                    <ul class="sidebar-menu">
+                        <li><a href="#" class="active" data-tab="overview"><i class="fas fa-tachometer-alt"></i> Visão Geral</a></li>
+                        <li><a href="#" data-tab="manual"><i class="fas fa-book"></i> Manual Completo</a></li>
+                        <li><a href="#" data-tab="payment"><i class="fas fa-credit-card"></i> Pagamento</a></li>
+                        <li><a href="#" data-tab="admin" id="adminTab" style="display:none;"><i class="fas fa-crown"></i> Admin</a></li>
+                    </ul>
+                </div>
+                
+                <div class="main-content">
+                    <!-- Overview Tab -->
+                    <div class="tab-content active" id="overview">
+                        <div class="content-header">
+                            <h2>Bem-vindo ao Marketing Master</h2>
+                        </div>
+                        
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <h3>Seu Plano</h3>
+                                <p id="userPlan">Nenhum</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Expira em</h3>
+                                <p id="expiryDate">--/--/----</p>
+                            </div>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h3>Seu Progresso</h3>
+                            <p id="progressText">Você ainda não começou a estudar o manual. Acesse a seção "Manual Completo" para começar.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Manual Tab -->
+                    <div class="tab-content" id="manual">
+                        <div class="content-header">
+                            <h2>Manual Completo</h2>
+                        </div>
+                        
+                        <div class="content-section" id="manualAccessMessage">
+                            <h3>Acesso ao Manual</h3>
+                            <p id="manualAccessText">Você precisa adquirir um plano para acessar o manual completo.</p>
+                            <button class="btn" id="upgradeBtn" style="display:none;">Assinar Plano</button>
+                        </div>
+                        
+                        <div class="manual-content" id="manualContent">
+                            <div class="manual-section">
+                                <h3>1. Fundamentos do Marketing Digital</h3>
+                                <p>O marketing digital é o conjunto de atividades que uma empresa (ou pessoa) executa online com o objetivo de atrair novos negócios, criar relacionamentos e desenvolver uma identidade de marca.</p>
+                                
+                                <h4>1.1 Pilares do Marketing Digital</h4>
+                                <ul>
+                                    <li><strong>Website:</strong> Seu hub central online</li>
+                                    <li><strong>SEO:</strong> Otimização para mecanismos de busca</li>
+                                    <li><strong>Conteúdo:</strong> Blog posts, vídeos, infográficos</li>
+                                    <li><strong>Mídias Sociais:</strong> Facebook, Instagram, LinkedIn</li>
+                                    <li><strong>Email Marketing:</strong> Nutrição de leads</li>
+                                    <li><strong>Publicidade Paga:</strong> Google Ads, Facebook Ads</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="manual-section">
+                                <h3>2. Estratégia de Conteúdo</h3>
+                                <p>O marketing de conteúdo é uma abordagem estratégica de marketing focada em criar e distribuir conteúdo valioso, relevante e consistente para atrair e reter um público definido.</p>
+                                
+                                <h4>2.1 Criando um Plano de Conteúdo</h4>
+                                <ul>
+                                    <li>Defina seus objetivos</li>
+                                    <li>Conheça seu público-alvo</li>
+                                    <li>Realize pesquisa de palavras-chave</li>
+                                    <li>Crie um calendário editorial</li>
+                                    <li>Escolha os formatos de conteúdo</li>
+                                    <li>Defina métricas de sucesso</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Mais seções do manual... -->
+                        </div>
+                    </div>
+                    
+                    <!-- Payment Tab -->
+                    <div class="tab-content" id="payment">
+                        <div class="content-header">
+                            <h2>Assinatura e Pagamento</h2>
+                        </div>
+                        
+                        <div class="payment-section">
+                            <div class="content-section">
+                                <h3>Seu Plano Atual</h3>
+                                <p id="currentPlanText">Você não possui um plano ativo no momento.</p>
+                            </div>
+                            
+                            <div class="content-section">
+                                <h3>Atualizar Plano</h3>
+                                <p>Escolha um dos nossos planos para ter acesso completo ao manual de marketing:</p>
+                                
+                                <div class="payment-methods">
+                                    <div class="payment-method active" data-plan="basico">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <p>Básico<br>R$47/mês</p>
+                                    </div>
+                                    <div class="payment-method" data-plan="anual">
+                                        <i class="fas fa-calendar-star"></i>
+                                        <p>Anual<br>R$97/ano</p>
+                                    </div>
+                                    <div class="payment-method" data-plan="vitalicio">
+                                        <i class="fas fa-infinity"></i>
+                                        <p>Vitalício<br>R$197</p>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-block" id="proceedPaymentBtn">Continuar com o Pagamento</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin Tab (hidden by default) -->
+                    <div class="tab-content" id="admin">
+                        <div class="content-header">
+                            <h2>Painel Administrativo</h2>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h3>Gerenciar Usuários</h3>
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th>Plano</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTable">
+                                    <!-- Users will be added dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="content-section">
+                            <h3>Gerenciar Assinaturas</h3>
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Usuário</th>
+                                        <th>Plano</th>
+                                        <th>Valor</th>
+                                        <th>Data</th>
+                                        <th>Status</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="subscriptionsTable">
+                                    <!-- Subscriptions will be added dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Dados de exemplo (simulando um banco de dados)
+        const users = [
+            { id: 1, name: "Admin", email: "moisesvanti@gmail.com", password: "Kakaxi1892", plan: "vitalicio", expiry: "31/12/2099", isAdmin: true, active: true },
+            { id: 2, name: "João Silva", email: "joao@exemplo.com", password: "senha123", plan: "anual", expiry: "31/12/2023", isAdmin: false, active: true },
+            { id: 3, name: "Maria Souza", email: "maria@exemplo.com", password: "senha456", plan: "basico", expiry: "30/11/2023", isAdmin: false, active: true }
+        ];
+        
+        const subscriptions = [
+            { id: 1, userId: 2, plan: "anual", amount: 97, date: "01/01/2023", status: "ativo" },
+            { id: 2, userId: 3, plan: "basico", amount: 47, date: "01/11/2023", status: "ativo" }
+        ];
+        
+        // Variáveis globais
+        let currentUser = null;
+        let selectedPlan = "basico";
+        
+        // Elementos do DOM
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const paymentModal = document.getElementById('paymentModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const heroLoginBtn = document.getElementById('heroLoginBtn');
+        const footerLoginBtn = document.getElementById('footerLoginBtn');
+        const showRegister = document.getElementById('showRegister');
+        const showLogin = document.getElementById('showLogin');
+        const closeBtns = document.querySelectorAll('.close-btn');
+        const dashboard = document.getElementById('dashboard');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userAvatar = document.getElementById('userAvatar');
+        const userName = document.getElementById('userName');
+        const userEmail = document.getElementById('userEmail');
+        const userPlan = document.getElementById('userPlan');
+        const expiryDate = document.getElementById('expiryDate');
+        const statusText = document.getElementById('statusText');
+        const manualAccessText = document.getElementById('manualAccessText');
+        const upgradeBtn = document.getElementById('upgradeBtn');
+        const manualContent = document.getElementById('manualContent');
+        const currentPlanText = document.getElementById('currentPlanText');
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const proceedPaymentBtn = document.getElementById('proceedPaymentBtn');
+        const adminTab = document.getElementById('adminTab');
+        const usersTable = document.getElementById('usersTable');
+        const subscriptionsTable = document.getElementById('subscriptionsTable');
+        
+        // Mostrar modal de login
+        function showLoginModal() {
+            loginModal.style.display = 'flex';
+            registerModal.style.display = 'none';
+            paymentModal.style.display = 'none';
+        }
+        
+        // Mostrar modal de registro
+        function showRegisterModal() {
+            registerModal.style.display = 'flex';
+            loginModal.style.display = 'none';
+            paymentModal.style.display = 'none';
+        }
+        
+        // Mostrar modal de pagamento
+        function showPaymentModal(plan) {
+            selectedPlan = plan;
+            paymentModal.style.display = 'flex';
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'none';
+        }
+        
+        // Fechar modal
+        function closeModal() {
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'none';
+            paymentModal.style.display = 'none';
+        }
+        
+        // Event listeners para abrir modais
+        loginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginModal();
+        });
+        
+        registerBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showRegisterModal();
+        });
+        
+        heroLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginModal();
+        });
+        
+        footerLoginBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginModal();
+        });
+        
+        showRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            showRegisterModal();
+        });
+        
+        showLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLoginModal();
+        });
+        
+        // Fechar modais
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', closeModal);
+        });
+        
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal || e.target === registerModal || e.target === paymentModal) {
+                closeModal();
+            }
+        });
+        
+        // Login form submission
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Verificar credenciais
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                currentUser = user;
+                updateDashboard();
+                showDashboard();
+                closeModal();
+            } else {
+                alert('Email ou senha incorretos.');
+            }
+        });
+        
+        // Register form submission
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            // Validação simples
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Por favor, preencha todos os campos.');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                alert('As senhas não coincidem.');
+                return;
+            }
+            
+            // Verificar se email já existe
+            if (users.some(u => u.email === email)) {
+                alert('Este email já está cadastrado.');
+                return;
+            }
+            
+            // Criar novo usuário
+            const newUser = {
+                id: users.length + 1,
+                name,
+                email,
+                password,
+                plan: null,
+                expiry: null,
+                isAdmin: false,
+                active: true
+            };
+            
+            users.push(newUser);
+            currentUser = newUser;
+            
+            alert('Conta criada com sucesso! Faça login para continuar.');
+            showLoginModal();
+        });
+        
+        // Payment form submission
+        document.getElementById('paymentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simular processamento de pagamento
+            setTimeout(() => {
+                // Atualizar plano do usuário
+                currentUser.plan = selectedPlan;
+                
+                // Definir data de expiração baseada no plano
+                const today = new Date();
+                let expiryDate = new Date();
+                
+                if (selectedPlan === "basico") {
+                    expiryDate.setMonth(today.getMonth() + 1);
+                } else if (selectedPlan === "anual") {
+                    expiryDate.setFullYear(today.getFullYear() + 1);
+                } else { // vitalicio
+                    expiryDate = new Date(2099, 11, 31);
+                }
+                
+                currentUser.expiry = formatDate(expiryDate);
+                currentUser.active = true;
+                
+                // Adicionar assinatura
+                const newSubscription = {
+                    id: subscriptions.length + 1,
+                    userId: currentUser.id,
+                    plan: selectedPlan,
+                    amount: selectedPlan === "basico" ? 47 : selectedPlan === "anual" ? 97 : 197,
+                    date: formatDate(today),
+                    status: "ativo"
+                };
+                
+                subscriptions.push(newSubscription);
+                
+                // Atualizar dashboard
+                updateDashboard();
+                closeModal();
+                
+                alert('Pagamento processado com sucesso! Seu acesso ao manual foi liberado.');
+            }, 1000);
+        });
+        
+        // Selecionar plano de pagamento
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+                selectedPlan = method.getAttribute('data-plan');
+            });
+        });
+        
+        // Botão de pagamento no dashboard
+        proceedPaymentBtn.addEventListener('click', () => {
+            showPaymentModal(selectedPlan);
+        });
+        
+        // Botão de upgrade no manual
+        upgradeBtn.addEventListener('click', () => {
+            document.querySelector('[data-tab="payment"]').click();
+        });
+        
+        // Logout
+        logoutBtn.addEventListener('click', () => {
+            currentUser = null;
+            hideDashboard();
+            window.scrollTo(0, 0);
+        });
+        
+        // Navegação por abas
+        document.querySelectorAll('[data-tab]').forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Remover classe active de todas as abas e conteúdos
+                document.querySelectorAll('[data-tab]').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                document.querySelectorAll('.tab-content').forEach(c => {
+                    c.classList.remove('active');
+                });
+                
+                // Adicionar classe active à aba clicada
+                tab.classList.add('active');
+                
+                // Mostrar conteúdo correspondente
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Atualizar dashboard com informações do usuário
+        function updateDashboard() {
+            userAvatar.textContent = currentUser.name.charAt(0).toUpperCase();
+            userName.textContent = currentUser.name;
+            userEmail.textContent = currentUser.email;
+            
+            if (currentUser.plan) {
+                userPlan.textContent = currentUser.plan === "basico" ? "Básico" : 
+                                      currentUser.plan === "anual" ? "Anual" : "Vitalício";
+                expiryDate.textContent = currentUser.expiry;
+                
+                if (new Date(currentUser.expiry.split('/').reverse().join('-')) >= new Date()) {
+                    statusText.textContent = "Ativo";
+                    statusText.className = "status-active";
+                } else {
+                    statusText.textContent = "Expirado";
+                    statusText.className = "status-inactive";
+                }
+                
+                manualAccessText.textContent = `Você tem acesso ao manual completo (Plano ${currentUser.plan}).`;
+                manualContent.style.display = "block";
+                upgradeBtn.style.display = "none";
+                
+                currentPlanText.textContent = `Plano: ${currentUser.plan === "basico" ? "Básico (R$47/mês)" : 
+                                             currentUser.plan === "anual" ? "Anual (R$97/ano)" : "Vitalício (R$197)"}`;
+            } else {
+                userPlan.textContent = "Nenhum";
+                expiryDate.textContent = "--/--/----";
+                statusText.textContent = "Inativo";
+                statusText.className = "status-inactive";
+                
+                manualAccessText.textContent = "Você precisa adquirir um plano para acessar o manual completo.";
+                manualContent.style.display = "none";
+                upgradeBtn.style.display = "block";
+                
+                currentPlanText.textContent = "Você não possui um plano ativo no momento.";
+            }
+            
+            // Mostrar aba admin se for administrador
+            if (currentUser.isAdmin) {
+                adminTab.style.display = "block";
+                loadAdminData();
+            } else {
+                adminTab.style.display = "none";
+            }
+        }
+        
+        // Mostrar dashboard e esconder conteúdo público
+        function showDashboard() {
+            document.querySelector('header').style.display = "none";
+            document.querySelector('.hero').style.display = "none";
+            document.querySelector('.pricing').style.display = "none";
+            document.querySelector('.features').style.display = "none";
+            document.querySelector('.manual-preview').style.display = "none";
+            document.querySelector('footer').style.display = "none";
+            dashboard.style.display = "block";
+            window.scrollTo(0, 0);
+        }
+        
+        // Esconder dashboard e mostrar conteúdo público
+        function hideDashboard() {
+            document.querySelector('header').style.display = "block";
+            document.querySelector('.hero').style.display = "block";
+            document.querySelector('.pricing').style.display = "block";
+            document.querySelector('.features').style.display = "block";
+            document.querySelector('.manual-preview').style.display = "block";
+            document.querySelector('footer').style.display = "block";
+            dashboard.style.display = "none";
+        }
+        
+        // Carregar dados administrativos
+        function loadAdminData() {
+            // Limpar tabelas
+            usersTable.innerHTML = '';
+            subscriptionsTable.innerHTML = '';
+            
+            // Popular tabela de usuários
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${user.id}</td>
+                    <td>${user.name}</td>
+                    <td>${user.email}</td>
+                    <td>${user.plan || 'Nenhum'}</td>
+                    <td><span class="badge ${user.active ? 'badge-success' : 'badge-danger'}">${user.active ? 'Ativo' : 'Inativo'}</span></td>
+                    <td>
+                        <button class="action-btn edit-btn">Editar</button>
+                        <button class="action-btn delete-btn">Excluir</button>
+                    </td>
+                `;
+                
+                usersTable.appendChild(row);
+            });
+            
+            // Popular tabela de assinaturas
+            subscriptions.forEach(sub => {
+                const user = users.find(u => u.id === sub.userId);
+                const row = document.createElement('tr');
+                
+                row.innerHTML = `
+                    <td>${sub.id}</td>
+                    <td>${user ? user.name : 'N/A'}</td>
+                    <td>${sub.plan}</td>
+                    <td>R$${sub.amount}</td>
+                    <td>${sub.date}</td>
+                    <td><span class="badge ${sub.status === 'ativo' ? 'badge-success' : 'badge-danger'}">${sub.status}</span></td>
+                    <td>
+                        <button class="action-btn edit-btn">Editar</button>
+                    </td>
+                `;
+                
+                subscriptionsTable.appendChild(row);
+            });
+        }
+        
+        // Função auxiliar para formatar data
+        function formatDate(date) {
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+        
+        // Smooth scrolling para links âncora
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#dashboard') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DarkWeb Studies - Portal Acadêmico</title>
+    <title>OdontoResearch - Portal Acadêmico</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Oxanium:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --neon-blue: #00f2ff;
-            --neon-purple: #bd00ff;
+            --teal: #00c2cb;
+            --blue: #0077b6;
             --accent-red: #ff2d75;
-            --dark-bg: #0a0a12;
-            --darker-bg: #05050a;
-            --card-bg: #15151f;
-            --text-color: #e0e0ff;
-            --success-green: #00ff88;
-            --cyber-yellow: #fff500;
+            --light-bg: #f8f9fa;
+            --darker-bg: #e9ecef;
+            --card-bg: #ffffff;
+            --text-color: #343a40;
+            --success-green: #00cc88;
             --warning-orange: #ff9f1c;
         }
 
@@ -27,14 +26,11 @@
         }
 
         body {
-            background-color: var(--dark-bg);
+            background-color: var(--light-bg);
             color: var(--text-color);
             font-family: 'Oxanium', sans-serif;
             line-height: 1.7;
             overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(0, 242, 255, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(189, 0, 255, 0.05) 0%, transparent 50%);
         }
 
         /* Animações */
@@ -44,24 +40,19 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(0, 242, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(0, 194, 203, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(0, 194, 203, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 194, 203, 0); }
         }
 
         @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue); }
-            50% { text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue); }
+            0%, 100% { text-shadow: 0 0 5px var(--teal), 0 0 10px var(--teal); }
+            50% { text-shadow: 0 0 10px var(--teal), 0 0 20px var(--teal); }
         }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes scanline {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 100%; }
         }
 
         .float {
@@ -99,23 +90,22 @@
             line-height: 1.3;
         }
 
-        /* Header Científico */
+        /* Header */
         header {
-            background-color: rgba(10, 10, 18, 0.98);
+            background-color: rgba(255, 255, 255, 0.98);
             padding: 20px 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid var(--neon-blue);
-            backdrop-filter: blur(8px);
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--teal);
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
         header.scrolled {
             padding: 15px 0;
-            box-shadow: 0 5px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 40px rgba(0, 0, 0, 0.15);
         }
 
         .header-container {
@@ -129,7 +119,7 @@
             align-items: center;
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--neon-blue);
+            color: var(--teal);
             text-decoration: none;
         }
 
@@ -162,7 +152,7 @@
         }
 
         .nav-link:hover {
-            color: var(--neon-blue);
+            color: var(--teal);
         }
 
         .nav-link::after {
@@ -172,7 +162,7 @@
             height: 2px;
             bottom: 0;
             left: 0;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(90deg, var(--teal), var(--blue));
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -187,7 +177,7 @@
             display: none;
             background: none;
             border: none;
-            color: var(--neon-blue);
+            color: var(--teal);
             font-size: 1.5rem;
             cursor: pointer;
         }
@@ -199,19 +189,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(0, 242, 255, 0.15) 0%, transparent 30%),
-                radial-gradient(circle at 80% 70%, rgba(189, 0, 255, 0.15) 0%, transparent 30%);
-            z-index: -1;
+            background: linear-gradient(135deg, rgba(0, 194, 203, 0.1) 0%, rgba(0, 119, 182, 0.1) 100%);
         }
 
         .hero-content {
@@ -223,9 +201,8 @@
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 25px;
-            color: var(--neon-blue);
+            color: var(--teal);
             line-height: 1.2;
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
         }
 
         .hero p {
@@ -237,37 +214,16 @@
 
         .terminal-output {
             margin-top: 30px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 242, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 194, 203, 0.3);
             border-radius: 8px;
             padding: 20px;
             font-family: 'Space Mono', monospace;
             max-width: 700px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .terminal-output::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 242, 255, 0.03) 0%,
-                transparent 2px,
-                transparent 98%,
-                rgba(0, 242, 255, 0.03) 100%
-            );
-            background-size: 100% 4px;
-            animation: scanline 8s linear infinite;
-            pointer-events: none;
         }
 
         .terminal-line {
-            color: var(--neon-blue);
+            color: var(--teal);
             margin-bottom: 8px;
             opacity: 0;
             transform: translateY(10px);
@@ -278,8 +234,8 @@
             display: inline-flex;
             align-items: center;
             padding: 15px 35px;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
-            color: #000;
+            background: linear-gradient(135deg, var(--teal), var(--blue));
+            color: #fff;
             border: none;
             border-radius: 50px;
             font-weight: 700;
@@ -289,7 +245,7 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 194, 203, 0.3);
             font-size: 1.1rem;
         }
 
@@ -300,7 +256,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--neon-purple), var(--neon-blue));
+            background: linear-gradient(135deg, var(--blue), var(--teal));
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: -1;
@@ -308,7 +264,7 @@
 
         .btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 242, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 194, 203, 0.4);
         }
 
         .btn:hover::before {
@@ -317,15 +273,15 @@
 
         .btn-outline {
             background: transparent;
-            border: 2px solid var(--neon-blue);
-            color: var(--neon-blue);
+            border: 2px solid var(--teal);
+            color: var(--teal);
             margin-left: 20px;
             box-shadow: none;
         }
 
         .btn-outline:hover {
-            background: var(--neon-blue);
-            color: #000;
+            background: var(--teal);
+            color: #fff;
         }
 
         .btn-icon {
@@ -348,30 +304,19 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(0, 242, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 242, 255, 0.05), rgba(189, 0, 255, 0.05));
-            z-index: 0;
+            border: 1px solid rgba(0, 194, 203, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 242, 255, 0.15);
-            border-color: rgba(0, 242, 255, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 194, 203, 0.1);
+            border-color: rgba(0, 194, 203, 0.4);
         }
 
         .card-icon {
             font-size: 2.5rem;
-            color: var(--neon-blue);
+            color: var(--teal);
             margin-bottom: 25px;
             position: relative;
         }
@@ -379,7 +324,7 @@
         .card h3 {
             font-size: 1.6rem;
             margin-bottom: 20px;
-            color: var(--neon-blue);
+            color: var(--teal);
             position: relative;
         }
 
@@ -390,7 +335,7 @@
         }
 
         .card-link {
-            color: var(--neon-blue);
+            color: var(--teal);
             text-decoration: none;
             font-weight: 600;
             display: inline-flex;
@@ -400,7 +345,7 @@
         }
 
         .card-link:hover {
-            color: var(--neon-purple);
+            color: var(--blue);
         }
 
         .card-link::after {
@@ -420,19 +365,6 @@
             overflow: hidden;
         }
 
-        .data-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="%2300f2ff" stroke-width="0.5" stroke-dasharray="5,5" opacity="0.1"/></svg>');
-            opacity: 0.3;
-            pointer-events: none;
-        }
-
         .data-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -443,27 +375,26 @@
         }
 
         .data-item {
-            background-color: rgba(30, 30, 47, 0.7);
+            background-color: var(--card-bg);
             padding: 30px;
             border-radius: 10px;
-            border-bottom: 3px solid var(--neon-blue);
+            border-bottom: 3px solid var(--teal);
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
         }
 
         .data-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 194, 203, 0.1);
         }
 
         .data-value {
             font-size: 3rem;
             font-weight: 700;
-            color: var(--neon-blue);
+            color: var(--teal);
             margin-bottom: 10px;
             font-family: 'Space Mono', monospace;
-            background: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(135deg, var(--teal), var(--blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -488,31 +419,20 @@
             margin-top: 50px;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(0, 242, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .chart-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 242, 255, 0.03), rgba(189, 0, 255, 0.03));
-            z-index: 0;
+            border: 1px solid rgba(0, 194, 203, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
         .chart-placeholder {
             width: 100%;
             height: 400px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border: 2px dashed var(--neon-blue);
+            background-color: rgba(0, 194, 203, 0.05);
+            border: 2px dashed var(--teal);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--neon-blue);
+            color: var(--teal);
             font-size: 1.2rem;
             position: relative;
             z-index: 1;
@@ -525,7 +445,7 @@
 
         .tab-header {
             display: flex;
-            border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+            border-bottom: 1px solid rgba(0, 194, 203, 0.2);
             margin-bottom: 30px;
         }
 
@@ -544,7 +464,7 @@
 
         .tab-btn.active {
             opacity: 1;
-            color: var(--neon-blue);
+            color: var(--teal);
         }
 
         .tab-btn::after {
@@ -554,7 +474,7 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(90deg, var(--teal), var(--blue));
             transform: scaleX(0);
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
@@ -570,91 +490,6 @@
 
         .tab-content.active {
             display: block;
-        }
-
-        /* Formulário de Contato */
-        .contact-section {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 80% 20%, rgba(0, 242, 255, 0.1) 0%, transparent 30%),
-                radial-gradient(circle at 20% 80%, rgba(189, 0, 255, 0.1) 0%, transparent 30%);
-            z-index: -1;
-        }
-
-        .contact-form {
-            max-width: 700px;
-            margin: 0 auto;
-            background-color: var(--card-bg);
-            padding: 50px;
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 242, 255, 0.1);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .contact-form::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(0, 242, 255, 0.03), rgba(189, 0, 255, 0.03));
-            z-index: 0;
-        }
-
-        .form-group {
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 12px;
-            color: var(--neon-blue);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 15px 20px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            border-radius: 8px;
-            color: var(--text-color);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: 'Oxanium', sans-serif;
-        }
-
-        .form-control:focus {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 0 3px rgba(0, 242, 255, 0.1);
-            outline: none;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        textarea.form-control {
-            min-height: 180px;
-            resize: vertical;
-        }
-
-        .form-submit {
-            text-align: center;
-            margin-top: 40px;
         }
 
         /* Seção de Publicações */
@@ -675,22 +510,22 @@
             border-radius: 12px;
             padding: 30px;
             transition: all 0.3s ease;
-            border-left: 4px solid var(--neon-blue);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--teal);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
         }
 
         .publication-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 194, 203, 0.1);
         }
 
         .publication-type {
             display: inline-block;
             padding: 4px 12px;
-            background-color: rgba(0, 242, 255, 0.1);
-            color: var(--neon-blue);
+            background-color: rgba(0, 194, 203, 0.1);
+            color: var(--teal);
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
@@ -701,7 +536,7 @@
         .publication-title {
             font-size: 1.4rem;
             margin-bottom: 15px;
-            color: var(--neon-blue);
+            color: var(--teal);
         }
 
         .publication-authors {
@@ -726,7 +561,7 @@
         }
 
         .publication-doi {
-            color: var(--neon-blue);
+            color: var(--teal);
             text-decoration: none;
             transition: opacity 0.3s ease;
         }
@@ -753,12 +588,13 @@
             padding: 30px;
             text-align: center;
             transition: all 0.3s ease;
-            border-bottom: 3px solid var(--neon-blue);
+            border-bottom: 3px solid var(--teal);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
         }
 
         .team-member:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 194, 203, 0.1);
         }
 
         .member-photo {
@@ -766,7 +602,7 @@
             height: 120px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--neon-blue);
+            border: 3px solid var(--teal);
             margin: 0 auto 20px;
             display: block;
         }
@@ -774,7 +610,7 @@
         .member-name {
             font-size: 1.4rem;
             margin-bottom: 5px;
-            color: var(--neon-blue);
+            color: var(--teal);
         }
 
         .member-title {
@@ -802,7 +638,7 @@
         }
 
         .member-link:hover {
-            color: var(--neon-blue);
+            color: var(--teal);
             transform: translateY(-3px);
         }
 
@@ -822,14 +658,14 @@
             border-radius: 10px;
             margin-bottom: 20px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-left: 3px solid var(--neon-blue);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 3px solid var(--teal);
         }
 
         .faq-question {
             padding: 20px;
-            background-color: rgba(0, 242, 255, 0.05);
-            color: var(--neon-blue);
+            background-color: rgba(0, 194, 203, 0.05);
+            color: var(--teal);
             font-weight: 600;
             cursor: pointer;
             display: flex;
@@ -839,7 +675,7 @@
         }
 
         .faq-question:hover {
-            background-color: rgba(0, 242, 255, 0.1);
+            background-color: rgba(0, 194, 203, 0.1);
         }
 
         .faq-question::after {
@@ -863,11 +699,72 @@
             padding: 20px 0;
         }
 
+        /* Seção de Contato */
+        .contact-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-form {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 50px;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 194, 203, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 12px;
+            color: var(--teal);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            background-color: rgba(0, 194, 203, 0.05);
+            border: 1px solid rgba(0, 194, 203, 0.2);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Oxanium', sans-serif;
+        }
+
+        .form-control:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 3px rgba(0, 194, 203, 0.1);
+            outline: none;
+            background-color: rgba(0, 194, 203, 0.1);
+        }
+
+        textarea.form-control {
+            min-height: 180px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            text-align: center;
+            margin-top: 40px;
+        }
+
         /* Footer */
         footer {
-            background-color: #000;
+            background-color: #fff;
             padding: 80px 0 40px;
-            border-top: 1px solid var(--neon-blue);
+            border-top: 1px solid var(--teal);
             position: relative;
         }
 
@@ -879,7 +776,7 @@
         }
 
         .footer-col h4 {
-            color: var(--neon-blue);
+            color: var(--teal);
             margin-bottom: 25px;
             font-size: 1.3rem;
             font-family: 'Space Mono', monospace;
@@ -909,7 +806,7 @@
             height: 1px;
             bottom: 0;
             left: 0;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(90deg, var(--teal), var(--blue));
             transform: scaleX(0);
             transform-origin: right;
             transition: transform 0.3s ease;
@@ -917,7 +814,7 @@
 
         .footer-links a:hover {
             opacity: 1;
-            color: var(--neon-blue);
+            color: var(--teal);
         }
 
         .footer-links a:hover::after {
@@ -938,7 +835,7 @@
         }
 
         .social-link:hover {
-            color: var(--neon-blue);
+            color: var(--teal);
             transform: translateY(-3px);
         }
 
@@ -947,15 +844,10 @@
             margin: 0 auto;
             text-align: center;
             padding-top: 40px;
-            border-top: 1px solid rgba(0, 242, 255, 0.2);
+            border-top: 1px solid rgba(0, 194, 203, 0.2);
             font-size: 0.9rem;
             opacity: 0.7;
             line-height: 1.6;
-        }
-
-        .disclaimer strong {
-            color: var(--accent-red);
-            font-weight: 600;
         }
 
         /* Modal */
@@ -970,7 +862,6 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
         }
 
         .modal-content {
@@ -982,8 +873,8 @@
             overflow-y: auto;
             padding: 40px;
             position: relative;
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            border: 1px solid var(--teal);
+            box-shadow: 0 0 30px rgba(0, 194, 203, 0.2);
         }
 
         .close-modal {
@@ -999,12 +890,12 @@
         }
 
         .close-modal:hover {
-            color: var(--neon-blue);
+            color: var(--teal);
             transform: rotate(90deg);
         }
 
         .modal-title {
-            color: var(--neon-blue);
+            color: var(--teal);
             margin-bottom: 20px;
             font-size: 2rem;
         }
@@ -1031,14 +922,15 @@
                 top: 80px;
                 left: 0;
                 width: 100%;
-                background-color: var(--darker-bg);
+                background-color: var(--card-bg);
                 flex-direction: column;
                 align-items: center;
                 padding: 20px 0;
                 transform: translateY(-150%);
                 transition: transform 0.4s ease;
                 z-index: 999;
-                border-bottom: 1px solid var(--neon-blue);
+                border-bottom: 1px solid var(--teal);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             }
             
             .nav-menu.active {
@@ -1119,19 +1011,19 @@
     </style>
 </head>
 <body>
-    <!-- Header Científico -->
+    <!-- Header -->
     <header id="header">
         <div class="container header-container">
             <a href="#" class="logo">
-                <span class="logo-icon">🔬</span>
-                <span>DarkWeb<span style="color: var(--neon-purple);">Studies</span></span>
+                <span class="logo-icon">🦷</span>
+                <span>Odonto<span style="color: var(--blue);">Research</span></span>
             </a>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item"><a href="#inicio" class="nav-link">Início</a></li>
-                <li class="nav-item"><a href="#sobre" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="#pesquisa" class="nav-link">Pesquisa</a></li>
                 <li class="nav-item"><a href="#dados" class="nav-link">Dados</a></li>
                 <li class="nav-item"><a href="#publicacoes" class="nav-link">Publicações</a></li>
                 <li class="nav-item"><a href="#equipe" class="nav-link">Equipe</a></li>
@@ -1145,17 +1037,17 @@
     <section class="hero section" id="inicio">
         <div class="container">
             <div class="hero-content">
-                <h1>Pesquisa Acadêmica sobre Mercados na <span class="text-glow">Darknet</span></h1>
-                <p>Um estudo interdisciplinar sobre os ecossistemas digitais clandestinos, seus impactos sociais e os desafios para a legislação no século XXI.</p>
+                <h1>Pesquisa Avançada em <span class="text-glow">Odontologia</span></h1>
+                <p>Um centro de excelência acadêmica dedicado ao estudo inovador da saúde bucal e suas interconexões com a saúde sistêmica.</p>
                 
                 <div class="terminal-output" id="terminalOutput">
                     <!-- Terminal lines will be added by JavaScript -->
                 </div>
                 
                 <div style="margin-top: 50px;">
-                    <a href="#dados" class="btn pulse">
-                        <span class="btn-icon">📊</span>
-                        Explorar Dados
+                    <a href="#pesquisa" class="btn pulse">
+                        <span class="btn-icon">🔍</span>
+                        Conheça Nossas Pesquisas
                     </a>
                     <a href="#publicacoes" class="btn btn-outline">
                         <span class="btn-icon">📚</span>
@@ -1166,34 +1058,34 @@
         </div>
     </section>
 
-    <!-- Seção Sobre -->
-    <section id="sobre" class="section">
+    <!-- Seção Pesquisa -->
+    <section id="pesquisa" class="section">
         <div class="container">
-            <h2 style="color: var(--neon-blue); margin-bottom: 15px; text-align: center;">Sobre o Projeto</h2>
+            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Áreas de Pesquisa</h2>
             <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Esta pesquisa reúne especialistas em direito digital, criminologia e tecnologia da informação para analisar os mercados clandestinos na darknet de forma ética e acadêmica.
+                Nossos estudos abrangem desde a odontologia básica até as mais avançadas técnicas de tratamento e prevenção.
             </p>
             
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-icon">🌐</div>
-                    <h3>Tecnologias de Anonimato</h3>
-                    <p>Análise detalhada do Tor, I2P e outras redes overlay que possibilitam o funcionamento desses mercados, com foco em suas aplicações legítimas para privacidade digital.</p>
-                    <a href="#" class="card-link" data-modal="tech-modal">Saiba mais</a>
+                    <div class="card-icon">🦠</div>
+                    <h3>Microbioma Oral</h3>
+                    <p>Estudo da complexa ecologia microbiana da cavidade oral e sua relação com doenças sistêmicas como diabetes e doenças cardiovasculares.</p>
+                    <a href="#" class="card-link" data-modal="microbioma-modal">Saiba mais</a>
                 </div>
                 
                 <div class="card">
-                    <div class="card-icon">💸</div>
-                    <h3>Sistemas de Pagamento</h3>
-                    <p>Estudo sobre o uso de criptomoedas e técnicas de lavagem de dinheiro nestes mercados, incluindo análise de blockchain e métodos de rastreamento.</p>
-                    <a href="#" class="card-link" data-modal="payment-modal">Saiba mais</a>
+                    <div class="card-icon">🧬</div>
+                    <h3>Odontogenética</h3>
+                    <p>Pesquisa sobre marcadores genéticos associados a doenças periodontais, cárie dentária e anomalias do desenvolvimento dental.</p>
+                    <a href="#" class="card-link" data-modal="genetica-modal">Saiba mais</a>
                 </div>
                 
                 <div class="card">
-                    <div class="card-icon">⚖️</div>
-                    <h3>Desafios Jurídicos</h3>
-                    <p>Análise dos obstáculos enfrentados por autoridades globais no combate a estes mercados, considerando questões de jurisdição e soberania digital.</p>
-                    <a href="#" class="card-link" data-modal="legal-modal">Saiba mais</a>
+                    <div class="card-icon">🤖</div>
+                    <h3>Odontologia Digital</h3>
+                    <p>Desenvolvimento e aplicação de tecnologias como IA, impressão 3D e realidade aumentada em procedimentos odontológicos.</p>
+                    <a href="#" class="card-link" data-modal="digital-modal">Saiba mais</a>
                 </div>
             </div>
         </div>
@@ -1202,52 +1094,52 @@
     <!-- Seção de Dados -->
     <section id="dados" class="section data-section">
         <div class="container">
-            <h2 style="color: var(--neon-blue); margin-bottom: 15px; text-align: center;">Dados da Pesquisa</h2>
+            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Dados Epidemiológicos</h2>
             <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Estatísticas e informações coletadas através de análise de fontes abertas e colaboração com especialistas.
+                Estatísticas e informações coletadas através de nossos estudos populacionais e colaborações internacionais.
             </p>
             
             <div class="data-grid">
                 <div class="data-item">
-                    <div class="data-value">+50</div>
-                    <div class="data-label">Mercados Ativos</div>
-                    <div class="data-description">Número estimado de plataformas operando simultaneamente em 2023</div>
+                    <div class="data-value">78%</div>
+                    <div class="data-label">Cárie Dentária</div>
+                    <div class="data-description">Prevalência em adultos brasileiros (idade 35-44 anos)</div>
                 </div>
                 
                 <div class="data-item">
-                    <div class="data-value">63%</div>
-                    <div class="data-label">Transações</div>
-                    <div class="data-description">Percentual relacionado a substâncias controladas</div>
+                    <div class="data-value">40%</div>
+                    <div class="data-label">Doença Periodontal</div>
+                    <div class="data-description">Prevalência em idosos (acima de 65 anos)</div>
                 </div>
                 
                 <div class="data-item">
-                    <div class="data-value">1.2B</div>
-                    <div class="data-label">Volume Anual</div>
-                    <div class="data-description">Movimentação financeira estimada (USD)</div>
+                    <div class="data-value">3.5x</div>
+                    <div class="data-label">Risco Cardiovascular</div>
+                    <div class="data-description">Aumento em pacientes com periodontite grave</div>
                 </div>
                 
                 <div class="data-item">
-                    <div class="data-value">12</div>
-                    <div class="data-label">Meses</div>
-                    <div class="data-description">Tempo médio de atividade antes de serem derrubados</div>
+                    <div class="data-value">62%</div>
+                    <div class="data-label">Acesso ao Dentista</div>
+                    <div class="data-description">Percentual da população que visita o dentista anualmente</div>
                 </div>
             </div>
             
             <!-- Sistema de Abas para Gráficos -->
             <div class="tab-system">
                 <div class="tab-header">
-                    <button class="tab-btn active" data-tab="tab1">Evolução Temporal</button>
+                    <button class="tab-btn active" data-tab="tab1">Saúde Bucal no Brasil</button>
                     <button class="tab-btn" data-tab="tab2">Distribuição Geográfica</button>
-                    <button class="tab-btn" data-tab="tab3">Categorias de Produtos</button>
+                    <button class="tab-btn" data-tab="tab3">Fatores de Risco</button>
                 </div>
                 
                 <div class="tab-content active" id="tab1">
                     <div class="chart-container">
                         <div class="chart-placeholder">
-                            [Gráfico de Linha: Evolução histórica dos mercados na darknet]
+                            [Gráfico: Prevalência de doenças bucais por faixa etária no Brasil]
                         </div>
                         <div style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                            <p><strong>Análise:</strong> O gráfico mostra o crescimento exponencial de mercados na darknet desde 2011, com picos coincidindo com o fechamento de plataformas importantes como Silk Road e AlphaBay, seguidos por rápida migração para novas plataformas.</p>
+                            <p><strong>Análise:</strong> O gráfico mostra a evolução da prevalência de cárie dentária, doença periodontal e edentulismo ao longo das diferentes faixas etárias da população brasileira.</p>
                         </div>
                     </div>
                 </div>
@@ -1255,10 +1147,10 @@
                 <div class="tab-content" id="tab2">
                     <div class="chart-container">
                         <div class="chart-placeholder">
-                            [Mapa de Calor: Distribuição global de usuários e vendedores]
+                            [Mapa: Distribuição regional de problemas bucais no Brasil]
                         </div>
                         <div style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                            <p><strong>Análise:</strong> Concentração de usuários na Europa Ocidental e América do Norte, enquanto os vendedores apresentam distribuição mais diversificada, com hubs emergentes no Leste Europeu e Sudeste Asiático.</p>
+                            <p><strong>Análise:</strong> Visualização das disparidades regionais no acesso a tratamentos odontológicos e prevalência de doenças bucais, com destaque para as desigualdades Norte-Sul.</p>
                         </div>
                     </div>
                 </div>
@@ -1266,10 +1158,10 @@
                 <div class="tab-content" id="tab3">
                     <div class="chart-container">
                         <div class="chart-placeholder">
-                            [Gráfico de Barras: Proporção entre diferentes categorias de produtos]
+                            [Gráfico: Fatores de risco associados a doenças periodontais]
                         </div>
                         <div style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                            <p><strong>Análise:</strong> Drogas ilícitas representam a maioria das transações (63%), seguido por documentos falsificados (12%), serviços de cibersegurança (9%), dados roubados (8%) e outros (8%).</p>
+                            <p><strong>Análise:</strong> Correlação entre tabagismo, diabetes, má alimentação e outros fatores com o desenvolvimento de periodontite em diferentes grupos populacionais.</p>
                         </div>
                     </div>
                 </div>
@@ -1280,7 +1172,7 @@
     <!-- Seção de Publicações -->
     <section id="publicacoes" class="section publications-section">
         <div class="container">
-            <h2 style="color: var(--neon-blue); margin-bottom: 15px; text-align: center;">Publicações Acadêmicas</h2>
+            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Publicações Científicas</h2>
             <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
                 Artigos, estudos de caso e relatórios técnicos produzidos pela nossa equipe de pesquisa.
             </p>
@@ -1288,20 +1180,20 @@
             <div class="publication-grid">
                 <div class="publication-card">
                     <span class="publication-type">Artigo Científico</span>
-                    <h3 class="publication-title">Análise de Rede de Mercados Clandestinos na Darknet</h3>
+                    <h3 class="publication-title">Microbioma Oral e Doenças Cardiovasculares</h3>
                     <p class="publication-authors">Silva, J. R.; Oliveira, M. F.; Santos, A. B.</p>
-                    <p class="publication-abstract">Este artigo apresenta uma análise quantitativa da estrutura de rede de 15 mercados clandestinos, identificando padrões de resiliência e migração após ações policiais.</p>
+                    <p class="publication-abstract">Este estudo longitudinal demonstra a correlação entre disbiose do microbioma oral e aumento do risco de aterosclerose em pacientes sem outros fatores de risco.</p>
                     <div class="publication-meta">
-                        <span>Journal of Cybersecurity, 2023</span>
-                        <a href="#" class="publication-doi" data-modal="pub1-modal">DOI:10.1234/cyber</a>
+                        <span>Journal of Dental Research, 2023</span>
+                        <a href="#" class="publication-doi" data-modal="pub1-modal">DOI:10.1234/jdr</a>
                     </div>
                 </div>
                 
                 <div class="publication-card">
                     <span class="publication-type">Relatório Técnico</span>
-                    <h3 class="publication-title">Técnicas de Lavagem de Criptomoedas em Mercados Ilegais</h3>
+                    <h3 class="publication-title">Eficácia de Novos Biomateriais em Implantodontia</h3>
                     <p class="publication-authors">Pereira, L. M.; Costa, R. S.</p>
-                    <p class="publication-abstract">Análise forense de cadeias de transações Bitcoin associadas a 3 grandes mercados derrubados entre 2020-2022, identificando padrões de ocultação de fundos.</p>
+                    <p class="publication-abstract">Análise comparativa de 5 novos biomateriais para implantes dentários, avaliando taxa de osseointegração, biocompatibilidade e durabilidade.</p>
                     <div class="publication-meta">
                         <span>Technical Report #45, 2022</span>
                         <a href="#" class="publication-doi" data-modal="pub2-modal">Ver Relatório</a>
@@ -1310,12 +1202,12 @@
                 
                 <div class="publication-card">
                     <span class="publication-type">Estudo de Caso</span>
-                    <h3 class="publication-title">Operação DarkHunt: Uma Análise Pós-Operatória</h3>
+                    <h3 class="publication-title">Protocolo Digital Completo em Reabilitação Oral</h3>
                     <p class="publication-authors">Fernandes, C. A. et al.</p>
-                    <p class="publication-abstract">Estudo detalhado dos impactos da operação policial internacional que derrubou o mercado DarkHunt em 2021 e seus efeitos no ecossistema.</p>
+                    <p class="publication-abstract">Relato detalhado de caso complexo utilizando fluxo digital completo desde o planejamento até a execução com guias cirúrgicos e próteses impressas 3D.</p>
                     <div class="publication-meta">
-                        <span>International Crime Review, 2023</span>
-                        <a href="#" class="publication-doi" data-modal="pub3-modal">DOI:10.5678/crime</a>
+                        <span>International Journal of Prosthodontics, 2023</span>
+                        <a href="#" class="publication-doi" data-modal="pub3-modal">DOI:10.5678/ijp</a>
                     </div>
                 </div>
             </div>
@@ -1332,34 +1224,34 @@
     <!-- Seção de Metodologia -->
     <section id="metodologia" class="section">
         <div class="container">
-            <h2 style="color: var(--neon-blue); margin-bottom: 15px; text-align: center;">Metodologia Científica</h2>
+            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Metodologia Científica</h2>
             <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Abordagem rigorosa e ética para coleta e análise de dados sobre os mercados na darknet.
+                Abordagem rigorosa e ética para coleta e análise de dados em odontologia.
             </p>
             
             <div class="card-grid">
                 <div class="card">
-                    <div class="card-icon">📚</div>
-                    <h3>Revisão Bibliográfica</h3>
-                    <p>Análise sistemática de mais de 200 artigos científicos, relatórios governamentais e estudos de caso publicados entre 2010-2023.</p>
+                    <div class="card-icon">🔬</div>
+                    <h3>Estudos Clínicos</h3>
+                    <p>Ensaios clínicos randomizados controlados seguindo protocolos internacionais com comitê de ética em pesquisa.</p>
                 </div>
                 
                 <div class="card">
-                    <div class="card-icon">🔍</div>
-                    <h3>Análise de Dados Secundários</h3>
-                    <p>Processamento de datasets abertos de agências governamentais e organizações de pesquisa sobre atividades na darknet.</p>
+                    <div class="card-icon">📊</div>
+                    <h3>Análise Epidemiológica</h3>
+                    <p>Estudos populacionais com amostras representativas e métodos estatísticos avançados para identificação de fatores de risco.</p>
                 </div>
                 
                 <div class="card">
-                    <div class="card-icon">👥</div>
-                    <h3>Entrevistas com Especialistas</h3>
-                    <p>Conversas com 15 profissionais de segurança cibernética, agentes da lei e acadêmicos especializados no tema.</p>
+                    <div class="card-icon">🧪</div>
+                    <h3>Pesquisa Laboratorial</h3>
+                    <p>Análises in vitro e in vivo de novos materiais, técnicas e abordagens terapêuticas em odontologia.</p>
                 </div>
             </div>
             
             <div style="margin-top: 60px; background-color: var(--card-bg); padding: 40px; border-radius: 15px; border-left: 4px solid var(--accent-red);">
-                <h3 style="color: var(--accent-red); margin-bottom: 20px;">⚠️ Limitações Éticas</h3>
-                <p>Esta pesquisa foi conduzida sem qualquer interação direta com mercados ilegais ou aquisição de produtos proibidos. Todos os dados foram coletados através de fontes secundárias e análises de domínio público, garantindo a conformidade com padrões éticos acadêmicos e legais. O projeto foi aprovado pelo Comitê de Ética em Pesquisa da Universidade sob o protocolo #2023-0456.</p>
+                <h3 style="color: var(--accent-red); margin-bottom: 20px;">⚠️ Ética em Pesquisa</h3>
+                <p>Todos os nossos estudos são conduzidos em conformidade com as diretrizes éticas internacionais, incluindo a Declaração de Helsinki. Projetos envolvendo seres humanos são aprovados pelo Comitê de Ética em Pesquisa da Universidade sob o protocolo #2023-0456. Garantimos o sigilo dos dados e o consentimento informado de todos os participantes.</p>
             </div>
         </div>
     </section>
@@ -1367,17 +1259,17 @@
     <!-- Seção de Equipe -->
     <section id="equipe" class="section team-section">
         <div class="container">
-            <h2 style="color: var(--neon-blue); margin-bottom: 15px; text-align: center;">Nossa Equipe</h2>
+            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Nossa Equipe</h2>
             <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Pesquisadores multidisciplinares dedicados ao estudo acadêmico dos mercados na darknet.
+                Pesquisadores e clínicos dedicados ao avanço da odontologia através da ciência.
             </p>
             
             <div class="team-grid">
                 <div class="team-member">
                     <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Dra. Ana Beatriz" class="member-photo">
                     <h3 class="member-name">Dra. Ana Beatriz</h3>
-                    <p class="member-title">Coordenadora do Projeto | Criminologia</p>
-                    <p class="member-bio">Especialista em crimes cibernéticos com 12 anos de experiência em análise de mercados clandestinos.</p>
+                    <p class="member-title">Coordenadora | Periodontia</p>
+                    <p class="member-bio">Especialista em microbioma oral e sua relação com doenças sistêmicas, com 15 anos de experiência em pesquisa clínica.</p>
                     <div class="member-links">
                         <a href="#" class="member-link"><i class="fas fa-envelope"></i></a>
                         <a href="#" class="member-link"><i class="fas fa-graduation-cap"></i></a>
@@ -1388,20 +1280,20 @@
                 <div class="team-member">
                     <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. Carlos Silva" class="member-photo">
                     <h3 class="member-name">Dr. Carlos Silva</h3>
-                    <p class="member-title">Pesquisador Sênior | Segurança Cibernética</p>
-                    <p class="member-bio">Especialista em análise forense de criptomoedas e tecnologias de anonimato.</p>
+                    <p class="member-title">Pesquisador Sênior | Implantodontia</p>
+                    <p class="member-bio">Expert em biomateriais e técnicas avançadas de reabilitação oral, autor de 3 patentes internacionais.</p>
                     <div class="member-links">
                         <a href="#" class="member-link"><i class="fas fa-envelope"></i></a>
                         <a href="#" class="member-link"><i class="fas fa-graduation-cap"></i></a>
-                        <a href="#" class="member-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="member-link"><i class="fab fa-researchgate"></i></a>
                     </div>
                 </div>
                 
                 <div class="team-member">
                     <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Dra. Fernanda Oliveira" class="member-photo">
                     <h3 class="member-name">Dra. Fernanda Oliveira</h3>
-                    <p class="member-title">Pesquisadora | Direito Digital</p>
-                    <p class="member-bio">Especialista em jurisdição internacional e desafios legais do combate a crimes na darknet.</p>
+                    <p class="member-title">Pesquisadora | Odontopediatria</p>
+                    <p class="member-bio">Especialista em prevenção e tratamento precoce em odontologia infantil, com foco em abordagens minimamente invasivas.</p>
                     <div class="member-links">
                         <a href="#" class="member-link"><i class="fas fa-envelope"></i></a>
                         <a href="#" class="member-link"><i class="fas fa-graduation-cap"></i></a>
@@ -1412,12 +1304,12 @@
                 <div class="team-member">
                     <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Dr. Ricardo Santos" class="member-photo">
                     <h3 class="member-name">Dr. Ricardo Santos</h3>
-                    <p class="member-title">Analista de Dados | Ciência da Computação</p>
-                    <p class="member-bio">Responsável pelo desenvolvimento de algoritmos de análise de redes e padrões de transação.</p>
+                    <p class="member-title">Bioestatístico | Ciência de Dados</p>
+                    <p class="member-bio">Responsável pela análise estatística avançada e modelagem preditiva em nossos estudos epidemiológicos.</p>
                     <div class="member-links">
                         <a href="#" class="member-link"><i class="fas fa-envelope"></i></a>
                         <a href="#" class="member-link"><i class="fas fa-graduation-cap"></i></a>
-                        <a href="#" class="member-link"><i class="fab fa-orcid"></i></a>
+                        <a href="#" class="member-link"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
@@ -1427,100 +1319,96 @@
     <!-- Seção FAQ -->
     <section id="faq" class="section faq-section">
         <div class="container">
-            <h2 style="color: var(--neon-blue); margin-bottom: 15px; text-align: center;">Perguntas Frequentes</h2>
+            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Perguntas Frequentes</h2>
             <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Respostas para as dúvidas mais comuns sobre nossa pesquisa e metodologia.
+                Respostas para as dúvidas mais comuns sobre nossa pesquisa e participação.
             </p>
             
             <div class="faq-container">
                 <div class="faq-item">
                     <div class="faq-question">
-                        Como vocês coletam dados sobre os mercados na darknet?
+                        Como posso participar dos estudos como voluntário?
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            <p>Nossa coleta de dados é realizada exclusivamente através de fontes secundárias abertas, incluindo:</p>
+                            <p>Temos diferentes estudos em andamento que podem precisar de voluntários. O processo geral inclui:</p>
                             <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Relatórios públicos de agências governamentais</li>
-                                <li>Artigos acadêmicos revisados por pares</li>
-                                <li>Análises técnicas publicadas por empresas de segurança cibernética</li>
-                                <li>Dados judiciais de processos relacionados</li>
-                                <li>Conteúdo de fóruns acadêmicos e técnicos especializados</li>
+                                <li>Verificar os critérios de elegibilidade para cada estudo</li>
+                                <li>Preencher um formulário de pré-triagem</li>
+                                <li>Participar de uma entrevista inicial</li>
+                                <li>Assinar o termo de consentimento informado</li>
                             </ul>
-                            <p style="margin-top: 10px;">Nunca acessamos diretamente mercados ilegais ou interagimos com seus participantes.</p>
+                            <p style="margin-top: 10px;">Todos os voluntários recebem acompanhamento odontológico gratuito durante o período do estudo.</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        Qual é o objetivo principal desta pesquisa?
+                        Vocês oferecem tratamento odontológico para o público?
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            <p>Nosso objetivo é compreender a dinâmica dos mercados na darknet para:</p>
+                            <p>Sim, em alguns casos:</p>
                             <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Identificar padrões e vulnerabilidades que possam auxiliar no combate a atividades ilegais</li>
-                                <li>Desenvolver políticas públicas mais eficazes</li>
-                                <li>Entender os impactos sociais e econômicos desses mercados</li>
-                                <li>Contribuir para o avanço do conhecimento acadêmico na área</li>
-                                <li>Propor melhorias nos sistemas legais e de fiscalização</li>
+                                <li>Pacientes incluídos em estudos clínicos recebem tratamento completo</li>
+                                <li>Oferecemos alguns serviços comunitários em parceria com a faculdade de odontologia</li>
+                                <li>Casos complexos podem ser aceitos para protocolos experimentais</li>
                             </ul>
+                            <p style="margin-top: 10px;">Para mais informações, entre em contato através do nosso formulário.</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        Como vocês garantem a ética na pesquisa?
+                        Como acessar os dados de pesquisa para trabalhos acadêmicos?
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            <p>Nossa pesquisa segue rigorosos protocolos éticos:</p>
+                            <p>Temos diferentes níveis de acesso aos dados:</p>
                             <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Aprovação pelo Comitê de Ética em Pesquisa da Universidade</li>
-                                <li>Coleta de dados apenas de fontes públicas e autorizadas</li>
-                                <li>Anonimização de todos os dados sensíveis</li>
-                                <li>Não participação ou incentivo a atividades ilegais</li>
-                                <li>Colaboração estreita com autoridades competentes</li>
+                                <li>Dados agregados estão disponíveis em nossas publicações</li>
+                                <li>Conjuntos de dados anonimizados podem ser solicitados para pesquisa</li>
+                                <li>Parcerias com instituições de ensino para acesso a bancos completos</li>
                             </ul>
-                            <p style="margin-top: 10px;">Todos os pesquisadores assinam códigos de conduta e passam por treinamentos regulares sobre ética em pesquisa.</p>
+                            <p style="margin-top: 10px;">Todos os pedidos são avaliados pelo comitê de ética em pesquisa.</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="faq-item">
                     <div class="faq-question">
-                        Posso usar os dados desta pesquisa em meu trabalho acadêmico?
+                        Vocês oferecem estágios ou oportunidades para estudantes?
                     </div>
                     <div class="faq-answer">
                         <div class="faq-answer-content">
-                            <p>Sim, nossos dados e publicações estão disponíveis para uso acadêmico, desde que:</p>
+                            <p>Sim, temos programas para diferentes níveis:</p>
                             <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Seja citada a fonte corretamente</li>
-                                <li>Não seja para fins comerciais</li>
-                                <li>Não seja alterado o contexto original dos dados</li>
-                            </ul>
-                            <p style="margin-top: 10px;">Para uso de conjuntos de dados completos, entre em contato conosco através do formulário específico.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Como posso colaborar com o projeto?
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>Aceitamos colaborações de pesquisadores e instituições que compartilhem nossos objetivos acadêmicos. As formas de colaboração incluem:</p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Parcerias institucionais</li>
+                                <li>Iniciação científica para graduandos</li>
                                 <li>Estágios de pesquisa para pós-graduandos</li>
-                                <li>Intercâmbio de dados e metodologias</li>
-                                <li>Coautoria em publicações</li>
-                                <li>Participação em eventos conjuntos</li>
+                                <li>Bolsas de doutorado e pós-doutorado</li>
+                                <li>Programa de visitantes para pesquisadores estrangeiros</li>
                             </ul>
-                            <p style="margin-top: 10px;">Entre em contato através do formulário na seção "Contato Acadêmico" para discutir possibilidades.</p>
+                            <p style="margin-top: 10px;">Consulte nossa seção de oportunidades ou entre em contato para mais informações.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Como são financiadas as pesquisas?
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-content">
+                            <p>Nossas fontes de financiamento incluem:</p>
+                            <ul style="margin-top: 10px; margin-left: 20px;">
+                                <li>Órgãos públicos de fomento à pesquisa (CNPq, CAPES, FAPESP)</li>
+                                <li>Editais internacionais de cooperação científica</li>
+                                <li>Parcerias com a indústria (com supervisão ética rigorosa)</li>
+                                <li>Doações de fundações privadas sem fins lucrativos</li>
+                            </ul>
+                            <p style="margin-top: 10px;">Todos os financiamentos são divulgados transparentemente em nossas publicações.</p>
                         </div>
                     </div>
                 </div>
@@ -1531,9 +1419,9 @@
     <!-- Seção de Contato -->
     <section id="contato" class="section contact-section">
         <div class="container">
-            <h2 style="color: var(--neon-blue); margin-bottom: 15px; text-align: center;">Contato Acadêmico</h2>
+            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Contato Acadêmico</h2>
             <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Entre em contato com nossa equipe de pesquisa para colaborações, palestras ou solicitação de materiais.
+                Entre em contato para colaborações, participação em pesquisas ou solicitação de informações.
             </p>
             
             <div class="contact-form">
@@ -1544,13 +1432,13 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="email" class="form-label">Email Institucional</label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="email" id="email" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="institution" class="form-label">Instituição/Organização</label>
-                        <input type="text" id="institution" class="form-control" required>
+                        <input type="text" id="institution" class="form-control">
                     </div>
                     
                     <div class="form-group">
@@ -1558,8 +1446,8 @@
                         <select id="purpose" class="form-control" required>
                             <option value="">Selecione uma opção</option>
                             <option value="collaboration">Colaboração em Pesquisa</option>
-                            <option value="lecture">Convite para Palestra</option>
-                            <option value="interview">Entrevista para Trabalho Acadêmico</option>
+                            <option value="volunteer">Participar como Voluntário</option>
+                            <option value="student">Oportunidades para Estudantes</option>
                             <option value="data">Solicitação de Dados/Publicações</option>
                             <option value="other">Outro</option>
                         </select>
@@ -1573,13 +1461,13 @@
                     <div class="form-group">
                         <div style="display: flex; align-items: center;">
                             <input type="checkbox" id="consent" required style="margin-right: 10px;">
-                            <label for="consent" style="font-size: 0.9rem;">Concordo com o processamento dos meus dados conforme a <a href="#" style="color: var(--neon-blue);">Política de Privacidade</a></label>
+                            <label for="consent" style="font-size: 0.9rem;">Concordo com o processamento dos meus dados conforme a <a href="#" style="color: var(--teal);">Política de Privacidade</a></label>
                         </div>
                     </div>
                     
                     <div class="form-submit">
                         <button type="submit" class="btn" style="padding: 18px 45px; font-size: 1.1rem;">
-                            <span class="btn-icon">🚀</span>
+                            <span class="btn-icon">✉️</span>
                             Enviar Mensagem
                         </button>
                     </div>
@@ -1593,13 +1481,13 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h4>DarkWeb Studies</h4>
-                    <p style="opacity: 0.8; margin-top: 15px;">Projeto acadêmico interdisciplinar dedicado ao estudo ético de ecossistemas digitais clandestinos e seus impactos sociais.</p>
+                    <h4>OdontoResearch</h4>
+                    <p style="opacity: 0.8; margin-top: 15px;">Centro de Pesquisa Avançada em Odontologia dedicado à excelência acadêmica e inovação em saúde bucal.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-researchgate"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
@@ -1607,8 +1495,8 @@
                     <h4>Navegação</h4>
                     <ul class="footer-links">
                         <li><a href="#inicio">Página Inicial</a></li>
-                        <li><a href="#sobre">Sobre o Projeto</a></li>
-                        <li><a href="#dados">Dados da Pesquisa</a></li>
+                        <li><a href="#pesquisa">Áreas de Pesquisa</a></li>
+                        <li><a href="#dados">Dados Epidemiológicos</a></li>
                         <li><a href="#publicacoes">Publicações</a></li>
                         <li><a href="#equipe">Equipe</a></li>
                         <li><a href="#faq">FAQ</a></li>
@@ -1621,8 +1509,8 @@
                     <ul class="footer-links">
                         <li><a href="#" data-modal="resources-modal">Publicações</a></li>
                         <li><a href="#" data-modal="datasets-modal">Conjuntos de Dados</a></li>
-                        <li><a href="#" data-modal="glossary-modal">Glossário de Termos</a></li>
-                        <li><a href="#" data-modal="methods-modal">Metodologias</a></li>
+                        <li><a href="#" data-modal="protocols-modal">Protocolos de Pesquisa</a></li>
+                        <li><a href="#" data-modal="education-modal">Materiais Educativos</a></li>
                         <li><a href="#" data-modal="events-modal">Eventos</a></li>
                     </ul>
                 </div>
@@ -1632,170 +1520,144 @@
                     <ul class="footer-links">
                         <li><a href="#" data-modal="about-modal">Sobre Nós</a></li>
                         <li><a href="#" data-modal="partners-modal">Parceiros</a></li>
-                        <li><a href="#" data-modal="funding-modal">Financiamento</a></li>
                         <li><a href="#" data-modal="ethics-modal">Ética em Pesquisa</a></li>
                         <li><a href="#" data-modal="jobs-modal">Oportunidades</a></li>
+                        <li><a href="#" data-modal="contact-modal">Contato</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="disclaimer">
-                <p><strong>AVISO LEGAL:</strong> Este portal é parte de um projeto de pesquisa acadêmica desenvolvido para fins educacionais. Não endossa, promove ou facilita qualquer atividade ilegal. Todas as informações apresentadas são baseadas em estudos científicos publicados e fontes abertas.</p>
-                <p style="margin-top: 15px;">© 2023 DarkWeb Research Project | Universidade Federal de Tecnologia | Todos os direitos reservados</p>
+                <p>© 2023 OdontoResearch | Centro de Pesquisa Avançada em Odontologia | Todos os direitos reservados</p>
+                <p style="margin-top: 15px;">As informações deste site são para fins acadêmicos e não substituem a orientação de um profissional de saúde.</p>
             </div>
         </div>
     </footer>
 
     <!-- Modais -->
-    <div class="modal" id="tech-modal">
+    <div class="modal" id="microbioma-modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Tecnologias de Anonimato</h2>
+            <h2 class="modal-title">Microbioma Oral e Saúde Sistêmica</h2>
             <div style="margin-top: 30px;">
-                <h3 style="color: var(--neon-purple); margin-bottom: 15px;">Redes Overlay e Privacidade</h3>
-                <p>Nossa pesquisa analisa as principais tecnologias que permitem o funcionamento dos mercados na darknet, com foco especial em:</p>
+                <h3 style="color: var(--blue); margin-bottom: 15px;">A Conexão Bucal-Sistêmica</h3>
+                <p>Nossa pesquisa revela como desequilíbrios no microbioma oral podem impactar diversas condições sistêmicas:</p>
                 
                 <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Tor (The Onion Router)</h4>
-                    <p>Sistema de anonimização que roteia o tráfego através de uma rede voluntária de servidores, encapsulando as comunicações em múltiplas camadas de criptografia. Nossos estudos mostram que:</p>
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Principais Achados</h4>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li>85% dos mercados analisados utilizam serviços onion</li>
-                        <li>O tempo médio de disponibilidade de um serviço onion é de 8 meses</li>
-                        <li>Existem padrões identificáveis na escolha de locais de hospedagem</li>
-                    </ul>
-                </div>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">I2P (Invisible Internet Project)</h4>
-                    <p>Rede alternativa que cria uma camada de comunicação anônima dentro da internet convencional. Nossas descobertas incluem:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Crescimento de 40% no uso entre 2020-2023</li>
-                        <li>Vantagens específicas para determinados tipos de serviços</li>
-                        <li>Desafios particulares para monitoramento e fiscalização</li>
-                    </ul>
-                </div>
-                
-                <div style="background-color: rgba(0, 242, 255, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--neon-blue); margin-top: 30px;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Aplicações Legítimas</h4>
-                    <p>É importante destacar que essas tecnologias têm usos legítimos e importantes para:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Proteção de ativistas em regimes autoritários</li>
-                        <li>Comunicação segura para jornalistas investigativos</li>
-                        <li>Proteção da privacidade de usuários comuns</li>
-                        <li>Pesquisa acadêmica em segurança cibernética</li>
-                    </ul>
-                </div>
-                
-                <div style="margin-top: 30px;">
-                    <p>Para mais detalhes, consulte nossa publicação completa: <a href="#" style="color: var(--neon-blue);">"Tecnologias de Anonimato: Usos e Abusos" (2023)</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="payment-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Sistemas de Pagamento na Darknet</h2>
-            <div style="margin-top: 30px;">
-                <h3 style="color: var(--neon-purple); margin-bottom: 15px;">Criptomoedas e Lavagem de Dinheiro</h3>
-                <p>Nossa equipe realizou uma análise abrangente dos métodos de pagamento utilizados em mercados clandestinos, com destaque para:</p>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Bitcoin e Monero</h4>
-                    <p>Embora o Bitcoin ainda seja a criptomoeda mais utilizada, observamos uma migração progressiva para o Monero devido a suas características de privacidade:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>65% dos mercados aceitam Bitcoin exclusivamente</li>
-                        <li>25% oferecem opção de Monero</li>
-                        <li>10% já exigem exclusivamente Monero</li>
+                        <li>Bactérias periodontopatogênicas encontradas em placas ateroscleróticas</li>
+                        <li>Correlação entre disbiose oral e resistência à insulina</li>
+                        <li>Mecanismos inflamatórios compartilhados com artrite reumatoide</li>
+                        <li>Impacto na saúde intestinal através da deglutição</li>
                     </ul>
                 </div>
                 
                 <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Técnicas de Lavagem</h4>
-                    <p>Identificamos padrões recorrentes na movimentação de fundos ilícitos:</p>
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Métodos de Análise</h4>
+                    <p>Utilizamos técnicas avançadas de sequenciamento genético para mapear o microbioma:</p>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li>Uso de mixers e tumblers para ofuscar transações</li>
-                        <li>Conversão para stablecoins em exchanges descentralizadas</li>
-                        <li>Estratégias de "peel chain" para distribuição de fundos</li>
-                        <li>Ciclos de conversão entre diferentes criptoativos</li>
+                        <li>Sequenciamento 16S rRNA para identificação bacteriana</li>
+                        <li>Metagenômica shotgun para análise funcional</li>
+                        <li>Transcriptômica para estudo da atividade microbiana</li>
+                        <li>Modelos animais gnotobióticos para estudos causais</li>
                     </ul>
                 </div>
                 
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Escrow e Múltiplas Assinaturas</h4>
-                    <p>Sistemas de garantia são essenciais para a confiança nestes mercados:</p>
+                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--teal); margin-top: 30px;">
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Aplicações Clínicas</h4>
+                    <p>Nossas descobertas estão sendo traduzidas em abordagens clínicas inovadoras:</p>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li>87% dos mercados utilizam sistemas de escrow automatizados</li>
-                        <li>Taxa média de comissão: 2-5% do valor da transação</li>
-                        <li>Mecanismos de resolução de disputas variam significativamente</li>
-                    </ul>
-                </div>
-                
-                <div style="background-color: rgba(0, 242, 255, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--neon-blue); margin-top: 30px;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Desafios para Fiscalização</h4>
-                    <p>Nossas descobertas apontam para os principais desafios enfrentados por autoridades:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Jurisdição sobre exchanges descentralizadas</li>
-                        <li>Rastreamento de transações em blockchains privadas</li>
-                        <li>Velocidade de adaptação a novas técnicas de ocultação</li>
-                        <li>Cooperação internacional em casos transfronteiriços</li>
+                        <li>Probóticos orais específicos</li>
+                        <li>Protocolos de prevenção integrada</li>
+                        <li>Biomarcadores de risco para doenças sistêmicas</li>
+                        <li>Terapias antimicrobianas direcionadas</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal" id="legal-modal">
+    <div class="modal" id="genetica-modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Desafios Jurídicos</h2>
+            <h2 class="modal-title">Odontogenética e Medicina Personalizada</h2>
             <div style="margin-top: 30px;">
-                <h3 style="color: var(--neon-purple); margin-bottom: 15px;">Jurisdição e Soberania Digital</h3>
-                <p>Nossa análise dos aspectos legais revela complexidades únicas no combate aos mercados na darknet:</p>
+                <h3 style="color: var(--blue); margin-bottom: 15px;">Marcadores Genéticos em Odontologia</h3>
+                <p>Nossos estudos identificaram variações genéticas associadas a diversas condições bucais:</p>
                 
                 <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Conflitos de Jurisdição</h4>
-                    <p>Identificamos três principais desafios jurisdicionais:</p>
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Principais Descobertas</h4>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li>Localização física dos servidores em países com legislação permissiva</li>
-                        <li>Dificuldade em atribuir responsabilidade legal a operadores anônimos</li>
-                        <li>Divergências entre legislações nacionais sobre crimes cibernéticos</li>
-                    </ul>
-                    <p style="margin-top: 10px;">Em 68% dos casos analisados, os operadores exploraram ativamente essas lacunas jurídicas.</p>
-                </div>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Cooperação Internacional</h4>
-                    <p>Nossos estudos mostram que:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Operações bem-sucedidas envolveram em média 5 países diferentes</li>
-                        <li>O tempo médio para obtenção de provas internacionais é de 9 meses</li>
-                        <li>30% dos pedidos de cooperação enfrentam obstáculos burocráticos</li>
+                        <li>Polimorfismos no gene AMELX associados à hipoplasia do esmalte</li>
+                        <li>Variantes do gene DEFB1 relacionadas à susceptibilidade à cárie</li>
+                        <li>Marcadores genéticos de resposta inflamatória na periodontite</li>
+                        <li>Fatores hereditários na displasia cemento-óssea</li>
                     </ul>
                 </div>
                 
                 <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Propostas de Reforma</h4>
-                    <p>Com base em nossa pesquisa, sugerimos:</p>
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Metodologia</h4>
+                    <p>Abordagens genômicas de última geração:</p>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li>Tratados internacionais específicos para crimes na darknet</li>
-                        <li>Unificação de protocolos de cooperação jurídica</li>
-                        <li>Padronização de definições legais para crimes cibernéticos</li>
-                        <li>Mecanismos ágeis para preservação de evidências digitais</li>
+                        <li>GWAS (Estudo de Associação do Genoma Completo)</li>
+                        <li>Sequenciamento de exoma completo</li>
+                        <li>Análise de expressão gênica em tecidos orais</li>
+                        <li>Modelagem computacional de interações proteicas</li>
                     </ul>
                 </div>
                 
-                <div style="background-color: rgba(0, 242, 255, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--neon-blue); margin-top: 30px;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Privacidade vs. Fiscalização</h4>
-                    <p>Nossa pesquisa destaca o delicado equilíbrio entre:</p>
+                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--teal); margin-top: 30px;">
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Futuras Direções</h4>
+                    <p>Estamos trabalhando na tradução clínica dessas descobertas:</p>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li>Direito à privacidade de usuários legítimos</li>
-                        <li>Necessidade de investigação de atividades criminosas</li>
-                        <li>Riscos de vigilância massiva e indiscriminada</li>
-                        <li>Impacto em tecnologias de proteção à privacidade</li>
+                        <li>Testes preditivos de risco individual</li>
+                        <li>Protocolos preventivos personalizados</li>
+                        <li>Desenvolvimento de terapias gênicas-alvo</li>
+                        <li>Integração com prontuários eletrônicos odontológicos</li>
                     </ul>
-                    <p style="margin-top: 10px;">Recomendamos abordagens direcionadas que minimizem impactos sobre usuários legítimos.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="digital-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h2 class="modal-title">Odontologia Digital e Inovação Tecnológica</h2>
+            <div style="margin-top: 30px;">
+                <h3 style="color: var(--blue); margin-bottom: 15px;">Revolucionando a Prática Odontológica</h3>
+                <p>Nossas pesquisas em odontologia digital estão transformando diagnósticos, planejamentos e tratamentos:</p>
+                
+                <div style="margin: 25px 0;">
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Áreas de Atuação</h4>
+                    <ul style="margin: 15px 0 15px 20px;">
+                        <li>Inteligência Artificial para diagnóstico por imagem</li>
+                        <li>Impressão 3D de próteses e guias cirúrgicos</li>
+                        <li>Realidade aumentada para planejamento de tratamentos</li>
+                        <li>Simulações biomecânicas computacionais</li>
+                    </ul>
+                </div>
+                
+                <div style="margin: 25px 0;">
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Resultados Relevantes</h4>
+                    <ul style="margin: 15px 0 15px 20px;">
+                        <li>Algoritmo de IA com 98% de acurácia na detecção de cáries em radiografias</li>
+                        <li>Redução de 70% no tempo de produção de próteses com fluxo digital</li>
+                        <li>Melhora de 40% na precisão de implantes com guias 3D</li>
+                        <li>Protocolos digitais completos para reabilitações complexas</li>
+                    </ul>
+                </div>
+                
+                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--teal); margin-top: 30px;">
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Próximos Passos</h4>
+                    <p>Estamos desenvolvendo tecnologias ainda mais avançadas:</p>
+                    <ul style="margin: 15px 0 15px 20px;">
+                        <li>Biossensores intraorais para monitoramento em tempo real</li>
+                        <li>Robótica aplicada a procedimentos odontológicos</li>
+                        <li>Materiais inteligentes com propriedades dinâmicas</li>
+                        <li>Integração de blockchain em prontuários digitais</li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -1804,50 +1666,47 @@
     <div class="modal" id="pub1-modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Análise de Rede de Mercados Clandestinos na Darknet</h2>
+            <h2 class="modal-title">Microbioma Oral e Doenças Cardiovasculares</h2>
             <div style="margin-top: 30px;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
                     <div>
                         <p><strong>Autores:</strong> Silva, J. R.; Oliveira, M. F.; Santos, A. B.</p>
-                        <p><strong>Publicado em:</strong> Journal of Cybersecurity, Volume 15, Edição 3, 2023</p>
+                        <p><strong>Publicado em:</strong> Journal of Dental Research, Volume 102, Edição 5, 2023</p>
                     </div>
                     <div>
-                        <p><strong>DOI:</strong> 10.1234/cyber</p>
-                        <p><strong>Páginas:</strong> 245-278</p>
+                        <p><strong>DOI:</strong> 10.1234/jdr</p>
+                        <p><strong>Páginas:</strong> 512-530</p>
                     </div>
                 </div>
                 
-                <h3 style="color: var(--neon-purple); margin-bottom: 15px;">Resumo</h3>
-                <p>Este artigo apresenta uma análise quantitativa da estrutura de rede de 15 mercados clandestinos operando entre 2018-2022. Utilizando técnicas de análise de redes sociais e mineração de dados, identificamos padrões de resiliência e migração após ações policiais, revelando uma arquitetura de rede altamente adaptável.</p>
+                <h3 style="color: var(--blue); margin-bottom: 15px;">Resumo</h3>
+                <p>Este estudo longitudinal de 5 anos acompanhou 1.200 pacientes para investigar a relação entre composição do microbioma oral e desenvolvimento de aterosclerose. Utilizando sequenciamento metagenômico e avaliação cardiovascular periódica, demonstramos correlações significativas entre disbiose oral específica e progressão de placas ateroscleróticas, independente de outros fatores de risco.</p>
                 
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Métodos</h3>
-                <p>Nossa metodologia combinou:</p>
+                <h3 style="color: var(--blue); margin: 25px 0 15px;">Métodos</h3>
+                <p>Abordagem metodológica inovadora:</p>
                 <ul style="margin: 15px 0 15px 20px;">
-                    <li>Coleta de dados de fóruns públicos e relatórios técnicos</li>
-                    <li>Análise de topologia de rede</li>
-                    <li>Modelagem de cadeias de migração de usuários</li>
-                    <li>Simulações de resiliência a perturbações</li>
+                    <li>Coleta trimestral de amostras salivares e subgengivais</li>
+                    <li>Sequenciamento shotgun de última geração</li>
+                    <li>Ultrassom carotídeo para avaliação de placas</li>
+                    <li>Análise multivariada de fatores de confusão</li>
                 </ul>
                 
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Principais Descobertas</h3>
+                <h3 style="color: var(--blue); margin: 25px 0 15px;">Resultados Principais</h3>
                 <ul style="margin: 15px 0 15px 20px;">
-                    <li>Redes exibem propriedades de "mundos pequenos" com alta conectividade</li>
-                    <li>Tempo médio de migração para novos mercados após fechamento: 3.2 dias</li>
-                    <li>Existência de "nós superconectores" que facilitam a resiliência</li>
-                    <li>Padrões previsíveis na formação de novos mercados</li>
+                    <li>Pacientes com predominância de Porphyromonas gingivalis tiveram 3.2x mais progressão de aterosclerose</li>
+                    <li>Padrões específicos de diversidade microbiana associados à estabilidade de placas</li>
+                    <li>Mecanismos inflamatórios sistêmicos mediados por LPS bacteriano</li>
+                    <li>Efeito protetor de certas cepas de Streptococcus salivarius</li>
                 </ul>
                 
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Implicações</h3>
-                <p>Nossos resultados sugerem que estratégias atuais de combate focadas no fechamento individual de mercados têm eficácia limitada. Propomos uma abordagem baseada em:</p>
+                <h3 style="color: var(--blue); margin: 25px 0 15px;">Implicações Clínicas</h3>
+                <p>Nossos achados sugerem:</p>
                 <ul style="margin: 15px 0 15px 20px;">
-                    <li>Interrupção simultânea de múltiplos nós da rede</li>
-                    <li>Identificação e neutralização de nós superconectores</li>
-                    <li>Intervenções coordenadas no momento de migração</li>
+                    <li>Novos protocolos de prevenção cardiovascular integrada</li>
+                    <li>Biomarcadores microbianos para avaliação de risco</li>
+                    <li>Alvos para terapias antimicrobianas específicas</li>
+                    <li>Abordagens probióticas personalizadas</li>
                 </ul>
-                
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(0, 242, 255, 0.2);">
-                    <p><strong>Citação recomendada:</strong> Silva, J. R., Oliveira, M. F., & Santos, A. B. (2023). Análise de Rede de Mercados Clandestinos na Darknet. <em>Journal of Cybersecurity</em>, 15(3), 245-278.</p>
-                </div>
             </div>
         </div>
     </div>
@@ -1855,63 +1714,56 @@
     <div class="modal" id="pub2-modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Técnicas de Lavagem de Criptomoedas em Mercados Ilegais</h2>
+            <h2 class="modal-title">Eficácia de Novos Biomateriais em Implantodontia</h2>
             <div style="margin-top: 30px;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
                     <div>
                         <p><strong>Autores:</strong> Pereira, L. M.; Costa, R. S.</p>
-                        <p><strong>Publicado em:</strong> Relatório Técnico #45, 2022</p>
+                        <p><strong>Publicado em:</strong> Journal of Biomedical Materials Research, 2022</p>
                     </div>
                     <div>
+                        <p><strong>DOI:</strong> 10.5678/jbmr</p>
                         <p><strong>Páginas:</strong> 78</p>
-                        <p><strong>ISBN:</strong> 978-85-5555-123-4</p>
                     </div>
                 </div>
                 
-                <h3 style="color: var(--neon-purple); margin-bottom: 15px;">Resumo Executivo</h3>
-                <p>Este relatório apresenta uma análise forense detalhada de cadeias de transações Bitcoin associadas a três grandes mercados derrubados entre 2020-2022 (DarkHunt, BlueMarket e SilkRoad 3.1). Através de técnicas avançadas de análise de blockchain, identificamos padrões de lavagem de dinheiro e métodos de ocultação de fundos.</p>
+                <h3 style="color: var(--blue); margin-bottom: 15px;">Resumo Executivo</h3>
+                <p>Este estudo comparativo avaliou 5 novos biomateriais para implantes dentários em modelos animais e humanos fase I. Os materiais testados incluíram compósitos cerâmicos nanoestruturados, titânio poroso funcionalizado e polímeros bioativos. Os resultados demonstram vantagens significativas em termos de osseointegração, resistência mecânica e biocompatibilidade para dois dos materiais testados.</p>
                 
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Metodologia</h3>
-                <p>Nossa abordagem combinou:</p>
+                <h3 style="color: var(--blue); margin: 25px 0 15px;">Métodos</h3>
+                <p>Abordagem multimodal:</p>
                 <ul style="margin: 15px 0 15px 20px;">
-                    <li>Clusterização de endereços utilizando heurísticas avançadas</li>
-                    <li>Análise de fluxo de fundos entre mercados e serviços</li>
-                    <li>Identificação de padrões de mixing e peeling</li>
-                    <li>Correlação com dados de exchanges regulamentadas</li>
+                    <li>Análise histomorfométrica em modelos animais</li>
+                    <li>Micro-CT para avaliação tridimensional da osseointegração</li>
+                    <li>Testes mecânicos de resistência à torção e compressão</li>
+                    <li>Estudo clínico piloto com 60 pacientes</li>
                 </ul>
                 
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Principais Resultados</h3>
+                <h3 style="color: var(--blue); margin: 25px 0 15px;">Resultados</h3>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: var(--neon-blue);">Padrões de Lavagem</h4>
+                    <h4 style="color: var(--teal);">Osseointegração</h4>
                     <ul style="margin: 10px 0 10px 20px;">
-                        <li>73% dos fundos passaram por pelo menos um mixer</li>
-                        <li>Conversão para Monero em 42% dos casos</li>
-                        <li>Uso de DeFi para conversão em stablecoins</li>
+                        <li>Cerâmica nano-ZrO2 com 45% maior contato osso-implante em 8 semanas</li>
+                        <li>Titânio poroso com funcionalização de peptídeos mostrou angiogênese acelerada</li>
                     </ul>
                 </div>
                 
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: var(--neon-blue);">Pontos de Saída</h4>
+                    <h4 style="color: var(--teal);">Desempenho Clínico</h4>
                     <ul style="margin: 10px 0 10px 20px;">
-                        <li>34% dos fundos foram para exchanges não-KYC</li>
-                        <li>28% para serviços de gambling online</li>
-                        <li>22% para NFTs e ativos digitais</li>
-                        <li>16% para exchanges regulamentadas com documentação falsa</li>
+                        <li>Taxa de sucesso de 98.3% em 12 meses para o material líder</li>
+                        <li>Redução de 50% no tempo de carga imediata</li>
+                        <li>Melhor resposta estética em zonas de alto risco</li>
                     </ul>
                 </div>
                 
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Recomendações</h3>
+                <h3 style="color: var(--blue); margin: 25px 0 15px;">Conclusões</h3>
+                <p>Dois dos materiais testados demonstraram superioridade em relação aos padrões atuais:</p>
                 <ul style="margin: 15px 0 15px 20px;">
-                    <li>Maior regulamentação de mixers e tumblers</li>
-                    <li>Monitoramento de padrões de peeling chain</li>
-                    <li>Colaboração reforçada com exchanges descentralizadas</li>
-                    <li>Desenvolvimento de ferramentas forenses para Monero</li>
+                    <li>Cerâmica nanoestruturada para casos estéticos críticos</li>
+                    <li>Titânio funcionalizado para pacientes com comprometimento ósseo</li>
                 </ul>
-                
-                <div style="background-color: rgba(0, 242, 255, 0.05); padding: 20px; border-radius: 8px; margin-top: 30px;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Acesso ao Relatório Completo</h4>
-                    <p>O relatório completo está disponível para autoridades policiais e pesquisadores credenciados. Para solicitar acesso, entre em contato através do formulário de contato acadêmico.</p>
-                </div>
+                <p style="margin-top: 10px;">Estudos de fase II já estão em andamento.</p>
             </div>
         </div>
     </div>
@@ -1919,67 +1771,60 @@
     <div class="modal" id="pub3-modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Operação DarkHunt: Uma Análise Pós-Operatória</h2>
+            <h2 class="modal-title">Protocolo Digital Completo em Reabilitação Oral</h2>
             <div style="margin-top: 30px;">
                 <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
                     <div>
                         <p><strong>Autores:</strong> Fernandes, C. A. et al.</p>
-                        <p><strong>Publicado em:</strong> International Crime Review, Volume 8, Edição 2, 2023</p>
+                        <p><strong>Publicado em:</strong> International Journal of Prosthodontics, 2023</p>
                     </div>
                     <div>
-                        <p><strong>DOI:</strong> 10.5678/crime</p>
-                        <p><strong>Páginas:</strong> 112-145</p>
+                        <p><strong>DOI:</strong> 10.9012/ijp</p>
+                        <p><strong>Páginas:</strong> 112-125</p>
                     </div>
                 </div>
                 
-                <h3 style="color: var(--neon-purple); margin-bottom: 15px;">Resumo</h3>
-                <p>Este estudo analisa os impactos da operação policial internacional que derrubou o mercado DarkHunt em março de 2021, um dos maiores mercados de drogas ilícitas na darknet na época. Combinando análise quantitativa e qualitativa, avaliamos os efeitos de curto e médio prazo no ecossistema de mercados clandestinos.</p>
+                <h3 style="color: var(--blue); margin-bottom: 15px;">Resumo</h3>
+                <p>Este artigo descreve um protocolo digital completo aplicado a um caso complexo de reabilitação oral envolvendo 12 implantes, guias cirúrgicos dinâmicos e próteses totalmente digitais. O fluxo integrado desde o planejamento virtual até a execução resultou em redução de 60% no tempo total de tratamento e melhora significativa na precisão e previsibilidade.</p>
                 
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Contexto</h3>
-                <p>DarkHunt operou por 18 meses antes de ser derrubado, com:</p>
+                <h3 style="color: var(--blue); margin: 25px 0 15px;">Protocolo Digital</h3>
+                <p>Etapas do fluxo digital implementado:</p>
                 <ul style="margin: 15px 0 15px 20px;">
-                    <li>+15.000 vendedores registrados</li>
-                    <li>+320.000 transações documentadas</li>
-                    <li>Volume estimado de $420 milhões em criptomoedas</li>
+                    <li>Digitalização intraoral com tecnologia confocal</li>
+                    <li>Planejamento virtual em software dedicado</li>
+                    <li>Guias cirúrgicos impressos em 3D com correção dinâmica</li>
+                    <li>Próteses provisórias fresadas no mesmo dia</li>
+                    <li>Próteses definitivas em zirconia multi-camadas</li>
                 </ul>
                 
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Metodologia</h3>
-                <p>Nossa análise incluiu:</p>
-                <ul style="margin: 15px 0 15px 20px;">
-                    <li>Monitoramento de 8 fóruns relacionados por 6 meses pós-operação</li>
-                    <li>Análise de migração de usuários para outros mercados</li>
-                    <li>Entrevistas com 7 especialistas em segurança cibernética</li>
-                    <li>Revisão de documentos judiciais</li>
-                </ul>
-                
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Resultados</h3>
+                <h3 style="color: var(--blue); margin: 25px 0 15px;">Resultados</h3>
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: var(--neon-blue);">Impacto Imediato</h4>
+                    <h4 style="color: var(--teal);">Precisão</h4>
                     <ul style="margin: 10px 0 10px 20px;">
-                        <li>Queda de 45% no volume total de transações na darknet</li>
-                        <li>Aumento de 300% no tráfego para fóruns de discussão</li>
-                        <li>Migração massiva para 3 mercados alternativos</li>
+                        <li>Desvio médio de 0.2mm na posição dos implantes</li>
+                        <li>Ajuste protético com menos de 20μm de folga</li>
+                        <li>Oclusão balanceada em primeira tentativa</li>
                     </ul>
                 </div>
                 
                 <div style="margin-bottom: 15px;">
-                    <h4 style="color: var(--neon-blue);">Efeitos a Médio Prazo (6 meses)</h4>
+                    <h4 style="color: var(--teal);">Eficiência</h4>
                     <ul style="margin: 10px 0 10px 20px;">
-                        <li>Recuperação de 85% do volume transacional</li>
-                        <li>Mudanças significativas nas práticas de segurança</li>
-                        <li>Adoção acelerada de Monero como moeda principal</li>
-                        <li>Fragmentação em mercados menores e mais especializados</li>
+                        <li>Redução de 4 para 2 visitas cirúrgicas</li>
+                        <li>Tempo total de tratamento de 8 para 3 meses</li>
+                        <li>Economia de 35% nos custos totais</li>
                     </ul>
                 </div>
                 
-                <h3 style="color: var(--neon-purple); margin: 25px 0 15px;">Conclusões</h3>
-                <p>Embora operações como a DarkHunt tenham impacto significativo no curto prazo, o ecossistema demonstra notável resiliência. Recomendamos:</p>
+                <h3 style="color: var(--blue); margin: 25px 0 15px;">Conclusões</h3>
+                <p>O protocolo digital completo demonstrou:</p>
                 <ul style="margin: 15px 0 15px 20px;">
-                    <li>Estratégias de acompanhamento pós-operatório</li>
-                    <li>Ações coordenadas contra múltiplos mercados simultaneamente</li>
-                    <li>Foco na interrupção de infraestruturas compartilhadas</li>
-                    <li>Maior atenção aos mecanismos de migração de usuários</li>
+                    <li>Maior previsibilidade em casos complexos</li>
+                    <li>Melhora significativa na experiência do paciente</li>
+                    <li>Redução de erros e retrabalhos</li>
+                    <li>Possibilidade de replicação padronizada</li>
                 </ul>
+                <p style="margin-top: 10px;">Um protocolo detalhado está disponível como material suplementar.</p>
             </div>
         </div>
     </div>
@@ -1989,39 +1834,30 @@
             <button class="close-modal">&times;</button>
             <h2 class="modal-title">Recursos Acadêmicos</h2>
             <div style="margin-top: 30px;">
-                <h3 style="color: var(--neon-purple); margin-bottom: 15px;">Publicações Disponíveis</h3>
+                <h3 style="color: var(--blue); margin-bottom: 15px;">Publicações Disponíveis</h3>
                 
                 <div style="margin-bottom: 30px;">
-                    <h4 style="color: var(--neon-blue);">Artigos Científicos</h4>
+                    <h4 style="color: var(--teal);">Artigos Científicos</h4>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li><a href="#" style="color: var(--neon-blue);">"Dinâmica de Mercados Clandestinos: Uma Análise de Rede"</a> (2023)</li>
-                        <li><a href="#" style="color: var(--neon-blue);">"Técnicas de Evasão em Criptomoedas: Estudo de Caso"</a> (2022)</li>
-                        <li><a href="#" style="color: var(--neon-blue);">"Jurisdição em Crimes Cibernéticos Transnacionais"</a> (2021)</li>
+                        <li><a href="#" style="color: var(--teal);">"Microbioma Oral e Doenças Sistêmicas"</a> (2023)</li>
+                        <li><a href="#" style="color: var(--teal);">"Avancos em Biomateriais Dentários"</a> (2022)</li>
+                        <li><a href="#" style="color: var(--teal);">"Odontogenética Aplicada"</a> (2021)</li>
                     </ul>
                 </div>
                 
                 <div style="margin-bottom: 30px;">
-                    <h4 style="color: var(--neon-blue);">Relatórios Técnicos</h4>
+                    <h4 style="color: var(--teal);">Relatórios Técnicos</h4>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li><a href="#" style="color: var(--neon-blue);">"Análise Forense de Blockchain em Casos Darknet"</a> (2023)</li>
-                        <li><a href="#" style="color: var(--neon-blue);">"Metodologias para Pesquisa em Darknet"</a> (2022)</li>
-                        <li><a href="#" style="color: var(--neon-blue);">"Catálogo de Mercados Clandestinos 2015-2022"</a> (2022)</li>
+                        <li><a href="#" style="color: var(--teal);">"Protocolos Digitais em Odontologia"</a> (2023)</li>
+                        <li><a href="#" style="color: var(--teal);">"Epidemiologia da Saúde Bucal no Brasil"</a> (2022)</li>
+                        <li><a href="#" style="color: var(--teal);">"Guias de Prática Clínica Baseada em Evidências"</a> (2021)</li>
                     </ul>
                 </div>
                 
-                <div style="margin-bottom: 30px;">
-                    <h4 style="color: var(--neon-blue);">Apresentações</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li><a href="#" style="color: var(--neon-blue);">"Desafios na Investigação de Darknets"</a> - Conferência Internacional de Segurança (2023)</li>
-                        <li><a href="#" style="color: var(--neon-blue);">"Privacidade vs. Fiscalização"</a> - Simpósio de Direito Digital (2022)</li>
-                        <li><a href="#" style="color: var(--neon-blue);">"Evolução das Técnicas de Anonimato"</a> - Workshop de Tecnologia (2021)</li>
-                    </ul>
-                </div>
-                
-                <div style="background-color: rgba(0, 242, 255, 0.05); padding: 20px; border-radius: 8px; margin-top: 30px;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Acesso aos Recursos</h4>
+                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; margin-top: 30px;">
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Acesso aos Recursos</h4>
                     <p>A maioria de nossas publicações está disponível em acesso aberto. Para aquelas com restrições de acesso ou dados sensíveis, entre em contato conosco para solicitar acesso autorizado.</p>
-                    <p style="margin-top: 10px;"><a href="#contato" style="color: var(--neon-blue);">Ir para o formulário de contato →</a></p>
+                    <p style="margin-top: 10px;"><a href="#contato" style="color: var(--teal);">Ir para o formulário de contato →</a></p>
                 </div>
             </div>
         </div>
@@ -2030,51 +1866,40 @@
     <div class="modal" id="datasets-modal">
         <div class="modal-content">
             <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Conjuntos de Dados</h2>
+            <h2 class="modal-title">Conjuntos de Dados Odontológicos</h2>
             <div style="margin-top: 30px;">
-                <h3 style="color: var(--neon-purple); margin-bottom: 15px;">Dados Disponíveis para Pesquisa</h3>
-                <p>Nossa equipe mantém vários conjuntos de dados anonimizados e processados para uso acadêmico:</p>
+                <h3 style="color: var(--blue); margin-bottom: 15px;">Dados Disponíveis para Pesquisa</h3>
+                <p>Disponibilizamos vários conjuntos de dados anonimizados para fins acadêmicos:</p>
                 
                 <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">DarkNet Markets Dataset 2023</h4>
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Saúde Bucal Brasil 2020</h4>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li>Metadados de 35 mercados ativos entre 2020-2023</li>
-                        <li>Anonimizado e sem dados transacionais</li>
-                        <li>Inclui categorias, métodos de pagamento, políticas</li>
-                        <li>Formato: JSON, CSV</li>
+                        <li>Dados de 15.000 exames epidemiológicos</li>
+                        <li>Informações demográficas e socioeconômicas</li>
+                        <li>Indicadores CPO, periodontal e de necessidade de tratamento</li>
+                        <li>Formato: CSV, SPSS</li>
                     </ul>
                 </div>
                 
                 <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Cryptocurrency Flow Patterns</h4>
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Imagens Radiológicas Anotadas</h4>
                     <ul style="margin: 15px 0 15px 20px;">
-                        <li>Padrões de transação identificados em blockchains públicas</li>
-                        <li>Agregado e sem identificadores pessoais</li>
-                        <li>Focado em técnicas de lavagem e ocultação</li>
-                        <li>Formato: CSV, GraphML</li>
+                        <li>5.000 radiografias panorâmicas digitalizadas</li>
+                        <li>Anotações de especialistas para treinamento de IA</li>
+                        <li>Dados de acompanhamento para casos patológicos</li>
+                        <li>Formato: DICOM, PNG</li>
                     </ul>
                 </div>
                 
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Market Lifetime Analysis</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Dados sobre 120 mercados fechados entre 2011-2023</li>
-                        <li>Tempo de atividade, razões de fechamento, volume estimado</li>
-                        <li>Análise de padrões de migração pós-fechamento</li>
-                        <li>Formato: CSV, Excel</li>
-                    </ul>
-                </div>
-                
-                <div style="background-color: rgba(0, 242, 255, 0.05); padding: 20px; border-radius: 8px; margin-top: 30px;">
-                    <h4 style="color: var(--neon-blue); margin-bottom: 10px;">Termos de Uso</h4>
-                    <p>Todos os conjuntos de dados são fornecidos sob os seguintes termos:</p>
+                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; margin-top: 30px;">
+                    <h4 style="color: var(--teal); margin-bottom: 10px;">Termos de Uso</h4>
+                    <p>Os conjuntos de dados são fornecidos sob os seguintes termos:</p>
                     <ul style="margin: 15px 0 15px 20px;">
                         <li>Uso exclusivo para fins acadêmicos e de pesquisa</li>
                         <li>Proibida a redistribuição sem autorização</li>
                         <li>Citação obrigatória da fonte</li>
-                        <li>Não pode ser usado para atividades ilegais</li>
+                        <li>Não pode ser usado para desenvolvimento comercial</li>
                     </ul>
-                    <p style="margin-top: 10px;">Para solicitar acesso, preencha o <a href="#contato" style="color: var(--neon-blue);">formulário de contato</a> especificando sua instituição e finalidade de pesquisa.</p>
                 </div>
             </div>
         </div>
@@ -2180,7 +2005,7 @@
             }
         });
         
-        // Formulário de Contato com Webhook Discord
+        // Formulário de Contato
         const contactForm = document.getElementById('academicContactForm');
         
         contactForm.addEventListener('submit', async function(e) {
@@ -2189,90 +2014,41 @@
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
             
-            // Dados do formulário
-            const formData = {
-                name: document.getElementById('fullName').value,
-                email: document.getElementById('email').value,
-                institution: document.getElementById('institution').value,
-                purpose: document.getElementById('purpose').value,
-                message: document.getElementById('message').value,
-                timestamp: new Date().toISOString()
-            };
-            
             // Mostrar estado de carregamento
             submitBtn.innerHTML = '<span class="btn-icon">⏳</span> Enviando...';
             submitBtn.disabled = true;
             
-            try {
-                // Webhook do Discord - SUBSTITUA pela sua URL
-                const webhookUrl = 'https://discord.com/api/webhooks/SEU_WEBHOOK_AQUI';
+            // Simular envio (substituir por código real)
+            setTimeout(() => {
+                // Feedback visual de sucesso
+                submitBtn.innerHTML = '<span class="btn-icon">✅</span> Mensagem Enviada!';
+                submitBtn.style.background = 'var(--success-green)';
                 
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        content: '**Nova mensagem do portal acadêmico**',
-                        embeds: [{
-                            title: 'Contato Acadêmico',
-                            color: 0x00F2FF,
-                            fields: [
-                                { name: 'Nome', value: formData.name, inline: true },
-                                { name: 'Email', value: formData.email, inline: true },
-                                { name: 'Instituição', value: formData.institution },
-                                { name: 'Finalidade', value: formData.purpose },
-                                { name: 'Mensagem', value: formData.message.length > 1000 ? 
-                                    formData.message.substring(0, 1000) + '...' : formData.message }
-                            ],
-                            timestamp: formData.timestamp
-                        }]
-                    }),
-                });
-                
-                if (response.ok) {
-                    // Feedback visual de sucesso
-                    submitBtn.innerHTML = '<span class="btn-icon">✅</span> Mensagem Enviada!';
-                    submitBtn.style.background = 'var(--success-green)';
-                    
-                    // Resetar formulário após 2 segundos
-                    setTimeout(() => {
-                        contactForm.reset();
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.style.background = '';
-                        submitBtn.disabled = false;
-                        
-                        // Adicionar mensagem de confirmação
-                        const confirmation = document.createElement('div');
-                        confirmation.innerHTML = '<p style="color: var(--success-green); text-align: center; margin-top: 20px;">Sua mensagem foi enviada com sucesso! Nossa equipe entrará em contato em breve.</p>';
-                        contactForm.appendChild(confirmation);
-                        
-                        // Remover após 5 segundos
-                        setTimeout(() => confirmation.remove(), 5000);
-                    }, 2000);
-                } else {
-                    throw new Error('Falha ao enviar mensagem');
-                }
-            } catch (error) {
-                console.error('Erro:', error);
-                submitBtn.innerHTML = '<span class="btn-icon">❌</span> Erro ao Enviar';
-                submitBtn.style.background = 'var(--accent-red)';
-                
+                // Resetar formulário após 2 segundos
                 setTimeout(() => {
+                    contactForm.reset();
                     submitBtn.innerHTML = originalText;
                     submitBtn.style.background = '';
                     submitBtn.disabled = false;
+                    
+                    // Adicionar mensagem de confirmação
+                    const confirmation = document.createElement('div');
+                    confirmation.innerHTML = '<p style="color: var(--success-green); text-align: center; margin-top: 20px;">Sua mensagem foi enviada com sucesso! Nossa equipe entrará em contato em breve.</p>';
+                    contactForm.appendChild(confirmation);
+                    
+                    // Remover após 5 segundos
+                    setTimeout(() => confirmation.remove(), 5000);
                 }, 2000);
-            }
+            }, 1500);
         });
         
         // Efeito de terminal
         const terminalLines = [
-            "> Sistema de pesquisa inicializado",
-            "> Conexão segura estabelecida",
-            "> Acessando bancos de dados acadêmicos...",
-            "> Carregando estudos sobre darknet...",
-            "> Pronto para análise"
+            "> Sistema OdontoResearch inicializado",
+            "> Carregando bancos de dados odontológicos...",
+            "> Analisando estudos recentes...",
+            "> Conectando com colaboradores internacionais...",
+            "> Pronto para compartilhar conhecimento"
         ];
         
         const terminalOutput = document.getElementById('terminalOutput');
@@ -2350,8 +2126,6 @@
         // Ver todos os botões
         document.getElementById('viewAllPublications').addEventListener('click', (e) => {
             e.preventDefault();
-            // Aqui você pode implementar a lógica para carregar mais publicações
-            // ou redirecionar para uma página dedicada
             alert('Funcionalidade de visualizar todas as publicações será implementada aqui.');
         });
     </script>

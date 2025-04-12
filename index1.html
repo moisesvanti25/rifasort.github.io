@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OdontoResearch - Portal Acadêmico</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Oxanium:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Validador Profissional de Cartões | Tutoriais Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --teal: #00c2cb;
-            --blue: #0077b6;
-            --accent-red: #ff2d75;
-            --light-bg: #f8f9fa;
-            --darker-bg: #e9ecef;
-            --card-bg: #ffffff;
-            --text-color: #343a40;
-            --success-green: #00cc88;
-            --warning-orange: #ff9f1c;
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #7209b7;
+            --error: #ef233c;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --info: #4895ef;
+            --dark: #14213d;
+            --darker: #0c1426;
+            --light: #f8f9fa;
+            --lighter: #ffffff;
+            --gray: #adb5bd;
+            --gray-light: #e9ecef;
+            --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            --gradient-secondary: linear-gradient(135deg, #7209b7 0%, #560bad 100%);
+            --gradient-danger: linear-gradient(135deg, #ef233c 0%, #d90429 100%);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.05);
+            --shadow-xl: 0 20px 40px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.05);
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
         }
 
         * {
@@ -26,2108 +39,1373 @@
         }
 
         body {
-            background-color: var(--light-bg);
-            color: var(--text-color);
-            font-family: 'Oxanium', sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.7;
-            overflow-x: hidden;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.05) 0%, rgba(67, 97, 238, 0.05) 90%);
         }
 
-        /* Animações */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 194, 203, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(0, 194, 203, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 194, 203, 0); }
-        }
-
-        @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 5px var(--teal), 0 0 10px var(--teal); }
-            50% { text-shadow: 0 0 10px var(--teal), 0 0 20px var(--teal); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .float {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .pulse {
-            animation: pulse 3s infinite;
-        }
-
-        .text-glow {
-            animation: textGlow 3s ease-in-out infinite alternate;
-        }
-
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
-
-        /* Layout Base */
-        .hidden { display: none; }
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 30px;
-        }
-
-        .section { 
-            padding: 100px 0;
-            position: relative;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        /* Header */
         header {
-            background-color: rgba(255, 255, 255, 0.98);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid var(--teal);
-            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        header.scrolled {
-            padding: 15px 0;
-            box-shadow: 0 5px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--teal);
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            margin-right: 12px;
-            font-size: 1.5rem;
-            animation: float 4s ease-in-out infinite;
-        }
-
-        /* Navegação */
-        .nav-menu {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-item {
-            margin-left: 30px;
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
             position: relative;
         }
 
-        .nav-link {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            padding: 5px 0;
-            position: relative;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-link:hover {
-            color: var(--teal);
-        }
-
-        .nav-link::after {
+        header::after {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 2px;
             bottom: 0;
-            left: 0;
-            background: linear-gradient(90deg, var(--teal), var(--blue));
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
         }
 
-        .nav-link:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--teal);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(0, 194, 203, 0.1) 0%, rgba(0, 119, 182, 0.1) 100%);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 25px;
-            color: var(--teal);
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-            max-width: 700px;
-        }
-
-        .terminal-output {
-            margin-top: 30px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(0, 194, 203, 0.3);
-            border-radius: 8px;
-            padding: 20px;
-            font-family: 'Space Mono', monospace;
-            max-width: 700px;
-        }
-
-        .terminal-line {
-            color: var(--teal);
-            margin-bottom: 8px;
-            opacity: 0;
-            transform: translateY(10px);
-        }
-
-        /* Botões */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 15px 35px;
-            background: linear-gradient(135deg, var(--teal), var(--blue));
-            color: #fff;
-            border: none;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-            box-shadow: 0 5px 15px rgba(0, 194, 203, 0.3);
-            font-size: 1.1rem;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--blue), var(--teal));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 194, 203, 0.4);
-        }
-
-        .btn:hover::before {
-            opacity: 1;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--teal);
-            color: var(--teal);
-            margin-left: 20px;
-            box-shadow: none;
-        }
-
-        .btn-outline:hover {
-            background: var(--teal);
-            color: #fff;
-        }
-
-        .btn-icon {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* Cards de Conteúdo */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            padding: 40px 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 194, 203, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 194, 203, 0.1);
-            border-color: rgba(0, 194, 203, 0.4);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            color: var(--teal);
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            color: var(--teal);
-            position: relative;
-        }
-
-        .card p {
-            margin-bottom: 25px;
-            position: relative;
-            opacity: 0.9;
-        }
-
-        .card-link {
-            color: var(--teal);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .card-link:hover {
-            color: var(--blue);
-        }
-
-        .card-link::after {
-            content: '→';
-            margin-left: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .card-link:hover::after {
-            transform: translateX(5px);
-        }
-
-        /* Seção de Dados */
-        .data-section {
-            background-color: var(--darker-bg);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .data-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .data-item {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 10px;
-            border-bottom: 3px solid var(--teal);
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .data-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 194, 203, 0.1);
-        }
-
-        .data-value {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--teal);
-            margin-bottom: 10px;
-            font-family: 'Space Mono', monospace;
-            background: linear-gradient(135deg, var(--teal), var(--blue));
+        h1 {
+            font-size: 2.8rem;
+            background: var(--gradient-primary);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
 
-        .data-label {
-            font-size: 1.1rem;
+        h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin: 2rem 0 1.5rem;
             font-weight: 600;
-            margin-bottom: 5px;
+            position: relative;
+            display: inline-block;
         }
 
-        .data-description {
-            opacity: 0.8;
-            font-size: 0.95rem;
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
         }
 
-        /* Gráficos */
-        .chart-container {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            padding: 40px;
-            margin-top: 50px;
+        h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+            opacity: 0.9;
+        }
+
+        .card {
+            background: var(--lighter);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-highlight {
+            border-top: 4px solid var(--primary);
+        }
+
+        .card-danger {
+            border-top: 4px solid var(--error);
+        }
+
+        .card-info {
+            border-top: 4px solid var(--info);
+        }
+
+        .demo-box {
+            background: var(--light);
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(0, 194, 203, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
-        .chart-placeholder {
+        .demo-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        input, select {
             width: 100%;
-            height: 400px;
-            background-color: rgba(0, 194, 203, 0.05);
-            border: 2px dashed var(--teal);
-            border-radius: 8px;
-            display: flex;
+            padding: 0.8rem 1rem;
+            border: 1px solid var(--gray);
+            border-radius: var(--border-radius-sm);
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Fira Code', monospace;
+            background: var(--lighter);
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 1.2rem;
+        }
+
+        button {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            color: var(--teal);
-            font-size: 1.2rem;
-            position: relative;
-            z-index: 1;
+            gap: 0.5rem;
         }
 
-        /* Sistema de Abas */
-        .tab-system {
-            margin-top: 60px;
+        button:hover {
+            background: var(--gradient-secondary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
-        .tab-header {
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            background: var(--gray);
+        }
+
+        .btn-danger {
+            background: var(--gradient-danger);
+        }
+
+        .btn-danger:hover {
+            background: var(--gradient-danger);
+            filter: brightness(1.1);
+        }
+
+        #result, #apiResult {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 500;
             display: flex;
-            border-bottom: 1px solid rgba(0, 194, 203, 0.2);
-            margin-bottom: 30px;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s;
         }
 
-        .tab-btn {
-            padding: 15px 30px;
+        .valid {
+            background: rgba(76, 201, 240, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+
+        .invalid {
+            background: rgba(239, 35, 60, 0.15);
+            color: var(--error);
+            border: 1px solid rgba(239, 35, 60, 0.3);
+        }
+
+        .processing {
+            background: rgba(248, 150, 30, 0.15);
+            color: var(--warning);
+            border: 1px solid rgba(248, 150, 30, 0.3);
+        }
+
+        .info {
+            background: rgba(72, 149, 239, 0.15);
+            color: var(--info);
+            border: 1px solid rgba(72, 149, 239, 0.3);
+        }
+
+        .code-block {
+            background: var(--darker);
+            color: #f5f6fa;
+            padding: 1.5rem;
+            border-radius: var(--border-radius-sm);
+            font-family: 'Fira Code', monospace;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: rgba(0,0,0,0.2);
+            border-top-left-radius: var(--border-radius-sm);
+            border-top-right-radius: var(--border-radius-sm);
+        }
+
+        .code-block::after {
+            content: '•••';
+            position: absolute;
+            top: 12px;
+            left: 15px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+
+        .tab {
+            display: inline-block;
+            margin-left: 1.5rem;
+        }
+
+        .card-preview {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius-sm);
+            color: white;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s;
+        }
+
+        .card-preview i {
+            font-size: 2.5rem;
+            opacity: 0.9;
+        }
+
+        .card-details {
+            flex: 1;
+        }
+
+        .card-number {
+            font-family: 'Fira Code', monospace;
+            letter-spacing: 1px;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            word-spacing: 0.5rem;
+        }
+
+        .card-type {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .card-expiry {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 0.3rem;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            color: var(--dark);
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            background: var(--lighter);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-sm);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .feature h3 {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .feature p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--gray-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-button {
+            padding: 0.8rem 1.5rem;
             background: none;
             border: none;
-            color: var(--text-color);
-            font-weight: 600;
             cursor: pointer;
+            font-weight: 500;
+            color: var(--gray);
             position: relative;
-            opacity: 0.7;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
+            box-shadow: none;
+            border-radius: 0;
         }
 
-        .tab-btn.active {
-            opacity: 1;
-            color: var(--teal);
+        .tab-button.active {
+            color: var(--primary);
         }
 
-        .tab-btn::after {
+        .tab-button.active::after {
             content: '';
             position: absolute;
             bottom: -1px;
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, var(--teal), var(--blue));
-            transform: scaleX(0);
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .tab-btn.active::after {
-            transform: scaleX(1);
+            background: var(--primary);
         }
 
         .tab-content {
-            padding: 20px 0;
             display: none;
         }
 
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.5s ease-out;
         }
 
-        /* Seção de Publicações */
-        .publications-section {
-            background-color: var(--darker-bg);
-            position: relative;
+        .accordion {
+            margin-bottom: 1rem;
         }
 
-        .publication-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .publication-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            border-left: 4px solid var(--teal);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .publication-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 194, 203, 0.1);
-        }
-
-        .publication-type {
-            display: inline-block;
-            padding: 4px 12px;
-            background-color: rgba(0, 194, 203, 0.1);
-            color: var(--teal);
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            align-self: flex-start;
-        }
-
-        .publication-title {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--teal);
-        }
-
-        .publication-authors {
-            font-size: 0.95rem;
-            opacity: 0.8;
-            margin-bottom: 15px;
-            font-style: italic;
-        }
-
-        .publication-abstract {
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .publication-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: auto;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        .publication-doi {
-            color: var(--teal);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .publication-doi:hover {
-            opacity: 1;
-        }
-
-        /* Seção de Equipe */
-        .team-section {
-            position: relative;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .team-member {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid var(--teal);
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-        }
-
-        .team-member:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 194, 203, 0.1);
-        }
-
-        .member-photo {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--teal);
-            margin: 0 auto 20px;
-            display: block;
-        }
-
-        .member-name {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-            color: var(--teal);
-        }
-
-        .member-title {
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-bottom: 15px;
-        }
-
-        .member-bio {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .member-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .member-link {
-            color: var(--text-color);
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .member-link:hover {
-            color: var(--teal);
-            transform: translateY(-3px);
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            background-color: var(--darker-bg);
-            position: relative;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-item {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            border-left: 3px solid var(--teal);
-        }
-
-        .faq-question {
-            padding: 20px;
-            background-color: rgba(0, 194, 203, 0.05);
-            color: var(--teal);
-            font-weight: 600;
+        .accordion-header {
+            padding: 1rem;
+            background: var(--lighter);
+            border: 1px solid var(--gray-light);
+            border-radius: var(--border-radius-sm);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
-        .faq-question:hover {
-            background-color: rgba(0, 194, 203, 0.1);
+        .accordion-header:hover {
+            background: var(--light);
         }
 
-        .faq-question::after {
-            content: '+';
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question.active::after {
-            content: '-';
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-answer-content {
-            padding: 20px 0;
-        }
-
-        /* Seção de Contato */
-        .contact-section {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-form {
-            max-width: 700px;
-            margin: 0 auto;
-            background-color: var(--card-bg);
-            padding: 50px;
-            border-radius: 15px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(0, 194, 203, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-        }
-
-        .form-group {
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 12px;
-            color: var(--teal);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 15px 20px;
-            background-color: rgba(0, 194, 203, 0.05);
-            border: 1px solid rgba(0, 194, 203, 0.2);
-            border-radius: 8px;
-            color: var(--text-color);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: 'Oxanium', sans-serif;
-        }
-
-        .form-control:focus {
-            border-color: var(--teal);
-            box-shadow: 0 0 0 3px rgba(0, 194, 203, 0.1);
-            outline: none;
-            background-color: rgba(0, 194, 203, 0.1);
-        }
-
-        textarea.form-control {
-            min-height: 180px;
-            resize: vertical;
-        }
-
-        .form-submit {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #fff;
-            padding: 80px 0 40px;
-            border-top: 1px solid var(--teal);
-            position: relative;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 50px;
-            margin-bottom: 60px;
-        }
-
-        .footer-col h4 {
-            color: var(--teal);
-            margin-bottom: 25px;
-            font-size: 1.3rem;
-            font-family: 'Space Mono', monospace;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            opacity: 0.8;
-            transition: all 0.3s ease;
-            display: inline-block;
-            position: relative;
-        }
-
-        .footer-links a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(90deg, var(--teal), var(--blue));
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-            color: var(--teal);
-        }
-
-        .footer-links a:hover::after {
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-link {
-            color: var(--text-color);
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            color: var(--teal);
-            transform: translateY(-3px);
-        }
-
-        .disclaimer {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding-top: 40px;
-            border-top: 1px solid rgba(0, 194, 203, 0.2);
-            font-size: 0.9rem;
-            opacity: 0.7;
-            line-height: 1.6;
-        }
-
-        /* Modal */
-        .modal {
+        .accordion-content {
+            padding: 1rem;
+            border: 1px solid var(--gray-light);
+            border-top: none;
+            border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+            background: var(--lighter);
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
         }
 
-        .modal-content {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 40px;
-            position: relative;
-            border: 1px solid var(--teal);
-            box-shadow: 0 0 30px rgba(0, 194, 203, 0.2);
+        .accordion.active .accordion-content {
+            display: block;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5rem;
-            color: var(--text-color);
+        .accordion.active .accordion-header {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .badge-primary {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+        }
+
+        .badge-success {
+            background: rgba(76, 201, 240, 0.1);
+            color: var(--success);
+        }
+
+        .badge-danger {
+            background: rgba(239, 35, 60, 0.1);
+            color: var(--error);
+        }
+
+        .example-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .example-card {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border-radius: var(--border-radius-sm);
+            font-family: 'Fira Code', monospace;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: none;
-            border: none;
+            transition: all 0.2s;
+            border: 1px solid var(--gray-light);
+            font-size: 0.9rem;
         }
 
-        .close-modal:hover {
-            color: var(--teal);
-            transform: rotate(90deg);
+        .example-card:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
         }
 
-        .modal-title {
-            color: var(--teal);
-            margin-bottom: 20px;
-            font-size: 2rem;
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
-        /* Responsividade */
-        @media (max-width: 1024px) {
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .btn-outline {
-                margin-left: 15px;
-                margin-top: 0;
-            }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
 
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: row;
+            .container {
+                padding: 1rem;
             }
             
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: 0;
-                width: 100%;
-                background-color: var(--card-bg);
-                flex-direction: column;
-                align-items: center;
-                padding: 20px 0;
-                transform: translateY(-150%);
-                transition: transform 0.4s ease;
-                z-index: 999;
-                border-bottom: 1px solid var(--teal);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            h1 {
+                font-size: 2rem;
             }
             
-            .nav-menu.active {
-                transform: translateY(0);
+            h2 {
+                font-size: 1.6rem;
             }
             
-            .nav-item {
-                margin: 15px 0;
+            .card {
+                padding: 1.5rem;
             }
             
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .btn-container {
-                display: flex;
-                flex-direction: column;
-            }
-            
-            .btn-outline {
-                margin-left: 0;
-                margin-top: 15px;
-            }
-            
-            .contact-form {
-                padding: 40px 30px;
-            }
-            
-            .section {
-                padding: 80px 0;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .section {
-                padding: 60px 0;
-            }
-            
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .tab-header {
-                flex-wrap: wrap;
-            }
-            
-            .tab-btn {
-                flex: 1 0 auto;
-                padding: 12px 15px;
-                font-size: 1rem;
-            }
-            
-            .chart-container {
-                padding: 30px 20px;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .publication-grid {
+            .features-grid {
                 grid-template-columns: 1fr;
             }
             
-            .modal-content {
-                padding: 30px 20px;
+            .tabs {
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+            
+            .tab-button {
+                white-space: nowrap;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header id="header">
-        <div class="container header-container">
-            <a href="#" class="logo">
-                <span class="logo-icon">🦷</span>
-                <span>Odonto<span style="color: var(--blue);">Research</span></span>
-            </a>
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item"><a href="#inicio" class="nav-link">Início</a></li>
-                <li class="nav-item"><a href="#pesquisa" class="nav-link">Pesquisa</a></li>
-                <li class="nav-item"><a href="#dados" class="nav-link">Dados</a></li>
-                <li class="nav-item"><a href="#publicacoes" class="nav-link">Publicações</a></li>
-                <li class="nav-item"><a href="#equipe" class="nav-link">Equipe</a></li>
-                <li class="nav-item"><a href="#faq" class="nav-link">FAQ</a></li>
-                <li class="nav-item"><a href="#contato" class="nav-link">Contato</a></li>
+    <div class="container">
+        <header class="animate-fadeIn">
+            <h1><i class="fas fa-shield-alt"></i> Validador Profissional de Cartões</h1>
+            <p>Verifique a validade de cartões de crédito/débito com tutoriais completos</p>
+        </header>
+
+        <div class="card card-highlight animate-fadeIn delay-1">
+            <h2><i class="fas fa-id-card"></i> Visualização do Cartão</h2>
+            <div class="card-preview" id="cardPreview">
+                <i class="fab fa-cc-visa" id="cardIcon"></i>
+                <div class="card-details">
+                    <div class="card-number" id="previewCardNumber">•••• •••• •••• ••••</div>
+                    <div class="card-type" id="previewCardType">Insira um número de cartão</div>
+                    <div class="card-expiry" id="previewCardExpiry">MM/AA •••</div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab(event, 'validatorTab')">Validador</button>
+                <button class="tab-button" onclick="openTab(event, 'tutorialTab')">Tutorial</button>
+                <button class="tab-button" onclick="openTab(event, 'examplesTab')">Exemplos</button>
+            </div>
+
+            <div id="validatorTab" class="tab-content active">
+                <h2><i class="fas fa-search"></i> Validador em Tempo Real</h2>
+                <p>Digite um número de cartão para verificação instantânea (não use dados reais):</p>
+                
+                <div class="demo-box">
+                    <div class="input-group input-icon">
+                        <label for="cardNumber">Número do Cartão:</label>
+                        <input type="text" id="cardNumber" placeholder="Ex: 4111 1111 1111 1111" maxlength="19">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="cardExpiry">Validade (MM/AA):</label>
+                        <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="cardCvv">CVV:</label>
+                        <input type="text" id="cardCvv" placeholder="•••" maxlength="4">
+                    </div>
+                    
+                    <button onclick="validateCard()">
+                        <i class="fas fa-check-circle"></i> Validar Cartão
+                    </button>
+                    <div id="result"></div>
+                </div>
+            </div>
+
+            <div id="tutorialTab" class="tab-content">
+                <h2><i class="fas fa-graduation-cap"></i> Como Validar Cartões</h2>
+                <p>O algoritmo <strong>Luhn</strong> (ou "módulo 10") é o padrão da indústria para verificação de números de cartão:</p>
+                
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Passo 1: Entenda a estrutura do número do cartão</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Um número de cartão de crédito consiste em:</p>
+                        <ul>
+                            <li><strong>BIN (6 primeiros dígitos):</strong> Identifica o emissor do cartão</li>
+                            <li><strong>Número da conta (dígitos 7-15):</strong> Identifica a conta individual</li>
+                            <li><strong>Dígito verificador (último dígito):</strong> Valida o número usando o algoritmo Luhn</li>
+                        </ul>
+                        <p>Os cartões têm normalmente 16 dígitos, mas podem variar de 13 a 19 dígitos.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Passo 2: Aplique o Algoritmo de Luhn</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>O algoritmo Luhn funciona da seguinte forma:</p>
+                        <ol>
+                            <li>Comece pelo penúltimo dígito e mova para a esquerda, dobrando cada segundo dígito</li>
+                            <li>Se a multiplicação resultar em um número com dois dígitos, some os dígitos (ou subtraia 9)</li>
+                            <li>Some todos os dígitos</li>
+                            <li>Se o total for um múltiplo de 10, o número é válido</li>
+                        </ol>
+                        <div class="code-block">
+                            <code>
+                                function isValidCard(cardNumber) {<br>
+                                <span class="tab"></span>cardNumber = cardNumber.replace(/\D/g, '');<br>
+                                <span class="tab"></span>if (cardNumber.length < 13 || cardNumber.length > 19) return false;<br>
+                                <br>
+                                <span class="tab"></span>let sum = 0;<br>
+                                <span class="tab"></span>let shouldDouble = false;<br>
+                                <br>
+                                <span class="tab"></span>for (let i = cardNumber.length - 1; i >= 0; i--) {<br>
+                                <span class="tab"></span><span class="tab"></span>let digit = parseInt(cardNumber.charAt(i));<br>
+                                <span class="tab"></span><span class="tab"></span>if (shouldDouble) {<br>
+                                <span class="tab"></span><span class="tab"></span><span class="tab"></span>digit *= 2;<br>
+                                <span class="tab"></span><span class="tab"></span><span class="tab"></span>if (digit > 9) digit -= 9;<br>
+                                <span class="tab"></span><span class="tab"></span>}<br>
+                                <span class="tab"></span><span class="tab"></span>sum += digit;<br>
+                                <span class="tab"></span><span class="tab"></span>shouldDouble = !shouldDouble;<br>
+                                <span class="tab"></span>}<br>
+                                <br>
+                                <span class="tab"></span>return sum % 10 === 0;<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>Passo 3: Identifique a Bandeira do Cartão</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Você pode identificar a bandeira pelos primeiros dígitos (BIN):</p>
+                        <div class="code-block">
+                            <code>
+                                function detectCardType(cardNumber) {<br>
+                                <span class="tab"></span>const firstDigit = cardNumber.charAt(0);<br>
+                                <span class="tab"></span>const firstTwoDigits = cardNumber.substring(0, 2);<br>
+                                <span class="tab"></span>const firstFourDigits = cardNumber.substring(0, 4);<br>
+                                <br>
+                                <span class="tab"></span>if (firstDigit === '4') return 'Visa';<br>
+                                <span class="tab"></span>if (/^5[1-5]/.test(firstTwoDigits)) return 'Mastercard';<br>
+                                <span class="tab"></span>if (/^3[47]/.test(firstTwoDigits)) return 'American Express';<br>
+                                <span class="tab"></span>if (/^6011|^64[4-9]|^65/.test(cardNumber)) return 'Discover';<br>
+                                <span class="tab"></span>if (/^35(2[8-9]|[3-8][0-9])/.test(firstFourDigits)) return 'JCB';<br>
+                                <span class="tab"></span>if (/^3(0[0-5]|[68][0-9])/.test(firstTwoDigits)) return 'Diners Club';<br>
+                                <span class="tab"></span>if (/^(4011|4312|4389|4514|4573|4576|5041|5067|5068|5090|5099|6277|6363|650[0-9])/.test(firstFourDigits)) return 'Elo';<br>
+                                <span class="tab"></span>return 'Desconhecido';<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="examplesTab" class="tab-content">
+                <h2><i class="fas fa-list-ol"></i> Números de Teste</h2>
+                <p>Use estes números de teste para validar seu sistema (nunca use cartões reais em ambientes de teste):</p>
+                
+                <h3>Cartões Válidos</h3>
+                <div class="example-cards">
+                    <div class="example-card" onclick="fillExample('4111111111111111', '12/25', '123')">Visa: 4111 1111 1111 1111</div>
+                    <div class="example-card" onclick="fillExample('5555555555554444', '06/24', '456')">Mastercard: 5555 5555 5555 4444</div>
+                    <div class="example-card" onclick="fillExample('378282246310005', '09/23', '789')">Amex: 3782 822463 10005</div>
+                    <div class="example-card" onclick="fillExample('6011111111111117', '03/26', '321')">Discover: 6011 1111 1111 1117</div>
+                    <div class="example-card" onclick="fillExample('3530111333300000', '11/25', '654')">JCB: 3530 1113 3330 0000</div>
+                </div>
+                
+                <h3>Cartões Inválidos</h3>
+                <div class="example-cards">
+                    <div class="example-card" onclick="fillExample('4111111111111112', '12/25', '123')">Visa Inválido: 4111 1111 1111 1112</div>
+                    <div class="example-card" onclick="fillExample('5555555555554445', '06/24', '456')">Mastercard Inválido: 5555 5555 5555 4445</div>
+                    <div class="example-card" onclick="fillExample('378282246310006', '09/23', '789')">Amex Inválido: 3782 822463 10006</div>
+                </div>
+                
+                <div class="info">
+                    <i class="fas fa-info-circle"></i> Estes são números de teste padrão da indústria que passam na validação Luhn mas não são cartões reais.
+                </div>
+            </div>
+        </div>
+
+        <div class="card animate-fadeIn delay-2">
+            <h2><i class="fas fa-microchip"></i> Tecnologia por Trás da Validação</h2>
+            <p>O sistema de validação de cartões envolve várias camadas de segurança e tecnologia:</p>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Algoritmo Luhn</h3>
+                    <p>Desenvolvido por Hans Peter Luhn da IBM em 1954, é um simples checksum para verificar erros de digitação.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-fingerprint"></i>
+                    <h3>BIN/IIN</h3>
+                    <p>Os primeiros 6 dígitos identificam a instituição emissora (Bank Identification Number/Issuer Identification Number).</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-virus"></i>
+                    <h3>PCI DSS</h3>
+                    <p>Padrão de segurança que todos os sistemas que processam cartões devem seguir para proteção de dados.</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Gateways de Pagamento</h3>
+                    <p>Sistemas como Stripe, Pagar.me e PayPal que processam transações de forma segura.</p>
+                </div>
+            </div>
+            
+            <h3><i class="fas fa-code"></i> Implementação Completa em JavaScript</h3>
+            <div class="code-block">
+                <code>
+                    // Valida número do cartão com Luhn e verifica a bandeira<br>
+                    function validateCreditCard(cardNumber, expiry, cvv) {<br>
+                    <span class="tab"></span>// Validação básica<br>
+                    <span class="tab"></span>if (!cardNumber || !expiry || !cvv) {<br>
+                    <span class="tab"></span><span class="tab"></span>return { valid: false, message: "Todos os campos são obrigatórios" };<br>
+                    <span class="tab"></span>}<br>
+                    <br>
+                    <span class="tab"></span>// Limpa os dados<br>
+                    <span class="tab"></span>const cleanCard = cardNumber.replace(/\D/g, '');<br>
+                    <span class="tab"></span>const cleanExpiry = expiry.replace(/\D/g, '');<br>
+                    <span class="tab"></span>const cleanCvv = cvv.replace(/\D/g, '');<br>
+                    <br>
+                    <span class="tab"></span>// Verifica comprimento do cartão<br>
+                    <span class="tab"></span>if (cleanCard.length < 13 || cleanCard.length > 19) {<br>
+                    <span class="tab"></span><span class="tab"></span>return { valid: false, message: "Número de cartão inválido" };<br>
+                    <span class="tab"></span>}<br>
+                    <br>
+                    <span class="tab"></span>// Verifica validade (MMAA)<br>
+                    <span class="tab"></span>if (cleanExpiry.length !== 4) {<br>
+                    <span class="tab"></span><span class="tab"></span>return { valid: false, message: "Data de validade inválida" };<br>
+                    <span class="tab"></span>}<br>
+                    <br>
+                    <span class="tab"></span>// Verifica CVV (3-4 dígitos)<br>
+                    <span class="tab"></span>if (cleanCvv.length < 3 || cleanCvv.length > 4) {<br>
+                    <span class="tab"></span><span class="tab"></span>return { valid: false, message: "CVV inválido" };<br>
+                    <span class="tab"></span>}<br>
+                    <br>
+                    <span class="tab"></span>// Aplica algoritmo Luhn<br>
+                    <span class="tab"></span>let sum = 0;<br>
+                    <span class="tab"></span>let shouldDouble = false;<br>
+                    <br>
+                    <span class="tab"></span>for (let i = cleanCard.length - 1; i >= 0; i--) {<br>
+                    <span class="tab"></span><span class="tab"></span>let digit = parseInt(cleanCard.charAt(i));<br>
+                    <span class="tab"></span><span class="tab"></span>if (shouldDouble) {<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>digit *= 2;<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>if (digit > 9) digit -= 9;<br>
+                    <span class="tab"></span><span class="tab"></span>}<br>
+                    <span class="tab"></span><span class="tab"></span>sum += digit;<br>
+                    <span class="tab"></span><span class="tab"></span>shouldDouble = !shouldDouble;<br>
+                    <span class="tab"></span>}<br>
+                    <br>
+                    <span class="tab"></span>const isValid = sum % 10 === 0;<br>
+                    <span class="tab"></span>const cardType = detectCardType(cleanCard);<br>
+                    <br>
+                    <span class="tab"></span>return {<br>
+                    <span class="tab"></span><span class="tab"></span>valid: isValid,<br>
+                    <span class="tab"></span><span class="tab"></span>type: cardType,<br>
+                    <span class="tab"></span><span class="tab"></span>message: isValid ? "Cartão válido" : "Número de cartão inválido"<br>
+                    <span class="tab"></span>};<br>
+                    }
+                </code>
+            </div>
+        </div>
+
+        <div class="card card-info animate-fadeIn delay-3">
+            <h2><i class="fas fa-plug"></i> Integração com APIs de Pagamento</h2>
+            <p>Em sistemas reais, você deve usar APIs profissionais para processar pagamentos:</p>
+            
+            <div class="demo-box">
+                <div class="input-group input-icon">
+                    <label for="apiCardNumber">Número do Cartão:</label>
+                    <input type="text" id="apiCardNumber" placeholder="Ex: 5555 5555 5555 4444" maxlength="19">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                
+                <div class="input-group">
+                    <label for="apiCardExpiry">Validade (MM/AA):</label>
+                    <input type="text" id="apiCardExpiry" placeholder="MM/AA" maxlength="5">
+                </div>
+                
+                <div class="input-group">
+                    <label for="apiCardCvv">CVV:</label>
+                    <input type="text" id="apiCardCvv" placeholder="•••" maxlength="4">
+                </div>
+                
+                <div class="input-group">
+                    <label for="apiAmount">Valor (R$):</label>
+                    <input type="number" id="apiAmount" placeholder="100.00" step="0.01">
+                </div>
+                
+                <button onclick="simulatePayment()" id="paymentButton">
+                    <i class="fas fa-paper-plane"></i> Processar Pagamento
+                </button>
+                <div id="apiResult"></div>
+            </div>
+            
+            <h3><i class="fas fa-code-branch"></i> Opções de APIs Reais</h3>
+            <div class="features-grid">
+                <div class="feature">
+                    <i class="fab fa-stripe"></i>
+                    <h3>Stripe</h3>
+                    <p>Solução global com suporte a múltiplas bandeiras e moedas. Ideal para negócios internacionais.</p>
+                    <a href="https://stripe.com" target="_blank" class="badge badge-primary">Documentação</a>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Pagar.me</h3>
+                    <p>Solução brasileira com ótima documentação em português e suporte a boletos.</p>
+                    <a href="https://pagar.me" target="_blank" class="badge badge-primary">Documentação</a>
+                </div>
+                <div class="feature">
+                    <i class="fab fa-paypal"></i>
+                    <h3>PayPal</h3>
+                    <p>Ótimo para pagamentos internacionais e integração com contas PayPal.</p>
+                    <a href="https://developer.paypal.com" target="_blank" class="badge badge-primary">Documentação</a>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-barcode"></i>
+                    <h3>Mercado Pago</h3>
+                    <p>Popular no Brasil com suporte a Pix e boleto. Boa alternativa para e-commerces.</p>
+                    <a href="https://www.mercadopago.com.br" target="_blank" class="badge badge-primary">Documentação</a>
+                </div>
+            </div>
+            
+            <div class="code-block">
+                <code>
+                    // Exemplo de integração com Stripe.js<br>
+                    &lt;script src="https://js.stripe.com/v3/"&gt;&lt;/script&gt;<br>
+                    <br>
+                    const stripe = Stripe('sua_chave_publica');<br>
+                    const elements = stripe.elements();<br>
+                    <br>
+                    // Cria elementos de cartão<br>
+                    const card = elements.create('card', {<br>
+                    <span class="tab"></span>style: {<br>
+                    <span class="tab"></span><span class="tab"></span>base: {<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>fontSize: '16px',<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>color: '#32325d'<br>
+                    <span class="tab"></span><span class="tab"></span>}<br>
+                    <span class="tab"></span>}<br>
+                    });<br>
+                    <br>
+                    // Monta o formulário<br>
+                    card.mount('#card-element');<br>
+                    <br>
+                    // Processa o pagamento<br>
+                    document.getElementById('payment-form').addEventListener('submit', async (e) => {<br>
+                    <span class="tab"></span>e.preventDefault();<br>
+                    <span class="tab"></span>const { error, paymentMethod } = await stripe.createPaymentMethod({<br>
+                    <span class="tab"></span><span class="tab"></span>type: 'card',<br>
+                    <span class="tab"></span><span class="tab"></span>card: card<br>
+                    <span class="tab"></span>});<br>
+                    <br>
+                    <span class="tab"></span>if (error) {<br>
+                    <span class="tab"></span><span class="tab"></span>showError(error.message);<br>
+                    <span class="tab"></span>} else {<br>
+                    <span class="tab"></span><span class="tab"></span>// Envia paymentMethod.id para seu servidor<br>
+                    <span class="tab"></span><span class="tab"></span>processPayment(paymentMethod.id);<br>
+                    <span class="tab"></span>}<br>
+                    });
+                </code>
+            </div>
+        </div>
+
+        <div class="card card-danger">
+            <h2><i class="fas fa-exclamation-triangle"></i> Segurança e PCI Compliance</h2>
+            <p>Ao trabalhar com cartões de crédito, é essencial seguir as normas de segurança:</p>
+            
+            <ul>
+                <li><strong>Nunca armazene dados sensíveis</strong> como números completos de cartão ou CVV</li>
+                <li>Use sempre <strong>tokens</strong> ou serviços de terceiros para processamento</li>
+                <li>Certifique-se que seu site usa <strong>HTTPS</strong></li>
+                <li>Implemente <strong>CSP (Content Security Policy)</strong> para prevenir ataques XSS</li>
+                <li>Siga as diretrizes do <strong>PCI DSS</strong> (Payment Card Industry Data Security Standard)</li>
             </ul>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero section" id="inicio">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Pesquisa Avançada em <span class="text-glow">Odontologia</span></h1>
-                <p>Um centro de excelência acadêmica dedicado ao estudo inovador da saúde bucal e suas interconexões com a saúde sistêmica.</p>
-                
-                <div class="terminal-output" id="terminalOutput">
-                    <!-- Terminal lines will be added by JavaScript -->
-                </div>
-                
-                <div style="margin-top: 50px;">
-                    <a href="#pesquisa" class="btn pulse">
-                        <span class="btn-icon">🔍</span>
-                        Conheça Nossas Pesquisas
-                    </a>
-                    <a href="#publicacoes" class="btn btn-outline">
-                        <span class="btn-icon">📚</span>
-                        Ver Publicações
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção Pesquisa -->
-    <section id="pesquisa" class="section">
-        <div class="container">
-            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Áreas de Pesquisa</h2>
-            <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Nossos estudos abrangem desde a odontologia básica até as mais avançadas técnicas de tratamento e prevenção.
-            </p>
             
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-icon">🦠</div>
-                    <h3>Microbioma Oral</h3>
-                    <p>Estudo da complexa ecologia microbiana da cavidade oral e sua relação com doenças sistêmicas como diabetes e doenças cardiovasculares.</p>
-                    <a href="#" class="card-link" data-modal="microbioma-modal">Saiba mais</a>
-                </div>
-                
-                <div class="card">
-                    <div class="card-icon">🧬</div>
-                    <h3>Odontogenética</h3>
-                    <p>Pesquisa sobre marcadores genéticos associados a doenças periodontais, cárie dentária e anomalias do desenvolvimento dental.</p>
-                    <a href="#" class="card-link" data-modal="genetica-modal">Saiba mais</a>
-                </div>
-                
-                <div class="card">
-                    <div class="card-icon">🤖</div>
-                    <h3>Odontologia Digital</h3>
-                    <p>Desenvolvimento e aplicação de tecnologias como IA, impressão 3D e realidade aumentada em procedimentos odontológicos.</p>
-                    <a href="#" class="card-link" data-modal="digital-modal">Saiba mais</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Dados -->
-    <section id="dados" class="section data-section">
-        <div class="container">
-            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Dados Epidemiológicos</h2>
-            <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Estatísticas e informações coletadas através de nossos estudos populacionais e colaborações internacionais.
-            </p>
-            
-            <div class="data-grid">
-                <div class="data-item">
-                    <div class="data-value">78%</div>
-                    <div class="data-label">Cárie Dentária</div>
-                    <div class="data-description">Prevalência em adultos brasileiros (idade 35-44 anos)</div>
-                </div>
-                
-                <div class="data-item">
-                    <div class="data-value">40%</div>
-                    <div class="data-label">Doença Periodontal</div>
-                    <div class="data-description">Prevalência em idosos (acima de 65 anos)</div>
-                </div>
-                
-                <div class="data-item">
-                    <div class="data-value">3.5x</div>
-                    <div class="data-label">Risco Cardiovascular</div>
-                    <div class="data-description">Aumento em pacientes com periodontite grave</div>
-                </div>
-                
-                <div class="data-item">
-                    <div class="data-value">62%</div>
-                    <div class="data-label">Acesso ao Dentista</div>
-                    <div class="data-description">Percentual da população que visita o dentista anualmente</div>
-                </div>
+            <div class="info">
+                <i class="fas fa-info-circle"></i> Para aplicações reais, considere usar soluções como <strong>Stripe Elements</strong> ou <strong>Braintree Hosted Fields</strong> que cuidam da segurança para você.
             </div>
             
-            <!-- Sistema de Abas para Gráficos -->
-            <div class="tab-system">
-                <div class="tab-header">
-                    <button class="tab-btn active" data-tab="tab1">Saúde Bucal no Brasil</button>
-                    <button class="tab-btn" data-tab="tab2">Distribuição Geográfica</button>
-                    <button class="tab-btn" data-tab="tab3">Fatores de Risco</button>
-                </div>
-                
-                <div class="tab-content active" id="tab1">
-                    <div class="chart-container">
-                        <div class="chart-placeholder">
-                            [Gráfico: Prevalência de doenças bucais por faixa etária no Brasil]
-                        </div>
-                        <div style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                            <p><strong>Análise:</strong> O gráfico mostra a evolução da prevalência de cárie dentária, doença periodontal e edentulismo ao longo das diferentes faixas etárias da população brasileira.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tab-content" id="tab2">
-                    <div class="chart-container">
-                        <div class="chart-placeholder">
-                            [Mapa: Distribuição regional de problemas bucais no Brasil]
-                        </div>
-                        <div style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                            <p><strong>Análise:</strong> Visualização das disparidades regionais no acesso a tratamentos odontológicos e prevalência de doenças bucais, com destaque para as desigualdades Norte-Sul.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="tab-content" id="tab3">
-                    <div class="chart-container">
-                        <div class="chart-placeholder">
-                            [Gráfico: Fatores de risco associados a doenças periodontais]
-                        </div>
-                        <div style="margin-top: 20px; font-size: 0.9rem; opacity: 0.8;">
-                            <p><strong>Análise:</strong> Correlação entre tabagismo, diabetes, má alimentação e outros fatores com o desenvolvimento de periodontite em diferentes grupos populacionais.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <button class="btn-danger" onclick="window.open('https://www.pcisecuritystandards.org', '_blank')">
+                <i class="fas fa-shield-alt"></i> Saiba mais sobre PCI DSS
+            </button>
         </div>
-    </section>
 
-    <!-- Seção de Publicações -->
-    <section id="publicacoes" class="section publications-section">
-        <div class="container">
-            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Publicações Científicas</h2>
-            <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Artigos, estudos de caso e relatórios técnicos produzidos pela nossa equipe de pesquisa.
-            </p>
-            
-            <div class="publication-grid">
-                <div class="publication-card">
-                    <span class="publication-type">Artigo Científico</span>
-                    <h3 class="publication-title">Microbioma Oral e Doenças Cardiovasculares</h3>
-                    <p class="publication-authors">Silva, J. R.; Oliveira, M. F.; Santos, A. B.</p>
-                    <p class="publication-abstract">Este estudo longitudinal demonstra a correlação entre disbiose do microbioma oral e aumento do risco de aterosclerose em pacientes sem outros fatores de risco.</p>
-                    <div class="publication-meta">
-                        <span>Journal of Dental Research, 2023</span>
-                        <a href="#" class="publication-doi" data-modal="pub1-modal">DOI:10.1234/jdr</a>
-                    </div>
-                </div>
-                
-                <div class="publication-card">
-                    <span class="publication-type">Relatório Técnico</span>
-                    <h3 class="publication-title">Eficácia de Novos Biomateriais em Implantodontia</h3>
-                    <p class="publication-authors">Pereira, L. M.; Costa, R. S.</p>
-                    <p class="publication-abstract">Análise comparativa de 5 novos biomateriais para implantes dentários, avaliando taxa de osseointegração, biocompatibilidade e durabilidade.</p>
-                    <div class="publication-meta">
-                        <span>Technical Report #45, 2022</span>
-                        <a href="#" class="publication-doi" data-modal="pub2-modal">Ver Relatório</a>
-                    </div>
-                </div>
-                
-                <div class="publication-card">
-                    <span class="publication-type">Estudo de Caso</span>
-                    <h3 class="publication-title">Protocolo Digital Completo em Reabilitação Oral</h3>
-                    <p class="publication-authors">Fernandes, C. A. et al.</p>
-                    <p class="publication-abstract">Relato detalhado de caso complexo utilizando fluxo digital completo desde o planejamento até a execução com guias cirúrgicos e próteses impressas 3D.</p>
-                    <div class="publication-meta">
-                        <span>International Journal of Prosthodontics, 2023</span>
-                        <a href="#" class="publication-doi" data-modal="pub3-modal">DOI:10.5678/ijp</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 50px;">
-                <a href="#" class="btn" id="viewAllPublications">
-                    <span class="btn-icon">📖</span>
-                    Ver Todas as Publicações
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Metodologia -->
-    <section id="metodologia" class="section">
-        <div class="container">
-            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Metodologia Científica</h2>
-            <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Abordagem rigorosa e ética para coleta e análise de dados em odontologia.
-            </p>
-            
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-icon">🔬</div>
-                    <h3>Estudos Clínicos</h3>
-                    <p>Ensaios clínicos randomizados controlados seguindo protocolos internacionais com comitê de ética em pesquisa.</p>
-                </div>
-                
-                <div class="card">
-                    <div class="card-icon">📊</div>
-                    <h3>Análise Epidemiológica</h3>
-                    <p>Estudos populacionais com amostras representativas e métodos estatísticos avançados para identificação de fatores de risco.</p>
-                </div>
-                
-                <div class="card">
-                    <div class="card-icon">🧪</div>
-                    <h3>Pesquisa Laboratorial</h3>
-                    <p>Análises in vitro e in vivo de novos materiais, técnicas e abordagens terapêuticas em odontologia.</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 60px; background-color: var(--card-bg); padding: 40px; border-radius: 15px; border-left: 4px solid var(--accent-red);">
-                <h3 style="color: var(--accent-red); margin-bottom: 20px;">⚠️ Ética em Pesquisa</h3>
-                <p>Todos os nossos estudos são conduzidos em conformidade com as diretrizes éticas internacionais, incluindo a Declaração de Helsinki. Projetos envolvendo seres humanos são aprovados pelo Comitê de Ética em Pesquisa da Universidade sob o protocolo #2023-0456. Garantimos o sigilo dos dados e o consentimento informado de todos os participantes.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Equipe -->
-    <section id="equipe" class="section team-section">
-        <div class="container">
-            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Nossa Equipe</h2>
-            <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Pesquisadores e clínicos dedicados ao avanço da odontologia através da ciência.
-            </p>
-            
-            <div class="team-grid">
-                <div class="team-member">
-                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Dra. Ana Beatriz" class="member-photo">
-                    <h3 class="member-name">Dra. Ana Beatriz</h3>
-                    <p class="member-title">Coordenadora | Periodontia</p>
-                    <p class="member-bio">Especialista em microbioma oral e sua relação com doenças sistêmicas, com 15 anos de experiência em pesquisa clínica.</p>
-                    <div class="member-links">
-                        <a href="#" class="member-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="member-link"><i class="fas fa-graduation-cap"></i></a>
-                        <a href="#" class="member-link"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. Carlos Silva" class="member-photo">
-                    <h3 class="member-name">Dr. Carlos Silva</h3>
-                    <p class="member-title">Pesquisador Sênior | Implantodontia</p>
-                    <p class="member-bio">Expert em biomateriais e técnicas avançadas de reabilitação oral, autor de 3 patentes internacionais.</p>
-                    <div class="member-links">
-                        <a href="#" class="member-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="member-link"><i class="fas fa-graduation-cap"></i></a>
-                        <a href="#" class="member-link"><i class="fab fa-researchgate"></i></a>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Dra. Fernanda Oliveira" class="member-photo">
-                    <h3 class="member-name">Dra. Fernanda Oliveira</h3>
-                    <p class="member-title">Pesquisadora | Odontopediatria</p>
-                    <p class="member-bio">Especialista em prevenção e tratamento precoce em odontologia infantil, com foco em abordagens minimamente invasivas.</p>
-                    <div class="member-links">
-                        <a href="#" class="member-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="member-link"><i class="fas fa-graduation-cap"></i></a>
-                        <a href="#" class="member-link"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                
-                <div class="team-member">
-                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Dr. Ricardo Santos" class="member-photo">
-                    <h3 class="member-name">Dr. Ricardo Santos</h3>
-                    <p class="member-title">Bioestatístico | Ciência de Dados</p>
-                    <p class="member-bio">Responsável pela análise estatística avançada e modelagem preditiva em nossos estudos epidemiológicos.</p>
-                    <div class="member-links">
-                        <a href="#" class="member-link"><i class="fas fa-envelope"></i></a>
-                        <a href="#" class="member-link"><i class="fas fa-graduation-cap"></i></a>
-                        <a href="#" class="member-link"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção FAQ -->
-    <section id="faq" class="section faq-section">
-        <div class="container">
-            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Perguntas Frequentes</h2>
-            <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Respostas para as dúvidas mais comuns sobre nossa pesquisa e participação.
-            </p>
-            
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Como posso participar dos estudos como voluntário?
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>Temos diferentes estudos em andamento que podem precisar de voluntários. O processo geral inclui:</p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Verificar os critérios de elegibilidade para cada estudo</li>
-                                <li>Preencher um formulário de pré-triagem</li>
-                                <li>Participar de uma entrevista inicial</li>
-                                <li>Assinar o termo de consentimento informado</li>
-                            </ul>
-                            <p style="margin-top: 10px;">Todos os voluntários recebem acompanhamento odontológico gratuito durante o período do estudo.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Vocês oferecem tratamento odontológico para o público?
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>Sim, em alguns casos:</p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Pacientes incluídos em estudos clínicos recebem tratamento completo</li>
-                                <li>Oferecemos alguns serviços comunitários em parceria com a faculdade de odontologia</li>
-                                <li>Casos complexos podem ser aceitos para protocolos experimentais</li>
-                            </ul>
-                            <p style="margin-top: 10px;">Para mais informações, entre em contato através do nosso formulário.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Como acessar os dados de pesquisa para trabalhos acadêmicos?
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>Temos diferentes níveis de acesso aos dados:</p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Dados agregados estão disponíveis em nossas publicações</li>
-                                <li>Conjuntos de dados anonimizados podem ser solicitados para pesquisa</li>
-                                <li>Parcerias com instituições de ensino para acesso a bancos completos</li>
-                            </ul>
-                            <p style="margin-top: 10px;">Todos os pedidos são avaliados pelo comitê de ética em pesquisa.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Vocês oferecem estágios ou oportunidades para estudantes?
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>Sim, temos programas para diferentes níveis:</p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Iniciação científica para graduandos</li>
-                                <li>Estágios de pesquisa para pós-graduandos</li>
-                                <li>Bolsas de doutorado e pós-doutorado</li>
-                                <li>Programa de visitantes para pesquisadores estrangeiros</li>
-                            </ul>
-                            <p style="margin-top: 10px;">Consulte nossa seção de oportunidades ou entre em contato para mais informações.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="faq-item">
-                    <div class="faq-question">
-                        Como são financiadas as pesquisas?
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            <p>Nossas fontes de financiamento incluem:</p>
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Órgãos públicos de fomento à pesquisa (CNPq, CAPES, FAPESP)</li>
-                                <li>Editais internacionais de cooperação científica</li>
-                                <li>Parcerias com a indústria (com supervisão ética rigorosa)</li>
-                                <li>Doações de fundações privadas sem fins lucrativos</li>
-                            </ul>
-                            <p style="margin-top: 10px;">Todos os financiamentos são divulgados transparentemente em nossas publicações.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Seção de Contato -->
-    <section id="contato" class="section contact-section">
-        <div class="container">
-            <h2 style="color: var(--teal); margin-bottom: 15px; text-align: center;">Contato Acadêmico</h2>
-            <p style="max-width: 800px; margin: 0 auto 60px; text-align: center; font-size: 1.2rem; opacity: 0.9;">
-                Entre em contato para colaborações, participação em pesquisas ou solicitação de informações.
-            </p>
-            
-            <div class="contact-form">
-                <form id="academicContactForm">
-                    <div class="form-group">
-                        <label for="fullName" class="form-label">Nome Completo</label>
-                        <input type="text" id="fullName" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="institution" class="form-label">Instituição/Organização</label>
-                        <input type="text" id="institution" class="form-control">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="purpose" class="form-label">Finalidade do Contato</label>
-                        <select id="purpose" class="form-control" required>
-                            <option value="">Selecione uma opção</option>
-                            <option value="collaboration">Colaboração em Pesquisa</option>
-                            <option value="volunteer">Participar como Voluntário</option>
-                            <option value="student">Oportunidades para Estudantes</option>
-                            <option value="data">Solicitação de Dados/Publicações</option>
-                            <option value="other">Outro</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message" class="form-label">Mensagem</label>
-                        <textarea id="message" class="form-control" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div style="display: flex; align-items: center;">
-                            <input type="checkbox" id="consent" required style="margin-right: 10px;">
-                            <label for="consent" style="font-size: 0.9rem;">Concordo com o processamento dos meus dados conforme a <a href="#" style="color: var(--teal);">Política de Privacidade</a></label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-submit">
-                        <button type="submit" class="btn" style="padding: 18px 45px; font-size: 1.1rem;">
-                            <span class="btn-icon">✉️</span>
-                            Enviar Mensagem
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>OdontoResearch</h4>
-                    <p style="opacity: 0.8; margin-top: 15px;">Centro de Pesquisa Avançada em Odontologia dedicado à excelência acadêmica e inovação em saúde bucal.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Navegação</h4>
-                    <ul class="footer-links">
-                        <li><a href="#inicio">Página Inicial</a></li>
-                        <li><a href="#pesquisa">Áreas de Pesquisa</a></li>
-                        <li><a href="#dados">Dados Epidemiológicos</a></li>
-                        <li><a href="#publicacoes">Publicações</a></li>
-                        <li><a href="#equipe">Equipe</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#contato">Contato</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Recursos</h4>
-                    <ul class="footer-links">
-                        <li><a href="#" data-modal="resources-modal">Publicações</a></li>
-                        <li><a href="#" data-modal="datasets-modal">Conjuntos de Dados</a></li>
-                        <li><a href="#" data-modal="protocols-modal">Protocolos de Pesquisa</a></li>
-                        <li><a href="#" data-modal="education-modal">Materiais Educativos</a></li>
-                        <li><a href="#" data-modal="events-modal">Eventos</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-col">
-                    <h4>Institucional</h4>
-                    <ul class="footer-links">
-                        <li><a href="#" data-modal="about-modal">Sobre Nós</a></li>
-                        <li><a href="#" data-modal="partners-modal">Parceiros</a></li>
-                        <li><a href="#" data-modal="ethics-modal">Ética em Pesquisa</a></li>
-                        <li><a href="#" data-modal="jobs-modal">Oportunidades</a></li>
-                        <li><a href="#" data-modal="contact-modal">Contato</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="disclaimer">
-                <p>© 2023 OdontoResearch | Centro de Pesquisa Avançada em Odontologia | Todos os direitos reservados</p>
-                <p style="margin-top: 15px;">As informações deste site são para fins acadêmicos e não substituem a orientação de um profissional de saúde.</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Modais -->
-    <div class="modal" id="microbioma-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Microbioma Oral e Saúde Sistêmica</h2>
-            <div style="margin-top: 30px;">
-                <h3 style="color: var(--blue); margin-bottom: 15px;">A Conexão Bucal-Sistêmica</h3>
-                <p>Nossa pesquisa revela como desequilíbrios no microbioma oral podem impactar diversas condições sistêmicas:</p>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Principais Achados</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Bactérias periodontopatogênicas encontradas em placas ateroscleróticas</li>
-                        <li>Correlação entre disbiose oral e resistência à insulina</li>
-                        <li>Mecanismos inflamatórios compartilhados com artrite reumatoide</li>
-                        <li>Impacto na saúde intestinal através da deglutição</li>
-                    </ul>
-                </div>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Métodos de Análise</h4>
-                    <p>Utilizamos técnicas avançadas de sequenciamento genético para mapear o microbioma:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Sequenciamento 16S rRNA para identificação bacteriana</li>
-                        <li>Metagenômica shotgun para análise funcional</li>
-                        <li>Transcriptômica para estudo da atividade microbiana</li>
-                        <li>Modelos animais gnotobióticos para estudos causais</li>
-                    </ul>
-                </div>
-                
-                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--teal); margin-top: 30px;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Aplicações Clínicas</h4>
-                    <p>Nossas descobertas estão sendo traduzidas em abordagens clínicas inovadoras:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Probóticos orais específicos</li>
-                        <li>Protocolos de prevenção integrada</li>
-                        <li>Biomarcadores de risco para doenças sistêmicas</li>
-                        <li>Terapias antimicrobianas direcionadas</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="genetica-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Odontogenética e Medicina Personalizada</h2>
-            <div style="margin-top: 30px;">
-                <h3 style="color: var(--blue); margin-bottom: 15px;">Marcadores Genéticos em Odontologia</h3>
-                <p>Nossos estudos identificaram variações genéticas associadas a diversas condições bucais:</p>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Principais Descobertas</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Polimorfismos no gene AMELX associados à hipoplasia do esmalte</li>
-                        <li>Variantes do gene DEFB1 relacionadas à susceptibilidade à cárie</li>
-                        <li>Marcadores genéticos de resposta inflamatória na periodontite</li>
-                        <li>Fatores hereditários na displasia cemento-óssea</li>
-                    </ul>
-                </div>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Metodologia</h4>
-                    <p>Abordagens genômicas de última geração:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>GWAS (Estudo de Associação do Genoma Completo)</li>
-                        <li>Sequenciamento de exoma completo</li>
-                        <li>Análise de expressão gênica em tecidos orais</li>
-                        <li>Modelagem computacional de interações proteicas</li>
-                    </ul>
-                </div>
-                
-                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--teal); margin-top: 30px;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Futuras Direções</h4>
-                    <p>Estamos trabalhando na tradução clínica dessas descobertas:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Testes preditivos de risco individual</li>
-                        <li>Protocolos preventivos personalizados</li>
-                        <li>Desenvolvimento de terapias gênicas-alvo</li>
-                        <li>Integração com prontuários eletrônicos odontológicos</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="digital-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Odontologia Digital e Inovação Tecnológica</h2>
-            <div style="margin-top: 30px;">
-                <h3 style="color: var(--blue); margin-bottom: 15px;">Revolucionando a Prática Odontológica</h3>
-                <p>Nossas pesquisas em odontologia digital estão transformando diagnósticos, planejamentos e tratamentos:</p>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Áreas de Atuação</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Inteligência Artificial para diagnóstico por imagem</li>
-                        <li>Impressão 3D de próteses e guias cirúrgicos</li>
-                        <li>Realidade aumentada para planejamento de tratamentos</li>
-                        <li>Simulações biomecânicas computacionais</li>
-                    </ul>
-                </div>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Resultados Relevantes</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Algoritmo de IA com 98% de acurácia na detecção de cáries em radiografias</li>
-                        <li>Redução de 70% no tempo de produção de próteses com fluxo digital</li>
-                        <li>Melhora de 40% na precisão de implantes com guias 3D</li>
-                        <li>Protocolos digitais completos para reabilitações complexas</li>
-                    </ul>
-                </div>
-                
-                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; border-left: 3px solid var(--teal); margin-top: 30px;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Próximos Passos</h4>
-                    <p>Estamos desenvolvendo tecnologias ainda mais avançadas:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Biossensores intraorais para monitoramento em tempo real</li>
-                        <li>Robótica aplicada a procedimentos odontológicos</li>
-                        <li>Materiais inteligentes com propriedades dinâmicas</li>
-                        <li>Integração de blockchain em prontuários digitais</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="pub1-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Microbioma Oral e Doenças Cardiovasculares</h2>
-            <div style="margin-top: 30px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                    <div>
-                        <p><strong>Autores:</strong> Silva, J. R.; Oliveira, M. F.; Santos, A. B.</p>
-                        <p><strong>Publicado em:</strong> Journal of Dental Research, Volume 102, Edição 5, 2023</p>
-                    </div>
-                    <div>
-                        <p><strong>DOI:</strong> 10.1234/jdr</p>
-                        <p><strong>Páginas:</strong> 512-530</p>
-                    </div>
-                </div>
-                
-                <h3 style="color: var(--blue); margin-bottom: 15px;">Resumo</h3>
-                <p>Este estudo longitudinal de 5 anos acompanhou 1.200 pacientes para investigar a relação entre composição do microbioma oral e desenvolvimento de aterosclerose. Utilizando sequenciamento metagenômico e avaliação cardiovascular periódica, demonstramos correlações significativas entre disbiose oral específica e progressão de placas ateroscleróticas, independente de outros fatores de risco.</p>
-                
-                <h3 style="color: var(--blue); margin: 25px 0 15px;">Métodos</h3>
-                <p>Abordagem metodológica inovadora:</p>
-                <ul style="margin: 15px 0 15px 20px;">
-                    <li>Coleta trimestral de amostras salivares e subgengivais</li>
-                    <li>Sequenciamento shotgun de última geração</li>
-                    <li>Ultrassom carotídeo para avaliação de placas</li>
-                    <li>Análise multivariada de fatores de confusão</li>
-                </ul>
-                
-                <h3 style="color: var(--blue); margin: 25px 0 15px;">Resultados Principais</h3>
-                <ul style="margin: 15px 0 15px 20px;">
-                    <li>Pacientes com predominância de Porphyromonas gingivalis tiveram 3.2x mais progressão de aterosclerose</li>
-                    <li>Padrões específicos de diversidade microbiana associados à estabilidade de placas</li>
-                    <li>Mecanismos inflamatórios sistêmicos mediados por LPS bacteriano</li>
-                    <li>Efeito protetor de certas cepas de Streptococcus salivarius</li>
-                </ul>
-                
-                <h3 style="color: var(--blue); margin: 25px 0 15px;">Implicações Clínicas</h3>
-                <p>Nossos achados sugerem:</p>
-                <ul style="margin: 15px 0 15px 20px;">
-                    <li>Novos protocolos de prevenção cardiovascular integrada</li>
-                    <li>Biomarcadores microbianos para avaliação de risco</li>
-                    <li>Alvos para terapias antimicrobianas específicas</li>
-                    <li>Abordagens probióticas personalizadas</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="pub2-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Eficácia de Novos Biomateriais em Implantodontia</h2>
-            <div style="margin-top: 30px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                    <div>
-                        <p><strong>Autores:</strong> Pereira, L. M.; Costa, R. S.</p>
-                        <p><strong>Publicado em:</strong> Journal of Biomedical Materials Research, 2022</p>
-                    </div>
-                    <div>
-                        <p><strong>DOI:</strong> 10.5678/jbmr</p>
-                        <p><strong>Páginas:</strong> 78</p>
-                    </div>
-                </div>
-                
-                <h3 style="color: var(--blue); margin-bottom: 15px;">Resumo Executivo</h3>
-                <p>Este estudo comparativo avaliou 5 novos biomateriais para implantes dentários em modelos animais e humanos fase I. Os materiais testados incluíram compósitos cerâmicos nanoestruturados, titânio poroso funcionalizado e polímeros bioativos. Os resultados demonstram vantagens significativas em termos de osseointegração, resistência mecânica e biocompatibilidade para dois dos materiais testados.</p>
-                
-                <h3 style="color: var(--blue); margin: 25px 0 15px;">Métodos</h3>
-                <p>Abordagem multimodal:</p>
-                <ul style="margin: 15px 0 15px 20px;">
-                    <li>Análise histomorfométrica em modelos animais</li>
-                    <li>Micro-CT para avaliação tridimensional da osseointegração</li>
-                    <li>Testes mecânicos de resistência à torção e compressão</li>
-                    <li>Estudo clínico piloto com 60 pacientes</li>
-                </ul>
-                
-                <h3 style="color: var(--blue); margin: 25px 0 15px;">Resultados</h3>
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: var(--teal);">Osseointegração</h4>
-                    <ul style="margin: 10px 0 10px 20px;">
-                        <li>Cerâmica nano-ZrO2 com 45% maior contato osso-implante em 8 semanas</li>
-                        <li>Titânio poroso com funcionalização de peptídeos mostrou angiogênese acelerada</li>
-                    </ul>
-                </div>
-                
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: var(--teal);">Desempenho Clínico</h4>
-                    <ul style="margin: 10px 0 10px 20px;">
-                        <li>Taxa de sucesso de 98.3% em 12 meses para o material líder</li>
-                        <li>Redução de 50% no tempo de carga imediata</li>
-                        <li>Melhor resposta estética em zonas de alto risco</li>
-                    </ul>
-                </div>
-                
-                <h3 style="color: var(--blue); margin: 25px 0 15px;">Conclusões</h3>
-                <p>Dois dos materiais testados demonstraram superioridade em relação aos padrões atuais:</p>
-                <ul style="margin: 15px 0 15px 20px;">
-                    <li>Cerâmica nanoestruturada para casos estéticos críticos</li>
-                    <li>Titânio funcionalizado para pacientes com comprometimento ósseo</li>
-                </ul>
-                <p style="margin-top: 10px;">Estudos de fase II já estão em andamento.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="pub3-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Protocolo Digital Completo em Reabilitação Oral</h2>
-            <div style="margin-top: 30px;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-                    <div>
-                        <p><strong>Autores:</strong> Fernandes, C. A. et al.</p>
-                        <p><strong>Publicado em:</strong> International Journal of Prosthodontics, 2023</p>
-                    </div>
-                    <div>
-                        <p><strong>DOI:</strong> 10.9012/ijp</p>
-                        <p><strong>Páginas:</strong> 112-125</p>
-                    </div>
-                </div>
-                
-                <h3 style="color: var(--blue); margin-bottom: 15px;">Resumo</h3>
-                <p>Este artigo descreve um protocolo digital completo aplicado a um caso complexo de reabilitação oral envolvendo 12 implantes, guias cirúrgicos dinâmicos e próteses totalmente digitais. O fluxo integrado desde o planejamento virtual até a execução resultou em redução de 60% no tempo total de tratamento e melhora significativa na precisão e previsibilidade.</p>
-                
-                <h3 style="color: var(--blue); margin: 25px 0 15px;">Protocolo Digital</h3>
-                <p>Etapas do fluxo digital implementado:</p>
-                <ul style="margin: 15px 0 15px 20px;">
-                    <li>Digitalização intraoral com tecnologia confocal</li>
-                    <li>Planejamento virtual em software dedicado</li>
-                    <li>Guias cirúrgicos impressos em 3D com correção dinâmica</li>
-                    <li>Próteses provisórias fresadas no mesmo dia</li>
-                    <li>Próteses definitivas em zirconia multi-camadas</li>
-                </ul>
-                
-                <h3 style="color: var(--blue); margin: 25px 0 15px;">Resultados</h3>
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: var(--teal);">Precisão</h4>
-                    <ul style="margin: 10px 0 10px 20px;">
-                        <li>Desvio médio de 0.2mm na posição dos implantes</li>
-                        <li>Ajuste protético com menos de 20μm de folga</li>
-                        <li>Oclusão balanceada em primeira tentativa</li>
-                    </ul>
-                </div>
-                
-                <div style="margin-bottom: 15px;">
-                    <h4 style="color: var(--teal);">Eficiência</h4>
-                    <ul style="margin: 10px 0 10px 20px;">
-                        <li>Redução de 4 para 2 visitas cirúrgicas</li>
-                        <li>Tempo total de tratamento de 8 para 3 meses</li>
-                        <li>Economia de 35% nos custos totais</li>
-                    </ul>
-                </div>
-                
-                <h3 style="color: var(--blue); margin: 25px 0 15px;">Conclusões</h3>
-                <p>O protocolo digital completo demonstrou:</p>
-                <ul style="margin: 15px 0 15px 20px;">
-                    <li>Maior previsibilidade em casos complexos</li>
-                    <li>Melhora significativa na experiência do paciente</li>
-                    <li>Redução de erros e retrabalhos</li>
-                    <li>Possibilidade de replicação padronizada</li>
-                </ul>
-                <p style="margin-top: 10px;">Um protocolo detalhado está disponível como material suplementar.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="resources-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Recursos Acadêmicos</h2>
-            <div style="margin-top: 30px;">
-                <h3 style="color: var(--blue); margin-bottom: 15px;">Publicações Disponíveis</h3>
-                
-                <div style="margin-bottom: 30px;">
-                    <h4 style="color: var(--teal);">Artigos Científicos</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li><a href="#" style="color: var(--teal);">"Microbioma Oral e Doenças Sistêmicas"</a> (2023)</li>
-                        <li><a href="#" style="color: var(--teal);">"Avancos em Biomateriais Dentários"</a> (2022)</li>
-                        <li><a href="#" style="color: var(--teal);">"Odontogenética Aplicada"</a> (2021)</li>
-                    </ul>
-                </div>
-                
-                <div style="margin-bottom: 30px;">
-                    <h4 style="color: var(--teal);">Relatórios Técnicos</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li><a href="#" style="color: var(--teal);">"Protocolos Digitais em Odontologia"</a> (2023)</li>
-                        <li><a href="#" style="color: var(--teal);">"Epidemiologia da Saúde Bucal no Brasil"</a> (2022)</li>
-                        <li><a href="#" style="color: var(--teal);">"Guias de Prática Clínica Baseada em Evidências"</a> (2021)</li>
-                    </ul>
-                </div>
-                
-                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; margin-top: 30px;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Acesso aos Recursos</h4>
-                    <p>A maioria de nossas publicações está disponível em acesso aberto. Para aquelas com restrições de acesso ou dados sensíveis, entre em contato conosco para solicitar acesso autorizado.</p>
-                    <p style="margin-top: 10px;"><a href="#contato" style="color: var(--teal);">Ir para o formulário de contato →</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="datasets-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h2 class="modal-title">Conjuntos de Dados Odontológicos</h2>
-            <div style="margin-top: 30px;">
-                <h3 style="color: var(--blue); margin-bottom: 15px;">Dados Disponíveis para Pesquisa</h3>
-                <p>Disponibilizamos vários conjuntos de dados anonimizados para fins acadêmicos:</p>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Saúde Bucal Brasil 2020</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Dados de 15.000 exames epidemiológicos</li>
-                        <li>Informações demográficas e socioeconômicas</li>
-                        <li>Indicadores CPO, periodontal e de necessidade de tratamento</li>
-                        <li>Formato: CSV, SPSS</li>
-                    </ul>
-                </div>
-                
-                <div style="margin: 25px 0;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Imagens Radiológicas Anotadas</h4>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>5.000 radiografias panorâmicas digitalizadas</li>
-                        <li>Anotações de especialistas para treinamento de IA</li>
-                        <li>Dados de acompanhamento para casos patológicos</li>
-                        <li>Formato: DICOM, PNG</li>
-                    </ul>
-                </div>
-                
-                <div style="background-color: rgba(0, 194, 203, 0.05); padding: 20px; border-radius: 8px; margin-top: 30px;">
-                    <h4 style="color: var(--teal); margin-bottom: 10px;">Termos de Uso</h4>
-                    <p>Os conjuntos de dados são fornecidos sob os seguintes termos:</p>
-                    <ul style="margin: 15px 0 15px 20px;">
-                        <li>Uso exclusivo para fins acadêmicos e de pesquisa</li>
-                        <li>Proibida a redistribuição sem autorização</li>
-                        <li>Citação obrigatória da fonte</li>
-                        <li>Não pode ser usado para desenvolvimento comercial</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <footer>
+            <p><i class="fas fa-lock"></i> <strong>Importante:</strong> Este é um simulador educacional. Nenhum dado é armazenado ou enviado a servidores.</p>
+            <p>© 2023 Validador de Cartões Educacional | Desenvolvido com <i class="fas fa-heart" style="color: var(--error);"></i> para fins didáticos</p>
+        </footer>
     </div>
 
     <script>
-        // Menu Mobile
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navMenu = document.getElementById('navMenu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Fechar menu ao clicar em um link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-        
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
+        // Mapeamento de bandeiras para ícones
+        const cardIcons = {
+            'Visa': 'fab fa-cc-visa',
+            'Mastercard': 'fab fa-cc-mastercard',
+            'American Express': 'fab fa-cc-amex',
+            'Discover': 'fab fa-cc-discover',
+            'JCB': 'fab fa-cc-jcb',
+            'Diners Club': 'fab fa-cc-diners-club',
+            'Elo': 'fab fa-cc-elo',
+            'Desconhecido': 'far fa-credit-card'
+        };
+
+        // Validação do cartão via Algoritmo de Luhn
+        function isValidCard(cardNumber) {
+            cardNumber = cardNumber.replace(/\D/g, '');
+            if (cardNumber.length < 13 || cardNumber.length > 19) return false;
+
+            let sum = 0;
+            let shouldDouble = false;
+
+            for (let i = cardNumber.length - 1; i >= 0; i--) {
+                let digit = parseInt(cardNumber.charAt(i));
+
+                if (shouldDouble) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                }
+
+                sum += digit;
+                shouldDouble = !shouldDouble;
+            }
+
+            return sum % 10 === 0;
+        }
+
+        // Detecta a bandeira do cartão com mais opções
+        function detectCardType(cardNumber) {
+            cardNumber = cardNumber.replace(/\D/g, '');
+            if (cardNumber.length === 0) return 'Desconhecido';
+            
+            const firstDigit = cardNumber.charAt(0);
+            const firstTwoDigits = cardNumber.substring(0, 2);
+            const firstThreeDigits = cardNumber.substring(0, 3);
+            const firstFourDigits = cardNumber.substring(0, 4);
+
+            // Visa
+            if (firstDigit === '4') return 'Visa';
+            
+            // Mastercard
+            if (/^5[1-5]/.test(firstTwoDigits)) return 'Mastercard';
+            if (/^22[2-9][1-9]/.test(firstFourDigits)) return 'Mastercard';
+            if (/^2[3-7][0-9][0-9]/.test(firstFourDigits)) return 'Mastercard';
+            
+            // American Express
+            if (/^3[47]/.test(firstTwoDigits)) return 'American Express';
+            
+            // Discover
+            if (firstFourDigits === '6011') return 'Discover';
+            if (/^64[4-9]/.test(firstThreeDigits)) return 'Discover';
+            if (firstTwoDigits === '65') return 'Discover';
+            
+            // JCB
+            if (/^35(2[8-9]|[3-8][0-9])/.test(firstFourDigits)) return 'JCB';
+            
+            // Diners Club
+            if (/^3(0[0-5]|[689][0-9])/.test(firstTwoDigits)) return 'Diners Club';
+            
+            // Elo
+            if (/^(4011|4312|4389|4514|4573|4576|5041|5067|5068|5090|5099|6277|6363|650[0-9])/.test(firstFourDigits)) return 'Elo';
+            
+            return 'Desconhecido';
+        }
+
+        // Valida a data de expiração
+        function isValidExpiry(expiry) {
+            if (!expiry || expiry.indexOf('/') === -1) return false;
+            
+            const [month, year] = expiry.split('/').map(Number);
+            if (!month || !year || month < 1 || month > 12) return false;
+            
+            const currentYear = new Date().getFullYear() % 100;
+            const currentMonth = new Date().getMonth() + 1;
+            
+            if (year < currentYear) return false;
+            if (year === currentYear && month < currentMonth) return false;
+            
+            return true;
+        }
+
+        // Valida o CVV
+        function isValidCvv(cvv, cardType) {
+            cvv = cvv.replace(/\D/g, '');
+            
+            if (cardType === 'American Express') {
+                return cvv.length === 4;
+            }
+            return cvv.length === 3;
+        }
+
+        // Atualiza a visualização do cartão em tempo real
+        function updateCardPreview(cardNumber, expiry, cvv) {
+            const previewNumber = document.getElementById('previewCardNumber');
+            const previewType = document.getElementById('previewCardType');
+            const previewExpiry = document.getElementById('previewCardExpiry');
+            const cardIcon = document.getElementById('cardIcon');
+            
+            // Formata o número para exibição
+            let displayNumber = cardNumber.replace(/\D/g, '');
+            displayNumber = displayNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
+            
+            if (displayNumber.trim() === '') {
+                previewNumber.textContent = '•••• •••• •••• ••••';
+                previewType.textContent = 'Insira um número de cartão';
+                previewExpiry.textContent = 'MM/AA •••';
+                cardIcon.className = 'far fa-credit-card';
+                return;
+            }
+            
+            // Mostra os 4 primeiros e os 4 últimos dígitos, mascara o meio
+            const visibleStart = displayNumber.substring(0, 4);
+            const visibleEnd = displayNumber.length > 8 ? displayNumber.substring(displayNumber.length - 4) : '';
+            const maskedMiddle = displayNumber.length > 8 ? ' •••• ' : ' ••••';
+            
+            previewNumber.textContent = visibleStart + maskedMiddle + (displayNumber.length > 8 ? visibleEnd : '');
+            
+            // Formata a data de expiração
+            let displayExpiry = '••/••';
+            if (expiry) {
+                displayExpiry = expiry.length >= 2 
+                    ? expiry.substring(0, 2) + '/' + (expiry.length > 2 ? expiry.substring(2, 4) : '••')
+                    : expiry + '••/••'.substring(expiry.length);
+            }
+            
+            // Formata o CVV
+            const displayCvv = cvv ? (cvv.length <= 3 ? '•'.repeat(cvv.length) + '•••'.substring(cvv.length) : '•••') : '•••';
+            
+            // Detecta a bandeira e atualiza o ícone
+            const cardType = detectCardType(cardNumber);
+            previewType.textContent = cardType;
+            previewExpiry.textContent = `${displayExpiry} ${displayCvv}`;
+            
+            // Atualiza o ícone conforme a bandeira
+            cardIcon.className = cardIcons[cardType] || 'far fa-credit-card';
+        }
+
+        // Validação no formulário
+        function validateCard() {
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiry = document.getElementById('cardExpiry').value;
+            const cvv = document.getElementById('cardCvv').value;
+            const resultDiv = document.getElementById('result');
+
+            if (!cardNumber || cardNumber.replace(/\D/g, '').length < 13) {
+                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Por favor, insira um número de cartão válido (13-19 dígitos)`;
+                resultDiv.className = "invalid";
+                return;
+            }
+
+            if (!isValidExpiry(expiry)) {
+                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Data de validade inválida ou expirada`;
+                resultDiv.className = "invalid";
+                return;
+            }
+
+            const cardType = detectCardType(cardNumber);
+            if (!isValidCvv(cvv, cardType)) {
+                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> CVV inválido (${cardType === 'American Express' ? '4 dígitos' : '3 dígitos'})`;
+                resultDiv.className = "invalid";
+                return;
+            }
+
+            const isValid = isValidCard(cardNumber);
+
+            if (isValid) {
+                resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> Cartão <strong>${cardType}</strong> válido!<br>
+                                      <small>Validade: ${expiry} | CVV: ${'•'.repeat(cvv.length)}</small>`;
+                resultDiv.className = "valid";
             } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // Sistema de Abas
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabId = btn.getAttribute('data-tab');
-                
-                // Remove todas as classes active
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // Adiciona active ao botão e conteúdo clicado
-                btn.classList.add('active');
-                document.getElementById(tabId).classList.add('active');
-            });
-        });
-        
-        // FAQ Accordion
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const faqItem = question.parentElement;
-                const answer = question.nextElementSibling;
-                
-                // Fecha todos os outros itens
-                document.querySelectorAll('.faq-item').forEach(item => {
-                    if (item !== faqItem) {
-                        item.querySelector('.faq-question').classList.remove('active');
-                        item.querySelector('.faq-answer').style.maxHeight = null;
-                    }
-                });
-                
-                // Alterna o item atual
-                question.classList.toggle('active');
-                
-                if (question.classList.contains('active')) {
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
-                } else {
-                    answer.style.maxHeight = null;
-                }
-            });
-        });
-        
-        // Sistema de Modais
-        const modals = document.querySelectorAll('.modal');
-        const modalTriggers = document.querySelectorAll('[data-modal]');
-        
-        modalTriggers.forEach(trigger => {
-            trigger.addEventListener('click', (e) => {
-                e.preventDefault();
-                const modalId = trigger.getAttribute('data-modal');
-                const modal = document.getElementById(modalId);
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            });
-        });
-        
-        modals.forEach(modal => {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            const closeBtn = modal.querySelector('.close-modal');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', () => {
-                    modal.style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                });
-            }
-        });
-        
-        // Formulário de Contato
-        const contactForm = document.getElementById('academicContactForm');
-        
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            
-            // Mostrar estado de carregamento
-            submitBtn.innerHTML = '<span class="btn-icon">⏳</span> Enviando...';
-            submitBtn.disabled = true;
-            
-            // Simular envio (substituir por código real)
-            setTimeout(() => {
-                // Feedback visual de sucesso
-                submitBtn.innerHTML = '<span class="btn-icon">✅</span> Mensagem Enviada!';
-                submitBtn.style.background = 'var(--success-green)';
-                
-                // Resetar formulário após 2 segundos
-                setTimeout(() => {
-                    contactForm.reset();
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.style.background = '';
-                    submitBtn.disabled = false;
-                    
-                    // Adicionar mensagem de confirmação
-                    const confirmation = document.createElement('div');
-                    confirmation.innerHTML = '<p style="color: var(--success-green); text-align: center; margin-top: 20px;">Sua mensagem foi enviada com sucesso! Nossa equipe entrará em contato em breve.</p>';
-                    contactForm.appendChild(confirmation);
-                    
-                    // Remover após 5 segundos
-                    setTimeout(() => confirmation.remove(), 5000);
-                }, 2000);
-            }, 1500);
-        });
-        
-        // Efeito de terminal
-        const terminalLines = [
-            "> Sistema OdontoResearch inicializado",
-            "> Carregando bancos de dados odontológicos...",
-            "> Analisando estudos recentes...",
-            "> Conectando com colaboradores internacionais...",
-            "> Pronto para compartilhar conhecimento"
-        ];
-        
-        const terminalOutput = document.getElementById('terminalOutput');
-        let currentLine = 0;
-        
-        function simulateTerminal() {
-            if (currentLine < terminalLines.length) {
-                const lineElement = document.createElement('div');
-                lineElement.className = 'terminal-line';
-                terminalOutput.appendChild(lineElement);
-                
-                // Efeito de digitação
-                let i = 0;
-                const typingInterval = setInterval(() => {
-                    if (i < terminalLines[currentLine].length) {
-                        lineElement.textContent += terminalLines[currentLine].charAt(i);
-                        i++;
-                    } else {
-                        clearInterval(typingInterval);
-                        lineElement.style.opacity = '1';
-                        lineElement.style.transform = 'translateY(0)';
-                        currentLine++;
-                        setTimeout(simulateTerminal, 1000);
-                    }
-                }, 50);
+                resultDiv.innerHTML = `<i class="fas fa-times-circle"></i> Número de cartão inválido`;
+                resultDiv.className = "invalid";
             }
         }
-        
-        // Inicia o efeito após 1 segundo
-        setTimeout(simulateTerminal, 1000);
-        
-        // Scroll suave para links internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
+
+        // Simulação de API de pagamento
+        async function simulatePayment() {
+            const cardNumber = document.getElementById('apiCardNumber').value;
+            const expiry = document.getElementById('apiCardExpiry').value;
+            const cvv = document.getElementById('apiCardCvv').value;
+            const amount = document.getElementById('apiAmount').value;
+            const resultDiv = document.getElementById('apiResult');
+            const paymentButton = document.getElementById('paymentButton');
+
+            if (!cardNumber || cardNumber.replace(/\D/g, '').length < 13) {
+                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Insira um número de cartão válido`;
+                resultDiv.className = "invalid";
+                return;
+            }
+
+            if (!isValidExpiry(expiry)) {
+                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Data de validade inválida`;
+                resultDiv.className = "invalid";
+                return;
+            }
+
+            const cardType = detectCardType(cardNumber);
+            if (!isValidCvv(cvv, cardType)) {
+                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> CVV inválido (${cardType === 'American Express' ? '4 dígitos' : '3 dígitos'})`;
+                resultDiv.className = "invalid";
+                return;
+            }
+
+            if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
+                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Valor inválido`;
+                resultDiv.className = "invalid";
+                return;
+            }
+
+            // Mostra estado de processamento
+            paymentButton.innerHTML = `<span class="spinner"></span> Processando...`;
+            paymentButton.disabled = true;
+            resultDiv.innerHTML = `<i class="fas fa-sync-alt fa-spin"></i> Processando pagamento de R$${parseFloat(amount).toFixed(2)}...`;
+            resultDiv.className = "processing";
+
+            // Simula uma chamada de API assíncrona
+            try {
+                const response = await fakePaymentAPI(cardNumber, expiry, cvv, amount);
                 
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Atualiza a URL sem recarregar a página
-                    if (history.pushState) {
-                        history.pushState(null, null, targetId);
-                    } else {
-                        location.hash = targetId;
+                if (response.success) {
+                    resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${response.message}<br>
+                                          <small>ID: ${response.transactionId} | Valor: R$${parseFloat(amount).toFixed(2)}</small>`;
+                    resultDiv.className = "valid";
+                } else {
+                    resultDiv.innerHTML = `<i class="fas fa-times-circle"></i> ${response.message}<br>
+                                          <small>Código: ${response.errorCode}</small>`;
+                    resultDiv.className = "invalid";
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Erro na conexão com o gateway de pagamento`;
+                resultDiv.className = "invalid";
+            } finally {
+                paymentButton.innerHTML = `<i class="fas fa-paper-plane"></i> Processar Pagamento`;
+                paymentButton.disabled = false;
+            }
+        }
+
+        // Função que simula uma API de pagamento mais realista
+        function fakePaymentAPI(cardNumber, expiry, cvv, amount) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    // Primeiro valida o cartão
+                    if (!isValidCard(cardNumber)) {
+                        resolve({
+                            success: false,
+                            message: "Número de cartão inválido",
+                            errorCode: "INVALID_CARD",
+                            transactionId: null
+                        });
+                        return;
                     }
-                }
+
+                    // Valida a data
+                    if (!isValidExpiry(expiry)) {
+                        resolve({
+                            success: false,
+                            message: "Cartão expirado ou data inválida",
+                            errorCode: "INVALID_EXPIRY",
+                            transactionId: null
+                        });
+                        return;
+                    }
+
+                    // Simula falhas aleatórias (20% de chance)
+                    const isSuccess = Math.random() > 0.2;
+                    const cardType = detectCardType(cardNumber);
+                    
+                    // Gera um ID de transação fictício
+                    const transactionId = 'txn_' + Math.random().toString(36).substr(2, 12).toUpperCase();
+
+                    if (isSuccess) {
+                        resolve({
+                            success: true,
+                            message: `Pagamento de R$${parseFloat(amount).toFixed(2)} com ${cardType} aprovado!`,
+                            transactionId: transactionId
+                        });
+                    } else {
+                        // Simula diferentes tipos de erro
+                        const errors = [
+                            { message: "Pagamento recusado pelo emissor", code: "DECLINED" },
+                            { message: "Fundos insuficientes", code: "INSUFFICIENT_FUNDS" },
+                            { message: "Transação não autorizada", code: "UNAUTHORIZED" },
+                            { message: "Limite excedido", code: "LIMIT_EXCEEDED" }
+                        ];
+                        const error = errors[Math.floor(Math.random() * errors.length)];
+                        
+                        resolve({
+                            success: false,
+                            message: error.message,
+                            errorCode: error.code,
+                            transactionId: null
+                        });
+                    }
+                }, 2000); // Simula delay de rede
             });
-        });
-        
-        // Animação de entrada dos elementos
-        const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.card, .data-item, .publication-card, .team-member, .faq-item');
+        }
+
+        // Preenche exemplos
+        function fillExample(cardNumber, expiry, cvv) {
+            document.getElementById('cardNumber').value = cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
+            document.getElementById('cardExpiry').value = expiry;
+            document.getElementById('cardCvv').value = cvv;
+            updateCardPreview(cardNumber, expiry.replace(/\D/g, ''), cvv);
+            validateCard();
+        }
+
+        // Formata o número do cartão (formatação automática)
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\D/g, '');
+            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+            input.value = value.substring(0, 19);
             
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                
-                if (elementPosition < screenPosition) {
-                    element.classList.add('fade-in');
-                }
-            });
-        };
-        
-        window.addEventListener('scroll', animateOnScroll);
-        window.addEventListener('load', animateOnScroll);
-        
-        // Ver todos os botões
-        document.getElementById('viewAllPublications').addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('Funcionalidade de visualizar todas as publicações será implementada aqui.');
+            // Atualiza a visualização em tempo real
+            const expiry = document.getElementById(input.id === 'cardNumber' ? 'cardExpiry' : 'apiCardExpiry').value;
+            const cvv = document.getElementById(input.id === 'cardNumber' ? 'cardCvv' : 'apiCardCvv').value;
+            updateCardPreview(value, expiry, cvv);
+        }
+
+        // Formata a data de validade
+        function formatExpiry(input) {
+            let value = input.value.replace(/\D/g, '');
+            
+            if (value.length > 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            
+            input.value = value.substring(0, 5);
+            
+            // Atualiza a visualização
+            const cardNumber = document.getElementById(input.id === 'cardExpiry' ? 'cardNumber' : 'apiCardNumber').value;
+            const cvv = document.getElementById(input.id === 'cardExpiry' ? 'cardCvv' : 'apiCardCvv').value;
+            updateCardPreview(cardNumber, value.replace(/\D/g, ''), cvv);
+        }
+
+        // Formata o CVV
+        function formatCvv(input) {
+            let value = input.value.replace(/\D/g, '');
+            input.value = value.substring(0, 4);
+            
+            // Atualiza a visualização
+            const cardNumber = document.getElementById(input.id === 'cardCvv' ? 'cardNumber' : 'apiCardNumber').value;
+            const expiry = document.getElementById(input.id === 'cardCvv' ? 'cardExpiry' : 'apiCardExpiry').value;
+            updateCardPreview(cardNumber, expiry, value);
+        }
+
+        // Controle de abas
+        function openTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Controle de accordion
+        function toggleAccordion(header) {
+            const accordion = header.parentElement;
+            accordion.classList.toggle("active");
+            
+            const icon = header.querySelector('i');
+            if (accordion.classList.contains("active")) {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-up');
+            } else {
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // Event listeners
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            formatCardNumber(e.target);
         });
+
+        document.getElementById('apiCardNumber').addEventListener('input', function(e) {
+            formatCardNumber(e.target);
+        });
+
+        document.getElementById('cardExpiry').addEventListener('input', function(e) {
+            formatExpiry(e.target);
+        });
+
+        document.getElementById('apiCardExpiry').addEventListener('input', function(e) {
+            formatExpiry(e.target);
+        });
+
+        document.getElementById('cardCvv').addEventListener('input', function(e) {
+            formatCvv(e.target);
+        });
+
+        document.getElementById('apiCardCvv').addEventListener('input', function(e) {
+            formatCvv(e.target);
+        });
+
+        // Inicializa a visualização do cartão
+        updateCardPreview('', '', '');
     </script>
 </body>
 </html>

@@ -3,1409 +3,1289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Validador Profissional de Cartões | Tutoriais Completo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>MyDrugs | Serviços Farmacêuticos Premium</title>
     <style>
         :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --error: #ef233c;
-            --success: #4cc9f0;
-            --warning: #f8961e;
-            --info: #4895ef;
-            --dark: #14213d;
-            --darker: #0c1426;
-            --light: #f8f9fa;
-            --lighter: #ffffff;
-            --gray: #adb5bd;
-            --gray-light: #e9ecef;
-            --gradient-primary: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
-            --gradient-secondary: linear-gradient(135deg, #7209b7 0%, #560bad 100%);
-            --gradient-danger: linear-gradient(135deg, #ef233c 0%, #d90429 100%);
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1), 0 1px 3px rgba(0,0,0,0.08);
-            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 5px 10px rgba(0,0,0,0.05);
-            --shadow-xl: 0 20px 40px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.05);
-            --border-radius: 12px;
-            --border-radius-sm: 8px;
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #00b4d8;
+            --text: #e6e6e6;
+            --dark: #0d0d0d;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --error: #e74c3c;
         }
-
+        
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.7;
-            min-height: 100vh;
-            background-image: radial-gradient(circle at 10% 20%, rgba(67, 97, 238, 0.05) 0%, rgba(67, 97, 238, 0.05) 90%);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-            position: relative;
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 4px;
-            background: var(--gradient-primary);
-            border-radius: 2px;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        h2 {
-            font-size: 2rem;
-            color: var(--dark);
-            margin: 2rem 0 1.5rem;
-            font-weight: 600;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 3px;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            margin: 1.5rem 0 1rem;
-            color: var(--dark);
-            font-weight: 500;
-        }
-
-        p {
-            margin-bottom: 1.2rem;
-            color: var(--dark);
-            opacity: 0.9;
-        }
-
-        .card {
-            background: var(--lighter);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-md);
-            padding: 2rem;
-            margin-bottom: 2.5rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-highlight {
-            border-top: 4px solid var(--primary);
-        }
-
-        .card-danger {
-            border-top: 4px solid var(--error);
-        }
-
-        .card-info {
-            border-top: 4px solid var(--info);
-        }
-
-        .demo-box {
-            background: var(--light);
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: var(--border-radius-sm);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .demo-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--primary);
-        }
-
-        .input-group {
-            margin-bottom: 1.2rem;
-            position: relative;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--dark);
-        }
-
-        input, select {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--gray);
-            border-radius: var(--border-radius-sm);
-            font-size: 1rem;
-            transition: all 0.3s;
-            font-family: 'Fira Code', monospace;
-            background: var(--lighter);
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
-        }
-
-        .input-icon {
-            position: relative;
-        }
-
-        .input-icon i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--gray);
-            font-size: 1.2rem;
-        }
-
-        button {
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 0.8rem 1.8rem;
-            border-radius: var(--border-radius-sm);
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            box-shadow: var(--shadow-sm);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        button:hover {
-            background: var(--gradient-secondary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        button:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            background: var(--gray);
-        }
-
-        .btn-danger {
-            background: var(--gradient-danger);
-        }
-
-        .btn-danger:hover {
-            background: var(--gradient-danger);
-            filter: brightness(1.1);
-        }
-
-        #result, #apiResult {
-            margin-top: 1.5rem;
-            padding: 1.2rem;
-            border-radius: var(--border-radius-sm);
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            transition: all 0.3s;
-        }
-
-        .valid {
-            background: rgba(76, 201, 240, 0.15);
-            color: var(--success);
-            border: 1px solid rgba(76, 201, 240, 0.3);
-        }
-
-        .invalid {
-            background: rgba(239, 35, 60, 0.15);
-            color: var(--error);
-            border: 1px solid rgba(239, 35, 60, 0.3);
-        }
-
-        .processing {
-            background: rgba(248, 150, 30, 0.15);
-            color: var(--warning);
-            border: 1px solid rgba(248, 150, 30, 0.3);
-        }
-
-        .info {
-            background: rgba(72, 149, 239, 0.15);
-            color: var(--info);
-            border: 1px solid rgba(72, 149, 239, 0.3);
-        }
-
-        .code-block {
-            background: var(--darker);
-            color: #f5f6fa;
-            padding: 1.5rem;
-            border-radius: var(--border-radius-sm);
-            font-family: 'Fira Code', monospace;
-            overflow-x: auto;
-            margin: 1.5rem 0;
-            box-shadow: var(--shadow-sm);
-            position: relative;
-            font-size: 0.9rem;
+            font-family: 'Courier New', monospace;
+            background-color: var(--dark);
+            color: var(--text);
             line-height: 1.6;
-        }
-
-        .code-block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
-            background: rgba(0,0,0,0.2);
-            border-top-left-radius: var(--border-radius-sm);
-            border-top-right-radius: var(--border-radius-sm);
-        }
-
-        .code-block::after {
-            content: '•••';
-            position: absolute;
-            top: 12px;
-            left: 15px;
-            color: rgba(255,255,255,0.4);
-            letter-spacing: 2px;
-            font-size: 0.8rem;
-        }
-
-        .tab {
-            display: inline-block;
-            margin-left: 1.5rem;
-        }
-
-        .card-preview {
+            min-height: 100vh;
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            background: var(--gradient-primary);
-            border-radius: var(--border-radius-sm);
-            color: white;
-            box-shadow: var(--shadow-md);
-            transition: all 0.3s;
+            flex-direction: column;
         }
-
-        .card-preview i {
-            font-size: 2.5rem;
-            opacity: 0.9;
-        }
-
-        .card-details {
-            flex: 1;
-        }
-
-        .card-number {
-            font-family: 'Fira Code', monospace;
-            letter-spacing: 1px;
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            word-spacing: 0.5rem;
-        }
-
-        .card-type {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .card-expiry {
-            font-size: 0.8rem;
-            opacity: 0.8;
-            margin-top: 0.3rem;
-        }
-
-        ul, ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        li {
-            margin-bottom: 0.5rem;
-            position: relative;
-        }
-
-        li::before {
-            content: '•';
-            color: var(--primary);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 3rem;
-            padding: 2rem;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            color: var(--dark);
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .feature {
-            background: var(--lighter);
-            padding: 1.5rem;
-            border-radius: var(--border-radius-sm);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .feature i {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-
-        .feature h3 {
-            margin: 0.5rem 0;
-            font-size: 1.2rem;
-        }
-
-        .feature p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            display: inline-block;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid var(--gray-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .tab-button {
-            padding: 0.8rem 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            color: var(--gray);
-            position: relative;
-            box-shadow: none;
-            border-radius: 0;
-        }
-
-        .tab-button.active {
-            color: var(--primary);
-        }
-
-        .tab-button.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--primary);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .accordion {
-            margin-bottom: 1rem;
-        }
-
-        .accordion-header {
-            padding: 1rem;
-            background: var(--lighter);
-            border: 1px solid var(--gray-light);
-            border-radius: var(--border-radius-sm);
-            cursor: pointer;
+        
+        .terminal-bar {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            padding: 0.8rem 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-weight: 500;
-        }
-
-        .accordion-header:hover {
-            background: var(--light);
-        }
-
-        .accordion-content {
-            padding: 1rem;
-            border: 1px solid var(--gray-light);
-            border-top: none;
-            border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
-            background: var(--lighter);
-            display: none;
-        }
-
-        .accordion.active .accordion-content {
-            display: block;
-        }
-
-        .accordion.active .accordion-header {
-            border-bottom-left-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-
-        .badge-primary {
-            background: rgba(67, 97, 238, 0.1);
-            color: var(--primary);
-        }
-
-        .badge-success {
-            background: rgba(76, 201, 240, 0.1);
-            color: var(--success);
-        }
-
-        .badge-danger {
-            background: rgba(239, 35, 60, 0.1);
-            color: var(--error);
-        }
-
-        .example-cards {
-            display: flex;
+            border-bottom: 1px solid var(--highlight);
             flex-wrap: wrap;
             gap: 1rem;
-            margin: 1rem 0;
         }
-
-        .example-card {
-            padding: 0.5rem 1rem;
-            background: var(--light);
-            border-radius: var(--border-radius-sm);
-            font-family: 'Fira Code', monospace;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid var(--gray-light);
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--highlight);
+            text-shadow: 0 0 10px rgba(0, 180, 216, 0.7);
+            white-space: nowrap;
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
             font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
         }
-
-        .example-card:hover {
-            background: var(--primary);
+        
+        .nav-links a:hover {
+            color: var(--highlight);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -3px;
+            left: 0;
+            background-color: var(--highlight);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .auth-section {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            border: 1px solid var(--highlight);
+            background: transparent;
+            color: var(--highlight);
+            white-space: nowrap;
+        }
+        
+        .btn:hover {
+            background: rgba(0, 180, 216, 0.1);
+            box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+        }
+        
+        .btn-primary {
+            background: var(--highlight);
+            color: var(--dark);
+            border: none;
+            font-weight: bold;
+        }
+        
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--highlight);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
+        }
+        
+        .cart-count {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--error);
             color: white;
-            transform: translateY(-2px);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        
+        .main-content {
+            padding: 2rem 1rem;
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: var(--secondary);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: var(--highlight);
+        }
+        
+        .product-image {
+            height: 200px;
+            background: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--highlight);
+            font-size: 3rem;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--highlight);
+        }
+        
+        .product-description {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            flex: 1;
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--highlight);
+            margin-bottom: 1rem;
+        }
+        
+        .product-rating {
+            color: gold;
+            margin-bottom: 1rem;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .modal-content {
+            background: var(--primary);
+            margin: 2rem auto;
+            padding: 1.5rem;
+            border: 1px solid var(--highlight);
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .animate-fadeIn {
-            animation: fadeIn 0.5s ease-out forwards;
+        
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
         }
-
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-
+        
+        .close-btn:hover {
+            color: var(--highlight);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--highlight);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--secondary);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--highlight);
+        }
+        
+        .error-message {
+            color: var(--error);
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            display: none;
+        }
+        
+        /* Cart Styles */
+        .cart-items {
+            margin-top: 1.5rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--accent);
+        }
+        
+        .cart-item-info {
+            flex: 1;
+            margin-right: 1rem;
+        }
+        
+        .cart-item-name {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .cart-item-price {
+            white-space: nowrap;
+            text-align: right;
+        }
+        
+        .remove-item {
+            color: var(--error);
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+        
+        .cart-total {
+            text-align: right;
+            margin-top: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        /* Payment Styles */
+        .payment-address {
+            background: var(--secondary);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            word-break: break-all;
+            font-size: 0.9rem;
+        }
+        
+        .status-badge {
+            padding: 0.5rem;
+            border-radius: 4px;
+            text-align: center;
+            margin: 1rem 0;
+        }
+        
+        .status-pending {
+            background: var(--warning);
+            color: var(--dark);
+        }
+        
+        .status-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        /* Reviews Section */
+        .reviews-section {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: var(--secondary);
+            border-radius: 8px;
+        }
+        
+        .review-form {
+            margin-bottom: 2rem;
+        }
+        
+        .review-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            background: var(--dark);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+            margin-bottom: 1rem;
+        }
+        
+        .reviews-list {
+            margin-top: 1.5rem;
+        }
+        
+        .review-item {
+            background: var(--primary);
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--highlight);
+        }
+        
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .review-text {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            white-space: pre-wrap;
+        }
+        
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
+            .terminal-bar {
+                flex-direction: column;
+                align-items: stretch;
             }
             
-            h1 {
-                font-size: 2rem;
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.5rem;
             }
             
-            h2 {
-                font-size: 1.6rem;
+            .nav-links {
+                justify-content: space-around;
+                padding: 0.5rem 0;
+                border-top: 1px solid rgba(0, 180, 216, 0.2);
+                border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+                margin: 0.5rem 0;
             }
             
-            .card {
-                padding: 1.5rem;
+            .auth-section {
+                justify-content: center;
             }
             
-            .features-grid {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+            
+            .modal-content {
+                margin: 1rem auto;
+                padding: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-grid {
                 grid-template-columns: 1fr;
             }
             
-            .tabs {
-                overflow-x: auto;
-                padding-bottom: 5px;
-            }
-            
-            .tab-button {
-                white-space: nowrap;
+            .btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.7rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="animate-fadeIn">
-            <h1><i class="fas fa-shield-alt"></i> Validador Profissional de Cartões</h1>
-            <p>Verifique a validade de cartões de crédito/débito com tutoriais completos</p>
-        </header>
-
-        <div class="card card-highlight animate-fadeIn delay-1">
-            <h2><i class="fas fa-id-card"></i> Visualização do Cartão</h2>
-            <div class="card-preview" id="cardPreview">
-                <i class="fab fa-cc-visa" id="cardIcon"></i>
-                <div class="card-details">
-                    <div class="card-number" id="previewCardNumber">•••• •••• •••• ••••</div>
-                    <div class="card-type" id="previewCardType">Insira um número de cartão</div>
-                    <div class="card-expiry" id="previewCardExpiry">MM/AA •••</div>
+    <header class="terminal-bar">
+        <div class="logo">MYDRUGS</div>
+        
+        <div class="nav-container">
+            <nav class="nav-links">
+                <a href="#products">PRODUTOS</a>
+                <a href="#reviews">AVALIAÇÕES</a>
+                <a href="#security">SEGURANÇA</a>
+            </nav>
+            
+            <div class="auth-section" id="authSection">
+                <button id="loginBtn" class="btn">LOGIN</button>
+                <button id="registerBtn" class="btn">REGISTRO</button>
+                <div class="cart-count">
+                    <button id="cartBtn" class="btn">CARRINHO</button>
+                    <span id="cartBadge" class="cart-badge" style="display: none;">0</span>
                 </div>
             </div>
-
-            <div class="tabs">
-                <button class="tab-button active" onclick="openTab(event, 'validatorTab')">Validador</button>
-                <button class="tab-button" onclick="openTab(event, 'tutorialTab')">Tutorial</button>
-                <button class="tab-button" onclick="openTab(event, 'examplesTab')">Exemplos</button>
-            </div>
-
-            <div id="validatorTab" class="tab-content active">
-                <h2><i class="fas fa-search"></i> Validador em Tempo Real</h2>
-                <p>Digite um número de cartão para verificação instantânea (não use dados reais):</p>
-                
-                <div class="demo-box">
-                    <div class="input-group input-icon">
-                        <label for="cardNumber">Número do Cartão:</label>
-                        <input type="text" id="cardNumber" placeholder="Ex: 4111 1111 1111 1111" maxlength="19">
-                        <i class="fas fa-credit-card"></i>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="cardExpiry">Validade (MM/AA):</label>
-                        <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5">
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="cardCvv">CVV:</label>
-                        <input type="text" id="cardCvv" placeholder="•••" maxlength="4">
-                    </div>
-                    
-                    <button onclick="validateCard()">
-                        <i class="fas fa-check-circle"></i> Validar Cartão
-                    </button>
-                    <div id="result"></div>
-                </div>
-            </div>
-
-            <div id="tutorialTab" class="tab-content">
-                <h2><i class="fas fa-graduation-cap"></i> Como Validar Cartões</h2>
-                <p>O algoritmo <strong>Luhn</strong> (ou "módulo 10") é o padrão da indústria para verificação de números de cartão:</p>
-                
-                <div class="accordion">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Passo 1: Entenda a estrutura do número do cartão</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <p>Um número de cartão de crédito consiste em:</p>
-                        <ul>
-                            <li><strong>BIN (6 primeiros dígitos):</strong> Identifica o emissor do cartão</li>
-                            <li><strong>Número da conta (dígitos 7-15):</strong> Identifica a conta individual</li>
-                            <li><strong>Dígito verificador (último dígito):</strong> Valida o número usando o algoritmo Luhn</li>
-                        </ul>
-                        <p>Os cartões têm normalmente 16 dígitos, mas podem variar de 13 a 19 dígitos.</p>
-                    </div>
-                </div>
-                
-                <div class="accordion">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Passo 2: Aplique o Algoritmo de Luhn</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <p>O algoritmo Luhn funciona da seguinte forma:</p>
-                        <ol>
-                            <li>Comece pelo penúltimo dígito e mova para a esquerda, dobrando cada segundo dígito</li>
-                            <li>Se a multiplicação resultar em um número com dois dígitos, some os dígitos (ou subtraia 9)</li>
-                            <li>Some todos os dígitos</li>
-                            <li>Se o total for um múltiplo de 10, o número é válido</li>
-                        </ol>
-                        <div class="code-block">
-                            <code>
-                                function isValidCard(cardNumber) {<br>
-                                <span class="tab"></span>cardNumber = cardNumber.replace(/\D/g, '');<br>
-                                <span class="tab"></span>if (cardNumber.length < 13 || cardNumber.length > 19) return false;<br>
-                                <br>
-                                <span class="tab"></span>let sum = 0;<br>
-                                <span class="tab"></span>let shouldDouble = false;<br>
-                                <br>
-                                <span class="tab"></span>for (let i = cardNumber.length - 1; i >= 0; i--) {<br>
-                                <span class="tab"></span><span class="tab"></span>let digit = parseInt(cardNumber.charAt(i));<br>
-                                <span class="tab"></span><span class="tab"></span>if (shouldDouble) {<br>
-                                <span class="tab"></span><span class="tab"></span><span class="tab"></span>digit *= 2;<br>
-                                <span class="tab"></span><span class="tab"></span><span class="tab"></span>if (digit > 9) digit -= 9;<br>
-                                <span class="tab"></span><span class="tab"></span>}<br>
-                                <span class="tab"></span><span class="tab"></span>sum += digit;<br>
-                                <span class="tab"></span><span class="tab"></span>shouldDouble = !shouldDouble;<br>
-                                <span class="tab"></span>}<br>
-                                <br>
-                                <span class="tab"></span>return sum % 10 === 0;<br>
-                                }
-                            </code>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="accordion">
-                    <div class="accordion-header" onclick="toggleAccordion(this)">
-                        <span>Passo 3: Identifique a Bandeira do Cartão</span>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="accordion-content">
-                        <p>Você pode identificar a bandeira pelos primeiros dígitos (BIN):</p>
-                        <div class="code-block">
-                            <code>
-                                function detectCardType(cardNumber) {<br>
-                                <span class="tab"></span>const firstDigit = cardNumber.charAt(0);<br>
-                                <span class="tab"></span>const firstTwoDigits = cardNumber.substring(0, 2);<br>
-                                <span class="tab"></span>const firstFourDigits = cardNumber.substring(0, 4);<br>
-                                <br>
-                                <span class="tab"></span>if (firstDigit === '4') return 'Visa';<br>
-                                <span class="tab"></span>if (/^5[1-5]/.test(firstTwoDigits)) return 'Mastercard';<br>
-                                <span class="tab"></span>if (/^3[47]/.test(firstTwoDigits)) return 'American Express';<br>
-                                <span class="tab"></span>if (/^6011|^64[4-9]|^65/.test(cardNumber)) return 'Discover';<br>
-                                <span class="tab"></span>if (/^35(2[8-9]|[3-8][0-9])/.test(firstFourDigits)) return 'JCB';<br>
-                                <span class="tab"></span>if (/^3(0[0-5]|[68][0-9])/.test(firstTwoDigits)) return 'Diners Club';<br>
-                                <span class="tab"></span>if (/^(4011|4312|4389|4514|4573|4576|5041|5067|5068|5090|5099|6277|6363|650[0-9])/.test(firstFourDigits)) return 'Elo';<br>
-                                <span class="tab"></span>return 'Desconhecido';<br>
-                                }
-                            </code>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="examplesTab" class="tab-content">
-                <h2><i class="fas fa-list-ol"></i> Números de Teste</h2>
-                <p>Use estes números de teste para validar seu sistema (nunca use cartões reais em ambientes de teste):</p>
-                
-                <h3>Cartões Válidos</h3>
-                <div class="example-cards">
-                    <div class="example-card" onclick="fillExample('4111111111111111', '12/25', '123')">Visa: 4111 1111 1111 1111</div>
-                    <div class="example-card" onclick="fillExample('5555555555554444', '06/24', '456')">Mastercard: 5555 5555 5555 4444</div>
-                    <div class="example-card" onclick="fillExample('378282246310005', '09/23', '789')">Amex: 3782 822463 10005</div>
-                    <div class="example-card" onclick="fillExample('6011111111111117', '03/26', '321')">Discover: 6011 1111 1111 1117</div>
-                    <div class="example-card" onclick="fillExample('3530111333300000', '11/25', '654')">JCB: 3530 1113 3330 0000</div>
-                </div>
-                
-                <h3>Cartões Inválidos</h3>
-                <div class="example-cards">
-                    <div class="example-card" onclick="fillExample('4111111111111112', '12/25', '123')">Visa Inválido: 4111 1111 1111 1112</div>
-                    <div class="example-card" onclick="fillExample('5555555555554445', '06/24', '456')">Mastercard Inválido: 5555 5555 5555 4445</div>
-                    <div class="example-card" onclick="fillExample('378282246310006', '09/23', '789')">Amex Inválido: 3782 822463 10006</div>
-                </div>
-                
-                <div class="info">
-                    <i class="fas fa-info-circle"></i> Estes são números de teste padrão da indústria que passam na validação Luhn mas não são cartões reais.
+            
+            <div class="auth-section" id="userSection" style="display: none;">
+                <span id="usernameDisplay" style="color: var(--highlight); margin-right: 0.5rem;"></span>
+                <button id="logoutBtn" class="btn">LOGOUT</button>
+                <div class="cart-count">
+                    <button id="cartBtnLogged" class="btn">CARRINHO</button>
+                    <span id="cartBadgeLogged" class="cart-badge" style="display: none;">0</span>
                 </div>
             </div>
         </div>
-
-        <div class="card animate-fadeIn delay-2">
-            <h2><i class="fas fa-microchip"></i> Tecnologia por Trás da Validação</h2>
-            <p>O sistema de validação de cartões envolve várias camadas de segurança e tecnologia:</p>
+    </header>
+    
+    <main class="main-content">
+        <section class="hero">
+            <h1>PRODUTOS FARMACÊUTICOS PREMIUM</h1>
+            <p>Entrega discreta mundial com pagamentos apenas em Bitcoin</p>
+        </section>
+        
+        <section id="products">
+            <div class="products-grid" id="productsGrid">
+                <!-- Produtos serão carregados aqui -->
+            </div>
+        </section>
+        
+        <section class="reviews-section" id="reviews">
+            <h2>AVALIAÇÕES DOS CLIENTES</h2>
             
-            <div class="features-grid">
-                <div class="feature">
-                    <i class="fas fa-calculator"></i>
-                    <h3>Algoritmo Luhn</h3>
-                    <p>Desenvolvido por Hans Peter Luhn da IBM em 1954, é um simples checksum para verificar erros de digitação.</p>
+            <div class="review-form" id="reviewForm" style="display: none;">
+                <h3>DEIXE SUA AVALIAÇÃO</h3>
+                <textarea id="reviewText" class="review-textarea" placeholder="Escreva sua avaliação sobre os produtos e serviços..."></textarea>
+                <div style="margin-bottom: 1rem;">
+                    <label>Avaliação: </label>
+                    <select id="reviewRating" class="form-control" style="width: auto; display: inline-block;">
+                        <option value="5">★★★★★</option>
+                        <option value="4">★★★★☆</option>
+                        <option value="3">★★★☆☆</option>
+                        <option value="2">★★☆☆☆</option>
+                        <option value="1">★☆☆☆☆</option>
+                    </select>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-fingerprint"></i>
-                    <h3>BIN/IIN</h3>
-                    <p>Os primeiros 6 dígitos identificam a instituição emissora (Bank Identification Number/Issuer Identification Number).</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-shield-virus"></i>
-                    <h3>PCI DSS</h3>
-                    <p>Padrão de segurança que todos os sistemas que processam cartões devem seguir para proteção de dados.</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-network-wired"></i>
-                    <h3>Gateways de Pagamento</h3>
-                    <p>Sistemas como Stripe, Pagar.me e PayPal que processam transações de forma segura.</p>
-                </div>
+                <button id="submitReview" class="btn btn-primary">ENVIAR AVALIAÇÃO</button>
             </div>
             
-            <h3><i class="fas fa-code"></i> Implementação Completa em JavaScript</h3>
-            <div class="code-block">
-                <code>
-                    // Valida número do cartão com Luhn e verifica a bandeira<br>
-                    function validateCreditCard(cardNumber, expiry, cvv) {<br>
-                    <span class="tab"></span>// Validação básica<br>
-                    <span class="tab"></span>if (!cardNumber || !expiry || !cvv) {<br>
-                    <span class="tab"></span><span class="tab"></span>return { valid: false, message: "Todos os campos são obrigatórios" };<br>
-                    <span class="tab"></span>}<br>
-                    <br>
-                    <span class="tab"></span>// Limpa os dados<br>
-                    <span class="tab"></span>const cleanCard = cardNumber.replace(/\D/g, '');<br>
-                    <span class="tab"></span>const cleanExpiry = expiry.replace(/\D/g, '');<br>
-                    <span class="tab"></span>const cleanCvv = cvv.replace(/\D/g, '');<br>
-                    <br>
-                    <span class="tab"></span>// Verifica comprimento do cartão<br>
-                    <span class="tab"></span>if (cleanCard.length < 13 || cleanCard.length > 19) {<br>
-                    <span class="tab"></span><span class="tab"></span>return { valid: false, message: "Número de cartão inválido" };<br>
-                    <span class="tab"></span>}<br>
-                    <br>
-                    <span class="tab"></span>// Verifica validade (MMAA)<br>
-                    <span class="tab"></span>if (cleanExpiry.length !== 4) {<br>
-                    <span class="tab"></span><span class="tab"></span>return { valid: false, message: "Data de validade inválida" };<br>
-                    <span class="tab"></span>}<br>
-                    <br>
-                    <span class="tab"></span>// Verifica CVV (3-4 dígitos)<br>
-                    <span class="tab"></span>if (cleanCvv.length < 3 || cleanCvv.length > 4) {<br>
-                    <span class="tab"></span><span class="tab"></span>return { valid: false, message: "CVV inválido" };<br>
-                    <span class="tab"></span>}<br>
-                    <br>
-                    <span class="tab"></span>// Aplica algoritmo Luhn<br>
-                    <span class="tab"></span>let sum = 0;<br>
-                    <span class="tab"></span>let shouldDouble = false;<br>
-                    <br>
-                    <span class="tab"></span>for (let i = cleanCard.length - 1; i >= 0; i--) {<br>
-                    <span class="tab"></span><span class="tab"></span>let digit = parseInt(cleanCard.charAt(i));<br>
-                    <span class="tab"></span><span class="tab"></span>if (shouldDouble) {<br>
-                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>digit *= 2;<br>
-                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>if (digit > 9) digit -= 9;<br>
-                    <span class="tab"></span><span class="tab"></span>}<br>
-                    <span class="tab"></span><span class="tab"></span>sum += digit;<br>
-                    <span class="tab"></span><span class="tab"></span>shouldDouble = !shouldDouble;<br>
-                    <span class="tab"></span>}<br>
-                    <br>
-                    <span class="tab"></span>const isValid = sum % 10 === 0;<br>
-                    <span class="tab"></span>const cardType = detectCardType(cleanCard);<br>
-                    <br>
-                    <span class="tab"></span>return {<br>
-                    <span class="tab"></span><span class="tab"></span>valid: isValid,<br>
-                    <span class="tab"></span><span class="tab"></span>type: cardType,<br>
-                    <span class="tab"></span><span class="tab"></span>message: isValid ? "Cartão válido" : "Número de cartão inválido"<br>
-                    <span class="tab"></span>};<br>
-                    }
-                </code>
+            <div class="reviews-list" id="reviewsList">
+                <!-- Avaliações serão carregadas aqui -->
             </div>
-        </div>
-
-        <div class="card card-info animate-fadeIn delay-3">
-            <h2><i class="fas fa-plug"></i> Integração com APIs de Pagamento</h2>
-            <p>Em sistemas reais, você deve usar APIs profissionais para processar pagamentos:</p>
-            
-            <div class="demo-box">
-                <div class="input-group input-icon">
-                    <label for="apiCardNumber">Número do Cartão:</label>
-                    <input type="text" id="apiCardNumber" placeholder="Ex: 5555 5555 5555 4444" maxlength="19">
-                    <i class="fas fa-credit-card"></i>
-                </div>
-                
-                <div class="input-group">
-                    <label for="apiCardExpiry">Validade (MM/AA):</label>
-                    <input type="text" id="apiCardExpiry" placeholder="MM/AA" maxlength="5">
-                </div>
-                
-                <div class="input-group">
-                    <label for="apiCardCvv">CVV:</label>
-                    <input type="text" id="apiCardCvv" placeholder="•••" maxlength="4">
-                </div>
-                
-                <div class="input-group">
-                    <label for="apiAmount">Valor (R$):</label>
-                    <input type="number" id="apiAmount" placeholder="100.00" step="0.01">
-                </div>
-                
-                <button onclick="simulatePayment()" id="paymentButton">
-                    <i class="fas fa-paper-plane"></i> Processar Pagamento
-                </button>
-                <div id="apiResult"></div>
+        </section>
+        
+        <section class="security-section" id="security">
+            <h2>PROTOCOLOS DE SEGURANÇA 🔒</h2>
+            <div style="margin: 1rem 0;">
+                <span class="status-badge" style="display: inline-block; background: var(--accent);">AES-256</span>
+                <span class="status-badge" style="display: inline-block; background: var(--accent);">SHA-512</span>
+                <span class="status-badge" style="display: inline-block; background: var(--accent);">PGP</span>
             </div>
-            
-            <h3><i class="fas fa-code-branch"></i> Opções de APIs Reais</h3>
-            <div class="features-grid">
-                <div class="feature">
-                    <i class="fab fa-stripe"></i>
-                    <h3>Stripe</h3>
-                    <p>Solução global com suporte a múltiplas bandeiras e moedas. Ideal para negócios internacionais.</p>
-                    <a href="https://stripe.com" target="_blank" class="badge badge-primary">Documentação</a>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-money-bill-wave"></i>
-                    <h3>Pagar.me</h3>
-                    <p>Solução brasileira com ótima documentação em português e suporte a boletos.</p>
-                    <a href="https://pagar.me" target="_blank" class="badge badge-primary">Documentação</a>
-                </div>
-                <div class="feature">
-                    <i class="fab fa-paypal"></i>
-                    <h3>PayPal</h3>
-                    <p>Ótimo para pagamentos internacionais e integração com contas PayPal.</p>
-                    <a href="https://developer.paypal.com" target="_blank" class="badge badge-primary">Documentação</a>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-barcode"></i>
-                    <h3>Mercado Pago</h3>
-                    <p>Popular no Brasil com suporte a Pix e boleto. Boa alternativa para e-commerces.</p>
-                    <a href="https://www.mercadopago.com.br" target="_blank" class="badge badge-primary">Documentação</a>
-                </div>
-            </div>
-            
-            <div class="code-block">
-                <code>
-                    // Exemplo de integração com Stripe.js<br>
-                    &lt;script src="https://js.stripe.com/v3/"&gt;&lt;/script&gt;<br>
-                    <br>
-                    const stripe = Stripe('sua_chave_publica');<br>
-                    const elements = stripe.elements();<br>
-                    <br>
-                    // Cria elementos de cartão<br>
-                    const card = elements.create('card', {<br>
-                    <span class="tab"></span>style: {<br>
-                    <span class="tab"></span><span class="tab"></span>base: {<br>
-                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>fontSize: '16px',<br>
-                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>color: '#32325d'<br>
-                    <span class="tab"></span><span class="tab"></span>}<br>
-                    <span class="tab"></span>}<br>
-                    });<br>
-                    <br>
-                    // Monta o formulário<br>
-                    card.mount('#card-element');<br>
-                    <br>
-                    // Processa o pagamento<br>
-                    document.getElementById('payment-form').addEventListener('submit', async (e) => {<br>
-                    <span class="tab"></span>e.preventDefault();<br>
-                    <span class="tab"></span>const { error, paymentMethod } = await stripe.createPaymentMethod({<br>
-                    <span class="tab"></span><span class="tab"></span>type: 'card',<br>
-                    <span class="tab"></span><span class="tab"></span>card: card<br>
-                    <span class="tab"></span>});<br>
-                    <br>
-                    <span class="tab"></span>if (error) {<br>
-                    <span class="tab"></span><span class="tab"></span>showError(error.message);<br>
-                    <span class="tab"></span>} else {<br>
-                    <span class="tab"></span><span class="tab"></span>// Envia paymentMethod.id para seu servidor<br>
-                    <span class="tab"></span><span class="tab"></span>processPayment(paymentMethod.id);<br>
-                    <span class="tab"></span>}<br>
-                    });
-                </code>
-            </div>
-        </div>
-
-        <div class="card card-danger">
-            <h2><i class="fas fa-exclamation-triangle"></i> Segurança e PCI Compliance</h2>
-            <p>Ao trabalhar com cartões de crédito, é essencial seguir as normas de segurança:</p>
-            
-            <ul>
-                <li><strong>Nunca armazene dados sensíveis</strong> como números completos de cartão ou CVV</li>
-                <li>Use sempre <strong>tokens</strong> ou serviços de terceiros para processamento</li>
-                <li>Certifique-se que seu site usa <strong>HTTPS</strong></li>
-                <li>Implemente <strong>CSP (Content Security Policy)</strong> para prevenir ataques XSS</li>
-                <li>Siga as diretrizes do <strong>PCI DSS</strong> (Payment Card Industry Data Security Standard)</li>
+            <p>Todos os dados são criptografados ponta-a-ponta, incluindo:</p>
+            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                <li>Credenciais de usuário (com hash e salt)</li>
+                <li>Histórico de transações</li>
+                <li>Dados de pagamento</li>
             </ul>
-            
-            <div class="info">
-                <i class="fas fa-info-circle"></i> Para aplicações reais, considere usar soluções como <strong>Stripe Elements</strong> ou <strong>Braintree Hosted Fields</strong> que cuidam da segurança para você.
+        </section>
+    </main>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>ACESSO DO CLIENTE</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">USUÁRIO</label>
+                    <input type="text" id="loginUsername" class="form-control" required>
+                    <div id="loginUserError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">SENHA</label>
+                    <input type="password" id="loginPassword" class="form-control" required>
+                    <div id="loginPassError" class="error-message"></div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">ACESSAR</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>CRIAR NOVA CONTA</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regUsername">USUÁRIO</label>
+                    <input type="text" id="regUsername" class="form-control" required minlength="3">
+                    <div id="regUserError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">SENHA</label>
+                    <input type="password" id="regPassword" class="form-control" required minlength="6">
+                    <div id="regPassError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="regConfirm">CONFIRMAR SENHA</label>
+                    <input type="password" id="regConfirm" class="form-control" required>
+                    <div id="regConfirmError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="regPGP">CHAVE PGP PÚBLICA (OPCIONAL)</label>
+                    <textarea id="regPGP" rows="3" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">CRIAR CONTA</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-btn">&times;</span>
+            <h2>SEU CARRINHO</h2>
+            <div class="cart-items" id="cartItems">
+                <p id="emptyCartMessage">Seu carrinho está vazio</p>
+            </div>
+            <div class="cart-total">
+                <strong>TOTAL: <span id="cartTotal">0</span> BTC</strong>
+            </div>
+            <button id="checkoutBtn" class="btn btn-primary" style="width: 100%; margin-top: 1rem; display: none;">FINALIZAR COMPRA</button>
+        </div>
+    </div>
+    
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <span class="close-btn">&times;</span>
+            <h2>PAGAMENTO COM BITCOIN</h2>
+            <p>Envie exatamente <strong id="paymentAmount">0</strong> BTC para:</p>
+            <div class="payment-address">
+                bc1qfdedkcvzp07f3pyuf7gtzdjz4rugnkdqyv2c97
+            </div>
+            <div style="text-align: center; margin: 1rem 0;">
+                <div style="background: white; padding: 1rem; display: inline-block;">
+                    [QR CODE BTC]
+                </div>
             </div>
             
-            <button class="btn-danger" onclick="window.open('https://www.pcisecuritystandards.org', '_blank')">
-                <i class="fas fa-shield-alt"></i> Saiba mais sobre PCI DSS
-            </button>
+            <div style="margin-top: 1.5rem;">
+                <div class="status-badge status-pending" id="paymentStatus">
+                    AGUARDANDO PAGAMENTO...
+                </div>
+                <div style="text-align: center; font-size: 0.9rem; margin-top: 0.5rem;">
+                    Última verificação: <span id="lastCheck">agora</span>
+                </div>
+            </div>
+            
+            <button id="cancelPayment" class="btn" style="width: 100%; margin-top: 1rem;">CANCELAR PEDIDO</button>
         </div>
-
-        <footer>
-            <p><i class="fas fa-lock"></i> <strong>Importante:</strong> Este é um simulador educacional. Nenhum dado é armazenado ou enviado a servidores.</p>
-            <p>© 2023 Validador de Cartões Educacional | Desenvolvido com <i class="fas fa-heart" style="color: var(--error);"></i> para fins didáticos</p>
-        </footer>
     </div>
-
+    
     <script>
-        // Mapeamento de bandeiras para ícones
-        const cardIcons = {
-            'Visa': 'fab fa-cc-visa',
-            'Mastercard': 'fab fa-cc-mastercard',
-            'American Express': 'fab fa-cc-amex',
-            'Discover': 'fab fa-cc-discover',
-            'JCB': 'fab fa-cc-jcb',
-            'Diners Club': 'fab fa-cc-diners-club',
-            'Elo': 'fab fa-cc-elo',
-            'Desconhecido': 'far fa-credit-card'
-        };
-
-        // Validação do cartão via Algoritmo de Luhn
-        function isValidCard(cardNumber) {
-            cardNumber = cardNumber.replace(/\D/g, '');
-            if (cardNumber.length < 13 || cardNumber.length > 19) return false;
-
-            let sum = 0;
-            let shouldDouble = false;
-
-            for (let i = cardNumber.length - 1; i >= 0; i--) {
-                let digit = parseInt(cardNumber.charAt(i));
-
-                if (shouldDouble) {
-                    digit *= 2;
-                    if (digit > 9) digit -= 9;
+        // Sistema de Autenticação
+        class AuthSystem {
+            static users = JSON.parse(localStorage.getItem('mydrugs_users')) || [];
+            static currentUser = null;
+            
+            static init() {
+                this.loadSession();
+            }
+            
+            static register(username, password, pgpKey = '') {
+                // Validação
+                if (this.users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
+                    return { success: false, message: 'Nome de usuário já em uso' };
                 }
-
-                sum += digit;
-                shouldDouble = !shouldDouble;
-            }
-
-            return sum % 10 === 0;
-        }
-
-        // Detecta a bandeira do cartão com mais opções
-        function detectCardType(cardNumber) {
-            cardNumber = cardNumber.replace(/\D/g, '');
-            if (cardNumber.length === 0) return 'Desconhecido';
-            
-            const firstDigit = cardNumber.charAt(0);
-            const firstTwoDigits = cardNumber.substring(0, 2);
-            const firstThreeDigits = cardNumber.substring(0, 3);
-            const firstFourDigits = cardNumber.substring(0, 4);
-
-            // Visa
-            if (firstDigit === '4') return 'Visa';
-            
-            // Mastercard
-            if (/^5[1-5]/.test(firstTwoDigits)) return 'Mastercard';
-            if (/^22[2-9][1-9]/.test(firstFourDigits)) return 'Mastercard';
-            if (/^2[3-7][0-9][0-9]/.test(firstFourDigits)) return 'Mastercard';
-            
-            // American Express
-            if (/^3[47]/.test(firstTwoDigits)) return 'American Express';
-            
-            // Discover
-            if (firstFourDigits === '6011') return 'Discover';
-            if (/^64[4-9]/.test(firstThreeDigits)) return 'Discover';
-            if (firstTwoDigits === '65') return 'Discover';
-            
-            // JCB
-            if (/^35(2[8-9]|[3-8][0-9])/.test(firstFourDigits)) return 'JCB';
-            
-            // Diners Club
-            if (/^3(0[0-5]|[689][0-9])/.test(firstTwoDigits)) return 'Diners Club';
-            
-            // Elo
-            if (/^(4011|4312|4389|4514|4573|4576|5041|5067|5068|5090|5099|6277|6363|650[0-9])/.test(firstFourDigits)) return 'Elo';
-            
-            return 'Desconhecido';
-        }
-
-        // Valida a data de expiração
-        function isValidExpiry(expiry) {
-            if (!expiry || expiry.indexOf('/') === -1) return false;
-            
-            const [month, year] = expiry.split('/').map(Number);
-            if (!month || !year || month < 1 || month > 12) return false;
-            
-            const currentYear = new Date().getFullYear() % 100;
-            const currentMonth = new Date().getMonth() + 1;
-            
-            if (year < currentYear) return false;
-            if (year === currentYear && month < currentMonth) return false;
-            
-            return true;
-        }
-
-        // Valida o CVV
-        function isValidCvv(cvv, cardType) {
-            cvv = cvv.replace(/\D/g, '');
-            
-            if (cardType === 'American Express') {
-                return cvv.length === 4;
-            }
-            return cvv.length === 3;
-        }
-
-        // Atualiza a visualização do cartão em tempo real
-        function updateCardPreview(cardNumber, expiry, cvv) {
-            const previewNumber = document.getElementById('previewCardNumber');
-            const previewType = document.getElementById('previewCardType');
-            const previewExpiry = document.getElementById('previewCardExpiry');
-            const cardIcon = document.getElementById('cardIcon');
-            
-            // Formata o número para exibição
-            let displayNumber = cardNumber.replace(/\D/g, '');
-            displayNumber = displayNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
-            
-            if (displayNumber.trim() === '') {
-                previewNumber.textContent = '•••• •••• •••• ••••';
-                previewType.textContent = 'Insira um número de cartão';
-                previewExpiry.textContent = 'MM/AA •••';
-                cardIcon.className = 'far fa-credit-card';
-                return;
-            }
-            
-            // Mostra os 4 primeiros e os 4 últimos dígitos, mascara o meio
-            const visibleStart = displayNumber.substring(0, 4);
-            const visibleEnd = displayNumber.length > 8 ? displayNumber.substring(displayNumber.length - 4) : '';
-            const maskedMiddle = displayNumber.length > 8 ? ' •••• ' : ' ••••';
-            
-            previewNumber.textContent = visibleStart + maskedMiddle + (displayNumber.length > 8 ? visibleEnd : '');
-            
-            // Formata a data de expiração
-            let displayExpiry = '••/••';
-            if (expiry) {
-                displayExpiry = expiry.length >= 2 
-                    ? expiry.substring(0, 2) + '/' + (expiry.length > 2 ? expiry.substring(2, 4) : '••')
-                    : expiry + '••/••'.substring(expiry.length);
-            }
-            
-            // Formata o CVV
-            const displayCvv = cvv ? (cvv.length <= 3 ? '•'.repeat(cvv.length) + '•••'.substring(cvv.length) : '•••') : '•••';
-            
-            // Detecta a bandeira e atualiza o ícone
-            const cardType = detectCardType(cardNumber);
-            previewType.textContent = cardType;
-            previewExpiry.textContent = `${displayExpiry} ${displayCvv}`;
-            
-            // Atualiza o ícone conforme a bandeira
-            cardIcon.className = cardIcons[cardType] || 'far fa-credit-card';
-        }
-
-        // Validação no formulário
-        function validateCard() {
-            const cardNumber = document.getElementById('cardNumber').value;
-            const expiry = document.getElementById('cardExpiry').value;
-            const cvv = document.getElementById('cardCvv').value;
-            const resultDiv = document.getElementById('result');
-
-            if (!cardNumber || cardNumber.replace(/\D/g, '').length < 13) {
-                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Por favor, insira um número de cartão válido (13-19 dígitos)`;
-                resultDiv.className = "invalid";
-                return;
-            }
-
-            if (!isValidExpiry(expiry)) {
-                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Data de validade inválida ou expirada`;
-                resultDiv.className = "invalid";
-                return;
-            }
-
-            const cardType = detectCardType(cardNumber);
-            if (!isValidCvv(cvv, cardType)) {
-                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> CVV inválido (${cardType === 'American Express' ? '4 dígitos' : '3 dígitos'})`;
-                resultDiv.className = "invalid";
-                return;
-            }
-
-            const isValid = isValidCard(cardNumber);
-
-            if (isValid) {
-                resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> Cartão <strong>${cardType}</strong> válido!<br>
-                                      <small>Validade: ${expiry} | CVV: ${'•'.repeat(cvv.length)}</small>`;
-                resultDiv.className = "valid";
-            } else {
-                resultDiv.innerHTML = `<i class="fas fa-times-circle"></i> Número de cartão inválido`;
-                resultDiv.className = "invalid";
-            }
-        }
-
-        // Simulação de API de pagamento
-        async function simulatePayment() {
-            const cardNumber = document.getElementById('apiCardNumber').value;
-            const expiry = document.getElementById('apiCardExpiry').value;
-            const cvv = document.getElementById('apiCardCvv').value;
-            const amount = document.getElementById('apiAmount').value;
-            const resultDiv = document.getElementById('apiResult');
-            const paymentButton = document.getElementById('paymentButton');
-
-            if (!cardNumber || cardNumber.replace(/\D/g, '').length < 13) {
-                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Insira um número de cartão válido`;
-                resultDiv.className = "invalid";
-                return;
-            }
-
-            if (!isValidExpiry(expiry)) {
-                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Data de validade inválida`;
-                resultDiv.className = "invalid";
-                return;
-            }
-
-            const cardType = detectCardType(cardNumber);
-            if (!isValidCvv(cvv, cardType)) {
-                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> CVV inválido (${cardType === 'American Express' ? '4 dígitos' : '3 dígitos'})`;
-                resultDiv.className = "invalid";
-                return;
-            }
-
-            if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
-                resultDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i> Valor inválido`;
-                resultDiv.className = "invalid";
-                return;
-            }
-
-            // Mostra estado de processamento
-            paymentButton.innerHTML = `<span class="spinner"></span> Processando...`;
-            paymentButton.disabled = true;
-            resultDiv.innerHTML = `<i class="fas fa-sync-alt fa-spin"></i> Processando pagamento de R$${parseFloat(amount).toFixed(2)}...`;
-            resultDiv.className = "processing";
-
-            // Simula uma chamada de API assíncrona
-            try {
-                const response = await fakePaymentAPI(cardNumber, expiry, cvv, amount);
                 
-                if (response.success) {
-                    resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${response.message}<br>
-                                          <small>ID: ${response.transactionId} | Valor: R$${parseFloat(amount).toFixed(2)}</small>`;
-                    resultDiv.className = "valid";
-                } else {
-                    resultDiv.innerHTML = `<i class="fas fa-times-circle"></i> ${response.message}<br>
-                                          <small>Código: ${response.errorCode}</small>`;
-                    resultDiv.className = "invalid";
+                if (password.length < 6) {
+                    return { success: false, message: 'A senha deve ter pelo menos 6 caracteres' };
                 }
-            } catch (error) {
-                resultDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> Erro na conexão com o gateway de pagamento`;
-                resultDiv.className = "invalid";
-            } finally {
-                paymentButton.innerHTML = `<i class="fas fa-paper-plane"></i> Processar Pagamento`;
-                paymentButton.disabled = false;
+                
+                // Criar usuário
+                const user = {
+                    username,
+                    password: this.hashPassword(password),
+                    pgpKey,
+                    createdAt: new Date().toISOString(),
+                    orders: []
+                };
+                
+                this.users.push(user);
+                this.saveUsers();
+                return { success: true, user };
+            }
+            
+            static login(username, password) {
+                const user = this.users.find(u => u.username.toLowerCase() === username.toLowerCase());
+                
+                if (!user) {
+                    return { success: false, message: 'Usuário não encontrado' };
+                }
+                
+                if (user.password !== this.hashPassword(password)) {
+                    return { success: false, message: 'Senha incorreta' };
+                }
+                
+                this.currentUser = user;
+                this.saveSession();
+                return { success: true, user };
+            }
+            
+            static logout() {
+                this.currentUser = null;
+                this.clearSession();
+                return { success: true };
+            }
+            
+            static hashPassword(password) {
+                // Simulação de hash - em produção usar PBKDF2 ou bcrypt
+                let hash = 5381;
+                for (let i = 0; i < password.length; i++) {
+                    hash = (hash * 33) ^ password.charCodeAt(i);
+                }
+                return (hash >>> 0).toString(16);
+            }
+            
+            static saveUsers() {
+                localStorage.setItem('mydrugs_users', JSON.stringify(this.users));
+            }
+            
+            static loadSession() {
+                const session = JSON.parse(localStorage.getItem('mydrugs_session'));
+                if (session) {
+                    const user = this.users.find(u => 
+                        u.username === session.username && 
+                        u.password === session.passwordHash
+                    );
+                    if (user) {
+                        this.currentUser = user;
+                        return user;
+                    }
+                }
+                return null;
+            }
+            
+            static saveSession() {
+                if (this.currentUser) {
+                    localStorage.setItem('mydrugs_session', JSON.stringify({
+                        username: this.currentUser.username,
+                        passwordHash: this.currentUser.password
+                    }));
+                }
+            }
+            
+            static clearSession() {
+                localStorage.removeItem('mydrugs_session');
             }
         }
 
-        // Função que simula uma API de pagamento mais realista
-        function fakePaymentAPI(cardNumber, expiry, cvv, amount) {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    // Primeiro valida o cartão
-                    if (!isValidCard(cardNumber)) {
-                        resolve({
-                            success: false,
-                            message: "Número de cartão inválido",
-                            errorCode: "INVALID_CARD",
-                            transactionId: null
-                        });
-                        return;
-                    }
+        // Sistema de Produtos e Carrinho
+        class StoreSystem {
+            static products = [
+                {
+                    id: 1,
+                    name: "ECSTASY GOLD",
+                    emoji: "💊",
+                    description: "Cristais de MDMA premium com 99.9% de pureza, testados em laboratório",
+                    price: 0.0012,
+                    rating: "★★★★★"
+                },
+                {
+                    id: 2,
+                    name: "PSILOCYBIN PRO",
+                    emoji: "🍄",
+                    description: "Trufas mágicas com potência consistente, seladas a vácuo",
+                    price: 0.0018,
+                    rating: "★★★★☆"
+                },
+                {
+                    id: 3,
+                    name: "HYBRID #42",
+                    emoji: "🌿",
+                    description: "Strain premium de cannabis, 27% THC, cultivo indoor",
+                    price: 0.0006,
+                    rating: "★★★★★"
+                },
+                {
+                    id: 4,
+                    name: "LAB-GRADE LSD",
+                    emoji: "🧪",
+                    description: "Blotters de 200μg com molécula Hoffman, verificado em laboratório",
+                    price: 0.0004,
+                    rating: "★★★★★"
+                }
+            ];
+            
+            static cart = [];
+            
+            static init() {
+                this.loadCart();
+            }
+            
+            static addToCart(productId) {
+                const product = this.products.find(p => p.id === productId);
+                if (!product) return false;
+                
+                const existingItem = this.cart.find(item => item.id === productId);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    this.cart.push({ ...product, quantity: 1 });
+                }
+                
+                this.saveCart();
+                return true;
+            }
+            
+            static removeFromCart(productId) {
+                this.cart = this.cart.filter(item => item.id !== productId);
+                this.saveCart();
+            }
+            
+            static getCartTotal() {
+                return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            }
+            
+            static getCartItemCount() {
+                return this.cart.reduce((count, item) => count + item.quantity, 0);
+            }
+            
+            static saveCart() {
+                if (AuthSystem.currentUser) {
+                    localStorage.setItem(
+                        `mydrugs_cart_${AuthSystem.currentUser.username}`, 
+                        JSON.stringify(this.cart)
+                    );
+                } else {
+                    localStorage.setItem('mydrugs_cart_guest', JSON.stringify(this.cart));
+                }
+            }
+            
+            static loadCart() {
+                let savedCart;
+                if (AuthSystem.currentUser) {
+                    savedCart = localStorage.getItem(`mydrugs_cart_${AuthSystem.currentUser.username}`);
+                } else {
+                    savedCart = localStorage.getItem('mydrugs_cart_guest');
+                }
+                
+                this.cart = savedCart ? JSON.parse(savedCart) : [];
+            }
+            
+            static clearCart() {
+                this.cart = [];
+                this.saveCart();
+            }
+        }
 
-                    // Valida a data
-                    if (!isValidExpiry(expiry)) {
-                        resolve({
-                            success: false,
-                            message: "Cartão expirado ou data inválida",
-                            errorCode: "INVALID_EXPIRY",
-                            transactionId: null
-                        });
-                        return;
-                    }
+        // Sistema de Avaliações (sem criptografia)
+        class ReviewSystem {
+            static reviews = JSON.parse(localStorage.getItem('mydrugs_reviews')) || [];
+            
+            static submitReview(text, rating, username) {
+                if (!text || !rating || !username) return false;
+                
+                const review = {
+                    id: Date.now(),
+                    username,
+                    date: new Date().toISOString(),
+                    text: text, // Texto armazenado sem criptografia
+                    rating: parseInt(rating)
+                };
+                
+                this.reviews.push(review);
+                this.saveReviews();
+                return true;
+            }
+            
+            static getRecentReviews(limit = 5) {
+                return [...this.reviews].reverse().slice(0, limit);
+            }
+            
+            static saveReviews() {
+                localStorage.setItem('mydrugs_reviews', JSON.stringify(this.reviews));
+            }
+        }
 
-                    // Simula falhas aleatórias (20% de chance)
-                    const isSuccess = Math.random() > 0.2;
-                    const cardType = detectCardType(cardNumber);
+        // Sistema de Pagamento
+        class PaymentSystem {
+            static processPayment(amount) {
+                return new Promise((resolve) => {
+                    // Simular processamento de pagamento
+                    setTimeout(() => {
+                        resolve({ 
+                            success: true, 
+                            transactionId: `tx_${Date.now()}`,
+                            amount 
+                        });
+                    }, 3000);
+                });
+            }
+        }
+
+        // Gerenciador de Interface
+        class UIManager {
+            static init() {
+                this.renderProducts();
+                this.setupEventListeners();
+                this.updateUI();
+            }
+            
+            static updateUI() {
+                // Atualizar estado de autenticação
+                if (AuthSystem.currentUser) {
+                    document.getElementById('authSection').style.display = 'none';
+                    document.getElementById('userSection').style.display = 'flex';
+                    document.getElementById('usernameDisplay').textContent = AuthSystem.currentUser.username;
+                    document.getElementById('reviewForm').style.display = 'block';
+                } else {
+                    document.getElementById('authSection').style.display = 'flex';
+                    document.getElementById('userSection').style.display = 'none';
+                    document.getElementById('reviewForm').style.display = 'none';
+                }
+                
+                // Atualizar carrinho
+                this.updateCartBadge();
+                
+                // Carregar avaliações
+                this.loadReviews();
+            }
+            
+            static renderProducts() {
+                const productsGrid = document.getElementById('productsGrid');
+                productsGrid.innerHTML = '';
+                
+                StoreSystem.products.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'product-card';
+                    productCard.innerHTML = `
+                        <div class="product-image">${product.emoji}</div>
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-description">${product.description}</p>
+                            <div class="product-rating">${product.rating}</div>
+                            <div class="product-price">${product.price.toFixed(6)} BTC</div>
+                            <button class="btn btn-primary add-to-cart" data-id="${product.id}" style="width: 100%;">ADICIONAR</button>
+                        </div>
+                    `;
+                    productsGrid.appendChild(productCard);
+                });
+            }
+            
+            static updateCartBadge() {
+                const count = StoreSystem.getCartItemCount();
+                const badge = document.getElementById('cartBadge');
+                const badgeLogged = document.getElementById('cartBadgeLogged');
+                
+                if (count > 0) {
+                    badge.textContent = count;
+                    badge.style.display = 'flex';
+                    badgeLogged.textContent = count;
+                    badgeLogged.style.display = 'flex';
+                } else {
+                    badge.style.display = 'none';
+                    badgeLogged.style.display = 'none';
+                }
+            }
+            
+            static renderCart() {
+                const cartItems = document.getElementById('cartItems');
+                const emptyMsg = document.getElementById('emptyCartMessage');
+                const checkoutBtn = document.getElementById('checkoutBtn');
+                
+                if (StoreSystem.cart.length === 0) {
+                    emptyMsg.style.display = 'block';
+                    checkoutBtn.style.display = 'none';
+                    cartItems.innerHTML = '<p id="emptyCartMessage">Seu carrinho está vazio</p>';
+                    return;
+                }
+                
+                emptyMsg.style.display = 'none';
+                checkoutBtn.style.display = 'block';
+                
+                let itemsHTML = '';
+                StoreSystem.cart.forEach(item => {
+                    itemsHTML += `
+                        <div class="cart-item">
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${item.name}</div>
+                                <div>${item.price.toFixed(6)} BTC × ${item.quantity}</div>
+                            </div>
+                            <div class="cart-item-price">
+                                ${(item.price * item.quantity).toFixed(6)} BTC
+                            </div>
+                            <span class="remove-item" data-id="${item.id}">✕</span>
+                        </div>
+                    `;
+                });
+                
+                cartItems.innerHTML = itemsHTML;
+                document.getElementById('cartTotal').textContent = StoreSystem.getCartTotal().toFixed(6);
+            }
+            
+            static loadReviews() {
+                const reviewsList = document.getElementById('reviewsList');
+                reviewsList.innerHTML = '';
+                
+                const reviews = ReviewSystem.getRecentReviews();
+                
+                if (reviews.length === 0) {
+                    reviewsList.innerHTML = '<p>Nenhuma avaliação disponível. Seja o primeiro a avaliar!</p>';
+                    return;
+                }
+                
+                reviews.forEach(review => {
+                    const reviewItem = document.createElement('div');
+                    reviewItem.className = 'review-item';
                     
-                    // Gera um ID de transação fictício
-                    const transactionId = 'txn_' + Math.random().toString(36).substr(2, 12).toUpperCase();
-
-                    if (isSuccess) {
-                        resolve({
-                            success: true,
-                            message: `Pagamento de R$${parseFloat(amount).toFixed(2)} com ${cardType} aprovado!`,
-                            transactionId: transactionId
-                        });
-                    } else {
-                        // Simula diferentes tipos de erro
-                        const errors = [
-                            { message: "Pagamento recusado pelo emissor", code: "DECLINED" },
-                            { message: "Fundos insuficientes", code: "INSUFFICIENT_FUNDS" },
-                            { message: "Transação não autorizada", code: "UNAUTHORIZED" },
-                            { message: "Limite excedido", code: "LIMIT_EXCEEDED" }
-                        ];
-                        const error = errors[Math.floor(Math.random() * errors.length)];
-                        
-                        resolve({
-                            success: false,
-                            message: error.message,
-                            errorCode: error.code,
-                            transactionId: null
-                        });
+                    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                    
+                    reviewItem.innerHTML = `
+                        <div class="review-header">
+                            <span>${review.username}</span>
+                            <span>${stars}</span>
+                        </div>
+                        <div class="review-text">
+                            ${review.text} <!-- Texto exibido sem criptografia -->
+                        </div>
+                        <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--highlight);">
+                            ${new Date(review.date).toLocaleDateString()}
+                        </div>
+                    `;
+                    
+                    reviewsList.appendChild(reviewItem);
+                });
+            }
+            
+            static setupEventListeners() {
+                // Login
+                document.getElementById('loginForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const username = document.getElementById('loginUsername').value.trim();
+                    const password = document.getElementById('loginPassword').value.trim();
+                    
+                    // Reset errors
+                    document.getElementById('loginUserError').style.display = 'none';
+                    document.getElementById('loginPassError').style.display = 'none';
+                    
+                    if (!username) {
+                        document.getElementById('loginUserError').textContent = 'Por favor, insira um nome de usuário';
+                        document.getElementById('loginUserError').style.display = 'block';
+                        return;
                     }
-                }, 2000); // Simula delay de rede
+                    
+                    if (!password) {
+                        document.getElementById('loginPassError').textContent = 'Por favor, insira uma senha';
+                        document.getElementById('loginPassError').style.display = 'block';
+                        return;
+                    }
+                    
+                    const result = AuthSystem.login(username, password);
+                    
+                    if (result.success) {
+                        document.getElementById('loginModal').style.display = 'none';
+                        StoreSystem.loadCart();
+                        this.updateUI();
+                    } else {
+                        document.getElementById('loginPassError').textContent = result.message;
+                        document.getElementById('loginPassError').style.display = 'block';
+                    }
+                });
+                
+                // Registro
+                document.getElementById('registerForm').addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const username = document.getElementById('regUsername').value.trim();
+                    const password = document.getElementById('regPassword').value.trim();
+                    const confirm = document.getElementById('regConfirm').value.trim();
+                    const pgpKey = document.getElementById('regPGP').value.trim();
+                    
+                    // Reset errors
+                    document.getElementById('regUserError').style.display = 'none';
+                    document.getElementById('regPassError').style.display = 'none';
+                    document.getElementById('regConfirmError').style.display = 'none';
+                    
+                    // Validação
+                    let hasError = false;
+                    
+                    if (username.length < 3) {
+                        document.getElementById('regUserError').textContent = 'O nome de usuário deve ter pelo menos 3 caracteres';
+                        document.getElementById('regUserError').style.display = 'block';
+                        hasError = true;
+                    }
+                    
+                    if (password.length < 6) {
+                        document.getElementById('regPassError').textContent = 'A senha deve ter pelo menos 6 caracteres';
+                        document.getElementById('regPassError').style.display = 'block';
+                        hasError = true;
+                    }
+                    
+                    if (password !== confirm) {
+                        document.getElementById('regConfirmError').textContent = 'As senhas não coincidem';
+                        document.getElementById('regConfirmError').style.display = 'block';
+                        hasError = true;
+                    }
+                    
+                    if (hasError) return;
+                    
+                    const result = AuthSystem.register(username, password, pgpKey);
+                    
+                    if (result.success) {
+                        document.getElementById('registerModal').style.display = 'none';
+                        StoreSystem.loadCart();
+                        this.updateUI();
+                    } else {
+                        document.getElementById('regUserError').textContent = result.message;
+                        document.getElementById('regUserError').style.display = 'block';
+                    }
+                });
+                
+                // Logout
+                document.getElementById('logoutBtn').addEventListener('click', () => {
+                    AuthSystem.logout();
+                    StoreSystem.loadCart();
+                    this.updateUI();
+                });
+                
+                // Carrinho
+                document.getElementById('cartBtn').addEventListener('click', () => {
+                    this.renderCart();
+                    document.getElementById('cartModal').style.display = 'block';
+                });
+                
+                document.getElementById('cartBtnLogged').addEventListener('click', () => {
+                    this.renderCart();
+                    document.getElementById('cartModal').style.display = 'block';
+                });
+                
+                // Adicionar ao carrinho
+                document.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('add-to-cart')) {
+                        if (!AuthSystem.currentUser) {
+                            alert('Por favor, faça login para adicionar itens ao carrinho');
+                            document.getElementById('loginModal').style.display = 'block';
+                            return;
+                        }
+                        
+                        const productId = parseInt(e.target.getAttribute('data-id'));
+                        if (StoreSystem.addToCart(productId)) {
+                            this.updateCartBadge();
+                            alert('Produto adicionado ao carrinho!');
+                        }
+                    }
+                    
+                    if (e.target.classList.contains('remove-item')) {
+                        const productId = parseInt(e.target.getAttribute('data-id'));
+                        StoreSystem.removeFromCart(productId);
+                        this.updateCartBadge();
+                        this.renderCart();
+                    }
+                });
+                
+                // Finalizar compra
+                document.getElementById('checkoutBtn').addEventListener('click', () => {
+                    if (!AuthSystem.currentUser) return;
+                    
+                    const total = StoreSystem.getCartTotal();
+                    document.getElementById('paymentAmount').textContent = total.toFixed(6);
+                    document.getElementById('cartModal').style.display = 'none';
+                    document.getElementById('paymentModal').style.display = 'block';
+                    
+                    this.processPayment();
+                });
+                
+                // Cancelar pagamento
+                document.getElementById('cancelPayment').addEventListener('click', () => {
+                    document.getElementById('paymentModal').style.display = 'none';
+                });
+                
+                // Enviar avaliação
+                document.getElementById('submitReview').addEventListener('click', () => {
+                    if (!AuthSystem.currentUser) return;
+                    
+                    const text = document.getElementById('reviewText').value.trim();
+                    const rating = document.getElementById('reviewRating').value;
+                    
+                    if (!text) {
+                        alert('Por favor, escreva sua avaliação');
+                        return;
+                    }
+                    
+                    if (ReviewSystem.submitReview(text, rating, AuthSystem.currentUser.username)) {
+                        document.getElementById('reviewText').value = '';
+                        this.loadReviews();
+                        alert('Avaliação enviada com sucesso!');
+                    }
+                });
+                
+                // Fechar modais
+                document.querySelectorAll('.close-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        this.closest('.modal').style.display = 'none';
+                    });
+                });
+                
+                // Fechar ao clicar fora
+                window.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('modal')) {
+                        e.target.style.display = 'none';
+                    }
+                });
+            }
+            
+            static async processPayment() {
+                const statusElement = document.getElementById('paymentStatus');
+                const lastCheckElement = document.getElementById('lastCheck');
+                
+                statusElement.className = 'status-badge status-pending';
+                statusElement.textContent = 'AGUARDANDO PAGAMENTO...';
+                
+                // Simular verificação de pagamento
+                let checks = 0;
+                const checkInterval = setInterval(() => {
+                    checks++;
+                    lastCheckElement.textContent = new Date().toLocaleTimeString();
+                    
+                    // Simular confirmação após 3 verificações
+                    if (checks === 3) {
+                        clearInterval(checkInterval);
+                        this.completePayment();
+                    }
+                }, 2000);
+            }
+            
+            static async completePayment() {
+                const statusElement = document.getElementById('paymentStatus');
+                statusElement.className = 'status-badge status-success';
+                statusElement.textContent = 'PAGAMENTO CONFIRMADO!';
+                
+                // Simular processamento
+                setTimeout(() => {
+                    // Criar pedido
+                    const order = {
+                        id: Date.now(),
+                        date: new Date().toISOString(),
+                        items: [...StoreSystem.cart],
+                        total: StoreSystem.getCartTotal(),
+                        status: 'completed'
+                    };
+                    
+                    // Adicionar ao histórico do usuário
+                    if (AuthSystem.currentUser) {
+                        const userIndex = AuthSystem.users.findIndex(
+                            u => u.username === AuthSystem.currentUser.username
+                        );
+                        if (userIndex !== -1) {
+                            AuthSystem.users[userIndex].orders.push(order);
+                            AuthSystem.saveUsers();
+                        }
+                    }
+                    
+                    // Limpar carrinho
+                    StoreSystem.clearCart();
+                    this.updateCartBadge();
+                    
+                    // Fechar modal e mostrar confirmação
+                    document.getElementById('paymentModal').style.display = 'none';
+                    alert(`Pedido #${order.id} realizado com sucesso!\nTotal: ${order.total.toFixed(6)} BTC`);
+                }, 2000);
+            }
+        }
+
+        // Inicialização do sistema
+        document.addEventListener('DOMContentLoaded', () => {
+            AuthSystem.init();
+            StoreSystem.init();
+            UIManager.init();
+            
+            // Botões para abrir modais
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                document.getElementById('loginModal').style.display = 'block';
+                document.getElementById('loginUsername').focus();
             });
-        }
-
-        // Preenche exemplos
-        function fillExample(cardNumber, expiry, cvv) {
-            document.getElementById('cardNumber').value = cardNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
-            document.getElementById('cardExpiry').value = expiry;
-            document.getElementById('cardCvv').value = cvv;
-            updateCardPreview(cardNumber, expiry.replace(/\D/g, ''), cvv);
-            validateCard();
-        }
-
-        // Formata o número do cartão (formatação automática)
-        function formatCardNumber(input) {
-            let value = input.value.replace(/\D/g, '');
-            value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
-            input.value = value.substring(0, 19);
             
-            // Atualiza a visualização em tempo real
-            const expiry = document.getElementById(input.id === 'cardNumber' ? 'cardExpiry' : 'apiCardExpiry').value;
-            const cvv = document.getElementById(input.id === 'cardNumber' ? 'cardCvv' : 'apiCardCvv').value;
-            updateCardPreview(value, expiry, cvv);
-        }
-
-        // Formata a data de validade
-        function formatExpiry(input) {
-            let value = input.value.replace(/\D/g, '');
-            
-            if (value.length > 2) {
-                value = value.substring(0, 2) + '/' + value.substring(2, 4);
-            }
-            
-            input.value = value.substring(0, 5);
-            
-            // Atualiza a visualização
-            const cardNumber = document.getElementById(input.id === 'cardExpiry' ? 'cardNumber' : 'apiCardNumber').value;
-            const cvv = document.getElementById(input.id === 'cardExpiry' ? 'cardCvv' : 'apiCardCvv').value;
-            updateCardPreview(cardNumber, value.replace(/\D/g, ''), cvv);
-        }
-
-        // Formata o CVV
-        function formatCvv(input) {
-            let value = input.value.replace(/\D/g, '');
-            input.value = value.substring(0, 4);
-            
-            // Atualiza a visualização
-            const cardNumber = document.getElementById(input.id === 'cardCvv' ? 'cardNumber' : 'apiCardNumber').value;
-            const expiry = document.getElementById(input.id === 'cardCvv' ? 'cardExpiry' : 'apiCardExpiry').value;
-            updateCardPreview(cardNumber, expiry, value);
-        }
-
-        // Controle de abas
-        function openTab(evt, tabName) {
-            const tabContents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove("active");
-            }
-
-            const tabButtons = document.getElementsByClassName("tab-button");
-            for (let i = 0; i < tabButtons.length; i++) {
-                tabButtons[i].classList.remove("active");
-            }
-
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
-
-        // Controle de accordion
-        function toggleAccordion(header) {
-            const accordion = header.parentElement;
-            accordion.classList.toggle("active");
-            
-            const icon = header.querySelector('i');
-            if (accordion.classList.contains("active")) {
-                icon.classList.remove('fa-chevron-down');
-                icon.classList.add('fa-chevron-up');
-            } else {
-                icon.classList.remove('fa-chevron-up');
-                icon.classList.add('fa-chevron-down');
-            }
-        }
-
-        // Event listeners
-        document.getElementById('cardNumber').addEventListener('input', function(e) {
-            formatCardNumber(e.target);
+            document.getElementById('registerBtn').addEventListener('click', () => {
+                document.getElementById('registerModal').style.display = 'block';
+                document.getElementById('regUsername').focus();
+            });
         });
-
-        document.getElementById('apiCardNumber').addEventListener('input', function(e) {
-            formatCardNumber(e.target);
-        });
-
-        document.getElementById('cardExpiry').addEventListener('input', function(e) {
-            formatExpiry(e.target);
-        });
-
-        document.getElementById('apiCardExpiry').addEventListener('input', function(e) {
-            formatExpiry(e.target);
-        });
-
-        document.getElementById('cardCvv').addEventListener('input', function(e) {
-            formatCvv(e.target);
-        });
-
-        document.getElementById('apiCardCvv').addEventListener('input', function(e) {
-            formatCvv(e.target);
-        });
-
-        // Inicializa a visualização do cartão
-        updateCardPreview('', '', '');
     </script>
 </body>
 </html>

@@ -431,6 +431,159 @@
             border-radius: 4px;
             white-space: pre-wrap;
         }
+
+        /* Chat Styles */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            z-index: 100;
+        }
+
+        .chat-box {
+            display: none;
+            background: var(--primary);
+            border: 1px solid var(--highlight);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            flex-direction: column;
+            height: 400px;
+        }
+
+        .chat-header {
+            background: var(--secondary);
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chat-header h3 {
+            color: var(--highlight);
+            margin: 0;
+        }
+
+        .chat-toggle {
+            background: var(--highlight);
+            color: var(--dark);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+        }
+
+        .chat-toggle:hover {
+            background: var(--highlight);
+            box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background: var(--highlight);
+            color: var(--dark);
+            border-top-right-radius: 0;
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background: var(--secondary);
+            border-top-left-radius: 0;
+        }
+
+        .admin-message {
+            align-self: flex-start;
+            background: var(--accent);
+            border-top-left-radius: 0;
+            border-left: 3px solid var(--highlight);
+        }
+
+        .system-message {
+            align-self: center;
+            background: var(--dark);
+            border: 1px solid var(--accent);
+            text-align: center;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+            text-align: right;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 0.8rem;
+            border-top: 1px solid var(--accent);
+            background: var(--secondary);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--dark);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+        }
+
+        .chat-input button {
+            margin-left: 0.5rem;
+            background: var(--highlight);
+            color: var(--dark);
+            border: none;
+            border-radius: 4px;
+            padding: 0 1rem;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background: var(--highlight);
+            opacity: 0.9;
+        }
+
+        .admin-login-form {
+            display: none;
+            padding: 1rem;
+            background: var(--secondary);
+            border-top: 1px solid var(--accent);
+        }
+
+        .admin-login-form input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            background: var(--dark);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            color: var(--text);
+            font-family: 'Courier New', monospace;
+        }
         
         /* Responsive Adjustments */
         @media (max-width: 768px) {
@@ -465,6 +618,16 @@
                 margin: 1rem auto;
                 padding: 1.2rem;
             }
+
+            .chat-container {
+                width: 300px;
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .chat-box {
+                height: 350px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -475,6 +638,10 @@
             .btn {
                 padding: 0.4rem 0.8rem;
                 font-size: 0.7rem;
+            }
+
+            .chat-container {
+                width: 280px;
             }
         }
     </style>
@@ -561,6 +728,28 @@
             </ul>
         </section>
     </main>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <div class="chat-toggle" id="chatToggle">💬</div>
+        <div class="chat-box" id="chatBox">
+            <div class="chat-header">
+                <h3>SUPORTE AO VIVO</h3>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will appear here -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Digite sua mensagem..." autocomplete="off">
+                <button id="sendMessage">Enviar</button>
+            </div>
+            <div class="admin-login-form" id="adminLoginForm">
+                <input type="password" id="adminPassword" placeholder="Senha de administrador">
+                <button id="adminLoginBtn" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Acessar como Admin</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
@@ -713,12 +902,14 @@
             }
             
             static hashPassword(password) {
-                // Simulação de hash - em produção usar PBKDF2 ou bcrypt
-                let hash = 5381;
+                // Função de hash simples (em produção use bcrypt)
+                let hash = 0;
                 for (let i = 0; i < password.length; i++) {
-                    hash = (hash * 33) ^ password.charCodeAt(i);
+                    const char = password.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash; // Convert to 32bit integer
                 }
-                return (hash >>> 0).toString(16);
+                return hash.toString(16);
             }
             
             static saveUsers() {
@@ -853,7 +1044,7 @@
             }
         }
 
-        // Sistema de Avaliações (sem criptografia)
+        // Sistema de Avaliações
         class ReviewSystem {
             static reviews = JSON.parse(localStorage.getItem('mydrugs_reviews')) || [];
             
@@ -864,7 +1055,7 @@
                     id: Date.now(),
                     username,
                     date: new Date().toISOString(),
-                    text: text, // Texto armazenado sem criptografia
+                    text: text,
                     rating: parseInt(rating)
                 };
                 
@@ -886,7 +1077,6 @@
         class PaymentSystem {
             static processPayment(amount) {
                 return new Promise((resolve) => {
-                    // Simular processamento de pagamento
                     setTimeout(() => {
                         resolve({ 
                             success: true, 
@@ -898,16 +1088,120 @@
             }
         }
 
+        // Sistema de Chat
+        class ChatSystem {
+            static messages = [];
+            static lastReset = localStorage.getItem('mydrugs_chat_last_reset');
+            static adminLoggedIn = false;
+            
+            // Hash da senha do admin (não armazenamos a senha em claro)
+            // Este hash deve ser gerado com a senha real em um ambiente seguro
+            static ADMIN_HASH = 'd3b1f8a2c5e9'; // Hash de exemplo (substitua pelo hash real)
+            
+            static init() {
+                this.checkReset();
+                this.loadMessages();
+                
+                if (this.messages.length === 0) {
+                    this.addSystemMessage("Bem-vindo ao suporte MyDrugs! Digite sua mensagem abaixo.");
+                }
+            }
+            
+            static checkReset() {
+                const now = new Date();
+                const today = now.toISOString().split('T')[0];
+                
+                if (!this.lastReset || this.lastReset !== today) {
+                    this.messages = [];
+                    this.lastReset = today;
+                    localStorage.setItem('mydrugs_chat_last_reset', today);
+                    localStorage.removeItem('mydrugs_chat_messages');
+                    this.addSystemMessage("Bem-vindo ao suporte MyDrugs! O chat é reiniciado a cada 24h.");
+                }
+            }
+            
+            static loadMessages() {
+                const savedMessages = localStorage.getItem('mydrugs_chat_messages');
+                if (savedMessages) {
+                    this.messages = JSON.parse(savedMessages);
+                }
+            }
+            
+            static saveMessages() {
+                localStorage.setItem('mydrugs_chat_messages', JSON.stringify(this.messages));
+            }
+            
+            static hashPassword(password) {
+                // Função de hash simples (em produção use bcrypt)
+                let hash = 0;
+                for (let i = 0; i < password.length; i++) {
+                    const char = password.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash; // Convert to 32bit integer
+                }
+                return hash.toString(16);
+            }
+            
+            static verifyAdmin(password) {
+                const hashed = this.hashPassword(password);
+                return hashed === this.ADMIN_HASH;
+            }
+            
+            static addUserMessage(text) {
+                const sender = AuthSystem.currentUser ? AuthSystem.currentUser.username : 'Visitante';
+                const message = {
+                    type: 'user',
+                    sender,
+                    text,
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                };
+                this.messages.push(message);
+                this.saveMessages();
+                return message;
+            }
+            
+            static addAdminMessage(text) {
+                const message = {
+                    type: 'admin',
+                    sender: 'Admin (m1000)',
+                    text,
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                };
+                this.messages.push(message);
+                this.saveMessages();
+                return message;
+            }
+            
+            static addSystemMessage(text) {
+                const message = {
+                    type: 'system',
+                    sender: 'Sistema',
+                    text,
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                };
+                this.messages.push(message);
+                this.saveMessages();
+                return message;
+            }
+            
+            static toggleAdminLogin(show) {
+                const adminForm = document.getElementById('adminLoginForm');
+                adminForm.style.display = show ? 'block' : 'none';
+            }
+        }
+
         // Gerenciador de Interface
         class UIManager {
             static init() {
                 this.renderProducts();
                 this.setupEventListeners();
                 this.updateUI();
+                
+                ChatSystem.init();
+                this.renderChatMessages();
             }
             
             static updateUI() {
-                // Atualizar estado de autenticação
                 if (AuthSystem.currentUser) {
                     document.getElementById('authSection').style.display = 'none';
                     document.getElementById('userSection').style.display = 'flex';
@@ -919,10 +1213,7 @@
                     document.getElementById('reviewForm').style.display = 'none';
                 }
                 
-                // Atualizar carrinho
                 this.updateCartBadge();
-                
-                // Carregar avaliações
                 this.loadReviews();
             }
             
@@ -1021,7 +1312,7 @@
                             <span>${stars}</span>
                         </div>
                         <div class="review-text">
-                            ${review.text} <!-- Texto exibido sem criptografia -->
+                            ${review.text}
                         </div>
                         <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--highlight);">
                             ${new Date(review.date).toLocaleDateString()}
@@ -1032,6 +1323,30 @@
                 });
             }
             
+            static renderChatMessages() {
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.innerHTML = '';
+                
+                ChatSystem.messages.forEach(msg => {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message ${msg.type}-message`;
+                    
+                    let senderInfo = '';
+                    if (msg.type !== 'system') {
+                        senderInfo = `<div style="font-weight: bold; color: ${msg.type === 'admin' ? 'var(--highlight)' : 'inherit'}">${msg.sender}:</div>`;
+                    }
+                    
+                    messageDiv.innerHTML = `
+                        ${senderInfo}
+                        <div>${msg.text}</div>
+                        <div class="message-time">${msg.time}</div>
+                    `;
+                    chatMessages.appendChild(messageDiv);
+                });
+                
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
             static setupEventListeners() {
                 // Login
                 document.getElementById('loginForm').addEventListener('submit', async (e) => {
@@ -1040,7 +1355,6 @@
                     const username = document.getElementById('loginUsername').value.trim();
                     const password = document.getElementById('loginPassword').value.trim();
                     
-                    // Reset errors
                     document.getElementById('loginUserError').style.display = 'none';
                     document.getElementById('loginPassError').style.display = 'none';
                     
@@ -1077,12 +1391,10 @@
                     const confirm = document.getElementById('regConfirm').value.trim();
                     const pgpKey = document.getElementById('regPGP').value.trim();
                     
-                    // Reset errors
                     document.getElementById('regUserError').style.display = 'none';
                     document.getElementById('regPassError').style.display = 'none';
                     document.getElementById('regConfirmError').style.display = 'none';
                     
-                    // Validação
                     let hasError = false;
                     
                     if (username.length < 3) {
@@ -1208,6 +1520,66 @@
                         e.target.style.display = 'none';
                     }
                 });
+                
+                // Chat - Toggle
+                document.getElementById('chatToggle').addEventListener('click', () => {
+                    const chatBox = document.getElementById('chatBox');
+                    if (chatBox.style.display === 'flex') {
+                        chatBox.style.display = 'none';
+                    } else {
+                        chatBox.style.display = 'flex';
+                        document.getElementById('chatInput').focus();
+                    }
+                });
+                
+                // Chat - Admin (duplo clique no ícone)
+                document.getElementById('chatToggle').addEventListener('dblclick', () => {
+                    if (!ChatSystem.adminLoggedIn) {
+                        ChatSystem.toggleAdminLogin(true);
+                        document.getElementById('adminPassword').focus();
+                    }
+                });
+                
+                // Chat - Login Admin
+                document.getElementById('adminLoginBtn').addEventListener('click', () => {
+                    const password = document.getElementById('adminPassword').value;
+                    if (ChatSystem.verifyAdmin(password)) {
+                        ChatSystem.adminLoggedIn = true;
+                        ChatSystem.toggleAdminLogin(false);
+                        ChatSystem.addSystemMessage("Modo administrador ativado");
+                        this.renderChatMessages();
+                    } else {
+                        alert("Senha de administrador incorreta");
+                    }
+                    document.getElementById('adminPassword').value = '';
+                });
+                
+                // Chat - Enviar mensagem
+                document.getElementById('sendMessage').addEventListener('click', () => {
+                    this.sendChatMessage();
+                });
+                
+                document.getElementById('chatInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.sendChatMessage();
+                    }
+                });
+            }
+            
+            static sendChatMessage() {
+                const input = document.getElementById('chatInput');
+                const message = input.value.trim();
+                
+                if (message) {
+                    if (ChatSystem.adminLoggedIn) {
+                        ChatSystem.addAdminMessage(message);
+                    } else {
+                        ChatSystem.addUserMessage(message);
+                    }
+                    
+                    this.renderChatMessages();
+                    input.value = '';
+                }
             }
             
             static async processPayment() {
@@ -1217,13 +1589,11 @@
                 statusElement.className = 'status-badge status-pending';
                 statusElement.textContent = 'AGUARDANDO PAGAMENTO...';
                 
-                // Simular verificação de pagamento
                 let checks = 0;
                 const checkInterval = setInterval(() => {
                     checks++;
                     lastCheckElement.textContent = new Date().toLocaleTimeString();
                     
-                    // Simular confirmação após 3 verificações
                     if (checks === 3) {
                         clearInterval(checkInterval);
                         this.completePayment();
@@ -1236,9 +1606,7 @@
                 statusElement.className = 'status-badge status-success';
                 statusElement.textContent = 'PAGAMENTO CONFIRMADO!';
                 
-                // Simular processamento
                 setTimeout(() => {
-                    // Criar pedido
                     const order = {
                         id: Date.now(),
                         date: new Date().toISOString(),
@@ -1247,7 +1615,6 @@
                         status: 'completed'
                     };
                     
-                    // Adicionar ao histórico do usuário
                     if (AuthSystem.currentUser) {
                         const userIndex = AuthSystem.users.findIndex(
                             u => u.username === AuthSystem.currentUser.username
@@ -1258,11 +1625,9 @@
                         }
                     }
                     
-                    // Limpar carrinho
                     StoreSystem.clearCart();
                     this.updateCartBadge();
                     
-                    // Fechar modal e mostrar confirmação
                     document.getElementById('paymentModal').style.display = 'none';
                     alert(`Pedido #${order.id} realizado com sucesso!\nTotal: ${order.total.toFixed(6)} BTC`);
                 }, 2000);

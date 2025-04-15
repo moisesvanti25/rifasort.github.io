@@ -1602,31 +1602,58 @@
                 
                 // Configurar a mensagem para o Discord
                 const discordMessage = {
-                    content: `📦 **NOVO PEDIDO #${formData.orderCode}**`,
-                    embeds: [{
-                        title: `🛒 Produto: ${formData.product}`,
-                        description: `💵 **Valor:** R$ ${parseFloat(formData.price).toFixed(2).replace('.', ',')}\n📅 **Data:** ${formData.timestamp}`,
-                        color: 0x00FF88,
-                        fields: [
-                            { name: '👤 Cliente', value: formData.name, inline: true },
-                            { name: '📧 E-mail', value: formData.email, inline: true },
-                            { name: '📞 Telefone', value: formData.phone, inline: true },
-                            { name: '🆔 CPF', value: formData.cpf, inline: true },
-                            { name: '🎮 Discord', value: formData.discord, inline: true },
-                            { name: '📝 Observações', value: formData.notes || 'Nenhuma', inline: true },
-                            { name: '📍 Endereço', value: `${formData.address}${formData.complement ? ', ' + formData.complement : ''}\n${formData.neighborhood}, ${formData.city}/${formData.state}\nCEP: ${formData.cep}` },
-                            { name: '📦 Dados para Envio', value: `**Código do Pedido:** ${formData.orderCode}\n**Produto:** ${formData.product}\n**Valor:** R$ ${parseFloat(formData.price).toFixed(2).replace('.', ',')}` }
-                        ],
-                        footer: { text: 'GamerFuel Pro - Sistema de Pedidos' }
-                    }],
+                    content: `🎮 **NOVO PEDIDO - GAMERFUEL PRO** 🎮`,
+                    embeds: [
+                        {
+                            title: `📦 Pedido #${formData.orderCode}`,
+                            color: 0x00FF88,
+                            thumbnail: {
+                                url: "https://i.imgur.com/JQ9w5Vr.png" // URL de uma imagem de logo
+                            },
+                            fields: [
+                                {
+                                    name: "🛍️ **Produto**",
+                                    value: `\`\`\`${formData.product}\`\`\``,
+                                    inline: true
+                                },
+                                {
+                                    name: "💰 **Valor**",
+                                    value: `\`\`\`R$ ${parseFloat(formData.price).toFixed(2).replace('.', ',')}\`\`\``,
+                                    inline: true
+                                },
+                                {
+                                    name: "📅 **Data/Hora**",
+                                    value: `\`\`\`${formData.timestamp}\`\`\``,
+                                    inline: true
+                                },
+                                {
+                                    name: "👤 **Informações do Cliente**",
+                                    value: `\`\`\`\nNome: ${formData.name}\nE-mail: ${formData.email}\nTelefone: ${formData.phone}\nCPF: ${formData.cpf}\nDiscord: ${formData.discord}\`\`\``
+                                },
+                                {
+                                    name: "🏠 **Endereço de Entrega**",
+                                    value: `\`\`\`\n${formData.address}${formData.complement ? ', ' + formData.complement : ''}\nBairro: ${formData.neighborhood}\n${formData.city}/${formData.state}\nCEP: ${formData.cep}\`\`\``
+                                },
+                                {
+                                    name: "📝 **Observações**",
+                                    value: formData.notes || '```Nenhuma observação adicional```'
+                                }
+                            ],
+                            footer: {
+                                text: "GamerFuel Pro • Sistema de Pedidos",
+                                icon_url: "https://i.imgur.com/JQ9w5Vr.png"
+                            },
+                            timestamp: new Date().toISOString()
+                        }
+                    ],
                     attachments: []
                 };
                 
                 // Se houver arquivo, adicionar ao payload
                 if (fileBase64) {
-                    discordMessage.embeds[0].fields.push({ 
-                        name: '📎 Comprovante', 
-                        value: `Tipo: ${fileType} | Tamanho: ${(receiptFile.size / 1024).toFixed(2)} KB` 
+                    discordMessage.embeds[0].fields.push({
+                        name: "📎 **Comprovante PIX**",
+                        value: `\`\`\`${fileName}\nTipo: ${fileType}\nTamanho: ${(receiptFile.size / 1024).toFixed(2)} KB\`\`\``
                     });
                     
                     discordMessage.attachments.push({

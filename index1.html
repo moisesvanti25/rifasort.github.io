@@ -172,7 +172,7 @@
         .product-card {
             background: var(--card-bg);
             border-radius: 20px;
-            padding: 25px;
+            padding: 30px;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -208,29 +208,17 @@
             border-color: var(--neon-green);
         }
         
-        .product-image-container {
-            width: 100%;
-            height: 200px;
-            position: relative;
-            margin-bottom: 20px;
-            perspective: 1000px;
+        .product-icon {
+            font-size: clamp(3rem, 8vw, 4rem);
+            margin: 20px auto;
+            color: var(--neon-green);
+            transition: all 0.3s;
+            text-align: center;
         }
         
-        .product-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 15px;
-            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
-            padding: 20px;
-            animation: float 6s ease-in-out infinite;
-            transition: all 0.5s;
-            transform-style: preserve-3d;
-        }
-        
-        .product-card:hover .product-image {
-            transform: rotateY(10deg) rotateX(5deg);
-            box-shadow: var(--glow-blue);
+        .product-card:hover .product-icon {
+            transform: scale(1.1);
+            text-shadow: var(--glow);
         }
         
         .product-badge {
@@ -256,7 +244,7 @@
             color: transparent;
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 1px;
-            min-height: 3.6rem;
+            text-align: center;
         }
         
         .product-description {
@@ -265,6 +253,7 @@
             margin-bottom: 20px;
             line-height: 1.7;
             font-size: clamp(0.9rem, 2vw, 1rem);
+            text-align: center;
         }
         
         .product-features {
@@ -1084,10 +1073,6 @@
                 padding: 20px;
             }
             
-            .product-image-container {
-                height: 180px;
-            }
-            
             .mobile-menu-btn {
                 display: flex;
             }
@@ -1193,8 +1178,8 @@
         <div class="products-grid">
             <div class="product-card">
                 <div class="product-badge">MAIS VENDIDO</div>
-                <div class="product-image-container">
-                    <img src="https://i.imgur.com/JqYeZ0L.png" alt="FOCUS+" class="product-image" loading="lazy">
+                <div class="product-icon">
+                    <i class="fas fa-brain"></i>
                 </div>
                 <h3 class="product-name">FOCUS+</h3>
                 <p class="product-description">O suplemento cognitivo definitivo para gamers profissionais. Melhora a concentração, tempo de reação e tomada de decisões em situações de alta pressão.</p>
@@ -1216,8 +1201,8 @@
 
             <div class="product-card">
                 <div class="product-badge">LANÇAMENTO</div>
-                <div class="product-image-container">
-                    <img src="https://i.imgur.com/vVXQZzP.png" alt="ENERGY+" class="product-image" loading="lazy">
+                <div class="product-icon">
+                    <i class="fas fa-bolt"></i>
                 </div>
                 <h3 class="product-name">ENERGY+</h3>
                 <p class="product-description">Energético de última geração com liberação prolongada. Mantenha-se alerta por até 12 horas sem os crashes comuns de cafeína.</p>
@@ -1239,8 +1224,8 @@
 
             <div class="product-card">
                 <div class="product-badge">KIT PREMIUM</div>
-                <div class="product-image-container">
-                    <img src="https://i.imgur.com/8nGLYQk.png" alt="SLEEP+" class="product-image" loading="lazy">
+                <div class="product-icon">
+                    <i class="fas fa-moon"></i>
                 </div>
                 <h3 class="product-name">SLEEP+</h3>
                 <p class="product-description">Fórmula noturna para recuperação acelerada. Durma profundamente e acorde renovado, mesmo após maratonas de gaming.</p>
@@ -1267,7 +1252,6 @@
                 <div class="testimonial-card">
                     <p class="testimonial-quote">Depois de usar o FOCUS+, meu K/D ratio no Warzone melhorou em 30%. Consigo manter o foco por horas sem distrações. Revolucionário!</p>
                     <div class="testimonial-author">
-                        <img src="https://i.imgur.com/7X7X7X7.jpg" alt="Marcelo" loading="lazy">
                         <div>
                             <div>Marcelo "HeadshotBR"</div>
                             <div class="testimonial-rating">
@@ -1284,7 +1268,6 @@
                 <div class="testimonial-card">
                     <p class="testimonial-quote">O ENERGY+ é simplesmente incrível. Consigo fazer streams de 10 horas sem sentir aquela queda de energia no final. Meus viewers notaram a diferença!</p>
                     <div class="testimonial-author">
-                        <img src="https://i.imgur.com/8nGLYQk.jpg" alt="Ana" loading="lazy">
                         <div>
                             <div>Ana "GameQueen"</div>
                             <div class="testimonial-rating">
@@ -1301,7 +1284,6 @@
                 <div class="testimonial-card">
                     <p class="testimonial-quote">SLEEP+ mudou minha vida. Durmo profundamente e acordo renovado, mesmo depois de noites intensas de treino. Finalmente encontrei um produto que funciona.</p>
                     <div class="testimonial-author">
-                        <img src="https://i.imgur.com/vVXQZzP.jpg" alt="Ricardo" loading="lazy">
                         <div>
                             <div>Ricardo "FPSMaster"</div>
                             <div class="testimonial-rating">

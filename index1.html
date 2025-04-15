@@ -1,20 +1,50 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyDrugs | Serviços Farmacêuticos Premium</title>
+    <title>GamerFuel Pro | Suplementos de Alto Desempenho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a1a2e;
-            --secondary: #16213e;
-            --accent: #0f3460;
-            --highlight: #00b4d8;
-            --text: #e6e6e6;
-            --dark: #0d0d0d;
-            --success: #2ecc71;
-            --warning: #f39c12;
-            --error: #e74c3c;
+            --neon-green: #00ff88;
+            --neon-blue: #00a2ff;
+            --neon-purple: #bd00ff;
+            --neon-pink: #ff00aa;
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --card-bg: rgba(18, 18, 18, 0.8);
+            --text-light: #f0f0f0;
+            --text-lighter: #ffffff;
+            --glow: 0 0 15px rgba(0, 255, 136, 0.5);
+            --glow-blue: 0 0 15px rgba(0, 162, 255, 0.5);
+            --glow-purple: 0 0 15px rgba(189, 0, 255, 0.5);
+            --glow-pink: 0 0 15px rgba(255, 0, 170, 0.5);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: var(--glow); }
+            50% { box-shadow: 0 0 25px rgba(0, 255, 136, 0.8); }
+            100% { box-shadow: var(--glow); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         * {
@@ -24,1631 +54,1661 @@
         }
         
         body {
-            font-family: 'Courier New', monospace;
-            background-color: var(--dark);
-            color: var(--text);
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--text-light);
             line-height: 1.6;
+            background: linear-gradient(-45deg, #0a0a0a, #111111, #0a0a1a, #0a1a0a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            overflow-x: hidden;
         }
         
-        .terminal-bar {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            padding: 0.8rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--highlight);
-            flex-wrap: wrap;
-            gap: 1rem;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(0, 255, 136, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            animation: float 10s infinite ease-in-out;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 40px;
+            position: relative;
+            background: rgba(5, 5, 5, 0.7);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.2);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,255,136,0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--highlight);
-            text-shadow: 0 0 10px rgba(0, 180, 216, 0.7);
-            white-space: nowrap;
-        }
-        
-        .nav-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            position: relative;
-            white-space: nowrap;
-        }
-        
-        .nav-links a:hover {
-            color: var(--highlight);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 1px;
-            bottom: -3px;
-            left: 0;
-            background-color: var(--highlight);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            transform: scaleX(1);
-        }
-        
-        .auth-section {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 0.5rem 1.2rem;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            border: 1px solid var(--highlight);
-            background: transparent;
-            color: var(--highlight);
-            white-space: nowrap;
-        }
-        
-        .btn:hover {
-            background: rgba(0, 180, 216, 0.1);
-            box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
-        }
-        
-        .btn-primary {
-            background: var(--highlight);
-            color: var(--dark);
-            border: none;
-            font-weight: bold;
-        }
-        
-        .btn-primary:hover {
-            background: transparent;
-            color: var(--highlight);
-            box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
-        }
-        
-        .cart-count {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            letter-spacing: 3px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
             position: relative;
             display: inline-block;
+            background-size: 200% 200%;
+            animation: gradientText 5s ease infinite;
         }
         
-        .cart-badge {
+        .logo::after {
+            content: '+';
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--error);
-            color: white;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
+            right: -0.5em;
+            top: -0.2em;
+            color: var(--neon-green);
+            font-size: 0.6em;
+            text-shadow: 0 0 15px var(--neon-green);
         }
         
-        .main-content {
-            padding: 2rem 1rem;
-            flex: 1;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        
-        .hero {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .hero h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        .tagline {
+            font-style: italic;
+            opacity: 0.9;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            margin-top: 15px;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 500;
         }
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
+            gap: 30px;
+            margin: 60px 0;
         }
         
         .product-card {
-            background: var(--secondary);
-            border: 1px solid rgba(0, 180, 216, 0.3);
-            border-radius: 8px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            transition: all 0.4s ease;
+            position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 162, 255, 0.2);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1;
             display: flex;
             flex-direction: column;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            z-index: -1;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
+            border-radius: 22px;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .product-card:hover::before {
+            opacity: 0.3;
         }
         
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: var(--highlight);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--neon-green);
+        }
+        
+        .product-image-container {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            margin-bottom: 20px;
+            perspective: 1000px;
         }
         
         .product-image {
-            height: 200px;
-            background: var(--dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--highlight);
-            font-size: 3rem;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+            padding: 20px;
+            animation: float 6s ease-in-out infinite;
+            transition: all 0.5s;
+            transform-style: preserve-3d;
         }
         
-        .product-info {
-            padding: 1.5rem;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        .product-card:hover .product-image {
+            transform: rotateY(10deg) rotateX(5deg);
+            box-shadow: var(--glow-blue);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8em;
+            font-weight: bold;
+            box-shadow: var(--glow-purple);
+            z-index: 2;
         }
         
         .product-name {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--highlight);
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            margin: 15px 0;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            min-height: 3.6rem;
         }
         
         .product-description {
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            opacity: 0.8;
-            flex: 1;
+            flex-grow: 1;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
         
-        .product-price {
-            font-size: 1.3rem;
+        .product-features {
+            margin: 15px 0;
+            padding-left: 20px;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+        }
+        
+        .product-features li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .product-features li::before {
+            content: '▹';
+            color: var(--neon-green);
+            position: absolute;
+            left: -20px;
+        }
+        
+        .price-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0 0;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .price {
             font-weight: bold;
-            color: var(--highlight);
-            margin-bottom: 1rem;
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            color: var(--neon-green);
+            font-family: 'Orbitron', sans-serif;
         }
         
-        .product-rating {
-            color: gold;
-            margin-bottom: 1rem;
+        .price-small {
+            font-size: 0.7em;
+            opacity: 0.8;
+            text-decoration: line-through;
+            color: #aaa;
+        }
+        
+        .btn-buy {
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            color: var(--darker-bg);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+            flex-grow: 1;
+            min-width: 150px;
+        }
+        
+        .btn-buy:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
+        }
+        
+        .btn-buy i {
+            font-size: 1.2em;
         }
         
         /* Modal Styles */
-        .modal {
+        .modal-overlay {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s;
+            padding: 20px;
             overflow-y: auto;
-            padding: 1rem;
         }
         
-        .modal-content {
-            background: var(--primary);
-            margin: 2rem auto;
-            padding: 1.5rem;
-            border: 1px solid var(--highlight);
-            border-radius: 8px;
-            max-width: 500px;
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .modal-container {
+            background: linear-gradient(145deg, #121212, #0a0a0a);
+            border-radius: 25px;
             width: 100%;
-            position: relative;
-            animation: modalFadeIn 0.3s ease;
-        }
-        
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text);
-        }
-        
-        .close-btn:hover {
-            color: var(--highlight);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--highlight);
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 0.8rem;
-            background: var(--secondary);
-            border: 1px solid var(--accent);
-            border-radius: 4px;
-            color: var(--text);
-            font-family: 'Courier New', monospace;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--highlight);
-        }
-        
-        .error-message {
-            color: var(--error);
-            margin-top: 0.5rem;
-            font-size: 0.8rem;
-            display: none;
-        }
-        
-        /* Cart Styles */
-        .cart-items {
-            margin-top: 1.5rem;
-        }
-        
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--accent);
-        }
-        
-        .cart-item-info {
-            flex: 1;
-            margin-right: 1rem;
-        }
-        
-        .cart-item-name {
-            font-weight: bold;
-            margin-bottom: 0.3rem;
-        }
-        
-        .cart-item-price {
-            white-space: nowrap;
-            text-align: right;
-        }
-        
-        .remove-item {
-            color: var(--error);
-            cursor: pointer;
-            margin-left: 1rem;
-        }
-        
-        .cart-total {
-            text-align: right;
-            margin-top: 1.5rem;
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-        
-        /* Payment Styles */
-        .payment-address {
-            background: var(--secondary);
-            padding: 1rem;
-            border-radius: 4px;
-            margin: 1rem 0;
-            word-break: break-all;
-            font-size: 0.9rem;
-        }
-        
-        .status-badge {
-            padding: 0.5rem;
-            border-radius: 4px;
-            text-align: center;
-            margin: 1rem 0;
-        }
-        
-        .status-pending {
-            background: var(--warning);
-            color: var(--dark);
-        }
-        
-        .status-success {
-            background: var(--success);
-            color: white;
-        }
-        
-        /* Reviews Section */
-        .reviews-section {
-            margin-top: 3rem;
-            padding: 1.5rem;
-            background: var(--secondary);
-            border-radius: 8px;
-        }
-        
-        .review-form {
-            margin-bottom: 2rem;
-        }
-        
-        .review-textarea {
-            width: 100%;
-            min-height: 100px;
-            padding: 1rem;
-            background: var(--dark);
-            border: 1px solid var(--accent);
-            border-radius: 4px;
-            color: var(--text);
-            font-family: 'Courier New', monospace;
-            margin-bottom: 1rem;
-        }
-        
-        .reviews-list {
-            margin-top: 1.5rem;
-        }
-        
-        .review-item {
-            background: var(--primary);
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            border-left: 3px solid var(--highlight);
-        }
-        
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-        
-        .review-text {
-            margin-top: 0.5rem;
-            padding: 0.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 4px;
-            white-space: pre-wrap;
-        }
-
-        /* Chat Styles */
-        .chat-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 350px;
-            z-index: 100;
-        }
-
-        .chat-box {
-            display: none;
-            background: var(--primary);
-            border: 1px solid var(--highlight);
-            border-radius: 8px;
+            max-width: 700px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.2);
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            flex-direction: column;
-            height: 400px;
+            position: relative;
+            animation: slideUp 0.4s;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-
-        .chat-header {
-            background: var(--secondary);
-            padding: 0.8rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
-
-        .chat-header h3 {
-            color: var(--highlight);
+        
+        .modal-header {
+            padding: 20px;
+            background: rgba(0, 162, 255, 0.1);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.2);
+            position: relative;
+        }
+        
+        .modal-title {
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
             margin: 0;
+            color: var(--neon-green);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
         }
-
-        .chat-toggle {
-            background: var(--highlight);
-            color: var(--dark);
+        
+        .modal-subtitle {
+            margin: 5px 0 0;
+            opacity: 0.9;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.8em;
+            cursor: pointer;
+            color: var(--neon-green);
+            transition: 0.3s;
+            background: none;
             border: none;
-            border-radius: 50%;
             width: 40px;
             height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+            color: var(--neon-purple);
+            background: rgba(189, 0, 255, 0.1);
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .pix-instructions {
+            background: rgba(0, 0, 0, 0.3);
+            border-left: 4px solid var(--neon-green);
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 20px;
+        }
+        
+        .pix-qr-code {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pix-qr-code img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .pix-key-container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .pix-key-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+        
+        .pix-key-value {
+            font-family: monospace;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            word-break: break-all;
+            color: var(--neon-green);
+        }
+        
+        .btn-copy {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--neon-green);
+            border: 1px solid var(--neon-green);
+            padding: 8px 15px;
+            border-radius: 5px;
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(0, 180, 216, 0.5);
+            font-size: 0.9em;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            width: 100%;
+            justify-content: center;
         }
-
-        .chat-toggle:hover {
-            background: var(--highlight);
-            box-shadow: 0 0 15px rgba(0, 180, 216, 0.7);
+        
+        .btn-copy:hover {
+            background: rgba(0, 255, 136, 0.2);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
         }
-
-        .chat-messages {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
+        
+        .receipt-form {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        .form-required::after {
+            content: ' *';
+            color: var(--neon-green);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            background: rgba(10, 10, 10, 0.7);
+            color: white;
+            font-family: inherit;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            transition: 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 162, 255, 0.3);
+        }
+        
+        .file-upload {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .file-upload-input {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border: 2px dashed #333;
+            border-radius: 10px;
+            background: rgba(10, 10, 10, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .file-upload-label:hover {
+            border-color: var(--neon-green);
+            background: rgba(0, 255, 136, 0.05);
+        }
+        
+        .file-upload-icon {
+            font-size: 1.8em;
+            color: var(--neon-green);
+        }
+        
+        .file-upload-text {
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+        }
+        
+        .file-upload-hint {
+            font-size: 0.8em;
+            opacity: 0.7;
+        }
+        
+        .file-name {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: var(--neon-green);
+            display: none;
+            word-break: break-all;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+            color: var(--darker-bg);
+            border: none;
+            padding: 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: clamp(1rem, 3vw, 1.1rem);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow);
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
+        }
+        
+        .btn-submit:disabled {
+            background: #333;
+            color: #777;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .status-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        .status-success {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+        }
+        
+        .status-error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff5555;
+            color: #ff5555;
+        }
+        
+        /* Features Section */
+        .features-section {
+            margin: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Orbitron', sans-serif;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
+            border-radius: 3px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: 25px;
+        }
+        
+        .feature-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(0, 162, 255, 0.2);
+            transition: all 0.4s;
+            backdrop-filter: blur(5px);
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
+            align-items: center;
         }
-
-        .message {
-            max-width: 80%;
-            padding: 0.8rem;
-            border-radius: 8px;
-            word-wrap: break-word;
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-
-        .user-message {
-            align-self: flex-end;
-            background: var(--highlight);
-            color: var(--dark);
-            border-top-right-radius: 0;
+        
+        .feature-icon {
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 15px;
+            color: var(--neon-green);
+            transition: 0.3s;
         }
-
-        .bot-message {
-            align-self: flex-start;
-            background: var(--secondary);
-            border-top-left-radius: 0;
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2);
+            color: var(--neon-blue);
         }
-
-        .admin-message {
-            align-self: flex-start;
-            background: var(--accent);
-            border-top-left-radius: 0;
-            border-left: 3px solid var(--highlight);
+        
+        .feature-title {
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            margin-bottom: 15px;
+            color: var(--neon-blue);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
         }
-
-        .system-message {
-            align-self: center;
-            background: var(--dark);
-            border: 1px solid var(--accent);
-            text-align: center;
+        
+        .feature-card p {
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            line-height: 1.6;
         }
-
-        .message-time {
-            font-size: 0.7rem;
-            opacity: 0.7;
-            margin-top: 0.3rem;
-            text-align: right;
+        
+        /* Testimonials */
+        .testimonials-section {
+            margin: 80px 0;
         }
-
-        .chat-input {
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+            gap: 25px;
+        }
+        
+        .testimonial-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            position: relative;
+            border: 1px solid rgba(189, 0, 255, 0.2);
+            transition: all 0.4s;
             display: flex;
-            padding: 0.8rem;
-            border-top: 1px solid var(--accent);
-            background: var(--secondary);
+            flex-direction: column;
         }
-
-        .chat-input input {
-            flex: 1;
-            padding: 0.8rem;
-            background: var(--dark);
-            border: 1px solid var(--accent);
-            border-radius: 4px;
-            color: var(--text);
-            font-family: 'Courier New', monospace;
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
-
-        .chat-input button {
-            margin-left: 0.5rem;
-            background: var(--highlight);
-            color: var(--dark);
-            border: none;
-            border-radius: 4px;
-            padding: 0 1rem;
-            cursor: pointer;
+        
+        .testimonial-quote {
+            font-style: italic;
+            position: relative;
+            padding: 0 15px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            font-size: clamp(0.9rem, 3vw, 1rem);
         }
-
-        .chat-input button:hover {
-            background: var(--highlight);
-            opacity: 0.9;
+        
+        .testimonial-quote::before,
+        .testimonial-quote::after {
+            content: '"';
+            font-size: 2em;
+            position: absolute;
+            opacity: 0.3;
+            color: var(--neon-purple);
         }
-
-        .admin-login-form {
+        
+        .testimonial-quote::before {
+            top: -15px;
+            left: -5px;
+        }
+        
+        .testimonial-quote::after {
+            bottom: -30px;
+            right: -5px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--neon-blue);
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .testimonial-author img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-green);
+            object-fit: cover;
+        }
+        
+        .testimonial-rating {
+            color: var(--neon-green);
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        
+        /* Warning */
+        .warning-box {
+            background: rgba(255, 85, 85, 0.1);
+            border: 1px solid #ff5555;
+            color: #ff5555;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 50px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .warning-box::before {
+            content: '⚠️';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 2em;
+            opacity: 0.2;
+        }
+        
+        .warning-box::after {
+            content: '⚠️';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 2em;
+            opacity: 0.2;
+        }
+        
+        .warning-title {
+            font-weight: bold;
+            font-size: clamp(1.1rem, 4vw, 1.3rem);
+            margin-bottom: 10px;
+        }
+        
+        .warning-box p {
+            font-size: clamp(0.9rem, 3vw, 1rem);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px 20px 30px;
+            border-top: 1px solid rgba(0, 255, 136, 0.2);
+            position: relative;
+            background: rgba(5, 5, 5, 0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .footer-logo {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--neon-green);
+            font-size: 1.3em;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: var(--neon-green);
+            color: var(--darker-bg);
+            transform: translateY(-5px);
+            box-shadow: var(--glow);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-link {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+            padding: 5px 10px;
+        }
+        
+        .footer-link:hover {
+            color: var(--neon-green);
+        }
+        
+        .copyright {
+            margin-top: 25px;
+            opacity: 0.7;
+            font-size: clamp(0.8rem, 3vw, 0.9rem);
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-green);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-blue);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
             display: none;
-            padding: 1rem;
-            background: var(--secondary);
-            border-top: 1px solid var(--accent);
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--neon-green);
+            border-radius: 50%;
+            z-index: 1001;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
         }
-
-        .admin-login-form input {
+        
+        .mobile-menu-btn span {
+            display: block;
+            width: 60%;
+            height: 2px;
+            background: var(--neon-green);
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 80px 20px 20px;
+            transition: right 0.3s ease;
+            border-left: 1px solid rgba(0, 255, 136, 0.2);
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .mobile-menu-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+            transition: 0.3s;
+        }
+        
+        .mobile-menu-link:hover {
+            color: var(--neon-green);
+            padding-left: 15px;
+        }
+        
+        /* Loading Animation */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 0.5rem;
-            background: var(--dark);
-            border: 1px solid var(--accent);
-            border-radius: 4px;
-            color: var(--text);
-            font-family: 'Courier New', monospace;
+            height: 100%;
+            background: var(--darker-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .loader-logo {
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 3px;
+        }
+        
+        .loader-bar {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .loader-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-blue));
+            animation: loading 2s ease-in-out forwards;
+        }
+        
+        @keyframes loading {
+            0% { width: 0%; }
+            100% { width: 100%; }
         }
         
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .terminal-bar {
-                flex-direction: column;
-                align-items: stretch;
+            .product-card {
+                padding: 20px;
             }
             
-            .nav-container {
-                flex-direction: column;
-                align-items: stretch;
-                gap: 0.5rem;
+            .product-image-container {
+                height: 180px;
             }
             
-            .nav-links {
-                justify-content: space-around;
-                padding: 0.5rem 0;
-                border-top: 1px solid rgba(0, 180, 216, 0.2);
-                border-bottom: 1px solid rgba(0, 180, 216, 0.2);
-                margin: 0.5rem 0;
+            .mobile-menu-btn {
+                display: flex;
             }
             
-            .auth-section {
-                justify-content: center;
+            .modal-container {
+                width: 95%;
+                max-height: 85vh;
             }
             
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            }
-            
-            .modal-content {
-                margin: 1rem auto;
-                padding: 1.2rem;
-            }
-
-            .chat-container {
-                width: 300px;
-                right: 10px;
-                bottom: 10px;
-            }
-
-            .chat-box {
-                height: 350px;
+            .pix-qr-code {
+                width: 150px;
+                height: 150px;
             }
         }
         
         @media (max-width: 480px) {
-            .products-grid {
-                grid-template-columns: 1fr;
+            .price-container {
+                flex-direction: column;
+                align-items: flex-start;
             }
             
-            .btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.7rem;
+            .btn-buy {
+                width: 100%;
             }
-
-            .chat-container {
-                width: 280px;
+            
+            .modal-body {
+                padding: 15px;
+            }
+            
+            .pix-instructions {
+                padding: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <header class="terminal-bar">
-        <div class="logo">MYDRUGS</div>
-        
-        <div class="nav-container">
-            <nav class="nav-links">
-                <a href="#products">PRODUTOS</a>
-                <a href="#reviews">AVALIAÇÕES</a>
-                <a href="#security">SEGURANÇA</a>
-            </nav>
-            
-            <div class="auth-section" id="authSection">
-                <button id="loginBtn" class="btn">LOGIN</button>
-                <button id="registerBtn" class="btn">REGISTRO</button>
-                <div class="cart-count">
-                    <button id="cartBtn" class="btn">CARRINHO</button>
-                    <span id="cartBadge" class="cart-badge" style="display: none;">0</span>
-                </div>
-            </div>
-            
-            <div class="auth-section" id="userSection" style="display: none;">
-                <span id="usernameDisplay" style="color: var(--highlight); margin-right: 0.5rem;"></span>
-                <button id="logoutBtn" class="btn">LOGOUT</button>
-                <div class="cart-count">
-                    <button id="cartBtnLogged" class="btn">CARRINHO</button>
-                    <span id="cartBadgeLogged" class="cart-badge" style="display: none;">0</span>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <main class="main-content">
-        <section class="hero">
-            <h1>PRODUTOS FARMACÊUTICOS PREMIUM</h1>
-            <p>Entrega discreta mundial com pagamentos apenas em Bitcoin</p>
-        </section>
-        
-        <section id="products">
-            <div class="products-grid" id="productsGrid">
-                <!-- Produtos serão carregados aqui -->
-            </div>
-        </section>
-        
-        <section class="reviews-section" id="reviews">
-            <h2>AVALIAÇÕES DOS CLIENTES</h2>
-            
-            <div class="review-form" id="reviewForm" style="display: none;">
-                <h3>DEIXE SUA AVALIAÇÃO</h3>
-                <textarea id="reviewText" class="review-textarea" placeholder="Escreva sua avaliação sobre os produtos e serviços..."></textarea>
-                <div style="margin-bottom: 1rem;">
-                    <label>Avaliação: </label>
-                    <select id="reviewRating" class="form-control" style="width: auto; display: inline-block;">
-                        <option value="5">★★★★★</option>
-                        <option value="4">★★★★☆</option>
-                        <option value="3">★★★☆☆</option>
-                        <option value="2">★★☆☆☆</option>
-                        <option value="1">★☆☆☆☆</option>
-                    </select>
-                </div>
-                <button id="submitReview" class="btn btn-primary">ENVIAR AVALIAÇÃO</button>
-            </div>
-            
-            <div class="reviews-list" id="reviewsList">
-                <!-- Avaliações serão carregadas aqui -->
-            </div>
-        </section>
-        
-        <section class="security-section" id="security">
-            <h2>PROTOCOLOS DE SEGURANÇA 🔒</h2>
-            <div style="margin: 1rem 0;">
-                <span class="status-badge" style="display: inline-block; background: var(--accent);">AES-256</span>
-                <span class="status-badge" style="display: inline-block; background: var(--accent);">SHA-512</span>
-                <span class="status-badge" style="display: inline-block; background: var(--accent);">PGP</span>
-            </div>
-            <p>Todos os dados são criptografados ponta-a-ponta, incluindo:</p>
-            <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
-                <li>Credenciais de usuário (com hash e salt)</li>
-                <li>Histórico de transações</li>
-                <li>Dados de pagamento</li>
-            </ul>
-        </section>
-    </main>
-
-    <!-- Chat Container -->
-    <div class="chat-container">
-        <div class="chat-toggle" id="chatToggle">💬</div>
-        <div class="chat-box" id="chatBox">
-            <div class="chat-header">
-                <h3>SUPORTE AO VIVO</h3>
-                <span class="close-btn">&times;</span>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <!-- Messages will appear here -->
-            </div>
-            <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Digite sua mensagem..." autocomplete="off">
-                <button id="sendMessage">Enviar</button>
-            </div>
-            <div class="admin-login-form" id="adminLoginForm">
-                <input type="password" id="adminPassword" placeholder="Senha de administrador">
-                <button id="adminLoginBtn" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Acessar como Admin</button>
-            </div>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-logo">GAMERFUEL+</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>ACESSO DO CLIENTE</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="loginUsername">USUÁRIO</label>
-                    <input type="text" id="loginUsername" class="form-control" required>
-                    <div id="loginUserError" class="error-message"></div>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">SENHA</label>
-                    <input type="password" id="loginPassword" class="form-control" required>
-                    <div id="loginPassError" class="error-message"></div>
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">ACESSAR</button>
-            </form>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-links">
+            <a href="#products" class="mobile-menu-link" onclick="hideMobileMenu()">Produtos</a>
+            <a href="#features" class="mobile-menu-link" onclick="hideMobileMenu()">Tecnologia</a>
+            <a href="#testimonials" class="mobile-menu-link" onclick="hideMobileMenu()">Depoimentos</a>
+            <a href="#" class="mobile-menu-link" onclick="hideMobileMenu()">Sobre Nós</a>
+            <a href="#" class="mobile-menu-link" onclick="hideMobileMenu()">Contato</a>
         </div>
     </div>
-    
-    <!-- Register Modal -->
-    <div id="registerModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>CRIAR NOVA CONTA</h2>
-            <form id="registerForm">
-                <div class="form-group">
-                    <label for="regUsername">USUÁRIO</label>
-                    <input type="text" id="regUsername" class="form-control" required minlength="3">
-                    <div id="regUserError" class="error-message"></div>
+
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">GAMERFUEL</h1>
+            <p class="tagline">Potencialize seu desempenho. Domine o jogo.</p>
+        </header>
+
+        <section class="features-section" id="features">
+            <h2 class="section-title">TECNOLOGIA DE PONTA</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">FOCUS+ TECHNOLOGY</h3>
+                    <p>Nossas fórmulas contêm nootrópicos avançados que melhoram a concentração e o tempo de reação em até 40%.</p>
                 </div>
-                <div class="form-group">
-                    <label for="regPassword">SENHA</label>
-                    <input type="password" id="regPassword" class="form-control" required minlength="6">
-                    <div id="regPassError" class="error-message"></div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">ENERGY+ MATRIX</h3>
+                    <p>Liberação prolongada de energia sem os crashes comuns de cafeína, mantendo você no pico por até 12 horas.</p>
                 </div>
-                <div class="form-group">
-                    <label for="regConfirm">CONFIRMAR SENHA</label>
-                    <input type="password" id="regConfirm" class="form-control" required>
-                    <div id="regConfirmError" class="error-message"></div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <h3 class="feature-title">NEURO-OPTIMIZAÇÃO</h3>
+                    <p>Ingredientes clinicamente testados para melhorar a função cognitiva e a tomada de decisões sob pressão.</p>
                 </div>
-                <div class="form-group">
-                    <label for="regPGP">CHAVE PGP PÚBLICA (OPCIONAL)</label>
-                    <textarea id="regPGP" rows="3" class="form-control"></textarea>
+            </div>
+        </section>
+
+        <h2 class="section-title" id="products">NOSSOS PRODUTOS</h2>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-badge">MAIS VENDIDO</div>
+                <div class="product-image-container">
+                    <img src="https://i.imgur.com/JqYeZ0L.png" alt="FOCUS+" class="product-image" loading="lazy">
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">CRIAR CONTA</button>
-            </form>
+                <h3 class="product-name">FOCUS+</h3>
+                <p class="product-description">O suplemento cognitivo definitivo para gamers profissionais. Melhora a concentração, tempo de reação e tomada de decisões em situações de alta pressão.</p>
+                <ul class="product-features">
+                    <li>Aumenta o foco em 60%</li>
+                    <li>Melhora o tempo de reação</li>
+                    <li>Zero efeitos colaterais</li>
+                </ul>
+                <div class="price-container">
+                    <div>
+                        <div class="price">R$ 89,90</div>
+                        <div class="price-small">De: R$ 129,90</div>
+                    </div>
+                    <button class="btn-buy" onclick="showModal('FOCUS+', 89.90)">
+                        <i class="fas fa-shopping-cart"></i> COMPRAR
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-badge">LANÇAMENTO</div>
+                <div class="product-image-container">
+                    <img src="https://i.imgur.com/vVXQZzP.png" alt="ENERGY+" class="product-image" loading="lazy">
+                </div>
+                <h3 class="product-name">ENERGY+</h3>
+                <p class="product-description">Energético de última geração com liberação prolongada. Mantenha-se alerta por até 12 horas sem os crashes comuns de cafeína.</p>
+                <ul class="product-features">
+                    <li>Energia sustentável por 12h</li>
+                    <li>Sabor frutas vermelhas</li>
+                    <li>Sem açúcar ou conservantes</li>
+                </ul>
+                <div class="price-container">
+                    <div>
+                        <div class="price">R$ 49,90</div>
+                        <div class="price-small">De: R$ 69,90</div>
+                    </div>
+                    <button class="btn-buy" onclick="showModal('ENERGY+', 49.90)">
+                        <i class="fas fa-shopping-cart"></i> COMPRAR
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-badge">KIT PREMIUM</div>
+                <div class="product-image-container">
+                    <img src="https://i.imgur.com/8nGLYQk.png" alt="SLEEP+" class="product-image" loading="lazy">
+                </div>
+                <h3 class="product-name">SLEEP+</h3>
+                <p class="product-description">Fórmula noturna para recuperação acelerada. Durma profundamente e acorde renovado, mesmo após maratonas de gaming.</p>
+                <ul class="product-features">
+                    <li>Induz sono natural</li>
+                    <li>Recuperação acelerada</li>
+                    <li>Sem efeito "ressaca"</li>
+                </ul>
+                <div class="price-container">
+                    <div>
+                        <div class="price">R$ 79,90</div>
+                        <div class="price-small">De: R$ 99,90</div>
+                    </div>
+                    <button class="btn-buy" onclick="showModal('SLEEP+', 79.90)">
+                        <i class="fas fa-shopping-cart"></i> COMPRAR
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <section class="testimonials-section" id="testimonials">
+            <h2 class="section-title">DEPOIMENTOS</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">Depois de usar o FOCUS+, meu K/D ratio no Warzone melhorou em 30%. Consigo manter o foco por horas sem distrações. Revolucionário!</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/7X7X7X7.jpg" alt="Marcelo" loading="lazy">
+                        <div>
+                            <div>Marcelo "HeadshotBR"</div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">O ENERGY+ é simplesmente incrível. Consigo fazer streams de 10 horas sem sentir aquela queda de energia no final. Meus viewers notaram a diferença!</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/8nGLYQk.jpg" alt="Ana" loading="lazy">
+                        <div>
+                            <div>Ana "GameQueen"</div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">SLEEP+ mudou minha vida. Durmo profundamente e acordo renovado, mesmo depois de noites intensas de treino. Finalmente encontrei um produto que funciona.</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/vVXQZzP.jpg" alt="Ricardo" loading="lazy">
+                        <div>
+                            <div>Ricardo "FPSMaster"</div>
+                            <div class="testimonial-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="warning-box">
+            <div class="warning-title">AVISO IMPORTANTE</div>
+            <p>Este é um site fictício criado para fins de demonstração e aprendizado. Os produtos mencionados não existem e não devem ser considerados como suplementos reais. Não nos responsabilizamos por qualquer uso indevido desta página.</p>
         </div>
     </div>
-    
-    <!-- Cart Modal -->
-    <div id="cartModal" class="modal">
-        <div class="modal-content" style="max-width: 600px;">
-            <span class="close-btn">&times;</span>
-            <h2>SEU CARRINHO</h2>
-            <div class="cart-items" id="cartItems">
-                <p id="emptyCartMessage">Seu carrinho está vazio</p>
+
+    <footer>
+        <div class="footer-logo">GAMERFUEL+</div>
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitch"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="footer-links">
+            <a href="#" class="footer-link">Termos de Uso</a>
+            <a href="#" class="footer-link">Política de Privacidade</a>
+            <a href="#" class="footer-link">FAQ</a>
+            <a href="#" class="footer-link">Contato</a>
+        </div>
+        <div class="copyright">
+            © 2024 GamerFuel Pro. Todos os direitos reservados.<br>
+            Este site não está associado a nenhuma marca real de suplementos.
+        </div>
+    </footer>
+
+    <!-- Modal de Compra -->
+    <div class="modal-overlay" id="pixModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <button class="close-modal" onclick="hideModal()">&times;</button>
+                <h3 class="modal-title">FINALIZAR COMPRA</h3>
+                <p class="modal-subtitle">Você está comprando: <strong id="productName"></strong> - <strong id="productPrice"></strong></p>
             </div>
-            <div class="cart-total">
-                <strong>TOTAL: <span id="cartTotal">0</span> BTC</strong>
+            <div class="modal-body">
+                <div class="pix-instructions">
+                    <h4><i class="fas fa-qrcode"></i> PAGAMENTO VIA PIX</h4>
+                    <p>Faça o pagamento usando a chave PIX abaixo e envie o comprovante neste formulário.</p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="pix-key-container">
+                        <div class="pix-key-label">Chave PIX (E-mail):</div>
+                        <div class="pix-key-value">gamersuplementos@gmail.com</div>
+                        <button class="btn-copy" onclick="copyPixKey()">
+                            <i class="far fa-copy"></i> Copiar Chave
+                        </button>
+                    </div>
+                </div>
+                
+                <form id="receiptForm" class="receipt-form">
+                    <input type="hidden" id="selectedProduct" name="product">
+                    <input type="hidden" id="selectedPrice" name="price">
+                    
+                    <div class="form-group">
+                        <label for="name" class="form-label form-required">Seu Nome Completo</label>
+                        <input type="text" id="name" name="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label form-required">Seu E-mail</label>
+                        <input type="email" id="email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="discord" class="form-label">Seu Discord (opcional)</label>
+                        <input type="text" id="discord" name="discord" class="form-input" placeholder="usuário#1234">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label form-required">Comprovante PIX</label>
+                        <div class="file-upload">
+                            <input type="file" id="receiptFile" name="receipt" class="file-upload-input" accept="image/*,.pdf" required>
+                            <label for="receiptFile" class="file-upload-label">
+                                <i class="fas fa-cloud-upload-alt file-upload-icon"></i>
+                                <span class="file-upload-text">Clique para enviar seu comprovante</span>
+                                <span class="file-upload-hint">Aceitamos imagens (JPG, PNG) ou PDF (Max. 5MB)</span>
+                            </label>
+                            <div id="fileName" class="file-name"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notes" class="form-label">Observações (opcional)</label>
+                        <textarea id="notes" name="notes" class="form-input" placeholder="Alguma informação adicional sobre seu pedido..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit" id="submitBtn">
+                        <i class="fas fa-paper-plane"></i> ENVIAR COMPROVANTE
+                    </button>
+                    
+                    <div id="statusMessage" class="status-message"></div>
+                </form>
             </div>
-            <button id="checkoutBtn" class="btn btn-primary" style="width: 100%; margin-top: 1rem; display: none;">FINALIZAR COMPRA</button>
         </div>
     </div>
-    
-    <!-- Payment Modal -->
-    <div id="paymentModal" class="modal">
-        <div class="modal-content" style="max-width: 500px;">
-            <span class="close-btn">&times;</span>
-            <h2>PAGAMENTO COM BITCOIN</h2>
-            <p>Envie exatamente <strong id="paymentAmount">0</strong> BTC para:</p>
-            <div class="payment-address">
-                bc1qfdedkcvzp07f3pyuf7gtzdjz4rugnkdqyv2c97
-            </div>
-            <div style="text-align: center; margin: 1rem 0;">
-                <div style="background: white; padding: 1rem; display: inline-block;">
-                    [QR CODE BTC]
-                </div>
-            </div>
-            
-            <div style="margin-top: 1.5rem;">
-                <div class="status-badge status-pending" id="paymentStatus">
-                    AGUARDANDO PAGAMENTO...
-                </div>
-                <div style="text-align: center; font-size: 0.9rem; margin-top: 0.5rem;">
-                    Última verificação: <span id="lastCheck">agora</span>
-                </div>
-            </div>
-            
-            <button id="cancelPayment" class="btn" style="width: 100%; margin-top: 1rem;">CANCELAR PEDIDO</button>
-        </div>
-    </div>
-    
+
     <script>
-        // Sistema de Autenticação
-        class AuthSystem {
-            static users = JSON.parse(localStorage.getItem('mydrugs_users')) || [];
-            static currentUser = null;
+        // Variáveis globais
+        let currentProduct = null;
+        let currentPrice = null;
+        let receiptFile = null;
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Criar partículas
+            createParticles();
             
-            static init() {
-                this.loadSession();
-            }
+            // Carregar animação
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 2000);
+        });
+        
+        // Criar partículas de fundo
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = window.innerWidth < 768 ? 30 : 50;
             
-            static register(username, password, pgpKey = '') {
-                // Validação
-                if (this.users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
-                    return { success: false, message: 'Nome de usuário já em uso' };
-                }
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
                 
-                if (password.length < 6) {
-                    return { success: false, message: 'A senha deve ter pelo menos 6 caracteres' };
-                }
+                // Tamanho aleatório
+                const size = Math.random() * 5 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
                 
-                // Criar usuário
-                const user = {
-                    username,
-                    password: this.hashPassword(password),
-                    pgpKey,
-                    createdAt: new Date().toISOString(),
-                    orders: []
-                };
+                // Posição aleatória
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
                 
-                this.users.push(user);
-                this.saveUsers();
-                return { success: true, user };
-            }
-            
-            static login(username, password) {
-                const user = this.users.find(u => u.username.toLowerCase() === username.toLowerCase());
+                // Cor aleatória
+                const colors = [
+                    'rgba(0, 255, 136, 0.3)',
+                    'rgba(0, 162, 255, 0.3)',
+                    'rgba(189, 0, 255, 0.3)',
+                    'rgba(255, 0, 170, 0.3)'
+                ];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
                 
-                if (!user) {
-                    return { success: false, message: 'Usuário não encontrado' };
-                }
+                // Animação aleatória
+                const duration = Math.random() * 15 + 10;
+                const delay = Math.random() * 5;
+                particle.style.animation = `float ${duration}s ${delay}s infinite ease-in-out`;
                 
-                if (user.password !== this.hashPassword(password)) {
-                    return { success: false, message: 'Senha incorreta' };
-                }
-                
-                this.currentUser = user;
-                this.saveSession();
-                return { success: true, user };
-            }
-            
-            static logout() {
-                this.currentUser = null;
-                this.clearSession();
-                return { success: true };
-            }
-            
-            static hashPassword(password) {
-                // Função de hash simples (em produção use bcrypt)
-                let hash = 0;
-                for (let i = 0; i < password.length; i++) {
-                    const char = password.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash; // Convert to 32bit integer
-                }
-                return hash.toString(16);
-            }
-            
-            static saveUsers() {
-                localStorage.setItem('mydrugs_users', JSON.stringify(this.users));
-            }
-            
-            static loadSession() {
-                const session = JSON.parse(localStorage.getItem('mydrugs_session'));
-                if (session) {
-                    const user = this.users.find(u => 
-                        u.username === session.username && 
-                        u.password === session.passwordHash
-                    );
-                    if (user) {
-                        this.currentUser = user;
-                        return user;
-                    }
-                }
-                return null;
-            }
-            
-            static saveSession() {
-                if (this.currentUser) {
-                    localStorage.setItem('mydrugs_session', JSON.stringify({
-                        username: this.currentUser.username,
-                        passwordHash: this.currentUser.password
-                    }));
-                }
-            }
-            
-            static clearSession() {
-                localStorage.removeItem('mydrugs_session');
+                particlesContainer.appendChild(particle);
             }
         }
-
-        // Sistema de Produtos e Carrinho
-        class StoreSystem {
-            static products = [
-                {
-                    id: 1,
-                    name: "ECSTASY GOLD",
-                    emoji: "💊",
-                    description: "Cristais de MDMA premium com 99.9% de pureza, testados em laboratório",
-                    price: 0.0012,
-                    rating: "★★★★★"
-                },
-                {
-                    id: 2,
-                    name: "PSILOCYBIN PRO",
-                    emoji: "🍄",
-                    description: "Trufas mágicas com potência consistente, seladas a vácuo",
-                    price: 0.0018,
-                    rating: "★★★★☆"
-                },
-                {
-                    id: 3,
-                    name: "HYBRID #42",
-                    emoji: "🌿",
-                    description: "Strain premium de cannabis, 27% THC, cultivo indoor",
-                    price: 0.0006,
-                    rating: "★★★★★"
-                },
-                {
-                    id: 4,
-                    name: "LAB-GRADE LSD",
-                    emoji: "🧪",
-                    description: "Blotters de 200μg com molécula Hoffman, verificado em laboratório",
-                    price: 0.0004,
-                    rating: "★★★★★"
-                }
-            ];
-            
-            static cart = [];
-            
-            static init() {
-                this.loadCart();
-            }
-            
-            static addToCart(productId) {
-                const product = this.products.find(p => p.id === productId);
-                if (!product) return false;
-                
-                const existingItem = this.cart.find(item => item.id === productId);
-                if (existingItem) {
-                    existingItem.quantity++;
-                } else {
-                    this.cart.push({ ...product, quantity: 1 });
-                }
-                
-                this.saveCart();
-                return true;
-            }
-            
-            static removeFromCart(productId) {
-                this.cart = this.cart.filter(item => item.id !== productId);
-                this.saveCart();
-            }
-            
-            static getCartTotal() {
-                return this.cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-            }
-            
-            static getCartItemCount() {
-                return this.cart.reduce((count, item) => count + item.quantity, 0);
-            }
-            
-            static saveCart() {
-                if (AuthSystem.currentUser) {
-                    localStorage.setItem(
-                        `mydrugs_cart_${AuthSystem.currentUser.username}`, 
-                        JSON.stringify(this.cart)
-                    );
-                } else {
-                    localStorage.setItem('mydrugs_cart_guest', JSON.stringify(this.cart));
-                }
-            }
-            
-            static loadCart() {
-                let savedCart;
-                if (AuthSystem.currentUser) {
-                    savedCart = localStorage.getItem(`mydrugs_cart_${AuthSystem.currentUser.username}`);
-                } else {
-                    savedCart = localStorage.getItem('mydrugs_cart_guest');
-                }
-                
-                this.cart = savedCart ? JSON.parse(savedCart) : [];
-            }
-            
-            static clearCart() {
-                this.cart = [];
-                this.saveCart();
-            }
+        
+        // Menu mobile
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+        
+        function hideMobileMenu() {
+            mobileMenuBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
         }
-
-        // Sistema de Avaliações
-        class ReviewSystem {
-            static reviews = JSON.parse(localStorage.getItem('mydrugs_reviews')) || [];
+        
+        // Mostrar modal de compra
+        function showModal(product, price) {
+            currentProduct = product;
+            currentPrice = price;
             
-            static submitReview(text, rating, username) {
-                if (!text || !rating || !username) return false;
-                
-                const review = {
-                    id: Date.now(),
-                    username,
-                    date: new Date().toISOString(),
-                    text: text,
-                    rating: parseInt(rating)
-                };
-                
-                this.reviews.push(review);
-                this.saveReviews();
-                return true;
-            }
+            document.getElementById('productName').textContent = product;
+            document.getElementById('productPrice').textContent = 'R$ ' + price.toFixed(2).replace('.', ',');
+            document.getElementById('selectedProduct').value = product;
+            document.getElementById('selectedPrice').value = price;
             
-            static getRecentReviews(limit = 5) {
-                return [...this.reviews].reverse().slice(0, limit);
-            }
+            document.getElementById('pixModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
             
-            static saveReviews() {
-                localStorage.setItem('mydrugs_reviews', JSON.stringify(this.reviews));
-            }
+            // Resetar formulário
+            document.getElementById('receiptForm').reset();
+            document.getElementById('fileName').style.display = 'none';
+            document.getElementById('statusMessage').style.display = 'none';
         }
-
-        // Sistema de Pagamento
-        class PaymentSystem {
-            static processPayment(amount) {
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve({ 
-                            success: true, 
-                            transactionId: `tx_${Date.now()}`,
-                            amount 
-                        });
-                    }, 3000);
-                });
-            }
+        
+        // Esconder modal
+        function hideModal() {
+            document.getElementById('pixModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
-
-        // Sistema de Chat
-        class ChatSystem {
-            static messages = [];
-            static lastReset = localStorage.getItem('mydrugs_chat_last_reset');
-            static adminLoggedIn = false;
+        
+        // Copiar chave PIX
+        function copyPixKey() {
+            navigator.clipboard.writeText('gamersuplementos@gmail.com');
             
-            // Hash da senha do admin (não armazenamos a senha em claro)
-            // Este hash deve ser gerado com a senha real em um ambiente seguro
-            static ADMIN_HASH = 'd3b1f8a2c5e9'; // Hash de exemplo (substitua pelo hash real)
+            const copyBtn = document.querySelector('.btn-copy');
+            const originalText = copyBtn.innerHTML;
             
-            static init() {
-                this.checkReset();
-                this.loadMessages();
-                
-                if (this.messages.length === 0) {
-                    this.addSystemMessage("Bem-vindo ao suporte MyDrugs! Digite sua mensagem abaixo.");
-                }
-            }
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+            copyBtn.style.background = 'rgba(0, 255, 136, 0.3)';
+            copyBtn.style.borderColor = 'var(--neon-green)';
             
-            static checkReset() {
-                const now = new Date();
-                const today = now.toISOString().split('T')[0];
-                
-                if (!this.lastReset || this.lastReset !== today) {
-                    this.messages = [];
-                    this.lastReset = today;
-                    localStorage.setItem('mydrugs_chat_last_reset', today);
-                    localStorage.removeItem('mydrugs_chat_messages');
-                    this.addSystemMessage("Bem-vindo ao suporte MyDrugs! O chat é reiniciado a cada 24h.");
-                }
-            }
-            
-            static loadMessages() {
-                const savedMessages = localStorage.getItem('mydrugs_chat_messages');
-                if (savedMessages) {
-                    this.messages = JSON.parse(savedMessages);
-                }
-            }
-            
-            static saveMessages() {
-                localStorage.setItem('mydrugs_chat_messages', JSON.stringify(this.messages));
-            }
-            
-            static hashPassword(password) {
-                // Função de hash simples (em produção use bcrypt)
-                let hash = 0;
-                for (let i = 0; i < password.length; i++) {
-                    const char = password.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash; // Convert to 32bit integer
-                }
-                return hash.toString(16);
-            }
-            
-            static verifyAdmin(password) {
-                const hashed = this.hashPassword(password);
-                return hashed === this.ADMIN_HASH;
-            }
-            
-            static addUserMessage(text) {
-                const sender = AuthSystem.currentUser ? AuthSystem.currentUser.username : 'Visitante';
-                const message = {
-                    type: 'user',
-                    sender,
-                    text,
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                };
-                this.messages.push(message);
-                this.saveMessages();
-                return message;
-            }
-            
-            static addAdminMessage(text) {
-                const message = {
-                    type: 'admin',
-                    sender: 'Admin (m1000)',
-                    text,
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                };
-                this.messages.push(message);
-                this.saveMessages();
-                return message;
-            }
-            
-            static addSystemMessage(text) {
-                const message = {
-                    type: 'system',
-                    sender: 'Sistema',
-                    text,
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-                };
-                this.messages.push(message);
-                this.saveMessages();
-                return message;
-            }
-            
-            static toggleAdminLogin(show) {
-                const adminForm = document.getElementById('adminLoginForm');
-                adminForm.style.display = show ? 'block' : 'none';
-            }
+            setTimeout(() => {
+                copyBtn.innerHTML = originalText;
+                copyBtn.style.background = 'rgba(0, 255, 136, 0.1)';
+            }, 2000);
         }
-
-        // Gerenciador de Interface
-        class UIManager {
-            static init() {
-                this.renderProducts();
-                this.setupEventListeners();
-                this.updateUI();
+        
+        // Gerenciar upload de arquivo
+        document.getElementById('receiptFile').addEventListener('change', function(e) {
+            if (this.files.length > 0) {
+                receiptFile = this.files[0];
+                const fileNameElement = document.getElementById('fileName');
                 
-                ChatSystem.init();
-                this.renderChatMessages();
-            }
-            
-            static updateUI() {
-                if (AuthSystem.currentUser) {
-                    document.getElementById('authSection').style.display = 'none';
-                    document.getElementById('userSection').style.display = 'flex';
-                    document.getElementById('usernameDisplay').textContent = AuthSystem.currentUser.username;
-                    document.getElementById('reviewForm').style.display = 'block';
-                } else {
-                    document.getElementById('authSection').style.display = 'flex';
-                    document.getElementById('userSection').style.display = 'none';
-                    document.getElementById('reviewForm').style.display = 'none';
-                }
-                
-                this.updateCartBadge();
-                this.loadReviews();
-            }
-            
-            static renderProducts() {
-                const productsGrid = document.getElementById('productsGrid');
-                productsGrid.innerHTML = '';
-                
-                StoreSystem.products.forEach(product => {
-                    const productCard = document.createElement('div');
-                    productCard.className = 'product-card';
-                    productCard.innerHTML = `
-                        <div class="product-image">${product.emoji}</div>
-                        <div class="product-info">
-                            <h3 class="product-name">${product.name}</h3>
-                            <p class="product-description">${product.description}</p>
-                            <div class="product-rating">${product.rating}</div>
-                            <div class="product-price">${product.price.toFixed(6)} BTC</div>
-                            <button class="btn btn-primary add-to-cart" data-id="${product.id}" style="width: 100%;">ADICIONAR</button>
-                        </div>
-                    `;
-                    productsGrid.appendChild(productCard);
-                });
-            }
-            
-            static updateCartBadge() {
-                const count = StoreSystem.getCartItemCount();
-                const badge = document.getElementById('cartBadge');
-                const badgeLogged = document.getElementById('cartBadgeLogged');
-                
-                if (count > 0) {
-                    badge.textContent = count;
-                    badge.style.display = 'flex';
-                    badgeLogged.textContent = count;
-                    badgeLogged.style.display = 'flex';
-                } else {
-                    badge.style.display = 'none';
-                    badgeLogged.style.display = 'none';
-                }
-            }
-            
-            static renderCart() {
-                const cartItems = document.getElementById('cartItems');
-                const emptyMsg = document.getElementById('emptyCartMessage');
-                const checkoutBtn = document.getElementById('checkoutBtn');
-                
-                if (StoreSystem.cart.length === 0) {
-                    emptyMsg.style.display = 'block';
-                    checkoutBtn.style.display = 'none';
-                    cartItems.innerHTML = '<p id="emptyCartMessage">Seu carrinho está vazio</p>';
+                if (receiptFile.size > 5 * 1024 * 1024) {
+                    alert('O arquivo é muito grande. Por favor, envie um arquivo de até 5MB.');
+                    this.value = '';
+                    fileNameElement.style.display = 'none';
                     return;
                 }
                 
-                emptyMsg.style.display = 'none';
-                checkoutBtn.style.display = 'block';
-                
-                let itemsHTML = '';
-                StoreSystem.cart.forEach(item => {
-                    itemsHTML += `
-                        <div class="cart-item">
-                            <div class="cart-item-info">
-                                <div class="cart-item-name">${item.name}</div>
-                                <div>${item.price.toFixed(6)} BTC × ${item.quantity}</div>
-                            </div>
-                            <div class="cart-item-price">
-                                ${(item.price * item.quantity).toFixed(6)} BTC
-                            </div>
-                            <span class="remove-item" data-id="${item.id}">✕</span>
-                        </div>
-                    `;
-                });
-                
-                cartItems.innerHTML = itemsHTML;
-                document.getElementById('cartTotal').textContent = StoreSystem.getCartTotal().toFixed(6);
+                fileNameElement.textContent = 'Arquivo selecionado: ' + receiptFile.name;
+                fileNameElement.style.display = 'block';
             }
+        });
+        
+        // Enviar comprovante para o Discord
+        document.getElementById('receiptForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            static loadReviews() {
-                const reviewsList = document.getElementById('reviewsList');
-                reviewsList.innerHTML = '';
+            const submitBtn = document.getElementById('submitBtn');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ENVIANDO...';
+            
+            // Coletar dados do formulário
+            const formData = {
+                product: document.getElementById('selectedProduct').value,
+                price: document.getElementById('selectedPrice').value,
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                discord: document.getElementById('discord').value || 'Não informado',
+                notes: document.getElementById('notes').value || 'Nenhuma observação',
+                timestamp: new Date().toLocaleString('pt-BR')
+            };
+            
+            try {
+                // Se houver arquivo, converter para Base64
+                let fileBase64 = '';
+                let fileName = '';
+                let fileType = '';
                 
-                const reviews = ReviewSystem.getRecentReviews();
-                
-                if (reviews.length === 0) {
-                    reviewsList.innerHTML = '<p>Nenhuma avaliação disponível. Seja o primeiro a avaliar!</p>';
-                    return;
+                if (receiptFile) {
+                    fileBase64 = await toBase64(receiptFile);
+                    fileName = receiptFile.name;
+                    fileType = receiptFile.type;
                 }
                 
-                reviews.forEach(review => {
-                    const reviewItem = document.createElement('div');
-                    reviewItem.className = 'review-item';
-                    
-                    const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
-                    
-                    reviewItem.innerHTML = `
-                        <div class="review-header">
-                            <span>${review.username}</span>
-                            <span>${stars}</span>
-                        </div>
-                        <div class="review-text">
-                            ${review.text}
-                        </div>
-                        <div style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--highlight);">
-                            ${new Date(review.date).toLocaleDateString()}
-                        </div>
-                    `;
-                    
-                    reviewsList.appendChild(reviewItem);
-                });
-            }
-            
-            static renderChatMessages() {
-                const chatMessages = document.getElementById('chatMessages');
-                chatMessages.innerHTML = '';
+                // Configurar a mensagem para o Discord
+                const discordMessage = {
+                    content: '🚀 **NOVA COMPRA VIA PIX**',
+                    embeds: [{
+                        title: `📦 Produto: ${formData.product}`,
+                        description: `💵 **Valor:** R$ ${parseFloat(formData.price).toFixed(2).replace('.', ',')}`,
+                        color: 0x00FF88,
+                        fields: [
+                            { name: '👤 Cliente', value: formData.name, inline: true },
+                            { name: '📧 E-mail', value: formData.email, inline: true },
+                            { name: '🎮 Discord', value: formData.discord, inline: true },
+                            { name: '📝 Observações', value: formData.notes },
+                            { name: '🕒 Data/Hora', value: formData.timestamp }
+                        ],
+                        footer: { text: 'GamerFuel Pro - Sistema de Pedidos' }
+                    }],
+                    attachments: []
+                };
                 
-                ChatSystem.messages.forEach(msg => {
-                    const messageDiv = document.createElement('div');
-                    messageDiv.className = `message ${msg.type}-message`;
-                    
-                    let senderInfo = '';
-                    if (msg.type !== 'system') {
-                        senderInfo = `<div style="font-weight: bold; color: ${msg.type === 'admin' ? 'var(--highlight)' : 'inherit'}">${msg.sender}:</div>`;
-                    }
-                    
-                    messageDiv.innerHTML = `
-                        ${senderInfo}
-                        <div>${msg.text}</div>
-                        <div class="message-time">${msg.time}</div>
-                    `;
-                    chatMessages.appendChild(messageDiv);
-                });
-                
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-            
-            static setupEventListeners() {
-                // Login
-                document.getElementById('loginForm').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const username = document.getElementById('loginUsername').value.trim();
-                    const password = document.getElementById('loginPassword').value.trim();
-                    
-                    document.getElementById('loginUserError').style.display = 'none';
-                    document.getElementById('loginPassError').style.display = 'none';
-                    
-                    if (!username) {
-                        document.getElementById('loginUserError').textContent = 'Por favor, insira um nome de usuário';
-                        document.getElementById('loginUserError').style.display = 'block';
-                        return;
-                    }
-                    
-                    if (!password) {
-                        document.getElementById('loginPassError').textContent = 'Por favor, insira uma senha';
-                        document.getElementById('loginPassError').style.display = 'block';
-                        return;
-                    }
-                    
-                    const result = AuthSystem.login(username, password);
-                    
-                    if (result.success) {
-                        document.getElementById('loginModal').style.display = 'none';
-                        StoreSystem.loadCart();
-                        this.updateUI();
-                    } else {
-                        document.getElementById('loginPassError').textContent = result.message;
-                        document.getElementById('loginPassError').style.display = 'block';
-                    }
-                });
-                
-                // Registro
-                document.getElementById('registerForm').addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const username = document.getElementById('regUsername').value.trim();
-                    const password = document.getElementById('regPassword').value.trim();
-                    const confirm = document.getElementById('regConfirm').value.trim();
-                    const pgpKey = document.getElementById('regPGP').value.trim();
-                    
-                    document.getElementById('regUserError').style.display = 'none';
-                    document.getElementById('regPassError').style.display = 'none';
-                    document.getElementById('regConfirmError').style.display = 'none';
-                    
-                    let hasError = false;
-                    
-                    if (username.length < 3) {
-                        document.getElementById('regUserError').textContent = 'O nome de usuário deve ter pelo menos 3 caracteres';
-                        document.getElementById('regUserError').style.display = 'block';
-                        hasError = true;
-                    }
-                    
-                    if (password.length < 6) {
-                        document.getElementById('regPassError').textContent = 'A senha deve ter pelo menos 6 caracteres';
-                        document.getElementById('regPassError').style.display = 'block';
-                        hasError = true;
-                    }
-                    
-                    if (password !== confirm) {
-                        document.getElementById('regConfirmError').textContent = 'As senhas não coincidem';
-                        document.getElementById('regConfirmError').style.display = 'block';
-                        hasError = true;
-                    }
-                    
-                    if (hasError) return;
-                    
-                    const result = AuthSystem.register(username, password, pgpKey);
-                    
-                    if (result.success) {
-                        document.getElementById('registerModal').style.display = 'none';
-                        StoreSystem.loadCart();
-                        this.updateUI();
-                    } else {
-                        document.getElementById('regUserError').textContent = result.message;
-                        document.getElementById('regUserError').style.display = 'block';
-                    }
-                });
-                
-                // Logout
-                document.getElementById('logoutBtn').addEventListener('click', () => {
-                    AuthSystem.logout();
-                    StoreSystem.loadCart();
-                    this.updateUI();
-                });
-                
-                // Carrinho
-                document.getElementById('cartBtn').addEventListener('click', () => {
-                    this.renderCart();
-                    document.getElementById('cartModal').style.display = 'block';
-                });
-                
-                document.getElementById('cartBtnLogged').addEventListener('click', () => {
-                    this.renderCart();
-                    document.getElementById('cartModal').style.display = 'block';
-                });
-                
-                // Adicionar ao carrinho
-                document.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('add-to-cart')) {
-                        if (!AuthSystem.currentUser) {
-                            alert('Por favor, faça login para adicionar itens ao carrinho');
-                            document.getElementById('loginModal').style.display = 'block';
-                            return;
-                        }
-                        
-                        const productId = parseInt(e.target.getAttribute('data-id'));
-                        if (StoreSystem.addToCart(productId)) {
-                            this.updateCartBadge();
-                            alert('Produto adicionado ao carrinho!');
-                        }
-                    }
-                    
-                    if (e.target.classList.contains('remove-item')) {
-                        const productId = parseInt(e.target.getAttribute('data-id'));
-                        StoreSystem.removeFromCart(productId);
-                        this.updateCartBadge();
-                        this.renderCart();
-                    }
-                });
-                
-                // Finalizar compra
-                document.getElementById('checkoutBtn').addEventListener('click', () => {
-                    if (!AuthSystem.currentUser) return;
-                    
-                    const total = StoreSystem.getCartTotal();
-                    document.getElementById('paymentAmount').textContent = total.toFixed(6);
-                    document.getElementById('cartModal').style.display = 'none';
-                    document.getElementById('paymentModal').style.display = 'block';
-                    
-                    this.processPayment();
-                });
-                
-                // Cancelar pagamento
-                document.getElementById('cancelPayment').addEventListener('click', () => {
-                    document.getElementById('paymentModal').style.display = 'none';
-                });
-                
-                // Enviar avaliação
-                document.getElementById('submitReview').addEventListener('click', () => {
-                    if (!AuthSystem.currentUser) return;
-                    
-                    const text = document.getElementById('reviewText').value.trim();
-                    const rating = document.getElementById('reviewRating').value;
-                    
-                    if (!text) {
-                        alert('Por favor, escreva sua avaliação');
-                        return;
-                    }
-                    
-                    if (ReviewSystem.submitReview(text, rating, AuthSystem.currentUser.username)) {
-                        document.getElementById('reviewText').value = '';
-                        this.loadReviews();
-                        alert('Avaliação enviada com sucesso!');
-                    }
-                });
-                
-                // Fechar modais
-                document.querySelectorAll('.close-btn').forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        this.closest('.modal').style.display = 'none';
+                // Se houver arquivo, adicionar ao payload
+                if (fileBase64) {
+                    discordMessage.embeds[0].fields.push({ 
+                        name: '📎 Comprovante', 
+                        value: `Tipo: ${fileType} | Tamanho: ${(receiptFile.size / 1024).toFixed(2)} KB` 
                     });
-                });
-                
-                // Fechar ao clicar fora
-                window.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('modal')) {
-                        e.target.style.display = 'none';
-                    }
-                });
-                
-                // Chat - Toggle
-                document.getElementById('chatToggle').addEventListener('click', () => {
-                    const chatBox = document.getElementById('chatBox');
-                    if (chatBox.style.display === 'flex') {
-                        chatBox.style.display = 'none';
-                    } else {
-                        chatBox.style.display = 'flex';
-                        document.getElementById('chatInput').focus();
-                    }
-                });
-                
-                // Chat - Admin (duplo clique no ícone)
-                document.getElementById('chatToggle').addEventListener('dblclick', () => {
-                    if (!ChatSystem.adminLoggedIn) {
-                        ChatSystem.toggleAdminLogin(true);
-                        document.getElementById('adminPassword').focus();
-                    }
-                });
-                
-                // Chat - Login Admin
-                document.getElementById('adminLoginBtn').addEventListener('click', () => {
-                    const password = document.getElementById('adminPassword').value;
-                    if (ChatSystem.verifyAdmin(password)) {
-                        ChatSystem.adminLoggedIn = true;
-                        ChatSystem.toggleAdminLogin(false);
-                        ChatSystem.addSystemMessage("Modo administrador ativado");
-                        this.renderChatMessages();
-                    } else {
-                        alert("Senha de administrador incorreta");
-                    }
-                    document.getElementById('adminPassword').value = '';
-                });
-                
-                // Chat - Enviar mensagem
-                document.getElementById('sendMessage').addEventListener('click', () => {
-                    this.sendChatMessage();
-                });
-                
-                document.getElementById('chatInput').addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        this.sendChatMessage();
-                    }
-                });
-            }
-            
-            static sendChatMessage() {
-                const input = document.getElementById('chatInput');
-                const message = input.value.trim();
-                
-                if (message) {
-                    if (ChatSystem.adminLoggedIn) {
-                        ChatSystem.addAdminMessage(message);
-                    } else {
-                        ChatSystem.addUserMessage(message);
-                    }
                     
-                    this.renderChatMessages();
-                    input.value = '';
+                    discordMessage.attachments.push({
+                        filename: fileName,
+                        data: fileBase64.split(',')[1] // Remove o prefixo data:image/...;base64,
+                    });
                 }
+                
+                // Configurar o webhook do Discord
+                const webhookUrl = 'https://discord.com/api/webhooks/1359658940874494173/1yJEVMiPO3i1AaxNIGKLleQfaxNkGDtCMmnuXo9vCIWxLahMVJf-g_ddxmssCPEM72qB';
+                
+                // Enviar para o Discord
+                const response = await sendToDiscord(webhookUrl, discordMessage);
+                
+                if (response.ok) {
+                    statusMessage.innerHTML = '✅ Comprovante enviado com sucesso! Entraremos em contato em breve.';
+                    statusMessage.className = 'status-message status-success';
+                    statusMessage.style.display = 'block';
+                    
+                    // Resetar formulário após 3 segundos
+                    setTimeout(() => {
+                        hideModal();
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> ENVIAR COMPROVANTE';
+                    }, 3000);
+                } else {
+                    throw new Error('Erro ao enviar para o Discord');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                statusMessage.innerHTML = '❌ Erro ao enviar comprovante. Por favor, entre em contato diretamente pelo Discord.';
+                statusMessage.className = 'status-message status-error';
+                statusMessage.style.display = 'block';
+                
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> ENVIAR COMPROVANTE';
+            }
+        });
+        
+        // Converter arquivo para Base64
+        function toBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+        
+        // Enviar dados para o Discord
+        async function sendToDiscord(webhookUrl, data) {
+            // Para arquivos, precisamos usar FormData
+            const formData = new FormData();
+            formData.append('payload_json', JSON.stringify({
+                content: data.content,
+                embeds: data.embeds
+            }));
+            
+            // Adicionar arquivo se existir
+            if (data.attachments.length > 0) {
+                const file = dataUrlToFile(
+                    `data:${data.attachments[0].filename.split('.').pop()};base64,${data.attachments[0].data}`,
+                    data.attachments[0].filename
+                );
+                formData.append('file', file);
             }
             
-            static async processPayment() {
-                const statusElement = document.getElementById('paymentStatus');
-                const lastCheckElement = document.getElementById('lastCheck');
-                
-                statusElement.className = 'status-badge status-pending';
-                statusElement.textContent = 'AGUARDANDO PAGAMENTO...';
-                
-                let checks = 0;
-                const checkInterval = setInterval(() => {
-                    checks++;
-                    lastCheckElement.textContent = new Date().toLocaleTimeString();
-                    
-                    if (checks === 3) {
-                        clearInterval(checkInterval);
-                        this.completePayment();
-                    }
-                }, 2000);
+            return await fetch(webhookUrl, {
+                method: 'POST',
+                body: formData
+            });
+        }
+        
+        // Converter data URL para File object
+        function dataUrlToFile(dataUrl, fileName) {
+            const arr = dataUrl.split(',');
+            const mime = arr[0].match(/:(.*?);/)[1];
+            const bstr = atob(arr[1]);
+            let n = bstr.length;
+            const u8arr = new Uint8Array(n);
+            
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
             }
             
-            static async completePayment() {
-                const statusElement = document.getElementById('paymentStatus');
-                statusElement.className = 'status-badge status-success';
-                statusElement.textContent = 'PAGAMENTO CONFIRMADO!';
-                
-                setTimeout(() => {
-                    const order = {
-                        id: Date.now(),
-                        date: new Date().toISOString(),
-                        items: [...StoreSystem.cart],
-                        total: StoreSystem.getCartTotal(),
-                        status: 'completed'
-                    };
-                    
-                    if (AuthSystem.currentUser) {
-                        const userIndex = AuthSystem.users.findIndex(
-                            u => u.username === AuthSystem.currentUser.username
-                        );
-                        if (userIndex !== -1) {
-                            AuthSystem.users[userIndex].orders.push(order);
-                            AuthSystem.saveUsers();
-                        }
-                    }
-                    
-                    StoreSystem.clearCart();
-                    this.updateCartBadge();
-                    
-                    document.getElementById('paymentModal').style.display = 'none';
-                    alert(`Pedido #${order.id} realizado com sucesso!\nTotal: ${order.total.toFixed(6)} BTC`);
-                }, 2000);
+            return new File([u8arr], fileName, { type: mime });
+        }
+        
+        // Fechar modal ao clicar fora
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('pixModal')) {
+                hideModal();
             }
         }
-
-        // Inicialização do sistema
-        document.addEventListener('DOMContentLoaded', () => {
-            AuthSystem.init();
-            StoreSystem.init();
-            UIManager.init();
-            
-            // Botões para abrir modais
-            document.getElementById('loginBtn').addEventListener('click', () => {
-                document.getElementById('loginModal').style.display = 'block';
-                document.getElementById('loginUsername').focus();
-            });
-            
-            document.getElementById('registerBtn').addEventListener('click', () => {
-                document.getElementById('registerModal').style.display = 'block';
-                document.getElementById('regUsername').focus();
+        
+        // Suavizar rolagem para âncoras
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>

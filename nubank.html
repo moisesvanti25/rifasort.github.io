@@ -1345,7 +1345,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="balance-amount">R$ 5.327,45</div>
+                <div class="balance-amount" id="current-balance">R$ 5.327,45</div>
                 <div class="balance-details">
                     <span class="balance-detail">
                         <i class="fas fa-lock" style="color: var(--nubank-green);"></i> R$ 1.200,00 rendendo 100% do CDI
@@ -1399,68 +1399,8 @@
                     </button>
                 </div>
                 
-                <div class="transaction" onclick="openModal('transaction-detail-modal')">
-                    <div class="transaction-info">
-                        <div class="transaction-icon"><i class="fas fa-shopping-cart"></i></div>
-                        <div class="transaction-details">
-                            <h4 class="transaction-title">Supermercado Bom Preço</h4>
-                            <div class="transaction-meta">
-                                <span class="transaction-date">Hoje, 14:30</span>
-                                <span class="transaction-category">
-                                    <i class="fas fa-tag" style="color: var(--nubank-green);"></i> Alimentação
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transaction-amount negative">- R$ 128,90</div>
-                </div>
-                
-                <div class="transaction" onclick="openModal('transaction-detail-modal')">
-                    <div class="transaction-info">
-                        <div class="transaction-icon"><i class="fas fa-money-bill-wave"></i></div>
-                        <div class="transaction-details">
-                            <h4 class="transaction-title">Transferência recebida</h4>
-                            <div class="transaction-meta">
-                                <span class="transaction-date">Ontem, 09:15</span>
-                                <span class="transaction-category">
-                                    <i class="fas fa-tag" style="color: var(--nubank-purple);"></i> Pix
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transaction-amount positive">+ R$ 500,00</div>
-                </div>
-                
-                <div class="transaction" onclick="openModal('transaction-detail-modal')">
-                    <div class="transaction-info">
-                        <div class="transaction-icon"><i class="fas fa-utensils"></i></div>
-                        <div class="transaction-details">
-                            <h4 class="transaction-title">Restaurante Sabor Caseiro</h4>
-                            <div class="transaction-meta">
-                                <span class="transaction-date">Ontem, 20:45</span>
-                                <span class="transaction-category">
-                                    <i class="fas fa-tag" style="color: var(--nubank-orange);"></i> Alimentação
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transaction-amount negative">- R$ 78,50</div>
-                </div>
-                
-                <div class="transaction" onclick="openModal('transaction-detail-modal')">
-                    <div class="transaction-info">
-                        <div class="transaction-icon"><i class="fas fa-film"></i></div>
-                        <div class="transaction-details">
-                            <h4 class="transaction-title">Netflix</h4>
-                            <div class="transaction-meta">
-                                <span class="transaction-date">2 dias atrás</span>
-                                <span class="transaction-category">
-                                    <i class="fas fa-tag" style="color: var(--nubank-red);"></i> Assinatura
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transaction-amount negative">- R$ 34,90</div>
+                <div id="transactions-list">
+                    <!-- Transactions will be loaded here -->
                 </div>
                 
                 <button class="btn btn-secondary" style="margin-top: 15px;" onclick="openModal('all-transactions-modal')">
@@ -1521,52 +1461,8 @@
                     </button>
                 </div>
                 
-                <div class="transaction" onclick="openModal('transaction-detail-modal')">
-                    <div class="transaction-info">
-                        <div class="transaction-icon"><i class="fas fa-shopping-cart"></i></div>
-                        <div class="transaction-details">
-                            <h4 class="transaction-title">Supermercado Bom Preço</h4>
-                            <div class="transaction-meta">
-                                <span class="transaction-date">Hoje, 14:30</span>
-                                <span class="transaction-category">
-                                    <i class="fas fa-tag" style="color: var(--nubank-green);"></i> Alimentação
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transaction-amount negative">- R$ 128,90</div>
-                </div>
-                
-                <div class="transaction" onclick="openModal('transaction-detail-modal')">
-                    <div class="transaction-info">
-                        <div class="transaction-icon"><i class="fas fa-utensils"></i></div>
-                        <div class="transaction-details">
-                            <h4 class="transaction-title">Restaurante Sabor Caseiro</h4>
-                            <div class="transaction-meta">
-                                <span class="transaction-date">Ontem, 20:45</span>
-                                <span class="transaction-category">
-                                    <i class="fas fa-tag" style="color: var(--nubank-orange);"></i> Alimentação
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transaction-amount negative">- R$ 78,50</div>
-                </div>
-                
-                <div class="transaction" onclick="openModal('transaction-detail-modal')">
-                    <div class="transaction-info">
-                        <div class="transaction-icon"><i class="fas fa-film"></i></div>
-                        <div class="transaction-details">
-                            <h4 class="transaction-title">Netflix</h4>
-                            <div class="transaction-meta">
-                                <span class="transaction-date">2 dias atrás</span>
-                                <span class="transaction-category">
-                                    <i class="fas fa-tag" style="color: var(--nubank-red);"></i> Assinatura
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="transaction-amount negative">- R$ 34,90</div>
+                <div id="credit-transactions-list">
+                    <!-- Credit card transactions will be loaded here -->
                 </div>
                 
                 <button class="btn btn-secondary" style="margin-top: 15px;" onclick="openModal('all-transactions-modal')">
@@ -1951,34 +1847,34 @@
             </div>
             <div class="modal-body">
                 <div class="transaction-detail-header">
-                    <div class="transaction-detail-icon"><i class="fas fa-shopping-cart"></i></div>
-                    <h3>Supermercado Bom Preço</h3>
-                    <div class="transaction-detail-amount negative">- R$ 128,90</div>
-                    <div class="transaction-detail-meta">Hoje, 14:30 • Cartão final 1234</div>
+                    <div class="transaction-detail-icon" id="transaction-detail-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3 id="transaction-detail-title">Supermercado Bom Preço</h3>
+                    <div class="transaction-detail-amount negative" id="transaction-detail-amount">- R$ 128,90</div>
+                    <div class="transaction-detail-meta" id="transaction-detail-meta">Hoje, 14:30 • Cartão final 1234</div>
                 </div>
                 
                 <div class="detail-row">
                     <span class="detail-label">Estabelecimento</span>
-                    <span class="detail-value">Supermercado Bom Preço</span>
+                    <span class="detail-value" id="transaction-detail-merchant">Supermercado Bom Preço</span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">Local</span>
-                    <span class="detail-value">Av. Paulista, 1000 - São Paulo, SP</span>
+                    <span class="detail-value" id="transaction-detail-location">Av. Paulista, 1000 - São Paulo, SP</span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">Categoria</span>
-                    <span class="detail-value">Alimentação</span>
+                    <span class="detail-value" id="transaction-detail-category">Alimentação</span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">Método de pagamento</span>
-                    <span class="detail-value">Cartão de crédito</span>
+                    <span class="detail-value" id="transaction-detail-method">Cartão de crédito</span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">Parcelamento</span>
-                    <span class="detail-value">À vista</span>
+                    <span class="detail-value" id="transaction-detail-installment">À vista</span>
                 </div>
                 
-                <button class="btn">
+                <button class="btn" onclick="shareReceipt()">
                     <i class="fas fa-share-alt"></i> Compartilhar comprovante
                 </button>
                 <button class="btn btn-secondary" style="margin-top: 10px;">
@@ -2004,21 +1900,21 @@
                 
                 <div class="form-group">
                     <label class="form-label">Valor do pagamento</label>
-                    <input type="text" class="form-control" value="R$ 1.245,90">
+                    <input type="text" class="form-control" id="invoice-payment-amount" value="R$ 1.245,90">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Data do pagamento</label>
-                    <input type="date" class="form-control" value="2023-06-10">
+                    <input type="date" class="form-control" id="invoice-payment-date" value="2023-06-10">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Conta de débito</label>
-                    <select class="form-control">
+                    <select class="form-control" id="invoice-payment-account">
                         <option>Conta Nubank (R$ 5.327,45)</option>
                         <option>Banco do Brasil •••• 4321</option>
                     </select>
                 </div>
                 
-                <button class="btn" onclick="showNotification('Pagamento agendado com sucesso!')">
+                <button class="btn" onclick="payInvoice()">
                     <i class="fas fa-check"></i> Confirmar pagamento
                 </button>
             </div>
@@ -2105,18 +2001,18 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="form-label">Chave Pix</label>
-                    <input type="text" class="form-control" placeholder="Digite a chave, CPF ou celular">
+                    <input type="text" class="form-control" id="pix-recipient-key" placeholder="Digite a chave, CPF ou celular">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Valor</label>
-                    <input type="text" class="form-control" placeholder="R$ 0,00">
+                    <input type="text" class="form-control" id="pix-amount" placeholder="R$ 0,00">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Descrição (opcional)</label>
-                    <input type="text" class="form-control" placeholder="Ex: Pagamento do serviço">
+                    <input type="text" class="form-control" id="pix-description" placeholder="Ex: Pagamento do serviço">
                 </div>
                 
-                <button class="btn" onclick="openModal('pix-confirm-modal')">
+                <button class="btn" onclick="confirmPix()">
                     <i class="fas fa-arrow-right"></i> Continuar
                 </button>
             </div>
@@ -2134,24 +2030,24 @@
                 <div style="text-align: center; margin: 20px 0 30px;">
                     <div class="transaction-detail-icon"><i class="fas fa-paper-plane"></i></div>
                     <h3>Enviar Pix</h3>
-                    <div class="transaction-detail-amount negative">- R$ 100,00</div>
-                    <div class="transaction-detail-meta">Para: joao.silva@email.com</div>
+                    <div class="transaction-detail-amount negative" id="pix-confirm-amount">- R$ 100,00</div>
+                    <div class="transaction-detail-meta" id="pix-confirm-recipient">Para: joao.silva@email.com</div>
                 </div>
                 
                 <div class="detail-row">
                     <span class="detail-label">Data</span>
-                    <span class="detail-value">Hoje, 15:30</span>
+                    <span class="detail-value" id="pix-confirm-date">Hoje, 15:30</span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">Descrição</span>
-                    <span class="detail-value">Pagamento do serviço</span>
+                    <span class="detail-value" id="pix-confirm-description">Pagamento do serviço</span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">Conta de débito</span>
                     <span class="detail-value">Conta Nubank</span>
                 </div>
                 
-                <button class="btn btn-success" onclick="showNotification('Pix enviado com sucesso!')">
+                <button class="btn btn-success" onclick="sendPix()">
                     <i class="fas fa-check"></i> Confirmar Pix
                 </button>
                 <button class="btn btn-secondary" style="margin-top: 10px;" onclick="closeModal(); openModal('pix-send-modal')">
@@ -2171,11 +2067,11 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="form-label">Valor (opcional)</label>
-                    <input type="text" class="form-control" placeholder="R$ 0,00">
+                    <input type="text" class="form-control" id="pix-receive-amount" placeholder="R$ 0,00">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Mensagem (opcional)</label>
-                    <input type="text" class="form-control" placeholder="Ex: Pagamento do aluguel">
+                    <input type="text" class="form-control" id="pix-receive-message" placeholder="Ex: Pagamento do aluguel">
                 </div>
                 
                 <div style="margin: 25px 0;">
@@ -2192,7 +2088,7 @@
                     </div>
                 </div>
                 
-                <button class="btn">
+                <button class="btn" onclick="generatePixQrCode()">
                     <i class="fas fa-qrcode"></i> Gerar QR Code
                 </button>
             </div>
@@ -2274,10 +2170,10 @@
                     <p style="margin-top: 10px; font-size: 18px;">cliente@nubank.com.br</p>
                 </div>
                 
-                <button class="btn">
+                <button class="btn" onclick="sharePixKey()">
                     <i class="fas fa-share-alt"></i> Compartilhar
                 </button>
-                <button class="btn btn-secondary" style="margin-top: 10px;">
+                <button class="btn btn-secondary" style="margin-top: 10px;" onclick="copyPixKey()">
                     <i class="far fa-copy"></i> Copiar chave
                 </button>
                 <button class="btn btn-danger" style="margin-top: 10px;">
@@ -2303,7 +2199,7 @@
                 
                 <div class="form-group">
                     <label class="form-label">Valor em reais para resgate</label>
-                    <input type="text" class="form-control" placeholder="R$ 0,00">
+                    <input type="text" class="form-control" id="cashback-amount" placeholder="R$ 0,00">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Conta para crédito</label>
@@ -2312,43 +2208,8 @@
                     </select>
                 </div>
                 
-                <button class="btn btn-success" onclick="showNotification('Cashback resgatado com sucesso!')">
+                <button class="btn btn-success" onclick="redeemCashback()">
                     <i class="fas fa-gift"></i> Confirmar resgate
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Partner Detail Modal -->
-    <div id="partner-detail-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">McDonald's</div>
-                <div class="close-modal" onclick="closeModal()">&times;</div>
-            </div>
-            <div class="modal-body">
-                <div style="text-align: center; margin: 20px 0 30px;">
-                    <div class="partner-img" style="width: 100px; height: 100px; margin: 0 auto 15px; font-size: 40px;">
-                        <i class="fas fa-hamburger"></i>
-                    </div>
-                    <h3>5x pontos</h3>
-                    <p style="margin-top: 10px; font-size: 16px;">Ganhe 5 pontos por cada R$1 gasto</p>
-                </div>
-                
-                <div style="margin-bottom: 25px;">
-                    <h4 style="margin-bottom: 15px;">Como funciona:</h4>
-                    <ul style="padding-left: 20px;">
-                        <li style="margin-bottom: 10px;">Pague com seu cartão Nubank em qualquer loja McDonald's</li>
-                        <li style="margin-bottom: 10px;">Os pontos são creditados automaticamente em até 5 dias úteis</li>
-                        <li>Resgate quando quiser como cashback na sua conta</li>
-                    </ul>
-                </div>
-                
-                <button class="btn">
-                    <i class="fas fa-map-marker-alt"></i> Ver restaurantes
-                </button>
-                <button class="btn btn-secondary" style="margin-top: 10px;">
-                    <i class="fas fa-info-circle"></i> Termos e condições
                 </button>
             </div>
         </div>
@@ -2364,366 +2225,41 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="form-label">Valor</label>
-                    <input type="text" class="form-control" placeholder="R$ 0,00">
+                    <input type="text" class="form-control" id="deposit-amount" placeholder="R$ 0,00">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Origem do depósito</label>
-                    <select class="form-control">
+                    <select class="form-control" id="deposit-source">
                         <option>Transferência bancária</option>
                         <option>Depósito em dinheiro</option>
                         <option>Outro banco</option>
                     </select>
                 </div>
                 
-                <button class="btn" onclick="showNotification('Depósito realizado com sucesso!')">
+                <button class="btn" onclick="makeDeposit()">
                     <i class="fas fa-arrow-right"></i> Continuar
                 </button>
             </div>
         </div>
     </div>
     
-    <!-- Recharge Modal -->
-    <div id="recharge-modal" class="modal">
+    <!-- All Transactions Modal -->
+    <div id="all-transactions-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-title">Recarga de celular</div>
+                <div class="modal-title">Todas as movimentações</div>
                 <div class="close-modal" onclick="closeModal()">&times;</div>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Número do celular</label>
-                    <input type="text" class="form-control" placeholder="(DDD) 9XXXX-XXXX">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Operadora</label>
-                    <select class="form-control">
-                        <option>Selecione</option>
-                        <option>Vivo</option>
-                        <option>Claro</option>
-                        <option>Tim</option>
-                        <option>Oi</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Valor</label>
-                    <input type="text" class="form-control" placeholder="R$ 0,00">
+                <div class="transactions-header">
+                    <h3 class="transactions-title">Histórico completo</h3>
+                    <button class="transactions-filter" onclick="openModal('transactions-filter-modal')">
+                        Filtrar <i class="fas fa-sliders-h"></i>
+                    </button>
                 </div>
                 
-                <button class="btn" onclick="showNotification('Recarga realizada com sucesso!')">
-                    <i class="fas fa-arrow-right"></i> Continuar
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Loan Modal -->
-    <div id="loan-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Empréstimo</div>
-                <div class="close-modal" onclick="closeModal()">&times;</div>
-            </div>
-            <div class="modal-body">
-                <div style="text-align: center; margin: 20px 0;">
-                    <h3>Disponível para você</h3>
-                    <div class="balance-amount" style="color: var(--nubank-green); margin: 15px 0;">R$ 5.000,00</div>
-                    <p style="color: var(--text-medium);">Limite pré-aprovado</p>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label">Valor desejado</label>
-                    <input type="text" class="form-control" placeholder="R$ 0,00">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Parcelas</label>
-                    <select class="form-control">
-                        <option>6x de R$ 883,33</option>
-                        <option>12x de R$ 458,33</option>
-                        <option>24x de R$ 241,67</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Conta para crédito</label>
-                    <select class="form-control">
-                        <option>Conta Nubank</option>
-                    </select>
-                </div>
-                
-                <button class="btn" onclick="openModal('loan-confirm-modal')">
-                    <i class="fas fa-arrow-right"></i> Simular empréstimo
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Loan Confirm Modal -->
-    <div id="loan-confirm-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Confirmar Empréstimo</div>
-                <div class="close-modal" onclick="closeModal()">&times;</div>
-            </div>
-            <div class="modal-body">
-                <div style="text-align: center; margin: 20px 0 30px;">
-                    <div class="transaction-detail-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                    <h3>Empréstimo</h3>
-                    <div class="transaction-detail-amount positive">+ R$ 5.000,00</div>
-                </div>
-                
-                <div class="detail-row">
-                    <span class="detail-label">Valor total</span>
-                    <span class="detail-value">R$ 5.300,00</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Parcelas</span>
-                    <span class="detail-value">12x de R$ 458,33</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Taxa de juros</span>
-                    <span class="detail-value">2,99% ao mês</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Data de crédito</span>
-                    <span class="detail-value">Hoje</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">1ª parcela</span>
-                    <span class="detail-value">10/07/2023</span>
-                </div>
-                
-                <button class="btn btn-success" onclick="showNotification('Empréstimo contratado com sucesso!')">
-                    <i class="fas fa-check"></i> Confirmar empréstimo
-                </button>
-                <button class="btn btn-secondary" style="margin-top: 10px;" onclick="closeModal(); openModal('loan-modal')">
-                    <i class="fas fa-edit"></i> Editar
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Investments Modal -->
-    <div id="investments-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Investimentos</div>
-                <div class="close-modal" onclick="closeModal()">&times;</div>
-            </div>
-            <div class="modal-body">
-                <div class="tab-header">
-                    <button class="tab-button active" onclick="changeInvestmentTab('investments-tab1')">Renda Fixa</button>
-                    <button class="tab-button" onclick="changeInvestmentTab('investments-tab2')">Tesouro Direto</button>
-                    <button class="tab-button" onclick="changeInvestmentTab('investments-tab3')">Fundos</button>
-                </div>
-                
-                <div id="investments-tab1" class="investment-tab active">
-                    <div class="feature" onclick="openModal('investment-detail-modal')">
-                        <div class="feature-icon"><i class="fas fa-coins"></i></div>
-                        <div class="feature-title">Nu Reserva Imediata</div>
-                    </div>
-                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
-                        <div class="feature-icon"><i class="fas fa-piggy-bank"></i></div>
-                        <div class="feature-title">CDB Nu</div>
-                    </div>
-                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
-                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
-                        <div class="feature-title">LCI/LCA</div>
-                    </div>
-                </div>
-                
-                <div id="investments-tab2" class="investment-tab">
-                    <div class="feature" onclick="openModal('investment-detail-modal')">
-                        <div class="feature-icon"><i class="fas fa-landmark"></i></div>
-                        <div class="feature-title">Tesouro Selic</div>
-                    </div>
-                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
-                        <div class="feature-icon"><i class="fas fa-landmark"></i></div>
-                        <div class="feature-title">Tesouro IPCA+</div>
-                    </div>
-                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
-                        <div class="feature-icon"><i class="fas fa-landmark"></i></div>
-                        <div class="feature-title">Tesouro Prefixado</div>
-                    </div>
-                </div>
-                
-                <div id="investments-tab3" class="investment-tab">
-                    <div class="feature" onclick="openModal('investment-detail-modal')">
-                        <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
-                        <div class="feature-title">Nu FIC FIM</div>
-                    </div>
-                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
-                        <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
-                        <div class="feature-title">Nu FIC RF</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Investment Detail Modal -->
-    <div id="investment-detail-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Nu Reserva Imediata</div>
-                <div class="close-modal" onclick="closeModal()">&times;</div>
-            </div>
-            <div class="modal-body">
-                <div style="text-align: center; margin: 20px 0;">
-                    <div class="points-circle" style="width: 100px; height: 100px; border-width: 4px;">
-                        <div class="points-amount" style="font-size: 24px;">100%</div>
-                        <div class="points-label" style="font-size: 14px;">do CDI</div>
-                    </div>
-                    <h3 style="margin-top: 15px;">Rentabilidade</h3>
-                </div>
-                
-                <div class="detail-row">
-                    <span class="detail-label">Tipo</span>
-                    <span class="detail-value">Renda Fixa</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Rentabilidade</span>
-                    <span class="detail-value">100% do CDI</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Vencimento</span>
-                    <span class="detail-value">Diário (D+1)</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">IR</span>
-                    <span class="detail-value">22,5% a 15% (regressivo)</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Aplicação mínima</span>
-                    <span class="detail-value">R$ 1,00</span>
-                </div>
-                
-                <button class="btn" onclick="openModal('invest-amount-modal')">
-                    <i class="fas fa-arrow-right"></i> Aplicar agora
-                </button>
-                <button class="btn btn-secondary" style="margin-top: 10px;">
-                    <i class="fas fa-info-circle"></i> Mais informações
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Invest Amount Modal -->
-    <div id="invest-amount-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Aplicar em Nu Reserva Imediata</div>
-                <div class="close-modal" onclick="closeModal()">&times;</div>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label class="form-label">Valor para investir</label>
-                    <input type="text" class="form-control" placeholder="R$ 0,00">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Conta de débito</label>
-                    <select class="form-control">
-                        <option>Conta Nubank (R$ 5.327,45)</option>
-                    </select>
-                </div>
-                
-                <button class="btn btn-success" onclick="showNotification('Investimento realizado com sucesso!')">
-                    <i class="fas fa-check"></i> Confirmar aplicação
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Insurance Modal -->
-    <div id="insurance-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Seguros</div>
-                <div class="close-modal" onclick="closeModal()">&times;</div>
-            </div>
-            <div class="modal-body">
-                <div class="feature" onclick="openModal('insurance-detail-modal')">
-                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <div class="feature-title">Celular</div>
-                </div>
-                <div class="feature" style="margin-top: 15px;" onclick="openModal('insurance-detail-modal')">
-                    <div class="feature-icon"><i class="fas fa-home"></i></div>
-                    <div class="feature-title">Residencial</div>
-                </div>
-                <div class="feature" style="margin-top: 15px;" onclick="openModal('insurance-detail-modal')">
-                    <div class="feature-icon"><i class="fas fa-car"></i></div>
-                    <div class="feature-title">Automóvel</div>
-                </div>
-                <div class="feature" style="margin-top: 15px;" onclick="openModal('insurance-detail-modal')">
-                    <div class="feature-icon"><i class="fas fa-plane"></i></div>
-                    <div class="feature-title">Viagem</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Insurance Detail Modal -->
-    <div id="insurance-detail-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Seguro Celular</div>
-                <div class="close-modal" onclick="closeModal()">&times;</div>
-            </div>
-            <div class="modal-body">
-                <div style="text-align: center; margin: 20px 0;">
-                    <div class="transaction-detail-icon"><i class="fas fa-mobile-alt"></i></div>
-                    <h3>Proteção para seu celular</h3>
-                    <p style="color: var(--text-medium); margin-top: 10px;">Cobertura contra roubo, furto e danos acidentais</p>
-                </div>
-                
-                <div class="detail-row">
-                    <span class="detail-label">Valor do aparelho</span>
-                    <span class="detail-value">Até R$ 5.000,00</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Cobertura</span>
-                    <span class="detail-value">Roubo, furto e danos</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Franquia</span>
-                    <span class="detail-value">R$ 100,00</span>
-                </div>
-                <div class="detail-row">
-                    <span class="detail-label">Mensalidade</span>
-                    <span class="detail-value">R$ 29,90/mês</span>
-                </div>
-                
-                <button class="btn" onclick="openModal('insurance-contract-modal')">
-                    <i class="fas fa-arrow-right"></i> Contratar
-                </button>
-                <button class="btn btn-secondary" style="margin-top: 10px;">
-                    <i class="fas fa-info-circle"></i> Termos completos
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Shop Modal -->
-    <div id="shop-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Shopping</div>
-                <div class="close-modal" onclick="closeModal()">&times;</div>
-            </div>
-            <div class="modal-body">
-                <div class="feature" onclick="openModal('shop-partner-modal')">
-                    <div class="feature-icon"><i class="fas fa-tag"></i></div>
-                    <div class="feature-title">Ofertas</div>
-                </div>
-                <div class="feature" style="margin-top: 15px;" onclick="openModal('shop-partner-modal')">
-                    <div class="feature-icon"><i class="fas fa-plane"></i></div>
-                    <div class="feature-title">Viagens</div>
-                </div>
-                <div class="feature" style="margin-top: 15px;" onclick="openModal('shop-partner-modal')">
-                    <div class="feature-icon"><i class="fas fa-ticket-alt"></i></div>
-                    <div class="feature-title">Ingressos</div>
-                </div>
-                <div class="feature" style="margin-top: 15px;" onclick="openModal('shop-partner-modal')">
-                    <div class="feature-icon"><i class="fas fa-car"></i></div>
-                    <div class="feature-title">Carros</div>
+                <div id="full-transactions-list">
+                    <!-- Full transactions list will be loaded here -->
                 </div>
             </div>
         </div>
@@ -2731,20 +2267,351 @@
     
     <!-- Dark Mode Toggle -->
     <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            if (document.body.classList.contains('dark-mode')) {
-                themeToggle.classList.remove('fa-moon');
-                themeToggle.classList.add('fa-sun');
-            } else {
-                themeToggle.classList.remove('fa-sun');
-                themeToggle.classList.add('fa-moon');
-            }
-        });
-    </script>
+        // Initialize app data
+        const appData = {
+            balance: 5327.45,
+            creditLimit: 6000,
+            creditUsed: 1245.90,
+            transactions: [
+                {
+                    id: 1,
+                    title: "Supermercado Bom Preço",
+                    amount: -128.90,
+                    date: "Hoje, 14:30",
+                    category: "Alimentação",
+                    type: "credit",
+                    icon: "shopping-cart",
+                    color: "green"
+                },
+                {
+                    id: 2,
+                    title: "Transferência recebida",
+                    amount: 500.00,
+                    date: "Ontem, 09:15",
+                    category: "Pix",
+                    type: "pix",
+                    icon: "money-bill-wave",
+                    color: "purple"
+                },
+                {
+                    id: 3,
+                    title: "Restaurante Sabor Caseiro",
+                    amount: -78.50,
+                    date: "Ontem, 20:45",
+                    category: "Alimentação",
+                    type: "credit",
+                    icon: "utensils",
+                    color: "orange"
+                },
+                {
+                    id: 4,
+                    title: "Netflix",
+                    amount: -34.90,
+                    date: "2 dias atrás",
+                    category: "Assinatura",
+                    type: "credit",
+                    icon: "film",
+                    color: "red"
+                },
+                {
+                    id: 5,
+                    title: "Notebook Dell",
+                    amount: -199.90,
+                    date: "10/12 • 3/12",
+                    category: "Eletrônicos",
+                    type: "installment",
+                    icon: "laptop",
+                    color: "blue"
+                },
+                {
+                    id: 6,
+                    title: "Renner",
+                    amount: -89.90,
+                    date: "05/12 • 6/12",
+                    category: "Vestuário",
+                    type: "installment",
+                    icon: "tshirt",
+                    color: "purple-light"
+                }
+            ],
+            pixKeys: [
+                {
+                    type: "email",
+                    value: "cliente@nubank.com.br",
+                    icon: "envelope"
+                },
+                {
+                    type: "phone",
+                    value: "+55 (11) 98765-4321",
+                    icon: "mobile-alt"
+                },
+                {
+                    type: "cpf",
+                    value: "123.456.789-00",
+                    icon: "id-card"
+                },
+                {
+                    type: "random",
+                    value: "a1b2c3d4-e5f6-g7h8-i9j0",
+                    icon: "random"
+                }
+            ]
+        };
 
-    <script>
+        // Format currency
+        function formatCurrency(value) {
+            return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        // Load transactions
+        function loadTransactions() {
+            const transactionsList = document.getElementById('transactions-list');
+            const creditTransactionsList = document.getElementById('credit-transactions-list');
+            const fullTransactionsList = document.getElementById('full-transactions-list');
+            
+            transactionsList.innerHTML = '';
+            creditTransactionsList.innerHTML = '';
+            fullTransactionsList.innerHTML = '';
+            
+            // Filter credit transactions
+            const creditTransactions = appData.transactions.filter(t => t.type === 'credit' || t.type === 'installment');
+            
+            // Display last 4 transactions in home
+            appData.transactions.slice(0, 4).forEach(transaction => {
+                transactionsList.appendChild(createTransactionElement(transaction));
+            });
+            
+            // Display credit transactions
+            creditTransactions.slice(0, 3).forEach(transaction => {
+                creditTransactionsList.appendChild(createTransactionElement(transaction));
+            });
+            
+            // Display all transactions in modal
+            appData.transactions.forEach(transaction => {
+                fullTransactionsList.appendChild(createTransactionElement(transaction));
+            });
+        }
+        
+        // Create transaction element
+        function createTransactionElement(transaction) {
+            const transactionEl = document.createElement('div');
+            transactionEl.className = 'transaction';
+            transactionEl.onclick = () => showTransactionDetail(transaction);
+            
+            const isPositive = transaction.amount > 0;
+            const amountClass = isPositive ? 'positive' : 'negative';
+            const amountText = isPositive ? `+ ${formatCurrency(transaction.amount)}` : `- ${formatCurrency(Math.abs(transaction.amount))}`;
+            
+            transactionEl.innerHTML = `
+                <div class="transaction-info">
+                    <div class="transaction-icon" style="color: var(--nubank-${transaction.color});">
+                        <i class="fas fa-${transaction.icon}"></i>
+                    </div>
+                    <div class="transaction-details">
+                        <h4 class="transaction-title">${transaction.title}</h4>
+                        <div class="transaction-meta">
+                            <span class="transaction-date">${transaction.date}</span>
+                            <span class="transaction-category">
+                                <i class="fas fa-tag" style="color: var(--nubank-${transaction.color});"></i> ${transaction.category}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="transaction-amount ${amountClass}">${amountText}</div>
+            `;
+            
+            return transactionEl;
+        }
+        
+        // Show transaction detail
+        function showTransactionDetail(transaction) {
+            const isPositive = transaction.amount > 0;
+            const amountText = isPositive ? `+ ${formatCurrency(transaction.amount)}` : `- ${formatCurrency(Math.abs(transaction.amount))}`;
+            
+            document.getElementById('transaction-detail-icon').innerHTML = `<i class="fas fa-${transaction.icon}"></i>`;
+            document.getElementById('transaction-detail-title').textContent = transaction.title;
+            document.getElementById('transaction-detail-amount').textContent = amountText;
+            document.getElementById('transaction-detail-amount').className = `transaction-detail-amount ${isPositive ? 'positive' : 'negative'}`;
+            document.getElementById('transaction-detail-meta').textContent = `${transaction.date} • ${transaction.type === 'credit' ? 'Cartão final 1234' : 'Pix'}`;
+            document.getElementById('transaction-detail-merchant').textContent = transaction.title;
+            document.getElementById('transaction-detail-location').textContent = transaction.type === 'credit' ? 'Av. Paulista, 1000 - São Paulo, SP' : 'Transferência entre contas';
+            document.getElementById('transaction-detail-category').textContent = transaction.category;
+            document.getElementById('transaction-detail-method').textContent = transaction.type === 'credit' ? 'Cartão de crédito' : 'Pix';
+            document.getElementById('transaction-detail-installment').textContent = transaction.type === 'installment' ? `${transaction.date.split('•')[1].trim()} parcelas` : 'À vista';
+            
+            openModal('transaction-detail-modal');
+        }
+        
+        // Share receipt
+        function shareReceipt() {
+            showNotification('Comprovante compartilhado com sucesso!');
+        }
+        
+        // Pay invoice
+        function payInvoice() {
+            const amount = parseFloat(document.getElementById('invoice-payment-amount').value.replace('R$ ', '').replace('.', '').replace(',', '.'));
+            const date = document.getElementById('invoice-payment-date').value;
+            const account = document.getElementById('invoice-payment-account').value;
+            
+            // Update balance
+            appData.balance -= amount;
+            appData.creditUsed = 0;
+            updateBalance();
+            
+            // Add transaction
+            const newTransaction = {
+                id: appData.transactions.length + 1,
+                title: "Pagamento de fatura",
+                amount: -amount,
+                date: "Hoje, " + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                category: "Pagamento",
+                type: "payment",
+                icon: "barcode",
+                color: "purple"
+            };
+            
+            appData.transactions.unshift(newTransaction);
+            loadTransactions();
+            
+            showNotification('Pagamento realizado com sucesso!');
+            closeModal();
+        }
+        
+        // Update balance display
+        function updateBalance() {
+            document.getElementById('current-balance').textContent = formatCurrency(appData.balance);
+            document.querySelector('.card-info-value').textContent = formatCurrency(appData.creditUsed);
+            document.querySelectorAll('.card-info-value')[1].textContent = formatCurrency(appData.creditLimit - appData.creditUsed);
+        }
+        
+        // Send PIX
+        function confirmPix() {
+            const recipient = document.getElementById('pix-recipient-key').value;
+            const amount = parseFloat(document.getElementById('pix-amount').value.replace('R$ ', '').replace('.', '').replace(',', '.'));
+            const description = document.getElementById('pix-description').value;
+            
+            if (!recipient || !amount || isNaN(amount)) {
+                showNotification('Preencha todos os campos corretamente!');
+                return;
+            }
+            
+            document.getElementById('pix-confirm-amount').textContent = `- ${formatCurrency(amount)}`;
+            document.getElementById('pix-confirm-recipient').textContent = `Para: ${recipient}`;
+            document.getElementById('pix-confirm-date').textContent = `Hoje, ${new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+            document.getElementById('pix-confirm-description').textContent = description || 'Sem descrição';
+            
+            closeModal();
+            openModal('pix-confirm-modal');
+        }
+        
+        function sendPix() {
+            const amountText = document.getElementById('pix-confirm-amount').textContent;
+            const amount = parseFloat(amountText.replace('- R$ ', '').replace('.', '').replace(',', '.'));
+            const recipient = document.getElementById('pix-confirm-recipient').textContent.replace('Para: ', '');
+            
+            // Update balance
+            appData.balance -= amount;
+            updateBalance();
+            
+            // Add transaction
+            const newTransaction = {
+                id: appData.transactions.length + 1,
+                title: `Pix para ${recipient}`,
+                amount: -amount,
+                date: "Hoje, " + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                category: "Transferência",
+                type: "pix",
+                icon: "paper-plane",
+                color: "purple"
+            };
+            
+            appData.transactions.unshift(newTransaction);
+            loadTransactions();
+            
+            showNotification('Pix enviado com sucesso!');
+            closeModal();
+        }
+        
+        // Make deposit
+        function makeDeposit() {
+            const amount = parseFloat(document.getElementById('deposit-amount').value.replace('R$ ', '').replace('.', '').replace(',', '.'));
+            const source = document.getElementById('deposit-source').value;
+            
+            if (!amount || isNaN(amount)) {
+                showNotification('Informe um valor válido!');
+                return;
+            }
+            
+            // Update balance
+            appData.balance += amount;
+            updateBalance();
+            
+            // Add transaction
+            const newTransaction = {
+                id: appData.transactions.length + 1,
+                title: `Depósito (${source})`,
+                amount: amount,
+                date: "Hoje, " + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                category: "Depósito",
+                type: "deposit",
+                icon: "piggy-bank",
+                color: "green"
+            };
+            
+            appData.transactions.unshift(newTransaction);
+            loadTransactions();
+            
+            showNotification('Depósito realizado com sucesso!');
+            closeModal();
+        }
+        
+        // Redeem cashback
+        function redeemCashback() {
+            const amount = parseFloat(document.getElementById('cashback-amount').value.replace('R$ ', '').replace('.', '').replace(',', '.'));
+            
+            if (!amount || isNaN(amount)) {
+                showNotification('Informe um valor válido!');
+                return;
+            }
+            
+            // Update balance
+            appData.balance += amount;
+            updateBalance();
+            
+            // Add transaction
+            const newTransaction = {
+                id: appData.transactions.length + 1,
+                title: "Cashback Rewards",
+                amount: amount,
+                date: "Hoje, " + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+                category: "Cashback",
+                type: "reward",
+                icon: "gift",
+                color: "green"
+            };
+            
+            appData.transactions.unshift(newTransaction);
+            loadTransactions();
+            
+            showNotification('Cashback resgatado com sucesso!');
+            closeModal();
+        }
+        
+        // Share PIX key
+        function sharePixKey() {
+            showNotification('Chave Pix compartilhada com sucesso!');
+        }
+        
+        // Copy PIX key
+        function copyPixKey() {
+            showNotification('Chave Pix copiada para a área de transferência!');
+        }
+        
+        // Generate PIX QR Code
+        function generatePixQrCode() {
+            showNotification('QR Code gerado com sucesso!');
+        }
+        
         // Tab navigation
         function showTab(tabId) {
             // Hide all tabs
@@ -2855,7 +2722,6 @@
             
             setTimeout(() => {
                 notification.classList.remove('show');
-                closeModal();
             }, 3000);
         }
         
@@ -2883,21 +2749,26 @@
             }
         });
         
-        // Change investment tab
-        function changeInvestmentTab(tabId) {
-            document.querySelectorAll('.investment-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.getElementById(tabId).classList.add('active');
-            
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-            });
-            event.target.classList.add('active');
-        }
+        // Dark mode toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.classList.remove('fa-moon');
+                themeToggle.classList.add('fa-sun');
+            } else {
+                themeToggle.classList.remove('fa-sun');
+                themeToggle.classList.add('fa-moon');
+            }
+        });
         
-        // Initialize animations on page load
+        // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
+            // Load initial data
+            loadTransactions();
+            updateBalance();
+            
+            // Animate elements on page load
             setTimeout(() => {
                 document.querySelectorAll('.slide-up').forEach((el, index) => {
                     setTimeout(() => {

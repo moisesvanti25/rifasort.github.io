@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubank Clone - Todas as Funcionalidades</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --purple-primary: #820ad1;
+            --purple-secondary: #a45cdd;
+            --purple-light: #f5e9ff;
+            --green: #00a86b;
+            --red: #ff3b30;
+            --gray-dark: #333;
+            --gray-medium: #666;
+            --gray-light: #f0f0f0;
+            --white: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+        
+        .header {
+            background-color: var(--purple-primary);
+            color: var(--white);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .menu a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .main {
+            margin-top: 80px;
+            padding: 20px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary));
+            color: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        
+        .card::after {
+            content: "";
+            position: absolute;
+            bottom: -80%;
+            right: -30%;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .card-number {
+            font-size: 18px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .card-info {
+            display: flex;
+            justify-content: space-between;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .card-info div {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .card-info small {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .balance {
+            background-color: var(--white);
+            color: var(--gray-dark);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .balance-title {
+            font-size: 14px;
+            color: var(--gray-medium);
+            margin-bottom: 5px;
+        }
+        
+        .balance-amount {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .feature {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--purple-primary);
+        }
+        
+        .feature-title {
+            font-size: 14px;
+        }
+        
+        .transactions {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .transactions-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: var(--gray-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .transaction {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-light);
+            cursor: pointer;
+        }
+        
+        .transaction:last-child {
+            border-bottom: none;
+        }
+        
+        .transaction-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--purple-primary);
+        }
+        
+        .transaction-details h4 {
+            font-size: 16px;
+        }
+        
+        .transaction-details p {
+            font-size: 12px;
+            color: var(--gray-medium);
+        }
+        
+        .transaction-amount {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .positive {
+            color: var(--green);
+        }
+        
+        .negative {
+            color: var(--red);
+        }
+        
+        .footer {
+            background-color: var(--purple-primary);
+            color: var(--white);
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer-tab {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .footer-tab i {
+            font-size: 20px;
+        }
+        
+        .footer-tab span {
+            font-size: 12px;
+        }
+        
+        .footer-tab.active {
+            color: var(--purple-light);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .close-modal {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: var(--gray-medium);
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray-light);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            background-color: var(--purple-primary);
+            color: var(--white);
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .btn:hover {
+            background-color: var(--purple-secondary);
+        }
+        
+        .pix-keys {
+            margin-top: 20px;
+        }
+        
+        .pix-key {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .pix-key:last-child {
+            border-bottom: none;
+        }
+        
+        .pix-key-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pix-key-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--purple-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--purple-primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .credit-card {
+            margin-bottom: 20px;
+        }
+        
+        .invoice-status {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .invoice-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .invoice-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .pay-invoice {
+            background-color: var(--purple-primary);
+            color: var(--white);
+        }
+        
+        .details-invoice {
+            background-color: var(--gray-light);
+            color: var(--gray-dark);
+        }
+        
+        .rewards-points {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .points-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--purple-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px;
+            border: 5px solid var(--purple-primary);
+        }
+        
+        .points-amount {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--purple-primary);
+        }
+        
+        .points-label {
+            font-size: 14px;
+            color: var(--gray-medium);
+        }
+        
+        .rewards-partners {
+            margin-top: 20px;
+        }
+        
+        .partner {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--gray-light);
+        }
+        
+        .partner-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--purple-primary);
+        }
+        
+        .partner-info h4 {
+            font-size: 16px;
+        }
+        
+        .partner-info p {
+            font-size: 12px;
+            color: var(--gray-medium);
+        }
+        
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .main {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">nubank</div>
+        <nav class="menu">
+            <a href="#" onclick="showTab('home')">Início</a>
+            <a href="#" onclick="showTab('credit')">Cartão</a>
+            <a href="#" onclick="showTab('pix')">Pix</a>
+            <a href="#" onclick="showTab('rewards')">Rewards</a>
+        </nav>
+    </header>
+    
+    <main class="main">
+        <!-- Home Tab -->
+        <div id="home" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <span>Cartão de Crédito</span>
+                    <span>••••</span>
+                </div>
+                <div class="card-number">•••• •••• •••• 1234</div>
+                <div class="card-info">
+                    <div>
+                        <small>Fatura atual</small>
+                        <span>R$ 1.245,90</span>
+                    </div>
+                    <div>
+                        <small>Limite disponível</small>
+                        <span>R$ 4.754,10</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="balance">
+                <div class="balance-title">Saldo disponível</div>
+                <div class="balance-amount">R$ 5.327,45</div>
+            </div>
+            
+            <div class="features">
+                <div class="feature" onclick="openModal('pix-modal')">
+                    <div class="feature-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="feature-title">Pix</div>
+                </div>
+                <div class="feature" onclick="openModal('deposit-modal')">
+                    <div class="feature-icon"><i class="fas fa-piggy-bank"></i></div>
+                    <div class="feature-title">Depositar</div>
+                </div>
+                <div class="feature" onclick="openModal('recharge-modal')">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="feature-title">Recarga</div>
+                </div>
+                <div class="feature" onclick="openModal('virtual-card-modal')">
+                    <div class="feature-icon"><i class="far fa-credit-card"></i></div>
+                    <div class="feature-title">Cartão virtual</div>
+                </div>
+            </div>
+            
+            <div class="transactions">
+                <h3 class="transactions-title">Últimas movimentações</h3>
+                
+                <div class="transaction" onclick="openModal('transaction-detail-modal')">
+                    <div class="transaction-info">
+                        <div class="transaction-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="transaction-details">
+                            <h4>Supermercado</h4>
+                            <p>Hoje, 14:30</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount negative">- R$ 128,90</div>
+                </div>
+                
+                <div class="transaction" onclick="openModal('transaction-detail-modal')">
+                    <div class="transaction-info">
+                        <div class="transaction-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="transaction-details">
+                            <h4>Transferência recebida</h4>
+                            <p>Ontem, 09:15</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount positive">+ R$ 500,00</div>
+                </div>
+                
+                <div class="transaction" onclick="openModal('transaction-detail-modal')">
+                    <div class="transaction-info">
+                        <div class="transaction-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="transaction-details">
+                            <h4>Restaurante</h4>
+                            <p>Ontem, 20:45</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount negative">- R$ 78,50</div>
+                </div>
+                
+                <div class="transaction" onclick="openModal('transaction-detail-modal')">
+                    <div class="transaction-info">
+                        <div class="transaction-icon"><i class="fas fa-film"></i></div>
+                        <div class="transaction-details">
+                            <h4>Streaming</h4>
+                            <p>2 dias atrás</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount negative">- R$ 34,90</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Credit Card Tab -->
+        <div id="credit" class="tab-content">
+            <div class="credit-card">
+                <div class="card">
+                    <div class="card-header">
+                        <span>Cartão de Crédito</span>
+                        <span>••••</span>
+                    </div>
+                    <div class="card-number">•••• •••• •••• 1234</div>
+                    <div class="card-info">
+                        <div>
+                            <small>Fatura atual</small>
+                            <span>R$ 1.245,90</span>
+                        </div>
+                        <div>
+                            <small>Limite disponível</small>
+                            <span>R$ 4.754,10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="invoice-status">
+                <div>
+                    <small>Próxima fatura</small>
+                    <span>R$ 1.245,90</span>
+                </div>
+                <div>
+                    <small>Vencimento</small>
+                    <span>10/06/2023</span>
+                </div>
+            </div>
+            
+            <div class="invoice-actions">
+                <div class="invoice-btn pay-invoice" onclick="openModal('pay-invoice-modal')">Pagar fatura</div>
+                <div class="invoice-btn details-invoice" onclick="openModal('invoice-details-modal')">Detalhes</div>
+            </div>
+            
+            <div class="transactions">
+                <h3 class="transactions-title">Últimos gastos</h3>
+                
+                <div class="transaction" onclick="openModal('transaction-detail-modal')">
+                    <div class="transaction-info">
+                        <div class="transaction-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="transaction-details">
+                            <h4>Supermercado</h4>
+                            <p>Hoje, 14:30</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount negative">- R$ 128,90</div>
+                </div>
+                
+                <div class="transaction" onclick="openModal('transaction-detail-modal')">
+                    <div class="transaction-info">
+                        <div class="transaction-icon"><i class="fas fa-utensils"></i></div>
+                        <div class="transaction-details">
+                            <h4>Restaurante</h4>
+                            <p>Ontem, 20:45</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount negative">- R$ 78,50</div>
+                </div>
+                
+                <div class="transaction" onclick="openModal('transaction-detail-modal')">
+                    <div class="transaction-info">
+                        <div class="transaction-icon"><i class="fas fa-film"></i></div>
+                        <div class="transaction-details">
+                            <h4>Streaming</h4>
+                            <p>2 dias atrás</p>
+                        </div>
+                    </div>
+                    <div class="transaction-amount negative">- R$ 34,90</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pix Tab -->
+        <div id="pix" class="tab-content">
+            <div class="transactions">
+                <h3 class="transactions-title">Área Pix</h3>
+                
+                <div class="features">
+                    <div class="feature" onclick="openModal('pix-send-modal')">
+                        <div class="feature-icon"><i class="fas fa-paper-plane"></i></div>
+                        <div class="feature-title">Enviar</div>
+                    </div>
+                    <div class="feature" onclick="openModal('pix-receive-modal')">
+                        <div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                        <div class="feature-title">Receber</div>
+                    </div>
+                    <div class="feature" onclick="openModal('pix-keys-modal')">
+                        <div class="feature-icon"><i class="fas fa-key"></i></div>
+                        <div class="feature-title">Minhas chaves</div>
+                    </div>
+                    <div class="feature" onclick="openModal('pix-history-modal')">
+                        <div class="feature-icon"><i class="fas fa-history"></i></div>
+                        <div class="feature-title">Histórico</div>
+                    </div>
+                </div>
+                
+                <div class="pix-keys">
+                    <h4 style="margin-bottom: 15px;">Minhas chaves Pix</h4>
+                    
+                    <div class="pix-key" onclick="openModal('pix-key-detail-modal')">
+                        <div class="pix-key-info">
+                            <div class="pix-key-icon"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <h4>E-mail</h4>
+                                <p>cliente@nubank.com.br</p>
+                            </div>
+                        </div>
+                        <div><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                    
+                    <div class="pix-key" onclick="openModal('pix-key-detail-modal')">
+                        <div class="pix-key-info">
+                            <div class="pix-key-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <div>
+                                <h4>Celular</h4>
+                                <p>+55 (11) 98765-4321</p>
+                            </div>
+                        </div>
+                        <div><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                    
+                    <div class="pix-key" onclick="openModal('pix-key-detail-modal')">
+                        <div class="pix-key-info">
+                            <div class="pix-key-icon"><i class="fas fa-id-card"></i></div>
+                            <div>
+                                <h4>CPF</h4>
+                                <p>123.456.789-00</p>
+                            </div>
+                        </div>
+                        <div><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Rewards Tab -->
+        <div id="rewards" class="tab-content">
+            <div class="rewards-points">
+                <div class="points-circle">
+                    <div class="points-amount">1.245</div>
+                    <div class="points-label">pontos</div>
+                </div>
+                <h3>Seus pontos Rewards</h3>
+                <p>Valem R$ 12,45 em cashback</p>
+            </div>
+            
+            <div class="transactions">
+                <h3 class="transactions-title">Como usar</h3>
+                
+                <div class="feature" onclick="openModal('rewards-cashback-modal')">
+                    <div class="feature-icon"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="feature-title">Resgatar cashback</div>
+                </div>
+                
+                <div class="feature" onclick="openModal('rewards-partners-modal')" style="margin-top: 15px;">
+                    <div class="feature-icon"><i class="fas fa-store"></i></div>
+                    <div class="feature-title">Lojas parceiras</div>
+                </div>
+            </div>
+            
+            <div class="rewards-partners">
+                <h4 style="margin-bottom: 15px;">Parceiros com mais pontos</h4>
+                
+                <div class="partner" onclick="openModal('partner-detail-modal')">
+                    <div class="partner-img"><i class="fas fa-hamburger"></i></div>
+                    <div class="partner-info">
+                        <h4>McDonald's</h4>
+                        <p>5 pontos por R$1 gasto</p>
+                    </div>
+                </div>
+                
+                <div class="partner" onclick="openModal('partner-detail-modal')">
+                    <div class="partner-img"><i class="fas fa-film"></i></div>
+                    <div class="partner-info">
+                        <h4>Netflix</h4>
+                        <p>3 pontos por R$1 gasto</p>
+                    </div>
+                </div>
+                
+                <div class="partner" onclick="openModal('partner-detail-modal')">
+                    <div class="partner-img"><i class="fas fa-tshirt"></i></div>
+                    <div class="partner-info">
+                        <h4>Renner</h4>
+                        <p>2 pontos por R$1 gasto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer Navigation -->
+    <footer class="footer">
+        <div class="footer-tab active" onclick="showTab('home')">
+            <i class="fas fa-home"></i>
+            <span>Início</span>
+        </div>
+        <div class="footer-tab" onclick="showTab('credit')">
+            <i class="far fa-credit-card"></i>
+            <span>Cartão</span>
+        </div>
+        <div class="footer-tab" onclick="showTab('pix')">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Pix</span>
+        </div>
+        <div class="footer-tab" onclick="showTab('rewards')">
+            <i class="fas fa-gift"></i>
+            <span>Rewards</span>
+        </div>
+    </footer>
+    
+    <!-- Modals -->
+    <div id="pix-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Área Pix</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="feature" onclick="openModal('pix-send-modal')">
+                <div class="feature-icon"><i class="fas fa-paper-plane"></i></div>
+                <div class="feature-title">Enviar com Pix</div>
+            </div>
+            <div class="feature" onclick="openModal('pix-receive-modal')" style="margin-top: 15px;">
+                <div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                <div class="feature-title">Receber com Pix</div>
+            </div>
+            <div class="feature" onclick="openModal('pix-keys-modal')" style="margin-top: 15px;">
+                <div class="feature-icon"><i class="fas fa-key"></i></div>
+                <div class="feature-title">Minhas chaves Pix</div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="deposit-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Depositar</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="form-group">
+                <label>Valor</label>
+                <input type="text" placeholder="R$ 0,00">
+            </div>
+            <button class="btn">Continuar</button>
+        </div>
+    </div>
+    
+    <div id="recharge-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Recarga de celular</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="form-group">
+                <label>Número do celular</label>
+                <input type="text" placeholder="(DDD) 9XXXX-XXXX">
+            </div>
+            <div class="form-group">
+                <label>Operadora</label>
+                <select>
+                    <option>Selecione</option>
+                    <option>Vivo</option>
+                    <option>Claro</option>
+                    <option>Tim</option>
+                    <option>Oi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Valor</label>
+                <input type="text" placeholder="R$ 0,00">
+            </div>
+            <button class="btn">Continuar</button>
+        </div>
+    </div>
+    
+    <div id="virtual-card-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Cartão virtual</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <span>Cartão Virtual</span>
+                    <span>••••</span>
+                </div>
+                <div class="card-number">•••• •••• •••• 5678</div>
+                <div class="card-info">
+                    <div>
+                        <small>Validade</small>
+                        <span>12/25</span>
+                    </div>
+                    <div>
+                        <small>CVV</small>
+                        <span>•••</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn" style="margin-top: 20px;">Mostrar CVV</button>
+            <button class="btn" style="margin-top: 10px; background-color: var(--gray-medium);">Bloquear cartão</button>
+        </div>
+    </div>
+    
+    <div id="transaction-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Detalhes da transação</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <div class="transaction-icon" style="margin: 0 auto 15px; width: 60px; height: 60px;"><i class="fas fa-shopping-cart"></i></div>
+                <h3>Supermercado</h3>
+                <p style="color: var(--red); font-size: 24px; font-weight: bold; margin: 10px 0;">- R$ 128,90</p>
+                <p>Hoje, 14:30</p>
+            </div>
+            <div style="margin: 20px 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="color: var(--gray-medium);">Estabelecimento</span>
+                    <span>Supermercado Bom Preço</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="color: var(--gray-medium);">Local</span>
+                    <span>São Paulo, SP</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span style="color: var(--gray-medium);">Categoria</span>
+                    <span>Alimentação</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--gray-medium);">Parcelamento</span>
+                    <span>À vista</span>
+                </div>
+            </div>
+            <button class="btn">Compartilhar comprovante</button>
+            <button class="btn" style="margin-top: 10px; background-color: var(--gray-medium);">Disputar transação</button>
+        </div>
+    </div>
+    
+    <div id="pay-invoice-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Pagar fatura</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <p>Fatura atual</p>
+                <h2 style="margin: 10px 0;">R$ 1.245,90</h2>
+                <p>Vencimento: 10/06/2023</p>
+            </div>
+            <div class="form-group">
+                <label>Valor do pagamento</label>
+                <input type="text" value="R$ 1.245,90">
+            </div>
+            <div class="form-group">
+                <label>Data do pagamento</label>
+                <input type="date" value="2023-06-10">
+            </div>
+            <button class="btn">Confirmar pagamento</button>
+        </div>
+    </div>
+    
+    <div id="invoice-details-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Detalhes da fatura</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div style="margin: 20px 0;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span style="color: var(--gray-medium);">Fatura atual</span>
+                    <span>R$ 1.245,90</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span style="color: var(--gray-medium);">Limite total</span>
+                    <span>R$ 6.000,00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span style="color: var(--gray-medium);">Limite disponível</span>
+                    <span>R$ 4.754,10</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                    <span style="color: var(--gray-medium);">Vencimento</span>
+                    <span>10/06/2023</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <span style="color: var(--gray-medium);">Fechamento</span>
+                    <span>20/05/2023</span>
+                </div>
+            </div>
+            <button class="btn" onclick="openModal('pay-invoice-modal')">Pagar fatura</button>
+        </div>
+    </div>
+    
+    <div id="pix-send-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Enviar com Pix</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="form-group">
+                <label>Chave Pix</label>
+                <input type="text" placeholder="Digite a chave, CPF ou celular">
+            </div>
+            <div class="form-group">
+                <label>Valor</label>
+                <input type="text" placeholder="R$ 0,00">
+            </div>
+            <div class="form-group">
+                <label>Descrição (opcional)</label>
+                <input type="text" placeholder="Ex: Pagamento do serviço">
+            </div>
+            <button class="btn">Continuar</button>
+        </div>
+    </div>
+    
+    <div id="pix-receive-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Receber com Pix</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="form-group">
+                <label>Valor (opcional)</label>
+                <input type="text" placeholder="R$ 0,00">
+            </div>
+            <div class="form-group">
+                <label>Mensagem (opcional)</label>
+                <input type="text" placeholder="Ex: Pagamento do aluguel">
+            </div>
+            <div style="margin: 20px 0;">
+                <h4 style="margin-bottom: 10px;">Compartilhar chave</h4>
+                <div class="pix-key">
+                    <div class="pix-key-info">
+                        <div class="pix-key-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>E-mail</h4>
+                            <p>cliente@nubank.com.br</p>
+                        </div>
+                    </div>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </div>
+            <button class="btn">Gerar QR Code</button>
+        </div>
+    </div>
+    
+    <div id="pix-keys-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Minhas chaves Pix</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="pix-keys">
+                <div class="pix-key" onclick="openModal('pix-key-detail-modal')">
+                    <div class="pix-key-info">
+                        <div class="pix-key-icon"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <h4>E-mail</h4>
+                            <p>cliente@nubank.com.br</p>
+                        </div>
+                    </div>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </div>
+                
+                <div class="pix-key" onclick="openModal('pix-key-detail-modal')">
+                    <div class="pix-key-info">
+                        <div class="pix-key-icon"><i class="fas fa-mobile-alt"></i></div>
+                        <div>
+                            <h4>Celular</h4>
+                            <p>+55 (11) 98765-4321</p>
+                        </div>
+                    </div>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </div>
+                
+                <div class="pix-key" onclick="openModal('pix-key-detail-modal')">
+                    <div class="pix-key-info">
+                        <div class="pix-key-icon"><i class="fas fa-id-card"></i></div>
+                        <div>
+                            <h4>CPF</h4>
+                            <p>123.456.789-00</p>
+                        </div>
+                    </div>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </div>
+            <button class="btn">Cadastrar nova chave</button>
+        </div>
+    </div>
+    
+    <div id="pix-key-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Chave Pix</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <div class="pix-key-icon" style="margin: 0 auto; width: 80px; height: 80px;"><i class="fas fa-envelope"></i></div>
+                <h3 style="margin: 10px 0;">E-mail</h3>
+                <p>cliente@nubank.com.br</p>
+            </div>
+            <button class="btn">Compartilhar</button>
+            <button class="btn" style="margin-top: 10px; background-color: var(--red);">Remover chave</button>
+        </div>
+    </div>
+    
+    <div id="rewards-cashback-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Resgatar cashback</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <p>Seus pontos disponíveis</p>
+                <h2 style="margin: 10px 0;">1.245 pontos</h2>
+                <p>Equivalente a R$ 12,45</p>
+            </div>
+            <div class="form-group">
+                <label>Valor em reais para resgate</label>
+                <input type="text" placeholder="R$ 0,00">
+            </div>
+            <button class="btn">Confirmar resgate</button>
+        </div>
+    </div>
+    
+    <div id="partner-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">McDonald's</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <div class="partner-img" style="margin: 0 auto; width: 80px; height: 80px;"><i class="fas fa-hamburger"></i></div>
+                <h3 style="margin: 10px 0;">5x pontos</h3>
+                <p>Ganhe 5 pontos por cada R$1 gasto</p>
+            </div>
+            <div style="margin: 20px 0;">
+                <p style="margin-bottom: 10px;">Como funciona:</p>
+                <ul style="padding-left: 20px; margin-bottom: 15px;">
+                    <li style="margin-bottom: 5px;">Pague com seu cartão Nubank</li>
+                    <li style="margin-bottom: 5px;">Os pontos são creditados em até 5 dias úteis</li>
+                    <li>Resgate quando quiser como cashback</li>
+                </ul>
+            </div>
+            <button class="btn">Ver restaurantes</button>
+        </div>
+    </div>
+    
+    <script>
+        // Tab navigation
+        function showTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabId).classList.add('active');
+            
+            // Update footer tabs
+            document.querySelectorAll('.footer-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Activate corresponding footer tab
+            if (tabId === 'home') {
+                document.querySelectorAll('.footer-tab')[0].classList.add('active');
+            } else if (tabId === 'credit') {
+                document.querySelectorAll('.footer-tab')[1].classList.add('active');
+            } else if (tabId === 'pix') {
+                document.querySelectorAll('.footer-tab')[2].classList.add('active');
+            } else if (tabId === 'rewards') {
+                document.querySelectorAll('.footer-tab')[3].classList.add('active');
+            }
+        }
+        
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.className === 'modal') {
+                closeModal();
+            }
+        }
+        
+        // Format currency inputs
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            if (input.placeholder.includes('R$')) {
+                input.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    value = (value / 100).toFixed(2) + '';
+                    value = value.replace(".", ",");
+                    value = value.replace(/(\d)(\d{3})(\d{3}),/g, "$1.$2.$3,");
+                    value = value.replace(/(\d)(\d{3}),/g, "$1.$2,");
+                    e.target.value = 'R$ ' + value;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

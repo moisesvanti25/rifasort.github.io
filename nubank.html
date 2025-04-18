@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nubank - Revolucionando seu dinheiro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,15 +13,21 @@
             --nubank-purple-light: #a45cdd;
             --nubank-purple-extra-light: #f5e9ff;
             --nubank-green: #00a86b;
+            --nubank-green-dark: #00875a;
             --nubank-red: #ff3b30;
             --nubank-orange: #ff7a00;
             --nubank-yellow: #ffcc00;
+            --nubank-blue: #007aff;
             --text-dark: #333333;
             --text-medium: #666666;
             --text-light: #999999;
             --bg-light: #f7f7f7;
             --bg-white: #ffffff;
             --border-color: #e0e0e0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1);
+            --shadow-purple: 0 5px 15px rgba(130, 10, 209, 0.3);
         }
 
         * {
@@ -37,13 +43,14 @@
             color: var(--text-dark);
             overflow-x: hidden;
             line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Header */
         .header {
             background-color: var(--nubank-purple);
             color: var(--bg-white);
-            padding: 20px 15px;
+            padding: 25px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -51,25 +58,30 @@
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
+            height: 70px;
         }
 
         .header.scrolled {
-            padding: 15px;
+            padding: 15px 20px;
             background-color: rgba(130, 10, 209, 0.98);
             backdrop-filter: blur(10px);
+            height: 60px;
         }
 
         .logo {
             font-size: 28px;
             font-weight: 700;
             letter-spacing: -1px;
+            background: linear-gradient(to right, #fff 0%, #f5e9ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .menu {
             display: flex;
-            gap: 25px;
+            gap: 20px;
         }
 
         .menu a {
@@ -79,10 +91,18 @@
             font-weight: 500;
             opacity: 0.9;
             transition: opacity 0.2s;
+            display: flex;
+            align-items: center;
         }
 
         .menu a:hover {
             opacity: 1;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
         }
 
         /* Main Content */
@@ -99,19 +119,19 @@
         .card {
             background: linear-gradient(135deg, var(--nubank-purple), var(--nubank-purple-dark));
             color: var(--bg-white);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 8px 20px rgba(130, 10, 209, 0.2);
+            box-shadow: var(--shadow-purple);
             position: relative;
             overflow: hidden;
             transform: translateY(0);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(130, 10, 209, 0.3);
+            box-shadow: 0 15px 30px rgba(130, 10, 209, 0.4);
         }
 
         .card::before {
@@ -161,6 +181,12 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .card-toggle:hover {
+            opacity: 1;
+            transform: translateX(3px);
         }
 
         .card-number {
@@ -171,6 +197,7 @@
             position: relative;
             font-weight: 500;
             word-spacing: 10px;
+            font-family: 'Courier New', monospace;
         }
 
         .card-info {
@@ -201,16 +228,16 @@
         .balance {
             background-color: var(--bg-white);
             color: var(--text-dark);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
         }
 
         .balance:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
         }
 
         .balance-header {
@@ -241,12 +268,18 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .balance-action:hover {
+            color: var(--nubank-purple-dark);
         }
 
         .balance-amount {
             font-size: 32px;
             font-weight: 700;
             margin: 10px 0 5px;
+            letter-spacing: -1px;
         }
 
         .balance-details {
@@ -254,12 +287,14 @@
             color: var(--text-medium);
             display: flex;
             gap: 15px;
+            flex-wrap: wrap;
         }
 
         .balance-detail {
             display: flex;
             align-items: center;
             gap: 5px;
+            font-size: 13px;
         }
 
         /* Features Grid */
@@ -272,10 +307,10 @@
 
         .feature {
             background-color: var(--bg-white);
-            border-radius: 10px;
+            border-radius: 15px;
             padding: 18px 10px;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
             cursor: pointer;
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
@@ -283,7 +318,7 @@
 
         .feature:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-md);
             border-color: var(--nubank-purple-extra-light);
         }
 
@@ -304,6 +339,7 @@
         .feature:hover .feature-icon {
             background-color: var(--nubank-purple);
             color: var(--bg-white);
+            transform: scale(1.1);
         }
 
         .feature-title {
@@ -315,9 +351,9 @@
         /* Transactions */
         .transactions {
             background-color: var(--bg-white);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-sm);
             margin-bottom: 20px;
         }
 
@@ -344,6 +380,11 @@
             display: flex;
             align-items: center;
             gap: 5px;
+            transition: all 0.2s ease;
+        }
+
+        .transactions-filter:hover {
+            color: var(--nubank-purple-dark);
         }
 
         .transaction {
@@ -352,7 +393,7 @@
             padding: 15px 0;
             border-bottom: 1px solid var(--border-color);
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
         }
 
         .transaction:last-child {
@@ -365,6 +406,7 @@
             margin-right: -25px;
             padding-left: 25px;
             padding-right: 25px;
+            border-radius: 10px;
         }
 
         .transaction-info {
@@ -385,6 +427,11 @@
             color: var(--nubank-purple);
             font-size: 18px;
             flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .transaction:hover .transaction-icon {
+            transform: scale(1.1);
         }
 
         .transaction-details {
@@ -406,6 +453,7 @@
             color: var(--text-medium);
             display: flex;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .transaction-category {
@@ -420,6 +468,11 @@
             display: flex;
             align-items: center;
             margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .transaction:hover .transaction-amount {
+            transform: scale(1.05);
         }
 
         .positive {
@@ -442,6 +495,8 @@
             justify-content: space-around;
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
             z-index: 999;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
         }
 
         .footer-tab {
@@ -454,6 +509,8 @@
             border-radius: 10px;
             transition: all 0.3s ease;
             position: relative;
+            flex: 1;
+            max-width: 80px;
         }
 
         .footer-tab.active {
@@ -464,6 +521,7 @@
         .footer-tab.active .footer-icon {
             background-color: var(--nubank-purple);
             color: var(--bg-white);
+            box-shadow: 0 5px 10px rgba(130, 10, 209, 0.2);
         }
 
         .footer-tab.active::after {
@@ -508,6 +566,7 @@
             align-items: center;
             opacity: 0;
             transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
         .modal.show {
@@ -517,14 +576,14 @@
 
         .modal-content {
             background-color: var(--bg-white);
-            border-radius: 20px;
+            border-radius: 25px;
             width: 95%;
             max-width: 420px;
             max-height: 90vh;
             overflow-y: auto;
             transform: translateY(20px);
             transition: transform 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow-lg);
         }
 
         .modal.show .modal-content {
@@ -541,7 +600,7 @@
             top: 0;
             background-color: var(--bg-white);
             z-index: 1;
-            border-radius: 20px 20px 0 0;
+            border-radius: 25px 25px 0 0;
         }
 
         .modal-title {
@@ -554,7 +613,7 @@
             font-size: 24px;
             cursor: pointer;
             color: var(--text-medium);
-            transition: color 0.2s;
+            transition: all 0.2s ease;
             width: 40px;
             height: 40px;
             display: flex;
@@ -566,6 +625,7 @@
         .close-modal:hover {
             color: var(--nubank-purple);
             background-color: var(--nubank-purple-extra-light);
+            transform: rotate(90deg);
         }
 
         .modal-body {
@@ -589,7 +649,7 @@
             width: 100%;
             padding: 14px 15px;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             transition: all 0.3s ease;
             background-color: var(--bg-light);
@@ -606,7 +666,7 @@
             background-color: var(--nubank-purple);
             color: var(--bg-white);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 16px;
             width: 100%;
             font-size: 16px;
@@ -618,22 +678,28 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            box-shadow: var(--shadow-sm);
         }
 
         .btn:hover {
             background-color: var(--nubank-purple-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(130, 10, 209, 0.3);
+            box-shadow: var(--shadow-purple);
+        }
+
+        .btn:active {
+            transform: translateY(0);
         }
 
         .btn-secondary {
             background-color: var(--bg-light);
             color: var(--text-dark);
+            box-shadow: none;
         }
 
         .btn-secondary:hover {
             background-color: #e0e0e0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-danger {
@@ -645,6 +711,15 @@
             box-shadow: 0 5px 15px rgba(255, 59, 48, 0.3);
         }
 
+        .btn-success {
+            background-color: var(--nubank-green);
+        }
+
+        .btn-success:hover {
+            background-color: var(--nubank-green-dark);
+            box-shadow: 0 5px 15px rgba(0, 168, 107, 0.3);
+        }
+
         /* Credit Card in Modal */
         .modal-card {
             background: linear-gradient(135deg, var(--nubank-purple), var(--nubank-purple-dark));
@@ -654,6 +729,7 @@
             margin-bottom: 25px;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-sm);
         }
 
         .modal-card-number {
@@ -662,6 +738,7 @@
             margin: 30px 0;
             font-weight: 500;
             word-spacing: 10px;
+            font-family: 'Courier New', monospace;
         }
 
         .modal-card-info {
@@ -686,12 +763,14 @@
             margin: 0 auto 15px;
             color: var(--nubank-purple);
             font-size: 28px;
+            box-shadow: var(--shadow-sm);
         }
 
         .transaction-detail-amount {
             font-size: 32px;
             font-weight: 700;
             margin: 10px 0;
+            letter-spacing: -1px;
         }
 
         .transaction-detail-meta {
@@ -718,6 +797,8 @@
             font-weight: 500;
             color: var(--text-dark);
             text-align: right;
+            max-width: 60%;
+            word-break: break-word;
         }
 
         /* Pix Key Item */
@@ -728,10 +809,20 @@
             padding: 18px 0;
             border-bottom: 1px solid var(--border-color);
             cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .pix-key:last-child {
             border-bottom: none;
+        }
+
+        .pix-key:hover {
+            background-color: var(--bg-light);
+            margin-left: -20px;
+            margin-right: -20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 10px;
         }
 
         .pix-key-info {
@@ -750,6 +841,11 @@
             justify-content: center;
             color: var(--nubank-purple);
             font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .pix-key:hover .pix-key-icon {
+            transform: scale(1.1);
         }
 
         .pix-key-title {
@@ -782,6 +878,12 @@
             border: 8px solid var(--nubank-purple);
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.5s ease;
+        }
+
+        .points-circle:hover {
+            transform: rotate(10deg) scale(1.05);
         }
 
         .points-circle::before {
@@ -816,10 +918,20 @@
             padding: 18px 0;
             border-bottom: 1px solid var(--border-color);
             cursor: pointer;
+            transition: all 0.2s ease;
         }
 
         .partner:last-child {
             border-bottom: none;
+        }
+
+        .partner:hover {
+            background-color: var(--bg-light);
+            margin-left: -25px;
+            margin-right: -25px;
+            padding-left: 25px;
+            padding-right: 25px;
+            border-radius: 10px;
         }
 
         .partner-img {
@@ -833,6 +945,11 @@
             color: var(--nubank-purple);
             font-size: 24px;
             flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .partner:hover .partner-img {
+            transform: scale(1.1);
         }
 
         .partner-info {
@@ -869,12 +986,177 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
         .fade-in {
             animation: fadeIn 0.5s ease forwards;
         }
 
         .slide-up {
             animation: slideUp 0.5s ease forwards;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(130, 10, 209, 0.2);
+            border-radius: 50%;
+            border-top: 4px solid var(--nubank-purple);
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--nubank-purple);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-md);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .notification.show {
+            opacity: 1;
+        }
+
+        /* Switches */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--nubank-purple);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Tabs */
+        .tab-header {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .tab-button {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-medium);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            color: var(--nubank-purple);
+            font-weight: 600;
+        }
+
+        .tab-button.active::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--nubank-purple);
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Charts */
+        .chart-container {
+            width: 100%;
+            height: 200px;
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .chart-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 150px;
+            padding: 0 10px;
+        }
+
+        .chart-bar-item {
+            flex: 1;
+            max-width: 30px;
+            background-color: var(--nubank-purple);
+            border-radius: 5px 5px 0 0;
+            margin: 0 5px;
+            position: relative;
+            transition: height 0.5s ease;
+        }
+
+        .chart-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: var(--text-medium);
         }
 
         /* Responsive */
@@ -885,6 +1167,7 @@
             
             .main {
                 padding-bottom: 120px;
+                max-width: 100%;
             }
             
             .footer {
@@ -900,26 +1183,116 @@
                 height: 36px;
                 font-size: 16px;
             }
-        }
 
-        @media (max-width: 480px) {
-            .menu {
-                gap: 15px;
-            }
-            
             .menu a {
-                font-size: 14px;
+                display: none;
             }
-            
+
+            .menu-icon {
+                display: block;
+            }
+
+            .header.scrolled .menu-icon {
+                color: white;
+            }
+
             .card-number, .modal-card-number {
                 font-size: 16px;
-                letter-spacing: 2px;
-                word-spacing: 8px;
             }
-            
+
             .balance-amount {
                 font-size: 28px;
             }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .balance {
+                padding: 20px;
+            }
+            
+            .transactions {
+                padding: 20px;
+            }
+            
+            .transaction:hover {
+                margin-left: -20px;
+                margin-right: -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            .pix-key:hover {
+                margin-left: -15px;
+                margin-right: -15px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            .partner:hover {
+                margin-left: -20px;
+                margin-right: -20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .balance,
+        body.dark-mode .transactions,
+        body.dark-mode .feature,
+        body.dark-mode .modal-content,
+        body.dark-mode .footer {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .transaction-icon,
+        body.dark-mode .pix-key-icon,
+        body.dark-mode .partner-img {
+            background-color: #2d2d2d;
+        }
+
+        body.dark-mode .form-control {
+            background-color: #2d2d2d;
+            border-color: #333;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .btn-secondary {
+            background-color: #2d2d2d;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .detail-label,
+        body.dark-mode .balance-title,
+        body.dark-mode .transaction-meta,
+        body.dark-mode .pix-key-value {
+            color: #a0a0a0;
+        }
+
+        body.dark-mode .detail-value,
+        body.dark-mode .transaction-title,
+        body.dark-mode .pix-key-title,
+        body.dark-mode .partner-name {
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .modal-header,
+        body.dark-mode .detail-row {
+            border-color: #333;
         }
     </style>
 </head>
@@ -932,6 +1305,7 @@
             <a href="#" onclick="showTab('credit')">Cartão</a>
             <a href="#" onclick="showTab('pix')">Pix</a>
             <a href="#" onclick="showTab('rewards')">Rewards</a>
+            <i class="fas fa-moon menu-icon" id="theme-toggle"></i>
         </nav>
     </header>
     
@@ -976,6 +1350,9 @@
                     <span class="balance-detail">
                         <i class="fas fa-lock" style="color: var(--nubank-green);"></i> R$ 1.200,00 rendendo 100% do CDI
                     </span>
+                    <span class="balance-detail">
+                        <i class="fas fa-piggy-bank" style="color: var(--nubank-purple);"></i> R$ 500,00 na reserva de emergência
+                    </span>
                 </div>
             </div>
             
@@ -996,9 +1373,25 @@
                     <div class="feature-icon"><i class="far fa-credit-card"></i></div>
                     <div class="feature-title">Cartão virtual</div>
                 </div>
+                <div class="feature slide-up" style="animation-delay: 0.7s;" onclick="openModal('loan-modal')">
+                    <div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <div class="feature-title">Empréstimo</div>
+                </div>
+                <div class="feature slide-up" style="animation-delay: 0.8s;" onclick="openModal('investments-modal')">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="feature-title">Investir</div>
+                </div>
+                <div class="feature slide-up" style="animation-delay: 0.9s;" onclick="openModal('insurance-modal')">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="feature-title">Seguros</div>
+                </div>
+                <div class="feature slide-up" style="animation-delay: 1.0s;" onclick="openModal('shop-modal')">
+                    <div class="feature-icon"><i class="fas fa-shopping-bag"></i></div>
+                    <div class="feature-title">Shopping</div>
+                </div>
             </div>
             
-            <div class="transactions slide-up" style="animation-delay: 0.7s;">
+            <div class="transactions slide-up" style="animation-delay: 1.1s;">
                 <div class="transactions-header">
                     <h3 class="transactions-title">Últimas movimentações</h3>
                     <button class="transactions-filter" onclick="openModal('transactions-filter-modal')">
@@ -1069,6 +1462,10 @@
                     </div>
                     <div class="transaction-amount negative">- R$ 34,90</div>
                 </div>
+                
+                <button class="btn btn-secondary" style="margin-top: 15px;" onclick="openModal('all-transactions-modal')">
+                    <i class="fas fa-list"></i> Ver todas as movimentações
+                </button>
             </div>
         </div>
         
@@ -1171,6 +1568,49 @@
                     </div>
                     <div class="transaction-amount negative">- R$ 34,90</div>
                 </div>
+                
+                <button class="btn btn-secondary" style="margin-top: 15px;" onclick="openModal('all-transactions-modal')">
+                    <i class="fas fa-list"></i> Ver todos os gastos
+                </button>
+            </div>
+            
+            <div class="transactions slide-up" style="animation-delay: 0.6s;">
+                <div class="transactions-header">
+                    <h3 class="transactions-title">Parcelas</h3>
+                    <span style="font-size: 14px; color: var(--text-medium);">5 compras parceladas</span>
+                </div>
+                
+                <div class="transaction" onclick="openModal('installment-detail-modal')">
+                    <div class="transaction-info">
+                        <div class="transaction-icon"><i class="fas fa-laptop"></i></div>
+                        <div class="transaction-details">
+                            <h4 class="transaction-title">Notebook Dell</h4>
+                            <div class="transaction-meta">
+                                <span class="transaction-date">10/12 • 3/12</span>
+                                <span class="transaction-category">
+                                    <i class="fas fa-tag" style="color: var(--nubank-blue);"></i> Eletrônicos
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount negative">- R$ 199,90</div>
+                </div>
+                
+                <div class="transaction" onclick="openModal('installment-detail-modal')">
+                    <div class="transaction-info">
+                        <div class="transaction-icon"><i class="fas fa-tshirt"></i></div>
+                        <div class="transaction-details">
+                            <h4 class="transaction-title">Renner</h4>
+                            <div class="transaction-meta">
+                                <span class="transaction-date">05/12 • 6/12</span>
+                                <span class="transaction-category">
+                                    <i class="fas fa-tag" style="color: var(--nubank-purple-light);"></i> Vestuário
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount negative">- R$ 89,90</div>
+                </div>
             </div>
         </div>
         
@@ -1230,11 +1670,52 @@
                     </div>
                     <div><i class="fas fa-chevron-right"></i></div>
                 </div>
+                
+                <div class="pix-key" onclick="openModal('pix-key-detail-modal')">
+                    <div class="pix-key-info">
+                        <div class="pix-key-icon"><i class="fas fa-random"></i></div>
+                        <div>
+                            <h4 class="pix-key-title">Aleatória</h4>
+                            <p class="pix-key-value">a1b2c3d4-e5f6-g7h8-i9j0</p>
+                        </div>
+                    </div>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </div>
             </div>
             
             <button class="btn slide-up" style="animation-delay: 0.6s; margin-top: 20px;" onclick="openModal('pix-new-key-modal')">
                 <i class="fas fa-plus"></i> Cadastrar nova chave
             </button>
+            
+            <div class="transactions slide-up" style="animation-delay: 0.7s; margin-top: 20px;">
+                <h3 class="transactions-title">Contatos frequentes</h3>
+                
+                <div class="pix-key" onclick="openModal('pix-send-contact-modal')">
+                    <div class="pix-key-info">
+                        <div class="pix-key-icon" style="background-color: #e3f2fd; color: var(--nubank-blue);">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="pix-key-title">João Silva</h4>
+                            <p class="pix-key-value">joao.silva@email.com</p>
+                        </div>
+                    </div>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </div>
+                
+                <div class="pix-key" onclick="openModal('pix-send-contact-modal')">
+                    <div class="pix-key-info">
+                        <div class="pix-key-icon" style="background-color: #e3f2fd; color: var(--nubank-blue);">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h4 class="pix-key-title">Maria Souza</h4>
+                            <p class="pix-key-value">+55 (11) 91234-5678</p>
+                        </div>
+                    </div>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </div>
         </div>
         
         <!-- Rewards Tab -->
@@ -1291,6 +1772,46 @@
                         </p>
                     </div>
                 </div>
+                
+                <div class="partner" onclick="openModal('partner-detail-modal')">
+                    <div class="partner-img"><i class="fas fa-plane"></i></div>
+                    <div class="partner-info">
+                        <h4 class="partner-name">Latam</h4>
+                        <p class="partner-benefit">
+                            <span class="partner-points">2x pontos</span> por R$1 gasto
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="transactions slide-up" style="animation-delay: 0.5s; margin-top: 20px;">
+                <h3 class="transactions-title">Seus resgates recentes</h3>
+                
+                <div class="transaction">
+                    <div class="transaction-info">
+                        <div class="transaction-icon" style="color: var(--nubank-green);"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="transaction-details">
+                            <h4 class="transaction-title">Cashback</h4>
+                            <div class="transaction-meta">
+                                <span class="transaction-date">15/05/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount positive">+ R$ 25,00</div>
+                </div>
+                
+                <div class="transaction">
+                    <div class="transaction-info">
+                        <div class="transaction-icon" style="color: var(--nubank-orange);"><i class="fas fa-gift"></i></div>
+                        <div class="transaction-details">
+                            <h4 class="transaction-title">Cupom Amazon</h4>
+                            <div class="transaction-meta">
+                                <span class="transaction-date">10/04/2023</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount" style="color: var(--nubank-purple);">1.000 pts</div>
+                </div>
             </div>
         </div>
     </main>
@@ -1314,6 +1835,12 @@
             <span class="footer-label">Rewards</span>
         </div>
     </footer>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-message">Operação realizada com sucesso!</span>
+    </div>
     
     <!-- Modals -->
     <!-- Card Modal -->
@@ -1368,6 +1895,9 @@
                 </button>
                 <button class="btn btn-secondary" style="margin-top: 10px;">
                     <i class="fas fa-lock"></i> Bloquear cartão
+                </button>
+                <button class="btn btn-secondary" style="margin-top: 10px;">
+                    <i class="fas fa-bell"></i> Configurar alertas
                 </button>
             </div>
         </div>
@@ -1488,7 +2018,7 @@
                     </select>
                 </div>
                 
-                <button class="btn">
+                <button class="btn" onclick="showNotification('Pagamento agendado com sucesso!')">
                     <i class="fas fa-check"></i> Confirmar pagamento
                 </button>
             </div>
@@ -1529,6 +2059,9 @@
                 </button>
                 <button class="btn btn-secondary" style="margin-top: 10px;">
                     <i class="fas fa-file-pdf"></i> Exportar PDF
+                </button>
+                <button class="btn btn-secondary" style="margin-top: 10px;">
+                    <i class="fas fa-chart-pie"></i> Ver por categorias
                 </button>
             </div>
         </div>
@@ -1583,8 +2116,46 @@
                     <input type="text" class="form-control" placeholder="Ex: Pagamento do serviço">
                 </div>
                 
-                <button class="btn">
+                <button class="btn" onclick="openModal('pix-confirm-modal')">
                     <i class="fas fa-arrow-right"></i> Continuar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Pix Confirm Modal -->
+    <div id="pix-confirm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Confirmar Pix</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin: 20px 0 30px;">
+                    <div class="transaction-detail-icon"><i class="fas fa-paper-plane"></i></div>
+                    <h3>Enviar Pix</h3>
+                    <div class="transaction-detail-amount negative">- R$ 100,00</div>
+                    <div class="transaction-detail-meta">Para: joao.silva@email.com</div>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Data</span>
+                    <span class="detail-value">Hoje, 15:30</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Descrição</span>
+                    <span class="detail-value">Pagamento do serviço</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Conta de débito</span>
+                    <span class="detail-value">Conta Nubank</span>
+                </div>
+                
+                <button class="btn btn-success" onclick="showNotification('Pix enviado com sucesso!')">
+                    <i class="fas fa-check"></i> Confirmar Pix
+                </button>
+                <button class="btn btn-secondary" style="margin-top: 10px;" onclick="closeModal(); openModal('pix-send-modal')">
+                    <i class="fas fa-edit"></i> Editar
                 </button>
             </div>
         </div>
@@ -1669,6 +2240,17 @@
                     <div><i class="fas fa-chevron-right"></i></div>
                 </div>
                 
+                <div class="pix-key" onclick="openModal('pix-key-detail-modal')">
+                    <div class="pix-key-info">
+                        <div class="pix-key-icon"><i class="fas fa-random"></i></div>
+                        <div>
+                            <h4 class="pix-key-title">Aleatória</h4>
+                            <p class="pix-key-value">a1b2c3d4-e5f6-g7h8-i9j0</p>
+                        </div>
+                    </div>
+                    <div><i class="fas fa-chevron-right"></i></div>
+                </div>
+                
                 <button class="btn" onclick="openModal('pix-new-key-modal')">
                     <i class="fas fa-plus"></i> Cadastrar nova chave
                 </button>
@@ -1694,6 +2276,9 @@
                 
                 <button class="btn">
                     <i class="fas fa-share-alt"></i> Compartilhar
+                </button>
+                <button class="btn btn-secondary" style="margin-top: 10px;">
+                    <i class="far fa-copy"></i> Copiar chave
                 </button>
                 <button class="btn btn-danger" style="margin-top: 10px;">
                     <i class="fas fa-trash-alt"></i> Remover chave
@@ -1727,7 +2312,7 @@
                     </select>
                 </div>
                 
-                <button class="btn">
+                <button class="btn btn-success" onclick="showNotification('Cashback resgatado com sucesso!')">
                     <i class="fas fa-gift"></i> Confirmar resgate
                 </button>
             </div>
@@ -1762,6 +2347,9 @@
                 <button class="btn">
                     <i class="fas fa-map-marker-alt"></i> Ver restaurantes
                 </button>
+                <button class="btn btn-secondary" style="margin-top: 10px;">
+                    <i class="fas fa-info-circle"></i> Termos e condições
+                </button>
             </div>
         </div>
     </div>
@@ -1787,7 +2375,7 @@
                     </select>
                 </div>
                 
-                <button class="btn">
+                <button class="btn" onclick="showNotification('Depósito realizado com sucesso!')">
                     <i class="fas fa-arrow-right"></i> Continuar
                 </button>
             </div>
@@ -1821,12 +2409,340 @@
                     <input type="text" class="form-control" placeholder="R$ 0,00">
                 </div>
                 
-                <button class="btn">
+                <button class="btn" onclick="showNotification('Recarga realizada com sucesso!')">
                     <i class="fas fa-arrow-right"></i> Continuar
                 </button>
             </div>
         </div>
     </div>
+    
+    <!-- Loan Modal -->
+    <div id="loan-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Empréstimo</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin: 20px 0;">
+                    <h3>Disponível para você</h3>
+                    <div class="balance-amount" style="color: var(--nubank-green); margin: 15px 0;">R$ 5.000,00</div>
+                    <p style="color: var(--text-medium);">Limite pré-aprovado</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Valor desejado</label>
+                    <input type="text" class="form-control" placeholder="R$ 0,00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Parcelas</label>
+                    <select class="form-control">
+                        <option>6x de R$ 883,33</option>
+                        <option>12x de R$ 458,33</option>
+                        <option>24x de R$ 241,67</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Conta para crédito</label>
+                    <select class="form-control">
+                        <option>Conta Nubank</option>
+                    </select>
+                </div>
+                
+                <button class="btn" onclick="openModal('loan-confirm-modal')">
+                    <i class="fas fa-arrow-right"></i> Simular empréstimo
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Loan Confirm Modal -->
+    <div id="loan-confirm-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Confirmar Empréstimo</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin: 20px 0 30px;">
+                    <div class="transaction-detail-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <h3>Empréstimo</h3>
+                    <div class="transaction-detail-amount positive">+ R$ 5.000,00</div>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Valor total</span>
+                    <span class="detail-value">R$ 5.300,00</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Parcelas</span>
+                    <span class="detail-value">12x de R$ 458,33</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Taxa de juros</span>
+                    <span class="detail-value">2,99% ao mês</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Data de crédito</span>
+                    <span class="detail-value">Hoje</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">1ª parcela</span>
+                    <span class="detail-value">10/07/2023</span>
+                </div>
+                
+                <button class="btn btn-success" onclick="showNotification('Empréstimo contratado com sucesso!')">
+                    <i class="fas fa-check"></i> Confirmar empréstimo
+                </button>
+                <button class="btn btn-secondary" style="margin-top: 10px;" onclick="closeModal(); openModal('loan-modal')">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Investments Modal -->
+    <div id="investments-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Investimentos</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div class="tab-header">
+                    <button class="tab-button active" onclick="changeInvestmentTab('investments-tab1')">Renda Fixa</button>
+                    <button class="tab-button" onclick="changeInvestmentTab('investments-tab2')">Tesouro Direto</button>
+                    <button class="tab-button" onclick="changeInvestmentTab('investments-tab3')">Fundos</button>
+                </div>
+                
+                <div id="investments-tab1" class="investment-tab active">
+                    <div class="feature" onclick="openModal('investment-detail-modal')">
+                        <div class="feature-icon"><i class="fas fa-coins"></i></div>
+                        <div class="feature-title">Nu Reserva Imediata</div>
+                    </div>
+                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
+                        <div class="feature-icon"><i class="fas fa-piggy-bank"></i></div>
+                        <div class="feature-title">CDB Nu</div>
+                    </div>
+                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="feature-title">LCI/LCA</div>
+                    </div>
+                </div>
+                
+                <div id="investments-tab2" class="investment-tab">
+                    <div class="feature" onclick="openModal('investment-detail-modal')">
+                        <div class="feature-icon"><i class="fas fa-landmark"></i></div>
+                        <div class="feature-title">Tesouro Selic</div>
+                    </div>
+                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
+                        <div class="feature-icon"><i class="fas fa-landmark"></i></div>
+                        <div class="feature-title">Tesouro IPCA+</div>
+                    </div>
+                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
+                        <div class="feature-icon"><i class="fas fa-landmark"></i></div>
+                        <div class="feature-title">Tesouro Prefixado</div>
+                    </div>
+                </div>
+                
+                <div id="investments-tab3" class="investment-tab">
+                    <div class="feature" onclick="openModal('investment-detail-modal')">
+                        <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+                        <div class="feature-title">Nu FIC FIM</div>
+                    </div>
+                    <div class="feature" style="margin-top: 15px;" onclick="openModal('investment-detail-modal')">
+                        <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+                        <div class="feature-title">Nu FIC RF</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Investment Detail Modal -->
+    <div id="investment-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Nu Reserva Imediata</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="points-circle" style="width: 100px; height: 100px; border-width: 4px;">
+                        <div class="points-amount" style="font-size: 24px;">100%</div>
+                        <div class="points-label" style="font-size: 14px;">do CDI</div>
+                    </div>
+                    <h3 style="margin-top: 15px;">Rentabilidade</h3>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Tipo</span>
+                    <span class="detail-value">Renda Fixa</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Rentabilidade</span>
+                    <span class="detail-value">100% do CDI</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Vencimento</span>
+                    <span class="detail-value">Diário (D+1)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">IR</span>
+                    <span class="detail-value">22,5% a 15% (regressivo)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Aplicação mínima</span>
+                    <span class="detail-value">R$ 1,00</span>
+                </div>
+                
+                <button class="btn" onclick="openModal('invest-amount-modal')">
+                    <i class="fas fa-arrow-right"></i> Aplicar agora
+                </button>
+                <button class="btn btn-secondary" style="margin-top: 10px;">
+                    <i class="fas fa-info-circle"></i> Mais informações
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Invest Amount Modal -->
+    <div id="invest-amount-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Aplicar em Nu Reserva Imediata</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Valor para investir</label>
+                    <input type="text" class="form-control" placeholder="R$ 0,00">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Conta de débito</label>
+                    <select class="form-control">
+                        <option>Conta Nubank (R$ 5.327,45)</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-success" onclick="showNotification('Investimento realizado com sucesso!')">
+                    <i class="fas fa-check"></i> Confirmar aplicação
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Insurance Modal -->
+    <div id="insurance-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Seguros</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div class="feature" onclick="openModal('insurance-detail-modal')">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="feature-title">Celular</div>
+                </div>
+                <div class="feature" style="margin-top: 15px;" onclick="openModal('insurance-detail-modal')">
+                    <div class="feature-icon"><i class="fas fa-home"></i></div>
+                    <div class="feature-title">Residencial</div>
+                </div>
+                <div class="feature" style="margin-top: 15px;" onclick="openModal('insurance-detail-modal')">
+                    <div class="feature-icon"><i class="fas fa-car"></i></div>
+                    <div class="feature-title">Automóvel</div>
+                </div>
+                <div class="feature" style="margin-top: 15px;" onclick="openModal('insurance-detail-modal')">
+                    <div class="feature-icon"><i class="fas fa-plane"></i></div>
+                    <div class="feature-title">Viagem</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Insurance Detail Modal -->
+    <div id="insurance-detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Seguro Celular</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="transaction-detail-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Proteção para seu celular</h3>
+                    <p style="color: var(--text-medium); margin-top: 10px;">Cobertura contra roubo, furto e danos acidentais</p>
+                </div>
+                
+                <div class="detail-row">
+                    <span class="detail-label">Valor do aparelho</span>
+                    <span class="detail-value">Até R$ 5.000,00</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Cobertura</span>
+                    <span class="detail-value">Roubo, furto e danos</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Franquia</span>
+                    <span class="detail-value">R$ 100,00</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Mensalidade</span>
+                    <span class="detail-value">R$ 29,90/mês</span>
+                </div>
+                
+                <button class="btn" onclick="openModal('insurance-contract-modal')">
+                    <i class="fas fa-arrow-right"></i> Contratar
+                </button>
+                <button class="btn btn-secondary" style="margin-top: 10px;">
+                    <i class="fas fa-info-circle"></i> Termos completos
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Shop Modal -->
+    <div id="shop-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">Shopping</div>
+                <div class="close-modal" onclick="closeModal()">&times;</div>
+            </div>
+            <div class="modal-body">
+                <div class="feature" onclick="openModal('shop-partner-modal')">
+                    <div class="feature-icon"><i class="fas fa-tag"></i></div>
+                    <div class="feature-title">Ofertas</div>
+                </div>
+                <div class="feature" style="margin-top: 15px;" onclick="openModal('shop-partner-modal')">
+                    <div class="feature-icon"><i class="fas fa-plane"></i></div>
+                    <div class="feature-title">Viagens</div>
+                </div>
+                <div class="feature" style="margin-top: 15px;" onclick="openModal('shop-partner-modal')">
+                    <div class="feature-icon"><i class="fas fa-ticket-alt"></i></div>
+                    <div class="feature-title">Ingressos</div>
+                </div>
+                <div class="feature" style="margin-top: 15px;" onclick="openModal('shop-partner-modal')">
+                    <div class="feature-icon"><i class="fas fa-car"></i></div>
+                    <div class="feature-title">Carros</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dark Mode Toggle -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.classList.remove('fa-moon');
+                themeToggle.classList.add('fa-sun');
+            } else {
+                themeToggle.classList.remove('fa-sun');
+                themeToggle.classList.add('fa-moon');
+            }
+        });
+    </script>
 
     <script>
         // Tab navigation
@@ -1917,16 +2833,30 @@
         // Copy card number
         function copyCardNumber() {
             navigator.clipboard.writeText('1234567812345678');
-            alert('Número do cartão copiado para a área de transferência!');
+            showNotification('Número do cartão copiado!');
         }
         
         // Regenerate virtual card
         function regenerateVirtualCard() {
             if (confirm('Tem certeza que deseja gerar um novo cartão virtual? O cartão atual será desativado.')) {
-                alert('Novo cartão virtual gerado com sucesso!');
+                showNotification('Novo cartão virtual gerado!');
                 closeModal();
                 openModal('virtual-card-modal');
             }
+        }
+        
+        // Show notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+            
+            notificationMessage.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                closeModal();
+            }, 3000);
         }
         
         // Format currency inputs
@@ -1952,6 +2882,19 @@
                 header.classList.remove('scrolled');
             }
         });
+        
+        // Change investment tab
+        function changeInvestmentTab(tabId) {
+            document.querySelectorAll('.investment-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.getElementById(tabId).classList.add('active');
+            
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
         
         // Initialize animations on page load
         document.addEventListener('DOMContentLoaded', function() {

@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Motors - Automóveis de Luxo e Esportivos</title>
+    <title>Neon Motors - Automóveis e Motos de Luxo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0a0a12;
-            --secondary: #1e1e2e;
-            --accent: #f0b90b;
-            --accent-dark: #c7990a;
+            --secondary: #1a1a2e;
+            --accent: #00f7ff;
+            --accent-dark: #00c7cf;
+            --accent2: #ff00f7;
+            --accent2-dark: #cf00c7;
             --light: #f5f5f7;
             --light-gray: #e2e2e9;
             --dark: #07070e;
-            --success: #28a745;
+            --success: #00ff88;
+            --neon-glow: 0 0 10px rgba(0, 247, 255, 0.8), 0 0 20px rgba(0, 247, 255, 0.6);
+            --neon-glow2: 0 0 10px rgba(255, 0, 247, 0.8), 0 0 20px rgba(255, 0, 247, 0.6);
         }
         
         * {
@@ -33,8 +37,9 @@
         }
         
         h1, h2, h3, h4 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 600;
+            text-shadow: var(--neon-glow);
         }
         
         /* Header */
@@ -48,7 +53,7 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(0, 247, 255, 0.2);
             transition: all 0.3s ease;
         }
         
@@ -67,7 +72,14 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: var(--neon-glow);
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            color: var(--accent2);
+            text-shadow: var(--neon-glow2);
         }
         
         .logo i {
@@ -96,6 +108,7 @@
         
         .nav-links a:hover {
             color: var(--accent);
+            text-shadow: var(--neon-glow);
         }
         
         .nav-links a::after {
@@ -106,6 +119,7 @@
             bottom: -5px;
             left: 0;
             background-color: var(--accent);
+            box-shadow: var(--neon-glow);
             transition: width 0.3s ease;
         }
         
@@ -123,13 +137,14 @@
         
         .mobile-menu:hover {
             color: var(--accent);
+            text-shadow: var(--neon-glow);
         }
         
         /* Hero Section */
         .hero {
             height: 100vh;
             min-height: 800px;
-            background: url('https://images.unsplash.com/photo-1494972308805-463bc619d34e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80') no-repeat center center/cover;
+            background: url('https://images.unsplash.com/photo-1593941707882-a5bba53b0998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1596&q=80') no-repeat center center/cover;
             display: flex;
             align-items: center;
             padding: 0 5%;
@@ -170,7 +185,7 @@
             margin-bottom: 1.5rem;
             color: var(--accent);
             line-height: 1.2;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            text-shadow: var(--neon-glow);
         }
         
         .hero p {
@@ -196,14 +211,15 @@
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             cursor: pointer;
             font-size: 1.05rem;
-            box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 247, 255, 0.3), var(--neon-glow);
             letter-spacing: 0.5px;
+            font-family: 'Orbitron', sans-serif;
         }
         
         .btn:hover {
             background: var(--accent-dark);
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(240, 185, 11, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 247, 255, 0.4), var(--neon-glow);
         }
         
         .btn i {
@@ -217,11 +233,13 @@
             color: var(--accent);
             margin-left: 1.5rem;
             box-shadow: none;
+            text-shadow: var(--neon-glow);
         }
         
         .btn-outline:hover {
             background: var(--accent);
             color: var(--dark);
+            text-shadow: none;
         }
         
         .btn-group {
@@ -258,6 +276,7 @@
             bottom: -15px;
             left: 20%;
             background: linear-gradient(to right, transparent 0%, var(--accent) 50%, transparent 100%);
+            box-shadow: var(--neon-glow);
         }
         
         /* Vehicles Section */
@@ -279,6 +298,36 @@
             pointer-events: none;
         }
         
+        .vehicle-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 1rem;
+        }
+        
+        .tab-btn {
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            color: var(--light-gray);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .tab-btn.active {
+            background: var(--accent);
+            color: var(--dark);
+            font-weight: 600;
+            box-shadow: var(--neon-glow);
+        }
+        
+        .tab-btn:hover:not(.active) {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
         .vehicle-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -292,12 +341,13 @@
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 247, 255, 0.1);
         }
         
         .vehicle-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3), var(--neon-glow);
+            border-color: var(--accent);
         }
         
         .vehicle-img {
@@ -328,6 +378,12 @@
             font-weight: 600;
             font-size: 0.9rem;
             z-index: 1;
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+        
+        .vehicle-badge.promo {
+            background: var(--accent2);
+            box-shadow: 0 0 10px rgba(255, 0, 247, 0.5);
         }
         
         .vehicle-info {
@@ -394,6 +450,7 @@
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
             position: relative;
+            border: 1px solid rgba(0, 247, 255, 0.2);
         }
         
         .about-img img {
@@ -433,14 +490,15 @@
             padding: 2rem 1.5rem;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 247, 255, 0.1);
             transition: all 0.3s ease;
         }
         
         .feature:hover {
             transform: translateY(-5px);
-            background: rgba(240, 185, 11, 0.05);
-            border-color: rgba(240, 185, 11, 0.2);
+            background: rgba(0, 247, 255, 0.05);
+            border-color: rgba(0, 247, 255, 0.3);
+            box-shadow: var(--neon-glow);
         }
         
         .feature i {
@@ -477,6 +535,7 @@
             width: 100%;
             height: 1px;
             background: linear-gradient(to right, transparent 0%, var(--accent) 50%, transparent 100%);
+            box-shadow: var(--neon-glow);
         }
         
         .footer-logo {
@@ -487,11 +546,31 @@
             display: inline-flex;
             align-items: center;
             margin-bottom: 2rem;
-            font-family: 'Playfair Display', serif;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: var(--neon-glow);
         }
         
         .footer-logo i {
             margin-right: 1rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--light-gray);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+            text-shadow: var(--neon-glow);
         }
         
         .copyright {
@@ -531,8 +610,8 @@
             width: 90%;
             position: relative;
             animation: modalopen 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(240, 185, 11, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), var(--neon-glow);
+            border: 1px solid rgba(0, 247, 255, 0.2);
             overflow: hidden;
         }
         
@@ -544,6 +623,7 @@
             width: 100%;
             height: 5px;
             background: linear-gradient(to right, var(--accent), var(--accent-dark));
+            box-shadow: var(--neon-glow);
         }
         
         @keyframes modalopen {
@@ -570,6 +650,7 @@
         
         .close:hover {
             color: var(--accent);
+            text-shadow: var(--neon-glow);
         }
         
         .modal-header {
@@ -595,7 +676,7 @@
             padding: 2rem;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
-            border: 1px dashed rgba(240, 185, 11, 0.3);
+            border: 1px dashed rgba(0, 247, 255, 0.3);
         }
         
         .pix-payment h3 {
@@ -671,7 +752,7 @@
         }
         
         .upload-area {
-            border: 2px dashed rgba(240, 185, 11, 0.3);
+            border: 2px dashed rgba(0, 247, 255, 0.3);
             border-radius: 10px;
             padding: 3rem 2rem;
             text-align: center;
@@ -684,7 +765,8 @@
         
         .upload-area:hover {
             border-color: var(--accent);
-            background: rgba(240, 185, 11, 0.03);
+            background: rgba(0, 247, 255, 0.03);
+            box-shadow: var(--neon-glow);
         }
         
         .upload-area i {
@@ -696,6 +778,7 @@
         
         .upload-area:hover i {
             transform: translateY(-5px);
+            text-shadow: var(--neon-glow);
         }
         
         .upload-area p {
@@ -710,6 +793,34 @@
             font-weight: 500;
         }
         
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--light-gray);
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 247, 255, 0.2);
+            border-radius: 5px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        }
+        
         /* Confirmation Modal */
         .confirmation-modal {
             text-align: center;
@@ -721,6 +832,7 @@
             color: var(--success);
             margin-bottom: 2rem;
             animation: bounce 1s ease infinite alternate;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.8), 0 0 20px rgba(0, 255, 136, 0.6);
         }
         
         @keyframes bounce {
@@ -746,8 +858,8 @@
         }
         
         .retirement-info {
-            background: rgba(40, 167, 69, 0.1);
-            border: 1px solid rgba(40, 167, 69, 0.3);
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
             border-radius: 10px;
             padding: 1.5rem;
             margin: 2rem 0;
@@ -782,12 +894,12 @@
         .confirmation-modal .btn {
             margin-top: 2rem;
             background: var(--success);
-            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.3), 0 0 10px rgba(0, 255, 136, 0.8), 0 0 20px rgba(0, 255, 136, 0.6);
         }
         
         .confirmation-modal .btn:hover {
-            background: #218838;
-            box-shadow: 0 10px 25px rgba(40, 167, 69, 0.4);
+            background: #00d977;
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.4), 0 0 15px rgba(0, 255, 136, 0.8), 0 0 30px rgba(0, 255, 136, 0.6);
         }
         
         /* Responsive */
@@ -871,6 +983,11 @@
             .modal-content {
                 padding: 2rem;
             }
+            
+            .vehicle-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
         }
         
         @media (max-width: 576px) {
@@ -903,10 +1020,11 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="#" class="logo"><i class="fas fa-car"></i> Elite Motors</a>
+            <a href="#" class="logo"><i class="fas fa-bolt"></i> Neon Motors</a>
             <ul class="nav-links">
                 <li><a href="#home">Início</a></li>
                 <li><a href="#vehicles">Veículos</a></li>
+                <li><a href="#about">Sobre</a></li>
             </ul>
             <div class="mobile-menu">
                 <i class="fas fa-bars"></i>
@@ -916,10 +1034,11 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Excelência em Automóveis de Luxo</h1>
-            <p>Descubra a coleção mais exclusiva de carros esportivos e de luxo do mercado. Qualidade, performance e sofisticação em um só lugar.</p>
+            <h1>Performance e Luxo em Neon</h1>
+            <p>Descubra a coleção mais exclusiva de carros esportivos e motos de alto desempenho. Tecnologia, velocidade e estilo em um só lugar.</p>
             <div class="btn-group">
                 <a href="#vehicles" class="btn">Ver Coleção <i class="fas fa-chevron-right"></i></a>
+                <a href="#about" class="btn btn-outline">Sobre Nós <i class="fas fa-info-circle"></i></a>
             </div>
         </div>
     </section>
@@ -927,8 +1046,14 @@
     <section id="vehicles" class="vehicles">
         <div class="container">
             <h2 class="section-title">Nossos Veículos</h2>
-            <div class="vehicle-grid">
-                <!-- Veículo 1 -->
+            
+            <div class="vehicle-tabs">
+                <button class="tab-btn active" data-tab="cars">Carros</button>
+                <button class="tab-btn" data-tab="motorcycles">Motos</button>
+            </div>
+            
+            <div class="vehicle-grid" id="cars-tab">
+                <!-- Carro 1 -->
                 <div class="vehicle-card">
                     <div class="vehicle-img">
                         <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1283&q=80" alt="Lamborghini Huracán">
@@ -946,11 +1071,11 @@
                     </div>
                 </div>
                 
-                <!-- Veículo 2 -->
+                <!-- Carro 2 -->
                 <div class="vehicle-card">
                     <div class="vehicle-img">
                         <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80" alt="Ferrari 488 GTB">
-                        <div class="vehicle-badge">ESGOTANDO</div>
+                        <div class="vehicle-badge promo">PROMOÇÃO</div>
                     </div>
                     <div class="vehicle-info">
                         <h3>Ferrari 488 GTB</h3>
@@ -964,7 +1089,7 @@
                     </div>
                 </div>
                 
-                <!-- Veículo 3 -->
+                <!-- Carro 3 -->
                 <div class="vehicle-card">
                     <div class="vehicle-img">
                         <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Porsche 911 Turbo S">
@@ -981,7 +1106,7 @@
                     </div>
                 </div>
                 
-                <!-- Veículo 4 -->
+                <!-- Carro 4 -->
                 <div class="vehicle-card">
                     <div class="vehicle-img">
                         <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1225&q=80" alt="Rolls-Royce Phantom">
@@ -998,11 +1123,11 @@
                     </div>
                 </div>
                 
-                <!-- Veículo 5 -->
+                <!-- Carro 5 -->
                 <div class="vehicle-card">
                     <div class="vehicle-img">
                         <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Aston Martin DB11">
-                        <div class="vehicle-badge">PROMOÇÃO</div>
+                        <div class="vehicle-badge">ESGOTANDO</div>
                     </div>
                     <div class="vehicle-info">
                         <h3>Aston Martin DB11</h3>
@@ -1016,7 +1141,7 @@
                     </div>
                 </div>
                 
-                <!-- Veículo 6 -->
+                <!-- Carro 6 -->
                 <div class="vehicle-card">
                     <div class="vehicle-img">
                         <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="McLaren 720S">
@@ -1033,6 +1158,113 @@
                     </div>
                 </div>
             </div>
+            
+            <div class="vehicle-grid" id="motorcycles-tab" style="display: none;">
+                <!-- Moto 1 -->
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Ducati Panigale V4">
+                        <div class="vehicle-badge">NOVO</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Ducati Panigale V4</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-tachometer-alt"></i> 299 km/h</span>
+                            <span><i class="fas fa-bolt"></i> 214 HP</span>
+                            <span><i class="fas fa-gas-pump"></i> 1.1L V4</span>
+                        </div>
+                        <div class="vehicle-price">149.900</div>
+                        <button class="btn btn-buy" data-car="Ducati Panigale V4" data-price="149900">Comprar Agora <i class="fas fa-shopping-bag"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Moto 2 -->
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1580310614697-2a8a5d4e2b3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="BMW S1000RR">
+                        <div class="vehicle-badge promo">PROMOÇÃO</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>BMW S1000RR</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-tachometer-alt"></i> 303 km/h</span>
+                            <span><i class="fas fa-bolt"></i> 207 HP</span>
+                            <span><i class="fas fa-gas-pump"></i> 1.0L I4</span>
+                        </div>
+                        <div class="vehicle-price">129.900</div>
+                        <button class="btn btn-buy" data-car="BMW S1000RR" data-price="129900">Comprar Agora <i class="fas fa-shopping-bag"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Moto 3 -->
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Kawasaki Ninja H2">
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Kawasaki Ninja H2</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-tachometer-alt"></i> 340 km/h</span>
+                            <span><i class="fas fa-bolt"></i> 231 HP</span>
+                            <span><i class="fas fa-gas-pump"></i> 1.0L I4</span>
+                        </div>
+                        <div class="vehicle-price">249.900</div>
+                        <button class="btn btn-buy" data-car="Kawasaki Ninja H2" data-price="249900">Comprar Agora <i class="fas fa-shopping-bag"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Moto 4 -->
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1621330396166-3bd52d6d8c9a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Harley-Davidson CVO Limited">
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Harley-Davidson CVO</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-tachometer-alt"></i> 180 km/h</span>
+                            <span><i class="fas fa-bolt"></i> 125 HP</span>
+                            <span><i class="fas fa-gas-pump"></i> 1.9L V2</span>
+                        </div>
+                        <div class="vehicle-price">189.900</div>
+                        <button class="btn btn-buy" data-car="Harley-Davidson CVO Limited" data-price="189900">Comprar Agora <i class="fas fa-shopping-bag"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Moto 5 -->
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Yamaha YZF-R1">
+                        <div class="vehicle-badge">ESGOTANDO</div>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Yamaha YZF-R1</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-tachometer-alt"></i> 299 km/h</span>
+                            <span><i class="fas fa-bolt"></i> 200 HP</span>
+                            <span><i class="fas fa-gas-pump"></i> 1.0L I4</span>
+                        </div>
+                        <div class="vehicle-price">119.900</div>
+                        <button class="btn btn-buy" data-car="Yamaha YZF-R1" data-price="119900">Comprar Agora <i class="fas fa-shopping-bag"></i></button>
+                    </div>
+                </div>
+                
+                <!-- Moto 6 -->
+                <div class="vehicle-card">
+                    <div class="vehicle-img">
+                        <img src="https://images.unsplash.com/photo-1558980394-4c7c9299fe96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Triumph Rocket 3">
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Triumph Rocket 3</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-tachometer-alt"></i> 240 km/h</span>
+                            <span><i class="fas fa-bolt"></i> 167 HP</span>
+                            <span><i class="fas fa-gas-pump"></i> 2.5L I3</span>
+                        </div>
+                        <div class="vehicle-price">139.900</div>
+                        <button class="btn btn-buy" data-car="Triumph Rocket 3" data-price="139900">Comprar Agora <i class="fas fa-shopping-bag"></i></button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1040,30 +1272,30 @@
         <div class="container">
             <div class="about">
                 <div class="about-content">
-                    <h2>Sobre a Elite Motors</h2>
-                    <p>Fundada em 2010, a Elite Motors rapidamente se estabeleceu como a principal concessionária de veículos de luxo e esportivos no Brasil. Nossa missão é proporcionar uma experiência de compra exclusiva e personalizada para clientes que buscam o melhor em desempenho, tecnologia e design automotivo.</p>
-                    <p>Com uma equipe de especialistas apaixonados por carros, oferecemos um atendimento diferenciado e um rigoroso processo de seleção de veículos, garantindo que cada unidade em nosso showroom atenda aos mais altos padrões de qualidade.</p>
+                    <h2>Sobre a Neon Motors</h2>
+                    <p>Fundada em 2015, a Neon Motors se estabeleceu como a principal concessionária de veículos de alto desempenho e luxo no Brasil. Nossa missão é proporcionar uma experiência de compra única, combinando tecnologia, performance e design futurista.</p>
+                    <p>Com uma equipe de especialistas apaixonados por velocidade e inovação, oferecemos um atendimento personalizado e um rigoroso processo de seleção, garantindo que cada veículo em nosso showroom atenda aos mais altos padrões de qualidade e performance.</p>
                     
                     <div class="features">
                         <div class="feature">
                             <i class="fas fa-shield-alt"></i>
-                            <h3>Garantia</h3>
-                            <p>Todos os veículos passam por inspeção rigorosa e incluem garantia estendida de 2 anos.</p>
+                            <h3>Garantia Extendida</h3>
+                            <p>Todos os veículos incluem garantia de 3 anos ou 50.000km, com cobertura total.</p>
                         </div>
                         <div class="feature">
                             <i class="fas fa-hand-holding-usd"></i>
                             <h3>Financiamento</h3>
-                            <p>Parcerias com os melhores bancos para oferecer as melhores condições do mercado.</p>
+                            <p>Condições especiais com os melhores bancos e taxas exclusivas para clientes.</p>
                         </div>
                         <div class="feature">
                             <i class="fas fa-headset"></i>
-                            <h3>Suporte</h3>
-                            <p>Atendimento personalizado 24/7 para clientes Elite Motors.</p>
+                            <h3>Suporte 24/7</h3>
+                            <p>Assistência premium disponível a qualquer momento para todos os clientes.</p>
                         </div>
                     </div>
                 </div>
                 <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1331&q=80" alt="Showroom Elite Motors">
+                    <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1331&q=80" alt="Showroom Neon Motors">
                 </div>
             </div>
         </div>
@@ -1071,8 +1303,16 @@
 
     <footer>
         <div class="container">
-            <a href="#" class="footer-logo"><i class="fas fa-car"></i> Elite Motors</a>
-            <p class="copyright">© 2023 Elite Motors. Todos os direitos reservados.</p>
+            <a href="#" class="footer-logo"><i class="fas fa-bolt"></i> Neon Motors</a>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            
+            <p class="copyright">© 2023 Neon Motors. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -1152,6 +1392,7 @@
                     <h4><i class="fas fa-car"></i> Retirada do Veículo</h4>
                     <p>Seu veículo estará disponível para retirada amanhã na loja mais próxima.</p>
                     <p><strong>Documentos necessários:</strong> RG, CPF e comprovante de residência</p>
+                    <p><strong>Local:</strong> Av. Neon, 1234 - São Paulo/SP</p>
                 </div>
                 
                 <button class="btn" id="closeConfirmation">Fechar <i class="fas fa-times"></i></button>
@@ -1175,6 +1416,30 @@
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
                 mobileMenu.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Tabs de veículos
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const carsTab = document.getElementById('cars-tab');
+        const motorcyclesTab = document.getElementById('motorcycles-tab');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tabBtns.forEach(b => b.classList.remove('active'));
+                
+                // Add active class to clicked button
+                btn.classList.add('active');
+                
+                // Show corresponding tab
+                if (btn.dataset.tab === 'cars') {
+                    carsTab.style.display = 'grid';
+                    motorcyclesTab.style.display = 'none';
+                } else {
+                    carsTab.style.display = 'none';
+                    motorcyclesTab.style.display = 'grid';
+                }
             });
         });
         
@@ -1248,17 +1513,17 @@
         uploadArea.addEventListener('dragover', (e) => {
             e.preventDefault();
             uploadArea.style.borderColor = 'var(--accent)';
-            uploadArea.style.backgroundColor = 'rgba(240, 185, 11, 0.1)';
+            uploadArea.style.backgroundColor = 'rgba(0, 247, 255, 0.1)';
         });
         
         uploadArea.addEventListener('dragleave', () => {
-            uploadArea.style.borderColor = 'rgba(240, 185, 11, 0.3)';
+            uploadArea.style.borderColor = 'rgba(0, 247, 255, 0.3)';
             uploadArea.style.backgroundColor = 'transparent';
         });
         
         uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
-            uploadArea.style.borderColor = 'rgba(240, 185, 11, 0.3)';
+            uploadArea.style.borderColor = 'rgba(0, 247, 255, 0.3)';
             uploadArea.style.backgroundColor = 'transparent';
             
             if (e.dataTransfer.files.length) {

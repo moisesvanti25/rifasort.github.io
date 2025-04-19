@@ -410,8 +410,8 @@
         
         .card-logo {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             z-index: 2;
         }
         
@@ -1089,6 +1089,9 @@
                     <button id="copy-all-btn" class="btn btn-warning">
                         <i class="fas fa-copy"></i> Copiar Todos
                     </button>
+                    <button id="export-txt-btn" class="btn btn-success">
+                        <i class="fas fa-file-alt"></i> Exportar TXT
+                    </button>
                     <button id="export-json-btn" class="btn btn-success">
                         <i class="fas fa-file-export"></i> Exportar JSON
                     </button>
@@ -1229,6 +1232,7 @@
         const generateBinBtn = document.getElementById('generate-bin-btn');
         const cardList = document.getElementById('card-list');
         const copyAllBtn = document.getElementById('copy-all-btn');
+        const exportTxtBtn = document.getElementById('export-txt-btn');
         const exportJsonBtn = document.getElementById('export-json-btn');
         const clearBtn = document.getElementById('clear-btn');
         const toast = document.getElementById('toast');
@@ -1824,6 +1828,48 @@
             }
         }
         
+        // Exportar cartões como TXT no formato Cartão|mes|ano|cvv
+        function exportCardsToTxt() {
+            if (currentCards.length === 0) {
+                showToast('Nenhum cartão para exportar!', 'warning');
+                return;
+            }
+
+            try {
+                let txtContent = 'Cartão|mes|ano|cvv\n'; // Cabeçalho
+                
+                currentCards.forEach(card => {
+                    // Extrair mês e ano da validade (formato MM/YY)
+                    const [month, year] = card.expiry.split('/');
+                    
+                    // Formatar no padrão Cartão|mes|ano|cvv
+                    txtContent += `${card.cardNumber}|${month}|20${year}|${card.cvv}\n`;
+                });
+
+                // Criar blob com o conteúdo
+                const blob = new Blob([txtContent], { type: 'text/plain;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                
+                // Criar link para download
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `cartoes-${new Date().toISOString().slice(0,10)}.txt`;
+                
+                // Adicionar ao documento, clicar e remover
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Liberar o objeto URL
+                setTimeout(() => URL.revokeObjectURL(url), 100);
+                
+                showToast(`${currentCards.length} cartões exportados como TXT!`);
+            } catch (error) {
+                showToast('Erro ao exportar cartões', 'error');
+                console.error('Erro ao exportar cartões:', error);
+            }
+        }
+        
         // Obter nome do país
         function getCountryName(code) {
             const countries = {
@@ -1954,77 +2000,64 @@
             createParticles();
             setup3DInteractions();
             
-            // Event listeners com prevenção de comportamento padrão
-            if (generateBtn) {
-                generateBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    generateCards();
-                });
-            }
+            // Event listeners
+            generateBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                generateCards();
+            });
 
-            if (generateBinBtn) {
-                generateBinBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    generateCardsWithBin();
-                });
-            }
+            generateBinBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                generateCardsWithBin();
+            });
 
-            if (copyAllBtn) {
-                copyAllBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    copyAllCards();
-                });
-            }
+            copyAllBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                copyAllCards();
+            });
 
-            if (exportJsonBtn) {
-                exportJsonBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    exportCardsToJson();
-                });
-            }
+            exportTxtBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                exportCardsToTxt();
+            });
 
-            if (clearBtn) {
-                clearBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    clearAll();
-                });
-            }
+            exportJsonBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                exportCardsToJson();
+            });
 
-            if (themeToggle) {
-                themeToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    toggleDarkMode();
-                });
-            }
+            clearBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearAll();
+            });
 
-            if (helpButton) {
-                helpButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    showHelp();
-                });
-            }
+            themeToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleDarkMode();
+            });
+
+            helpButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                showHelp();
+            });
             
             // Detectar tipo de cartão quando o BIN é digitado
-            if (binInput) {
-                binInput.addEventListener('input', function() {
-                    const type = detectCardTypeByBin(this.value);
-                    if (type) {
-                        cardTypeSelect.value = type;
-                    }
-                });
-                
-                binInput.addEventListener('keypress', function(e) {
-                    if (!/\d/.test(e.key)) {
-                        e.preventDefault();
-                    }
-                });
-            }
+            binInput.addEventListener('input', function() {
+                const type = detectCardTypeByBin(this.value);
+                if (type) {
+                    cardTypeSelect.value = type;
+                }
+            });
+            
+            binInput.addEventListener('keypress', function(e) {
+                if (!/\d/.test(e.key)) {
+                    e.preventDefault();
+                }
+            });
             
             // Gerar alguns cartões ao carregar
             setTimeout(() => {
-                if (generateBtn) {
-                    generateCards();
-                }
+                generateCards();
             }, 500);
         }
 

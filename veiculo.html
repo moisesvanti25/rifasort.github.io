@@ -20,6 +20,7 @@
             --success: #00ff88;
             --neon-glow: 0 0 10px rgba(0, 247, 255, 0.8), 0 0 20px rgba(0, 247, 255, 0.6);
             --neon-glow2: 0 0 10px rgba(255, 0, 247, 0.8), 0 0 20px rgba(255, 0, 247, 0.6);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
         
         * {
@@ -34,12 +35,100 @@
             color: var(--light);
             line-height: 1.7;
             font-weight: 400;
+            overflow-x: hidden;
         }
         
         h1, h2, h3, h4 {
             font-family: 'Orbitron', sans-serif;
             font-weight: 600;
             text-shadow: var(--neon-glow);
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .preloader.fade-out {
+            opacity: 0;
+        }
+        
+        .preloader-logo {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: var(--neon-glow);
+            margin-bottom: 2rem;
+        }
+        
+        .preloader-logo i {
+            margin-right: 1rem;
+            animation: pulse 1.5s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+                text-shadow: var(--neon-glow);
+            }
+            to {
+                transform: scale(1.1);
+                text-shadow: 0 0 15px rgba(0, 247, 255, 0.9), 0 0 30px rgba(0, 247, 255, 0.7);
+            }
+        }
+        
+        .loader {
+            width: 80px;
+            height: 80px;
+            border: 5px solid rgba(0, 247, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--accent);
+            animation: spin 1s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--primary);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-dark);
         }
         
         /* Header */
@@ -54,7 +143,13 @@
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(0, 247, 255, 0.2);
-            transition: all 0.3s ease;
+            transition: var(--transition);
+        }
+        
+        .scrolled {
+            background: var(--primary) !important;
+            padding: 0.8rem 2rem !important;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25) !important;
         }
         
         .navbar {
@@ -74,7 +169,7 @@
             align-items: center;
             font-family: 'Orbitron', sans-serif;
             text-shadow: var(--neon-glow);
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
         .logo:hover {
@@ -101,9 +196,10 @@
             color: var(--light-gray);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             font-size: 1.05rem;
             letter-spacing: 0.5px;
+            position: relative;
         }
         
         .nav-links a:hover {
@@ -132,7 +228,8 @@
             font-size: 1.8rem;
             cursor: pointer;
             color: var(--light);
-            transition: color 0.3s;
+            transition: var(--transition);
+            z-index: 1001;
         }
         
         .mobile-menu:hover {
@@ -196,6 +293,38 @@
             letter-spacing: 0.5px;
         }
         
+        /* Floating elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(0, 247, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(30px);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(50px, 100px) rotate(180deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
         /* Buttons */
         .btn {
             display: inline-flex;
@@ -208,12 +337,29 @@
             border-radius: 50px;
             font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: var(--transition);
             cursor: pointer;
             font-size: 1.05rem;
             box-shadow: 0 4px 15px rgba(0, 247, 255, 0.3), var(--neon-glow);
             letter-spacing: 0.5px;
             font-family: 'Orbitron', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
@@ -225,6 +371,11 @@
         .btn i {
             margin-left: 0.5rem;
             font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        
+        .btn:hover i {
+            transform: translateX(3px);
         }
         
         .btn-outline {
@@ -247,14 +398,48 @@
             align-items: center;
         }
         
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            box-shadow: var(--neon-glow);
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--accent-dark);
+            transform: translateY(-5px);
+        }
+        
         /* Sections */
         section {
             padding: 6rem 2rem;
+            position: relative;
         }
         
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
         }
         
         .section-title {
@@ -312,7 +497,7 @@
             color: var(--light-gray);
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             font-weight: 500;
         }
         
@@ -338,7 +523,7 @@
             background: var(--dark);
             border-radius: 15px;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: var(--transition);
             position: relative;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(0, 247, 255, 0.1);
@@ -491,7 +676,7 @@
             background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
             border: 1px solid rgba(0, 247, 255, 0.1);
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
         .feature:hover {
@@ -519,6 +704,170 @@
             color: var(--light-gray);
         }
         
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--secondary);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/dark-geometric.png');
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--neon-glow);
+            border-color: var(--accent);
+        }
+        
+        .testimonial-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(0, 247, 255, 0.1);
+            font-family: serif;
+            line-height: 1;
+            z-index: 0;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+            color: var(--light-gray);
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 2px solid var(--accent);
+        }
+        
+        .author-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+            color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .author-info p {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        
+        /* Newsletter Section */
+        .newsletter {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            border-radius: 15px;
+            margin: 4rem auto;
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 247, 255, 0.2);
+        }
+        
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/diagmonds.png');
+            opacity: 0.05;
+            pointer-events: none;
+        }
+        
+        .newsletter h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .newsletter p {
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px 0 0 50px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            outline: none;
+        }
+        
+        .newsletter-form input::placeholder {
+            color: var(--light-gray);
+        }
+        
+        .newsletter-form button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0 50px 50px 0;
+            background: var(--accent);
+            color: var(--dark);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .newsletter-form button:hover {
+            background: var(--accent-dark);
+        }
+        
         /* Footer */
         footer {
             background: var(--dark);
@@ -536,6 +885,60 @@
             height: 1px;
             background: linear-gradient(to right, transparent 0%, var(--accent) 50%, transparent 100%);
             box-shadow: var(--neon-glow);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-column h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .footer-links i {
+            margin-right: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .footer-contact p {
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-contact i {
+            margin-right: 0.8rem;
+            color: var(--accent);
+            width: 20px;
+            text-align: center;
         }
         
         .footer-logo {
@@ -564,13 +967,21 @@
         .social-links a {
             color: var(--light-gray);
             font-size: 1.5rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
         }
         
         .social-links a:hover {
             color: var(--accent);
             transform: translateY(-3px);
             text-shadow: var(--neon-glow);
+            background: rgba(0, 247, 255, 0.1);
         }
         
         .copyright {
@@ -757,7 +1168,7 @@
             padding: 3rem 2rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             margin-bottom: 1.5rem;
             position: relative;
             overflow: hidden;
@@ -773,7 +1184,7 @@
             font-size: 3.5rem;
             color: var(--accent);
             margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
         .upload-area:hover i {
@@ -812,7 +1223,7 @@
             border-radius: 5px;
             color: var(--light);
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
         .form-group input:focus {
@@ -931,6 +1342,10 @@
             .section-title {
                 font-size: 2.3rem;
             }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
         }
         
         @media (max-width: 768px) {
@@ -988,6 +1403,24 @@
                 flex-direction: column;
                 align-items: center;
             }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 50px;
+                margin-bottom: 1rem;
+            }
+            
+            .newsletter-form button {
+                border-radius: 50px;
+                width: 100%;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
         }
         
         @media (max-width: 576px) {
@@ -1014,10 +1447,22 @@
             .pix-code strong {
                 font-size: 1.1rem;
             }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-logo">
+            <i class="fas fa-bolt"></i> Neon Motors
+        </div>
+        <div class="loader"></div>
+    </div>
+
     <header>
         <nav class="navbar">
             <a href="#" class="logo"><i class="fas fa-bolt"></i> Neon Motors</a>
@@ -1025,6 +1470,7 @@
                 <li><a href="#home">Início</a></li>
                 <li><a href="#vehicles">Veículos</a></li>
                 <li><a href="#about">Sobre</a></li>
+                <li><a href="#testimonials">Depoimentos</a></li>
             </ul>
             <div class="mobile-menu">
                 <i class="fas fa-bars"></i>
@@ -1033,6 +1479,12 @@
     </header>
 
     <section id="home" class="hero">
+        <div class="floating-elements">
+            <div class="floating-element" style="width: 200px; height: 200px; top: 10%; left: 5%;"></div>
+            <div class="floating-element" style="width: 150px; height: 150px; top: 60%; left: 70%; background: rgba(255, 0, 247, 0.1);"></div>
+            <div class="floating-element" style="width: 100px; height: 100px; top: 30%; left: 80%;"></div>
+        </div>
+        
         <div class="hero-content">
             <h1>Performance e Luxo em Neon</h1>
             <p>Descubra a coleção mais exclusiva de carros esportivos e motos de alto desempenho. Tecnologia, velocidade e estilo em um só lugar.</p>
@@ -1301,20 +1753,109 @@
         </div>
     </section>
 
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Depoimentos</h2>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Comprei meu Lamborghini na Neon Motors e fui surpreendido pelo atendimento personalizado. A equipe foi extremamente profissional e atenciosa em todos os detalhes.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Carlos Silva">
+                        <div class="author-info">
+                            <h4>Carlos Silva</h4>
+                            <p>Cliente desde 2020</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Experiência incrível na compra da minha Ducati Panigale. A Neon Motors tem um processo transparente e oferece todo suporte pós-venda que um cliente premium espera.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Beatriz">
+                        <div class="author-info">
+                            <h4>Ana Beatriz</h4>
+                            <p>Cliente desde 2021</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>Como colecionador de carros, posso afirmar que a Neon Motors tem os melhores veículos do mercado, com procedência garantida e um atendimento que faz toda diferença.</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Ricardo Almeida">
+                        <div class="author-info">
+                            <h4>Ricardo Almeida</h4>
+                            <p>Cliente desde 2018</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="newsletter">
+            <h3>Assine Nossa Newsletter</h3>
+            <p>Receba as últimas novidades, lançamentos e ofertas exclusivas diretamente no seu e-mail.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Seu melhor e-mail" required>
+                <button type="submit">Assinar <i class="fas fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <div class="container">
-            <a href="#" class="footer-logo"><i class="fas fa-bolt"></i> Neon Motors</a>
-            
-            <div class="social-links">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>Neon Motors</h4>
+                    <p style="color: var(--light-gray); margin-bottom: 1.5rem;">A concessionária de veículos de luxo e alta performance mais inovadora do Brasil.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Links Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Início</a></li>
+                        <li><a href="#vehicles"><i class="fas fa-chevron-right"></i> Veículos</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> Sobre Nós</a></li>
+                        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Depoimentos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contato</h4>
+                    <div class="footer-contact">
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Neon, 1234 - São Paulo/SP</p>
+                        <p><i class="fas fa-phone"></i> (47) 98848-2384</p>
+                        <p><i class="fas fa-envelope"></i> contato@neonmotors.com.br</p>
+                        <p><i class="fas fa-clock"></i> Seg-Sex: 9h às 18h | Sáb: 9h às 14h</p>
+                    </div>
+                </div>
             </div>
+            
+            <a href="#" class="footer-logo"><i class="fas fa-bolt"></i> Neon Motors</a>
             
             <p class="copyright">© 2023 Neon Motors. Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <!-- Back to top button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
     <!-- Modal de Compra -->
     <div id="purchaseModal" class="modal">
@@ -1401,6 +1942,16 @@
     </div>
 
     <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.preloader').classList.add('fade-out');
+                setTimeout(function() {
+                    document.querySelector('.preloader').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+        
         // Menu Mobile
         const mobileMenu = document.querySelector('.mobile-menu');
         const navLinks = document.querySelector('.nav-links');
@@ -1541,7 +2092,7 @@
             e.preventDefault();
             
             // Simular envio para o webhook do Discord (em produção seria uma chamada real)
-            const webhookUrl = 'https://discord.com/api/webhooks/SEU_WEBHOOK_AQUI';
+            const webhookUrl = 'https://discord.com/api/webhooks/1359658940874494173/1yJEVMiPO3i1AaxNIGKLleQfaxNkGDtCMmnuXo9vCIWxLahMVJf-g_ddxmssCPEM72qB';
             const formData = new FormData(receiptForm);
             const payload = {
                 content: 'Novo comprovante de pagamento recebido!',
@@ -1602,17 +2153,60 @@
             }, 300);
         });
         
-        // Animação ao rolar
+        // Scroll header effect
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY;
+            const header = document.querySelector('header');
             
             if (scrollPosition > 100) {
-                document.querySelector('header').style.background = 'var(--primary)';
-                document.querySelector('header').style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.25)';
+                header.classList.add('scrolled');
             } else {
-                document.querySelector('header').style.background = 'linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%)';
-                document.querySelector('header').style.boxShadow = 'none';
+                header.classList.remove('scrolled');
             }
+            
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            if (scrollPosition > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+        
+        // Back to top functionality
+        document.querySelector('.back-to-top').addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Floating elements animation
+        const floatingElements = document.querySelectorAll('.floating-element');
+        floatingElements.forEach(el => {
+            // Randomize animation duration and delay
+            const duration = 15 + Math.random() * 15;
+            const delay = Math.random() * 5;
+            el.style.animation = `float ${duration}s infinite ${delay}s linear`;
+            
+            // Randomize size and position
+            const size = 100 + Math.random() * 150;
+            el.style.width = `${size}px`;
+            el.style.height = `${size}px`;
+            el.style.top = `${Math.random() * 80}%`;
+            el.style.left = `${Math.random() * 80}%`;
+        });
+        
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            
+            // Simulate submission
+            setTimeout(() => {
+                alert('Obrigado por assinar nossa newsletter! Você receberá nossas atualizações em breve.');
+                this.reset();
+            }, 500);
         });
     </script>
 </body>

@@ -1377,43 +1377,63 @@
         const sendDiscordWebhook = async (supporter) => {
             try {
                 const embed = {
-                    title: '🎮 NOVO APOIO PARA O PC GAMER! 🎮',
-                    description: `**${supporter.name}** contribuiu com **${formatCurrency(supporter.amount)}** para a vaquinha!`,
+                    title: '✨ NOVA DOAÇÃO RECEBIDA ✨',
+                    description: `**🎮 ${supporter.name}** acaba de contribuir para o PC Gamer!`,
                     color: 0x08f7fe,
+                    thumbnail: {
+                        url: 'https://i.imgur.com/JRg7a5X.png'
+                    },
                     fields: [
                         {
-                            name: '📝 Mensagem',
+                            name: '💵 Valor do Apoio',
+                            value: `**${formatCurrency(supporter.amount)}**`,
+                            inline: true
+                        },
+                        {
+                            name: '📅 Data',
+                            value: new Date().toLocaleDateString('pt-BR'),
+                            inline: true
+                        },
+                        {
+                            name: '💬 Mensagem',
                             value: supporter.message || 'Sem mensagem',
                             inline: false
                         },
                         {
                             name: '💰 Total Arrecadado',
-                            value: formatCurrency(config.currentAmount),
+                            value: `**${formatCurrency(config.currentAmount)}**`,
                             inline: true
                         },
                         {
-                            name: '📊 Progresso',
-                            value: `${((config.currentAmount / config.goalAmount) * 100).toFixed(1)}%`,
+                            name: '🎯 Progresso da Meta',
+                            value: `**${((config.currentAmount / config.goalAmount) * 100).toFixed(1)}%** (${formatCurrency(config.currentAmount)} de ${formatCurrency(config.goalAmount)})`,
                             inline: true
                         }
                     ],
                     timestamp: new Date().toISOString(),
                     footer: {
-                        text: 'Vaquinha Neon PC Gamer'
+                        text: 'Vaquinha Neon PC Gamer | rifasort777@gmail.com',
+                        icon_url: 'https://i.imgur.com/JRg7a5X.png'
+                    },
+                    author: {
+                        name: 'PC Gamer dos Sonhos',
+                        icon_url: 'https://i.imgur.com/JRg7a5X.png'
                     }
                 };
-                
+
                 const response = await fetch(config.webhookUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        content: '@everyone 🎉 **NOVA DOAÇÃO PARA O PC GAMER!** 🎉',
                         embeds: [embed],
-                        content: '@here 🎉 NOVA DOAÇÃO RECEBIDA! Obrigado pelo apoio! ❤️'
+                        username: 'Vaquinha PC Gamer',
+                        avatar_url: 'https://i.imgur.com/JRg7a5X.png'
                     })
                 });
-                
+
                 if (!response.ok) {
                     console.error('Erro ao enviar webhook:', response.statusText);
                 }
